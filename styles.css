@@ -189,6 +189,19 @@ h1, h2, h3, h4, h5, h6 {
     gap: var(--spacing-md);
 }
 
+.logo-img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: transform var(--transition-base);
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* Legacy logo circle for fallback */
 .logo-circle {
     width: 48px;
     height: 48px;
@@ -1028,6 +1041,18 @@ textarea {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .logo-img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .brand-name {
+        font-size: 16px;
+    }
+    
+    .brand-tagline {
+        font-size: 11px;
+    }
     .nav-menu {
         position: fixed;
         top: 80px;
