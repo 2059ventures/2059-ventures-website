@@ -3,218 +3,610 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>20/59 Ventures - Strategic Investment Partners</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>20/59 Ventures - Technology-Driven Housing Solutions for Veterans and Seniors</title>
+    <meta name="description" content="Property management and housing referral agency serving veterans and seniors in Dothan, Alabama. Affordable shared and private room housing options.">
+    
+    <!-- Preconnect to optimize font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Apple-inspired SF Pro Display font with Inter fallback -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
+    <!-- Apple-style Navigation with glassmorphism -->
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <div class="logo-img"></div>
-                <div>
-                    <div class="logo-text">20/59 Ventures</div>
-                    <div class="logo-subtitle">Strategic Partners</div>
+            <div class="nav-brand">
+                <div class="logo-container">
+                    <div class="logo-circle">
+                        <span class="logo-text">20/59</span>
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">20/59 Ventures</span>
+                        <span class="brand-tagline">Real Estate Managers</span>
+                    </div>
                 </div>
             </div>
-            <div class="nav-links">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#portfolio" class="nav-link">Portfolio</a>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#housing" class="nav-link">Housing</a>
                 <a href="#services" class="nav-link">Services</a>
+                <a href="#about" class="nav-link">About</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <div class="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section id="home" class="hero">
         <div class="hero-container">
-            <div class="hero-eyebrow">Strategic Investment Partners</div>
-            <h1 class="hero-headline">Building Tomorrow's Leaders</h1>
-            <p class="hero-subheadline">We partner with visionary entrepreneurs to transform innovative ideas into market-leading companies through strategic investment and expert guidance.</p>
-            
-            <div class="hero-cta">
-                <a href="#contact" class="btn-primary large">Start Partnership</a>
-                <a href="#portfolio" class="btn-secondary large">View Portfolio</a>
+            <div class="hero-content">
+                <div class="hero-eyebrow">Technology-Driven Housing Solutions</div>
+                <h1 class="hero-title">
+                    Housing for <br>
+                    <span class="gradient-text">Veterans & Seniors</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Affordable, technology-enhanced housing solutions in Dothan, Alabama. 
+                    Serving veterans, seniors 55+, and low-income families with dignity and care.
+                </p>
+                
+                <div class="hero-cta">
+                    <a href="#housing" class="btn btn-primary">
+                        <span>Explore Housing</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span>Get Started</span>
+                    </a>
+                </div>
             </div>
             
-            <div class="partnership-callout">
-                <i class="fas fa-handshake"></i>
-                <div>
-                    <strong>Partnership-First Approach</strong>
-                    <p>We believe in building long-term relationships that drive sustainable growth and innovation.</p>
+            <div class="hero-visual">
+                <div class="hero-cards">
+                    <div class="hero-card card-1">
+                        <div class="card-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Smart Homes</h3>
+                            <p>Technology-enhanced living</p>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-card card-2">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Community</h3>
+                            <p>Veterans & seniors together</p>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-card card-3">
+                        <div class="card-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Affordable</h3>
+                            <p>Starting at $650/month</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Housing Options Section -->
+    <section id="housing" class="housing-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Housing Options</div>
+                <h2 class="section-title">Choose Your <span class="gradient-text">Perfect Home</span></h2>
+                <p class="section-subtitle">
+                    Flexible housing solutions designed for veterans, seniors, and families in need.
+                </p>
+            </div>
+            
+            <div class="housing-grid">
+                <!-- Shared Room Housing -->
+                <div class="housing-card featured">
+                    <div class="housing-badge">Most Popular</div>
+                    <div class="housing-icon">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <h3 class="housing-title">Shared Room Housing</h3>
+                    <div class="housing-price">
+                        <span class="price-amount">$650</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                    <p class="housing-description">
+                        Affordable shared accommodation with 2 beds per room. Perfect for building community connections.
+                    </p>
+                    
+                    <ul class="housing-features">
+                        <li><i class="fas fa-check"></i> Shared bedroom space</li>
+                        <li><i class="fas fa-check"></i> Common areas included</li>
+                        <li><i class="fas fa-check"></i> Most affordable option</li>
+                        <li><i class="fas fa-check"></i> Community atmosphere</li>
+                    </ul>
+                    
+                    <button class="btn btn-primary housing-btn" data-housing="shared">
+                        Apply Now
+                    </button>
+                </div>
+                
+                <!-- Private Room Housing -->
+                <div class="housing-card premium">
+                    <div class="housing-badge premium-badge">Premium</div>
+                    <div class="housing-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3 class="housing-title">Private Room Housing</h3>
+                    <div class="housing-price">
+                        <span class="price-amount">$850</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                    <p class="housing-description">
+                        Your own private space with enhanced privacy and comfort. Premium living experience.
+                    </p>
+                    
+                    <ul class="housing-features">
+                        <li><i class="fas fa-check"></i> Private bedroom</li>
+                        <li><i class="fas fa-check"></i> Enhanced privacy</li>
+                        <li><i class="fas fa-check"></i> Premium amenities</li>
+                        <li><i class="fas fa-check"></i> Quiet environment</li>
+                    </ul>
+                    
+                    <button class="btn btn-primary housing-btn" data-housing="private">
+                        Apply Now
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Eligibility Section -->
+            <div class="eligibility-section">
+                <h3 class="eligibility-title">Who Qualifies?</h3>
+                <div class="eligibility-grid">
+                    <div class="eligibility-card">
+                        <div class="eligibility-icon">
+                            <i class="fas fa-flag-usa"></i>
+                        </div>
+                        <h4>Veterans</h4>
+                        <p>All veterans with honorable discharge status</p>
+                    </div>
+                    
+                    <div class="eligibility-card">
+                        <div class="eligibility-icon">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                        <h4>Seniors (55+)</h4>
+                        <p>Adults 55 years and older seeking affordable housing</p>
+                    </div>
+                    
+                    <div class="eligibility-card">
+                        <div class="eligibility-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h4>Low-Income</h4>
+                        <p>Households meeting income requirements</p>
+                    </div>
+                    
+                    <div class="eligibility-card">
+                        <div class="eligibility-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h4>VASH HUD Vouchers</h4>
+                        <p>HUD-VASH voucher holders welcome</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Our Services</div>
+                <h2 class="section-title">Technology-Enhanced <span class="gradient-text">Living</span></h2>
+                <p class="section-subtitle">
+                    Advanced property management solutions powered by intelligent algorithms.
+                </p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="service-title">Property Management</h3>
+                    <p class="service-description">
+                        Professional management of residential properties with 24/7 support and maintenance.
+                    </p>
+                    <div class="service-features">
+                        <span class="feature-tag">24/7 Support</span>
+                        <span class="feature-tag">Maintenance</span>
+                        <span class="feature-tag">Security</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search-location"></i>
+                    </div>
+                    <h3 class="service-title">Housing Referrals</h3>
+                    <p class="service-description">
+                        Connecting qualified applicants with suitable housing options throughout Dothan and surrounding areas.
+                    </p>
+                    <div class="service-features">
+                        <span class="feature-tag">Matching Service</span>
+                        <span class="feature-tag">Qualified Properties</span>
+                        <span class="feature-tag">Support</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3 class="service-title">Smart Technology</h3>
+                    <p class="service-description">
+                        IoT-enabled homes with smart thermostats, security systems, and energy-efficient solutions.
+                    </p>
+                    <div class="service-features">
+                        <span class="feature-tag">IoT Devices</span>
+                        <span class="feature-tag">Energy Efficient</span>
+                        <span class="feature-tag">Security</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="service-title">Landlord Partnerships</h3>
+                    <p class="service-description">
+                        Connecting property owners with qualified tenants through our comprehensive referral network.
+                    </p>
+                    <div class="service-features">
+                        <span class="feature-tag">Qualified Tenants</span>
+                        <span class="feature-tag">Screening</span>
+                        <span class="feature-tag">Support</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="section" id="about">
-        <div class="section-container">
-            <div class="section-header">
-                <div class="section-eyebrow">Who We Are</div>
-                <h2 class="section-title">Strategic Investment Excellence</h2>
-                <p class="section-subtitle">With decades of combined experience, we provide more than capital – we deliver strategic partnerships that accelerate growth and maximize potential.</p>
-            </div>
-
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-chart-line"></i>
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="section-eyebrow">About 20/59 Ventures</div>
+                    <h2 class="section-title">
+                        Serving Those Who <span class="gradient-text">Served</span>
+                    </h2>
+                    <p class="about-description">
+                        As a subsidiary of Intelligent Algorithm Management, we combine cutting-edge technology 
+                        with compassionate service to provide affordable housing solutions for veterans and seniors 
+                        in Dothan, Alabama.
+                    </p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Veterans Housed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Seniors Served</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Satisfaction Rate</div>
+                        </div>
                     </div>
-                    <h3 class="card-title">Growth Strategy</h3>
-                    <p class="card-description">Data-driven strategies tailored to your business model, market position, and growth objectives.</p>
-                    <a href="#" class="card-link">Learn More →</a>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-users"></i>
+                    
+                    <div class="about-cta">
+                        <a href="#contact" class="btn btn-primary">
+                            <span>Partner With Us</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
-                    <h3 class="card-title">Expert Network</h3>
-                    <p class="card-description">Access to industry leaders, technical experts, and strategic advisors across multiple sectors.</p>
-                    <a href="#" class="card-link">Explore Network →</a>
                 </div>
-
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-rocket"></i>
+                
+                <div class="about-visual">
+                    <div class="about-cards">
+                        <div class="about-card">
+                            <h4>Our Mission</h4>
+                            <p>Technology-driven housing solutions that honor the service of veterans and provide dignity for seniors.</p>
+                        </div>
+                        
+                        <div class="about-card">
+                            <h4>Our Values</h4>
+                            <p>Integrity, innovation, and community-first approach to affordable housing management.</p>
+                        </div>
+                        
+                        <div class="about-card">
+                            <h4>Our Technology</h4>
+                            <p>AI-powered matching algorithms ensure the best housing fit for every individual's needs.</p>
+                        </div>
                     </div>
-                    <h3 class="card-title">Scale Operations</h3>
-                    <p class="card-description">Operational excellence support to help you scale efficiently while maintaining quality and culture.</p>
-                    <a href="#" class="card-link">Scale Now →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="section" id="services">
-        <div class="section-container">
-            <div class="feature">
-                <div class="feature-content">
-                    <h3>Investment Philosophy</h3>
-                    <p>We invest in companies that demonstrate strong fundamentals, innovative solutions, and exceptional leadership teams. Our approach combines financial backing with strategic guidance to ensure sustainable growth.</p>
-                    <p>Our portfolio spans technology, healthcare, sustainable energy, and emerging markets, reflecting our commitment to backing transformative businesses.</p>
-                    <a href="#" class="btn-secondary">View Investment Criteria</a>
-                </div>
-                <div class="feature-image" style="background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');"></div>
-            </div>
-
-            <div class="feature">
-                <div class="feature-content">
-                    <h3>Strategic Support</h3>
-                    <p>Beyond capital, we provide hands-on strategic support including market analysis, competitive positioning, partnership development, and executive coaching.</p>
-                    <p>Our team works closely with portfolio companies to identify opportunities, overcome challenges, and accelerate time-to-market for new initiatives.</p>
-                    <a href="#" class="btn-secondary">Explore Services</a>
-                </div>
-                <div class="feature-image" style="background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2126&q=80');"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="section-container">
-            <div class="stats-grid">
-                <div class="stat">
-                    <div class="stat-number">$2.5B+</div>
-                    <div class="stat-label">Assets Under Management</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">150+</div>
-                    <div class="stat-label">Portfolio Companies</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">25+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">95%</div>
-                    <div class="stat-label">Success Rate</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="section contact" id="contact">
-        <div class="section-container">
+    <section id="contact" class="contact-section">
+        <div class="container">
             <div class="section-header">
                 <div class="section-eyebrow">Get In Touch</div>
-                <h2 class="section-title">Ready to Partner?</h2>
-                <p class="section-subtitle">Let's discuss how we can help accelerate your company's growth through strategic investment and partnership.</p>
+                <h2 class="section-title">Ready to Find Your <span class="gradient-text">Home</span>?</h2>
+                <p class="section-subtitle">
+                    Contact us today to learn more about our housing options and services.
+                </p>
             </div>
-
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name" class="form-label">Full Name</label>
-                    <input type="text" id="name" class="form-input" required>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Address</h4>
+                            <p>212 W Troy St<br>Dothan, AL 36303</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p><a href="tel:205-534-8492">205-534-8492</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p><a href="mailto:info@2059ventures.online">info@2059ventures.online</a></p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input type="email" id="email" class="form-input" required>
+                <!-- Quick Forms -->
+                <div class="quick-forms">
+                    <div class="form-tabs">
+                        <button class="form-tab active" data-form="housing">Housing Request</button>
+                        <button class="form-tab" data-form="partnership">Partnership</button>
+                        <button class="form-tab" data-form="landlord">Landlord</button>
+                        <button class="form-tab" data-form="general">Contact</button>
+                    </div>
+                    
+                    <!-- Housing Request Form -->
+                    <form id="housing-form" class="contact-form active" action="https://formspree.io/f/mzzaowjq" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" required placeholder="Full Name">
+                            <input type="email" name="email" required placeholder="Email Address">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" placeholder="Phone Number">
+                            <select name="housing_type" required>
+                                <option value="">Select Housing Type</option>
+                                <option value="shared">Shared Room ($650/month)</option>
+                                <option value="private">Private Room ($850/month)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="eligibility" required>
+                                <option value="">Eligibility Status</option>
+                                <option value="veteran">Veteran</option>
+                                <option value="senior">Senior (55+)</option>
+                                <option value="low-income">Low-Income Household</option>
+                                <option value="vash">VASH HUD Voucher Holder</option>
+                            </select>
+                        </div>
+                        <textarea name="message" placeholder="Tell us about your housing needs..." rows="4"></textarea>
+                        <button type="submit" class="btn btn-primary form-submit">
+                            <span>Submit Request</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    
+                    <!-- Partnership Form -->
+                    <form id="partnership-form" class="contact-form" action="https://formspree.io/f/mnnbwroz" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" required placeholder="Full Name">
+                            <input type="email" name="email" required placeholder="Email Address">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="organization" placeholder="Organization/Company">
+                            <input type="tel" name="phone" placeholder="Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <select name="partnership_type" required>
+                                <option value="">Partnership Interest</option>
+                                <option value="referral">Referral Partner</option>
+                                <option value="service">Service Provider</option>
+                                <option value="funding">Funding Partner</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <textarea name="message" placeholder="Describe your partnership proposal..." rows="4" required></textarea>
+                        <button type="submit" class="btn btn-primary form-submit">
+                            <span>Submit Proposal</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    
+                    <!-- Landlord Form -->
+                    <form id="landlord-form" class="contact-form" action="https://formspree.io/f/xovnr5kg" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" required placeholder="Full Name">
+                            <input type="email" name="email" required placeholder="Email Address">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" placeholder="Phone Number">
+                            <input type="number" name="properties" placeholder="Number of Properties">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="location" placeholder="Property Location(s)">
+                            <select name="property_type">
+                                <option value="">Property Type</option>
+                                <option value="single-family">Single Family</option>
+                                <option value="multi-family">Multi-Family</option>
+                                <option value="apartment">Apartment Complex</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <textarea name="message" placeholder="Tell us about your properties and partnership goals..." rows="4"></textarea>
+                        <button type="submit" class="btn btn-primary form-submit">
+                            <span>Join Network</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    
+                    <!-- General Contact Form -->
+                    <form id="general-form" class="contact-form" action="https://formspree.io/f/meolndzb" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" required placeholder="Full Name">
+                            <input type="email" name="email" required placeholder="Email Address">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" placeholder="Phone Number">
+                            <input type="text" name="subject" placeholder="Subject">
+                        </div>
+                        <textarea name="message" placeholder="How can we help you?" rows="6" required></textarea>
+                        <button type="submit" class="btn btn-primary form-submit">
+                            <span>Send Message</span>
+                            <i class="fas fa="paper-plane"></i>
+                        </button>
+                    </form>
                 </div>
-                
-                <div class="form-group">
-                    <label for="company" class="form-label">Company</label>
-                    <input type="text" id="company" class="form-input" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea id="message" class="form-textarea" placeholder="Tell us about your company and partnership interests..." required></textarea>
-                </div>
-                
-                <button type="submit" class="btn-primary full-width">Send Message</button>
-            </form>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <div class="logo-img"></div>
-                <div>
-                    <div class="logo-text">20/59 Ventures</div>
-                    <div class="logo-subtitle">Strategic Partners</div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="logo-container">
+                            <div class="logo-circle">
+                                <span class="logo-text">20/59</span>
+                            </div>
+                            <div class="brand-text">
+                                <span class="brand-name">20/59 Ventures</span>
+                                <span class="brand-tagline">Real Estate Managers</span>
+                            </div>
+                        </div>
+                        <p class="footer-description">
+                            Technology-driven housing solutions for veterans and seniors in Dothan, Alabama.
+                        </p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4>Housing</h4>
+                            <ul>
+                                <li><a href="#housing">Shared Room Housing</a></li>
+                                <li><a href="#housing">Private Room Housing</a></li>
+                                <li><a href="#housing">Eligibility</a></li>
+                                <li><a href="#housing">Application Process</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4>Services</h4>
+                            <ul>
+                                <li><a href="#services">Property Management</a></li>
+                                <li><a href="#services">Housing Referrals</a></li>
+                                <li><a href="#services">Smart Technology</a></li>
+                                <li><a href="#services">Landlord Partnerships</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4>Contact</h4>
+                            <ul>
+                                <li><a href="tel:205-534-8492">205-534-8492</a></li>
+                                <li><a href="mailto:info@2059ventures.online">info@2059ventures.online</a></li>
+                                <li>212 W Troy St<br>Dothan, AL 36303</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="footer-links">
-                <a href="#about" class="footer-link">About</a>
-                <a href="#portfolio" class="footer-link">Portfolio</a>
-                <a href="#services" class="footer-link">Services</a>
-                <a href="#contact" class="footer-link">Contact</a>
-                <a href="#" class="footer-link">Privacy Policy</a>
-                <a href="#" class="footer-link">Terms of Service</a>
-            </div>
-            
-            <div class="footer-copyright">
-                <p>&copy; 2024 20/59 Ventures. All rights reserved.</p>
+                
+                <div class="footer-bottom">
+                    <div class="footer-legal">
+                        <p>&copy; 2024 20/59 Ventures. All rights reserved.</p>
+                        <p>A subsidiary of Intelligent Algorithm Management</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-        // Simple mobile menu toggle
-        document.querySelector('.nav-toggle').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('active');
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
         });
 
-        // Smooth scrolling for navigation links
+        // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -228,21 +620,101 @@
             });
         });
 
-        // Add scroll effect to navigation
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('.nav');
+        // Navbar Glassmorphism Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
-                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.classList.add('scrolled');
             } else {
-                nav.style.background = 'rgba(255, 255, 255, 0.8)';
+                navbar.classList.remove('scrolled');
             }
         });
 
-        // Form submission
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! We\'ll get back to you soon.');
-            this.reset();
+        // Form Tab Switching
+        const formTabs = document.querySelectorAll('.form-tab');
+        const contactForms = document.querySelectorAll('.contact-form');
+
+        formTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and forms
+                formTabs.forEach(t => t.classList.remove('active'));
+                contactForms.forEach(f => f.classList.remove('active'));
+
+                // Add active class to clicked tab
+                tab.classList.add('active');
+
+                // Show corresponding form
+                const formId = tab.getAttribute('data-form') + '-form';
+                document.getElementById(formId).classList.add('active');
+            });
+        });
+
+        // Housing Application Buttons
+        document.querySelectorAll('.housing-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const housingType = btn.getAttribute('data-housing');
+                
+                // Switch to housing form tab
+                document.querySelector('[data-form="housing"]').click();
+                
+                // Pre-select housing type
+                const select = document.querySelector('select[name="housing_type"]');
+                select.value = housingType;
+                
+                // Scroll to contact section
+                document.getElementById('contact').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form Submissions
+        document.querySelectorAll('.contact-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                const submitBtn = this.querySelector('.form-submit');
+                const originalText = submitBtn.querySelector('span').textContent;
+                
+                // Update button state
+                submitBtn.disabled = true;
+                submitBtn.querySelector('span').textContent = 'Sending...';
+                submitBtn.querySelector('i').className = 'fas fa-spinner fa-spin';
+                
+                // Reset button after delay (form will be handled by Formspree)
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.querySelector('span').textContent = originalText;
+                    submitBtn.querySelector('i').className = 'fas fa-paper-plane';
+                }, 3000);
+            });
+        });
+
+        // Scroll Indicator Animation
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        if (scrollIndicator) {
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const opacity = Math.max(0, 1 - (scrollTop / window.innerHeight));
+                scrollIndicator.style.opacity = opacity;
+            });
+        }
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.housing-card, .service-card, .about-card, .hero-card').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
