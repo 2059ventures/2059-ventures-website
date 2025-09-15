@@ -70,15 +70,18 @@ body {
     gap: 12px;
 }
 
+/* Updated Logo Styling */
 .logo-img {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(74, 124, 89, 0.3);
+    height: 50px;
+    width: auto;
+    margin-right: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(74, 124, 89, 0.2);
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
 }
 
 .logo-text {
@@ -1420,6 +1423,19 @@ body {
     gap: 12px;
 }
 
+/* Footer Logo Styling */
+.footer-logo .logo-img {
+    height: 40px;
+    width: auto;
+    margin-right: 12px;
+    border-radius: 6px;
+    transition: transform 0.3s ease;
+}
+
+.footer-logo .logo-img:hover {
+    transform: scale(1.05);
+}
+
 .footer-links {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1699,5 +1715,16 @@ body {
     
     .metric-number {
         font-size: 36px;
+    }
+    
+    /* Mobile logo adjustments */
+    .logo-img {
+        height: 40px;
+        margin-right: 10px;
+    }
+    
+    .footer-logo .logo-img {
+        height: 35px;
+        margin-right: 8px;
     }
 }
