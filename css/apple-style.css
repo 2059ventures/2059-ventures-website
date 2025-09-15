@@ -1,883 +1,1703 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>20/59 Ventures - Technology-Driven Housing Solutions for Veterans and Seniors</title>
-    <meta name="description" content="20/59 Ventures provides dignified housing solutions for veterans and seniors with smart technology, guaranteed management, and community focus. VASH HUD vouchers accepted.">
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/apple-style.css">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <div class="logo-img"></div>
-                <div>
-                    <div class="logo-text">20/59 VENTURES</div>
-                    <div class="logo-subtitle">Real Estate Managers</div>
-                </div>
-            </div>
-            <div class="nav-links">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
+/* 20/59 Ventures - Apple-Style CSS */
+/* Updated with softer green color palette from actual logo */
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-container fade-in">
-            <div class="hero-eyebrow">Technology-Driven Housing</div>
-            <h1 class="hero-headline">Dignified homes.<br>Trusted management.</h1>
-            <p class="hero-subheadline">Connecting veterans and seniors with safe, affordable housing while providing landlords with guaranteed peace of mind.</p>
-            <div class="hero-cta">
-                <button class="btn-primary" onclick="openModal('housingModal')">Request a Place to Stay</button>
-                <button class="btn-secondary" onclick="openModal('partnerModal')">Partner With Us</button>
-            </div>
-            
-            <!-- Partnership Callout -->
-            <div class="partnership-callout">
-                <i class="fas fa-handshake"></i>
-                <div>
-                    <strong>A Shared Mission with Limyè Foundation</strong>
-                    <p>Creating stronger communities through housing and care</p>
-                </div>
-            </div>
-        </div>
-    </section>
+:root {
+    /* Apple-inspired color palette with your brand colors */
+    --logo-green: #4A7C59;           /* Softer green from actual logo */
+    --logo-cream: #F8F6F0;          /* Warm cream from logo */
+    --logo-dark-green: #3A5F47;     /* Darker version for hovers */
+    --logo-light-green: #6B9A78;    /* Lighter version for accents */
+    
+    /* Apple-style neutrals */
+    --white: #FFFFFF;
+    --black: #1D1D1F;
+    --gray-light: #F5F5F7;
+    --gray-medium: #86868B;
+    --gray-dark: #515154;
+    
+    /* Apple glassmorphism and transparency */
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --backdrop-blur: blur(20px);
+}
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="features-container">
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
-                    <h3 class="feature-title">Veterans First</h3>
-                    <p class="feature-description">VASH HUD vouchers accepted. Specialized support for those who served our country with dignity and respect.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3 class="feature-title">Senior Care</h3>
-                    <p class="feature-description">Affordable housing solutions designed with seniors' unique needs, accessibility, and community in mind.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="feature-title">Smart Technology</h3>
-                    <p class="feature-description">Digital management, smart locks, and seamless tenant-landlord communication for modern living.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <!-- About Section -->
-    <section class="about-section" id="about">
-        <div class="about-container">
-            <div class="about-content">
-                <div class="section-eyebrow">About 20/59 Ventures</div>
-                <h2 class="section-headline">Built on trust.<br>Driven by mission.</h2>
-                <p class="section-subheadline">As a subsidiary of Intelligent Algorithm Management, we serve as both Property Management Company and Housing Referral Agency, connecting underserved populations with secure, reliable homes.</p>
-                
-                <div class="about-grid">
-                    <div class="about-card">
-                        <div class="about-icon">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <h4>Property Management Excellence</h4>
-                        <p>Comprehensive services with technology-driven solutions and guaranteed peace of mind for property owners.</p>
-                    </div>
-                    <div class="about-card">
-                        <div class="about-icon">
-                            <i class="fas fa-network-wired"></i>
-                        </div>
-                        <h4>Housing Referral Network</h4>
-                        <p>Connecting qualified tenants with suitable housing opportunities through our extensive network and partnerships.</p>
-                    </div>
-                    <div class="about-card">
-                        <div class="about-icon">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <h4>Community Focused</h4>
-                        <p>Dedicated to serving veterans, seniors, and building stronger, more inclusive communities for everyone.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+html {
+    scroll-behavior: smooth;
+}
 
-    <!-- Smart Home Technology Section -->
-    <section class="tech-section">
-        <div class="tech-container">
-            <h2 class="section-headline">Smart. Secure. Simple.</h2>
-            <p class="section-subheadline">Technology that brings peace of mind to everyone.</p>
-            
-            <div class="tech-grid">
-                <div class="tech-card fade-in">
-                    <div class="tech-image">
-                        <i class="fas fa-key" style="font-size: 48px;"></i>
-                        <div class="tech-overlay">Smart Lock Technology</div>
-                    </div>
-                    <h3 class="tech-title">Keyless Entry</h3>
-                    <p class="tech-description">Secure, contactless access for tenants with remote management capabilities for property owners. No more lost keys or lockouts.</p>
-                </div>
-                <div class="tech-card fade-in">
-                    <div class="tech-image">
-                        <i class="fas fa-video" style="font-size: 48px;"></i>
-                        <div class="tech-overlay">Interior Security Monitoring</div>
-                    </div>
-                    <h3 class="tech-title">Safety & Security</h3>
-                    <p class="tech-description">Optional interior cameras for common areas, ensuring safety and security while respecting privacy and personal space.</p>
-                </div>
-                <div class="tech-card fade-in">
-                    <div class="tech-image">
-                        <i class="fas fa-laptop" style="font-size: 48px;"></i>
-                        <div class="tech-overlay">Digital Management Portal</div>
-                    </div>
-                    <h3 class="tech-title">Easy Management</h3>
-                    <p class="tech-description">Tenant and landlord portals with digital leases, automated payments, maintenance requests, and 24/7 access to information.</p>
-                </div>
-                <div class="tech-card fade-in">
-                    <div class="tech-image">
-                        <i class="fas fa-mobile-alt" style="font-size: 48px;"></i>
-                        <div class="tech-overlay">Mobile App Access</div>
-                    </div>
-                    <h3 class="tech-title">Always Connected</h3>
-                    <p class="tech-description">Mobile access to all services, from unlocking doors to paying rent, communicating with management, and requesting support.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    line-height: 1.6;
+    color: var(--black);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
-    <!-- Housing Options Section -->
-    <section class="housing-section" id="tenants">
-        <div class="housing-container">
-            <div class="section-header">
-                <div class="section-eyebrow">For Tenants</div>
-                <h2 class="section-headline">Housing options<br>designed for you.</h2>
-                <p class="section-subheadline">Safe, affordable, and dignified housing solutions for veterans and seniors.</p>
-                
-                <!-- HUD-VASH Priority Banner -->
-                <div class="hud-vash-banner">
-                    <div class="banner-content">
-                        <i class="fas fa-star"></i>
-                        <div>
-                            <strong>HUD-VASH Vouchers Accepted</strong>
-                            <p>Veterans and seniors get priority placement • Affordable rates guaranteed</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="housing-grid">
-                <div class="housing-card fade-in">
-                    <div class="housing-badge shared">Most Affordable</div>
-                    <h3 class="housing-title">Shared Room Housing</h3>
-                    <p class="housing-price">Starting at $650/month</p>
-                    <div class="housing-features">
-                        <div class="feature-item">
-                            <i class="fas fa-bed"></i>
-                            <span>Two beds per room with privacy curtains</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-utensils"></i>
-                            <span>Shared kitchen and common areas</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-bolt"></i>
-                            <span>All utilities included</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-users"></i>
-                            <span>Community support network</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="housing-card fade-in">
-                    <div class="housing-badge premium">Premium Option</div>
-                    <h3 class="housing-title">Private Room Housing</h3>
-                    <p class="housing-price">Starting at $850/month</p>
-                    <div class="housing-features">
-                        <div class="feature-item">
-                            <i class="fas fa-door-closed"></i>
-                            <span>Private bedroom with personal space</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-couch"></i>
-                            <span>Shared common areas with residents</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-lock"></i>
-                            <span>Enhanced privacy and comfort</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-star"></i>
-                            <span>Priority maintenance and support</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="eligibility-section">
-                <h3 class="eligibility-title">Who Qualifies</h3>
-                <div class="eligibility-grid">
-                    <div class="eligibility-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Military Veterans</span>
-                    </div>
-                    <div class="eligibility-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Senior Citizens (55+)</span>
-                    </div>
-                    <div class="eligibility-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Low-income households</span>
-                    </div>
-                    <div class="eligibility-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>VASH HUD voucher holders</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="housing-cta">
-                <button class="btn-primary large" onclick="openModal('housingModal')">Request a Bed</button>
-            </div>
-        </div>
-    </section>
+/* Navigation */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(248, 246, 240, 0.8);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    border-bottom: 1px solid rgba(74, 124, 89, 0.1);
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 
-    <!-- Diversity & Community Section -->
-    <section class="community-section">
-        <div class="community-container">
-            <h2 class="section-headline">A home for everyone.</h2>
-            <p class="section-subheadline">Celebrating diversity, building community, creating belonging.</p>
-            
-            <div class="community-grid">
-                <div class="community-card fade-in">
-                    <div class="community-image">
-                        <i class="fas fa-users" style="font-size: 48px;"></i>
-                        <div class="community-overlay">Diverse Community</div>
-                    </div>
-                    <h3 class="community-title">United by Respect</h3>
-                    <p class="community-description">Veterans and seniors from all backgrounds finding dignity, safety, and community together in our welcoming spaces.</p>
-                </div>
-                <div class="community-card fade-in">
-                    <div class="community-image">
-                        <i class="fas fa-home-heart" style="font-size: 48px;"></i>
-                        <div class="community-overlay">Modern Homes</div>
-                    </div>
-                    <h3 class="community-title">Thoughtful Spaces</h3>
-                    <p class="community-description">Clean, modern housing with smart technology, accessible design, and thoughtful amenities for all residents.</p>
-                </div>
-                <div class="community-card fade-in">
-                    <div class="community-image">
-                        <i class="fas fa-hands-helping" style="font-size: 48px;"></i>
-                        <div class="community-overlay">Support Network</div>
-                    </div>
-                    <h3 class="community-title">Always Supported</h3>
-                    <p class="community-description">24/7 support staff, community activities, and partnerships that ensure no one feels alone or forgotten.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
 
-    <!-- Testimonials & Social Proof Section -->
-    <section class="testimonials-section">
-        <div class="testimonials-container">
-            <h2 class="section-headline">Trusted by veterans, seniors, and landlords.</h2>
-            <p class="section-subheadline">Real stories from the people we serve and partners we work with.</p>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"After serving 20 years in the Army, finding stable housing was challenging. 20/59 Ventures understood my situation and got me into a clean, safe place within two weeks."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Robert M.</h4>
-                            <span>U.S. Army Veteran</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"As a 67-year-old on a fixed income, I thought I'd never find affordable housing. The shared room option gave me community and dignity at a price I could afford."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Margaret S.</h4>
-                            <span>Senior Resident</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"They delivered exactly what they promised. Two months' rent upfront, excellent tenants, and zero damage issues. I wish I'd partnered with them sooner."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>David L.</h4>
-                            <span>Property Owner</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Trust Metrics -->
-            <div class="trust-metrics">
-                <div class="metric-item">
-                    <div class="metric-number">150+</div>
-                    <div class="metric-label">Veterans & Seniors Housed</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-number">98%</div>
-                    <div class="metric-label">Tenant Satisfaction Rate</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-number">45+</div>
-                    <div class="metric-label">Partner Properties</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-number">99%</div>
-                    <div class="metric-label">On-Time Rent Collection</div>
-                </div>
-            </div>
-            
-            <!-- Certifications -->
-            <div class="certifications">
-                <h3>Certified & Trusted</h3>
-                <div class="cert-badges">
-                    <div class="cert-badge">
-                        <i class="fas fa-medal"></i>
-                        <span>HUD-VASH Approved</span>
-                    </div>
-                    <div class="cert-badge">
-                        <i class="fas fa-flag-usa"></i>
-                        <span>Veterans Affairs Partner</span>
-                    </div>
-                    <div class="cert-badge">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>Licensed Property Manager</span>
-                    </div>
-                    <div class="cert-badge">
-                        <i class="fas fa-handshake"></i>
-                        <span>Better Business Bureau</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-    <!-- Landlords Section -->
-    <section class="landlords-section" id="landlords">
-        <div class="landlords-container">
-            <div class="section-header">
-                <div class="section-eyebrow">For Landlords</div>
-                <h2 class="section-headline">Guaranteed housing.<br>Guaranteed peace of mind.</h2>
-                <p class="section-subheadline">Partner with us and eliminate the stress of property management while making a difference.</p>
-            </div>
-            
-            <div class="guarantees-grid">
-                <div class="guarantee-card fade-in">
-                    <div class="guarantee-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="guarantee-title">Guaranteed Occupancy</h3>
-                    <p class="guarantee-description">We specialize in placing veterans and seniors through HUD-VASH and government programs, ensuring consistent, qualified tenancy.</p>
-                </div>
-                <div class="guarantee-card fade-in">
-                    <div class="guarantee-icon">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <h3 class="guarantee-title">Up to 2 Months' Rent Advanced</h3>
-                    <p class="guarantee-description">In qualifying cases, we advance up to two months' rent to landlords, providing immediate cash flow and financial security.</p>
-                </div>
-                <div class="guarantee-card fade-in">
-                    <div class="guarantee-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="guarantee-title">$500 Damage Protection</h3>
-                    <p class="guarantee-description">We cover the first $500 of tenant-caused damage ourselves, giving you additional peace of mind and protection.</p>
-                </div>
-                <div class="guarantee-card fade-in">
-                    <div class="guarantee-icon">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                    <h3 class="guarantee-title">Stress-Free Management</h3>
-                    <p class="guarantee-description">Complete property management including screening, rent collection, maintenance coordination, and ongoing oversight.</p>
-                </div>
-            </div>
-            
-            <!-- Enhanced Guarantee Program Section -->
-            <div class="guarantee-program">
-                <div class="program-header">
-                    <h3 class="program-title">Guaranteed Housing Program</h3>
-                    <p class="program-subtitle">In qualifying cases, we advance up to two months' rent upfront and cover the first $500 of tenant-caused damage. We're that confident in the quality and responsibility of our veterans and seniors tenants.</p>
-                </div>
-                
-                <div class="program-features">
-                    <div class="program-feature">
-                        <i class="fas fa-money-bill-wave"></i>
-                        <div>
-                            <h4>Upfront Rent Advance</h4>
-                            <p>Up to 2 months' rent paid in advance for qualifying properties</p>
-                        </div>
-                    </div>
-                    <div class="program-feature">
-                        <i class="fas fa-shield-check"></i>
-                        <div>
-                            <h4>Damage Protection</h4>
-                            <p>First $500 of tenant-caused damage covered by us</p>
-                        </div>
-                    </div>
-                    <div class="program-feature">
-                        <i class="fas fa-user-check"></i>
-                        <div>
-                            <h4>Vetted Tenants</h4>
-                            <p>Veterans and seniors with verified backgrounds and references</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="landlord-cta">
-                <h3 class="cta-title">Ready to join our Guaranteed Housing Program?</h3>
-                <p class="cta-subtitle">Join our network of landlords who enjoy guaranteed rent and peace of mind.</p>
-                <div class="cta-buttons-group">
-                    <button class="btn-primary large" onclick="openModal('landlordModal')">Enroll in Guaranteed Housing Program</button>
-                    <button class="btn-secondary large" onclick="openModal('partnerModal')">Partner With Us for Rent Assurance</button>
-                </div>
-            </div>
-        </div>
-    </section>
+.logo-img {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(74, 124, 89, 0.3);
+}
 
-    <!-- Services Section -->
-    <section class="services-section" id="services">
-        <div class="services-container">
-            <div class="services-header">
-                <h2 class="section-headline">Complete care.</h2>
-                <p class="section-subheadline">From housing placement to property management, we handle every detail.</p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-item fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Housing Placement</h3>
-                        <p>Specialized housing placement services for veterans and seniors, connecting them with appropriate, affordable housing options that meet their specific needs and circumstances.</p>
-                    </div>
-                </div>
-                <div class="service-item fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Property Management</h3>
-                        <p>Comprehensive property management services including tenant screening, rent collection, maintenance coordination, and ongoing property oversight with guaranteed results.</p>
-                    </div>
-                </div>
-                <div class="service-item fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Referral Services</h3>
-                        <p>Connecting landlords, tenants, and housing agencies through our extensive network, facilitating successful housing placements and long-term partnerships.</p>
-                    </div>
-                </div>
-                <div class="service-item fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Technology Platform</h3>
-                        <p>State-of-the-art platform with tenant and landlord portals, digital lease management, automated payment processing, and smart home integration.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+.logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--logo-green);
+    letter-spacing: -0.02em;
+}
 
-    <!-- Disclosure Section -->
-    <section class="disclosure-section">
-        <div class="disclosure-container">
-            <h2 class="section-headline">Our transparency promise.</h2>
-            <p class="section-subheadline">Clear, honest communication with all partners and clients.</p>
-            
-            <div class="disclosure-grid">
-                <div class="disclosure-item fade-in">
-                    <div class="disclosure-icon">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <h4>Guaranteed Housing Program Eligibility</h4>
-                    <p>Advance rent (up to 2 months) and damage coverage ($500) are offered only in qualifying cases. Property must meet our standards, tenant must pass screening, and written agreement required. Not all applications qualify.</p>
-                </div>
-                <div class="disclosure-item fade-in">
-                    <div class="disclosure-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h4>Damage Protection Limitations</h4>
-                    <p>$500 damage coverage applies only to verified tenant-caused incidents under lease terms. Normal wear and tear, pre-existing conditions, and damages exceeding $500 are excluded.</p>
-                </div>
-                <div class="disclosure-item fade-in">
-                    <div class="disclosure-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <h4>Technology Features by Unit</h4>
-                    <p>Smart locks, digital management features, and technology amenities may vary by individual property and unit. Not all locations include all advertised technology features.</p>
-                </div>
-                <div class="disclosure-item fade-in">
-                    <div class="disclosure-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h4>Housing Availability & Applications</h4>
-                    <p>Housing availability is limited and subject to application review. Veterans and seniors receive priority, but placement is not guaranteed. All applicants must meet eligibility requirements.</p>
-                </div>
-                <div class="disclosure-item fade-in">
-                    <div class="disclosure-icon">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-                    <h4>HUD-VASH & Voucher Programs</h4>
-                    <p>We accept HUD-VASH vouchers where applicable and available. Voucher acceptance subject to property participation in programs and current availability. Processing times may vary.</p>
-                </div>
-                <div class="disclosure-item fade-in">
-                    <div class="disclosure-icon">
-                        <i class="fas fa-balance-scale"></i>
-                    </div>
-                    <h4>Fair Housing & Equal Opportunity</h4>
-                    <p>We are committed to fair housing practices and equal opportunity. All terms, conditions, and fees are clearly outlined in written agreements. Licensed property management services.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+.logo-subtitle {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
 
-    <!-- Contact Section -->
-    <section class="contact-section" id="contact">
-        <div class="contact-container">
-            <div class="contact-header">
-                <h2 class="section-headline">Get in touch.</h2>
-                <p class="section-subheadline">Ready to find housing or explore a partnership? We're here to help.</p>
-            </div>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Address</h4>
-                            <p>212 W Troy St<br>Dothan, AL 36303</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Phone</h4>
-                            <p><a href="tel:205-534-8492">205-534-8492</a></p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <p><a href="mailto:info@2059ventures.online">info@2059ventures.online</a></p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form-wrapper">
-                    <h3 class="form-title">Send us a message</h3>
-                    <form action="https://formspree.io/f/meolndzb" method="POST" class="contact-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" id="contact-name" name="name" placeholder="Name" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" id="contact-email" name="email" placeholder="Email" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="tel" id="contact-phone" name="phone" placeholder="Phone (optional)">
-                            </div>
-                            <div class="form-group">
-                                <select id="contact-inquiry-type" name="inquiry_type" required>
-                                    <option value="">Select inquiry type</option>
-                                    <option value="general_info">General Information</option>
-                                    <option value="housing_question">Housing Question</option>
-                                    <option value="landlord_interest">Landlord Interest</option>
-                                    <option value="partnership">Partnership Opportunity</option>
-                                    <option value="limye_foundation">Limyè Foundation Related</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <textarea id="contact-message" name="message" rows="4" placeholder="How can we help you?" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn-primary full-width">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+.nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="logo-img"></div>
-                    <div>
-                        <div class="logo-text">20/59 VENTURES</div>
-                        <div class="logo-subtitle">Real Estate Managers</div>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <div class="link-group">
-                        <h4>Services</h4>
-                        <a href="#tenants">For Tenants</a>
-                        <a href="#landlords">For Landlords</a>
-                        <a href="#services">Our Services</a>
-                    </div>
-                    
-                    <div class="link-group">
-                        <h4>Company</h4>
-                        <a href="#about">About Us</a>
-                        <a href="#contact">Contact</a>
-                        <a href="https://limyefoundation.org" target="_blank">Limyè Foundation</a>
-                    </div>
-                    
-                    <div class="link-group">
-                        <h4>Contact</h4>
-                        <a href="tel:205-534-8492">205-534-8492</a>
-                        <a href="mailto:info@2059ventures.online">info@2059ventures.online</a>
-                        <p>212 W Troy St, Dothan, AL 36303</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 20/59 Ventures. A subsidiary of Intelligent Algorithm Management. All rights reserved.</p>
-                <p>Technology-Driven Housing Solutions for Veterans and Seniors</p>
-            </div>
-        </div>
-    </footer>
+.nav-link {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--gray-dark);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 8px 0;
+    position: relative;
+}
 
-    <!-- Modals -->
-    <!-- Housing Request Modal -->
-    <div id="housingModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('housingModal')">&times;</span>
-            <h2>Request a Place to Stay</h2>
-            <form action="https://formspree.io/f/mzzaowjq" method="POST" class="modal-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="text" id="housing-name" name="full_name" placeholder="Full Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="housing-email" name="email" placeholder="Email" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="tel" id="housing-phone" name="phone" placeholder="Phone" required>
-                    </div>
-                    <div class="form-group">
-                        <select id="veteran-status" name="veteran_status" required>
-                            <option value="">Are you a veteran?</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <select id="senior-status" name="senior_status" required>
-                            <option value="">Are you a senior (55+)?</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select id="hud-vash" name="hud_vash_voucher">
-                            <option value="">Do you have HUD-VASH voucher?</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            <option value="applying">Currently Applying</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <select id="housing-preference" name="housing_preference" required>
-                            <option value="">Housing preference</option>
-                            <option value="shared_room">Shared Room (2 beds per room - affordable)</option>
-                            <option value="private_room">Private Room (additional fee)</option>
-                            <option value="either">Either Option</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select id="move-in-timeline" name="move_in_timeline">
-                            <option value="">Preferred move-in timeline</option>
-                            <option value="immediate">Immediately</option>
-                            <option value="within_30_days">Within 30 Days</option>
-                            <option value="within_60_days">Within 60 Days</option>
-                            <option value="within_90_days">Within 90 Days</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <textarea id="special-needs" name="special_needs" rows="3" placeholder="Special needs or accommodations (optional)"></textarea>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="text" id="emergency-contact-name" name="emergency_contact_name" placeholder="Emergency contact name (optional)">
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" id="emergency-contact-phone" name="emergency_contact_phone" placeholder="Emergency contact phone (optional)">
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn-primary full-width">Submit Request</button>
-            </form>
-        </div>
-    </div>
+.nav-link:hover {
+    color: var(--logo-green);
+    transform: translateY(-1px);
+}
 
-    <!-- Quick Partner Modal -->
-    <div id="partnerModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('partnerModal')">&times;</span>
-            <h2>Partner With Us</h2>
-            <form action="https://formspree.io/f/mnnbwroz" method="POST" class="modal-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="text" id="partner-name" name="name" placeholder="Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="partner-email" name="email" placeholder="Email" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="tel" id="partner-phone" name="phone" placeholder="Phone" required>
-                    </div>
-                    <div class="form-group">
-                        <select id="interest-type" name="interest_type" required>
-                            <option value="">I am interested in</option>
-                            <option value="property_management">Property Management Services</option>
-                            <option value="tenant_placement">Tenant Placement</option>
-                            <option value="full_partnership">Full Partnership Program</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn-primary full-width">Submit Partnership Request</button>
-            </form>
-        </div>
-    </div>
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--logo-green), var(--logo-light-green));
+    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 
-    <!-- Landlord Partnership Modal -->
-    <div id="landlordModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('landlordModal')">&times;</span>
-            <h2>Landlord Partnership Application</h2>
-            <form action="https://formspree.io/f/xovnr5kg" method="POST" class="modal-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="text" id="landlord-owner-name" name="owner_name" placeholder="Property Owner Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="landlord-email" name="email" placeholder="Email" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="tel" id="landlord-phone" name="phone" placeholder="Phone" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="number" id="units-available" name="units_available" placeholder="Number of Units Available" min="1">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <input type="text" id="landlord-property-address" name="property_address" placeholder="Property Address" required>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <select id="landlord-property-type" name="property_type" required>
-                            <option value="">Select Property Type</option>
-                            <option value="single_family">Single Family Home</option>
-                            <option value="multi_unit">Multi-Unit Property</option>
-                            <option value="apartment">Apartment Complex</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select id="tenant-preference" name="tenant_preference">
-                            <option value="">Preferred Tenant Type</option>
-                            <option value="veterans">Veterans</option>
-                            <option value="seniors">Seniors</option>
-                            <option value="both">Veterans & Seniors</option>
-                            <option value="">No Preference</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <textarea id="management-needs" name="management_needs" rows="3" placeholder="Property management needs (optional)"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <textarea id="additional-services" name="additional_services" rows="3" placeholder="Additional services needed (optional)"></textarea>
-                </div>
-                
-                <button type="submit" class="btn-primary full-width">Submit Partnership Application</button>
-            </form>
-        </div>
-    </div>
+.nav-link:hover::after {
+    width: 100%;
+}
 
-    <script src="js/apple-style.js"></script>
-</body>
-</html>
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.nav-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background: var(--logo-green);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--logo-cream) 0%, rgba(248, 246, 240, 0.8) 50%, var(--white) 100%);
+    padding: 100px 24px 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(74, 124, 89, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(107, 154, 120, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero-container {
+    max-width: 800px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-eyebrow {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--logo-green);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.2s forwards;
+}
+
+.hero-headline {
+    font-size: clamp(48px, 8vw, 72px);
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.4s forwards;
+}
+
+.hero-subheadline {
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--gray-dark);
+    line-height: 1.5;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.6s forwards;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.8s forwards;
+}
+
+/* Partnership Callout */
+.partnership-callout {
+    background: var(--glass-bg);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 8px 32px rgba(74, 124, 89, 0.1);
+    opacity: 0;
+    animation: fadeInUp 1s ease 1s forwards;
+}
+
+.partnership-callout i {
+    font-size: 24px;
+    color: var(--logo-green);
+}
+
+.partnership-callout strong {
+    color: var(--logo-green);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.partnership-callout p {
+    color: var(--gray-dark);
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary {
+    padding: 16px 32px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    color: var(--white);
+    box-shadow: 0 8px 32px rgba(74, 124, 89, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(74, 124, 89, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--logo-green);
+    border: 2px solid var(--logo-green);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+}
+
+.btn-secondary:hover {
+    background: var(--logo-green);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.btn-primary.large, .btn-secondary.large {
+    padding: 20px 40px;
+    font-size: 18px;
+}
+
+.btn-primary.full-width, .btn-secondary.full-width {
+    width: 100%;
+    padding: 18px 32px;
+}
+
+/* Features Section */
+.features {
+    padding: 100px 24px;
+    background: var(--white);
+}
+
+.features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.feature-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(74, 124, 89, 0.15);
+    border-color: rgba(74, 124, 89, 0.3);
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    box-shadow: 0 8px 32px rgba(74, 124, 89, 0.3);
+}
+
+.feature-icon i {
+    font-size: 32px;
+    color: var(--white);
+}
+
+.feature-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.feature-description {
+    font-size: 16px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+}
+
+/* Section Styling */
+.section-eyebrow {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--logo-green);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.section-headline {
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    text-align: center;
+}
+
+.section-subheadline {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--gray-dark);
+    line-height: 1.6;
+    margin-bottom: 60px;
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* About Section */
+.about-section {
+    padding: 100px 24px;
+    background: var(--gray-light);
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-content {
+    text-align: center;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.about-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.about-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(74, 124, 89, 0.15);
+}
+
+.about-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.about-icon i {
+    font-size: 24px;
+    color: var(--white);
+}
+
+.about-card h4 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 12px;
+}
+
+.about-card p {
+    font-size: 16px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+}
+
+/* Tech Section */
+.tech-section {
+    padding: 100px 24px;
+    background: var(--white);
+}
+
+.tech-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.tech-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(74, 124, 89, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.tech-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(74, 124, 89, 0.2);
+    border-color: var(--logo-green);
+}
+
+.tech-image {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(74, 124, 89, 0.3);
+}
+
+.tech-image i {
+    color: var(--white);
+    z-index: 2;
+    position: relative;
+}
+
+.tech-overlay {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.tech-card:hover .tech-overlay {
+    transform: translateY(0);
+}
+
+.tech-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 16px;
+}
+
+.tech-description {
+    font-size: 16px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+}
+
+/* Housing Section */
+.housing-section {
+    padding: 100px 24px;
+    background: var(--gray-light);
+}
+
+.housing-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* HUD-VASH Banner */
+.hud-vash-banner {
+    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    border-radius: 20px;
+    padding: 24px;
+    margin: 40px 0 60px;
+    box-shadow: 0 8px 32px rgba(74, 124, 89, 0.3);
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: left;
+}
+
+.hud-vash-banner i {
+    font-size: 24px;
+    color: var(--white);
+}
+
+.hud-vash-banner strong {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.hud-vash-banner p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    margin: 0;
+}
+
+.housing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.housing-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(74, 124, 89, 0.1);
+}
+
+.housing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(74, 124, 89, 0.2);
+    border-color: var(--logo-green);
+}
+
+.housing-badge {
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.housing-badge.shared {
+    background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+    color: var(--white);
+}
+
+.housing-badge.premium {
+    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    color: var(--white);
+}
+
+.housing-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 12px;
+    margin-top: 20px;
+}
+
+.housing-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--logo-green);
+    margin-bottom: 24px;
+}
+
+.housing-features {
+    margin-bottom: 32px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    color: var(--gray-dark);
+}
+
+.feature-item i {
+    color: var(--logo-green);
+    font-size: 16px;
+    width: 20px;
+}
+
+/* Eligibility Section */
+.eligibility-section {
+    margin: 60px 0;
+    text-align: center;
+}
+
+.eligibility-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 32px;
+}
+
+.eligibility-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.eligibility-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--white);
+    border-radius: 16px;
+    font-weight: 600;
+    color: var(--gray-dark);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.eligibility-item i {
+    color: var(--logo-green);
+    font-size: 18px;
+}
+
+.housing-cta {
+    text-align: center;
+}
+
+/* Community Section */
+.community-section {
+    padding: 100px 24px;
+    background: var(--white);
+}
+
+.community-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.community-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.community-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(74, 124, 89, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.community-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(74, 124, 89, 0.2);
+    border-color: var(--logo-green);
+}
+
+.community-image {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(74, 124, 89, 0.3);
+}
+
+.community-image i {
+    color: var(--white);
+    z-index: 2;
+    position: relative;
+}
+
+.community-overlay {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.community-card:hover .community-overlay {
+    transform: translateY(0);
+}
+
+.community-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 16px;
+}
+
+.community-description {
+    font-size: 16px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 100px 24px;
+    background: var(--gray-light);
+}
+
+.testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin: 60px 0;
+}
+
+.testimonial-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(74, 124, 89, 0.1);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(74, 124, 89, 0.2);
+    border-color: var(--logo-green);
+}
+
+.testimonial-quote {
+    margin-bottom: 24px;
+}
+
+.testimonial-quote i {
+    font-size: 24px;
+    color: var(--logo-green);
+    margin-bottom: 16px;
+}
+
+.testimonial-quote p {
+    font-size: 18px;
+    font-style: italic;
+    color: var(--gray-dark);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.author-info h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+}
+
+.author-info span {
+    font-size: 14px;
+    color: var(--logo-green);
+    font-weight: 600;
+}
+
+/* Trust Metrics */
+.trust-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin: 80px 0 60px;
+    padding: 60px 40px;
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.metric-item {
+    text-align: center;
+}
+
+.metric-number {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--logo-green);
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.metric-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gray-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Certifications */
+.certifications {
+    margin-top: 60px;
+}
+
+.certifications h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 32px;
+}
+
+.cert-badges {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+}
+
+.cert-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: var(--white);
+    border-radius: 16px;
+    font-weight: 600;
+    color: var(--gray-dark);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(74, 124, 89, 0.1);
+    transition: all 0.3s ease;
+}
+
+.cert-badge:hover {
+    border-color: var(--logo-green);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(74, 124, 89, 0.15);
+}
+
+.cert-badge i {
+    color: var(--logo-green);
+    font-size: 18px;
+}
+
+/* Landlords Section */
+.landlords-section {
+    padding: 100px 24px;
+    background: var(--white);
+}
+
+.landlords-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.guarantees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    margin: 60px 0;
+}
+
+.guarantee-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(74, 124, 89, 0.1);
+}
+
+.guarantee-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(74, 124, 89, 0.2);
+    border-color: var(--logo-green);
+}
+
+.guarantee-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    box-shadow: 0 8px 32px rgba(74, 124, 89, 0.3);
+}
+
+.guarantee-icon i {
+    font-size: 32px;
+    color: var(--white);
+}
+
+.guarantee-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.guarantee-description {
+    font-size: 16px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+}
+
+/* Guarantee Program */
+.guarantee-program {
+    background: var(--gray-light);
+    border-radius: 24px;
+    padding: 60px 40px;
+    margin: 60px 0;
+    text-align: center;
+}
+
+.program-header {
+    margin-bottom: 40px;
+}
+
+.program-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 16px;
+}
+
+.program-subtitle {
+    font-size: 18px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.program-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 32px;
+    margin-top: 40px;
+}
+
+.program-feature {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+}
+
+.program-feature i {
+    font-size: 24px;
+    color: var(--logo-green);
+    flex-shrink: 0;
+}
+
+.program-feature h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+}
+
+.program-feature p {
+    font-size: 14px;
+    color: var(--gray-dark);
+    margin: 0;
+}
+
+.landlord-cta {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.cta-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 12px;
+}
+
+.cta-subtitle {
+    font-size: 18px;
+    color: var(--gray-dark);
+    margin-bottom: 32px;
+}
+
+.cta-buttons-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Services Section */
+.services-section {
+    padding: 100px 24px;
+    background: var(--gray-light);
+}
+
+.services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.services-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.services-grid {
+    display: grid;
+    gap: 40px;
+}
+
+.service-item {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(74, 124, 89, 0.1);
+}
+
+.service-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(74, 124, 89, 0.2);
+    border-color: var(--logo-green);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 8px 32px rgba(74, 124, 89, 0.3);
+}
+
+.service-icon i {
+    font-size: 32px;
+    color: var(--white);
+}
+
+.service-content h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 12px;
+}
+
+.service-content p {
+    font-size: 16px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+}
+
+/* Disclosure Section */
+.disclosure-section {
+    padding: 100px 24px;
+    background: var(--white);
+}
+
+.disclosure-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.disclosure-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.disclosure-item {
+    background: var(--gray-light);
+    border-radius: 24px;
+    padding: 32px;
+    text-align: left;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(74, 124, 89, 0.1);
+}
+
+.disclosure-item:hover {
+    border-color: var(--logo-green);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(74, 124, 89, 0.1);
+}
+
+.disclosure-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--logo-green);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.disclosure-icon i {
+    font-size: 20px;
+    color: var(--white);
+}
+
+.disclosure-item h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.disclosure-item p {
+    font-size: 14px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 100px 24px;
+    background: var(--gray-light);
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 8px 32px rgba(74, 124, 89, 0.3);
+}
+
+.contact-icon i {
+    font-size: 20px;
+    color: var(--white);
+}
+
+.contact-details h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+}
+
+.contact-details p {
+    font-size: 16px;
+    color: var(--gray-dark);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.contact-details a {
+    color: var(--logo-green);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.contact-details a:hover {
+    color: var(--logo-dark-green);
+}
+
+/* Contact Form */
+.contact-form-wrapper {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(74, 124, 89, 0.1);
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 16px 20px;
+    border: 2px solid rgba(74, 124, 89, 0.1);
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: var(--white);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--logo-green);
+    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Footer */
+.footer {
+    background: var(--black);
+    color: var(--white);
+    padding: 60px 24px 24px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    margin-bottom: 40px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+.link-group h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 16px;
+}
+
+.link-group a {
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    margin-bottom: 8px;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.link-group a:hover {
+    color: var(--logo-light-green);
+}
+
+.link-group p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 8px 0;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 24px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.modal-content {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal.show .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--gray-medium);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    line-height: 1;
+}
+
+.close:hover {
+    color: var(--logo-green);
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .nav-toggle {
+        display: flex;
+    }
+    
+    .hero-headline {
+        font-size: 48px;
+    }
+    
+    .hero-subheadline {
+        font-size: 18px;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .partnership-callout {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .features-grid,
+    .about-grid,
+    .tech-grid,
+    .community-grid,
+    .guarantees-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .housing-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .trust-metrics {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        padding: 40px 20px;
+    }
+    
+    .cert-badges {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .service-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+    }
+    
+    .program-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons-group .btn-primary,
+    .cta-buttons-group .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0 16px;
+    }
+    
+    .hero {
+        padding: 80px 16px 40px;
+    }
+    
+    .section-headline {
+        font-size: 36px;
+    }
+    
+    .feature-card,
+    .about-card,
+    .tech-card,
+    .community-card,
+    .guarantee-card,
+    .testimonial-card {
+        padding: 24px;
+    }
+    
+    .housing-card {
+        padding: 24px;
+    }
+    
+    .guarantee-program {
+        padding: 40px 24px;
+    }
+    
+    .contact-form-wrapper {
+        padding: 24px;
+    }
+    
+    .modal-content {
+        padding: 24px;
+        width: 95%;
+    }
+    
+    .trust-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .metric-number {
+        font-size: 36px;
+    }
+}
