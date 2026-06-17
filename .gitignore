@@ -38,3 +38,9 @@ Thumbs.db
 dist/
 build/
 *.egg-info/
+
+# Document and temporary files
+*.odt
+*.pdf
+.~lock.*
+Gemini_Generated_Image_pze67ppze67ppze6.png

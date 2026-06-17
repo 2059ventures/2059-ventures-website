@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Opt-In - 20/59 Ventures</title>
+    <meta name="description" content="Manage your text messaging communication preferences with 20/59 Ventures.">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/apple-style.css">
+    <style>
+        .consent-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .consent-checkbox {
+            margin-top: 5px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--logo-green);
+        }
+        .consent-label {
+            font-size: 13px;
+            color: var(--gray-dark);
+            line-height: 1.5;
+        }
+        .consent-label a {
+            color: var(--logo-green);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://page.gensparksite.com/v1/base64_upload/dc7d70c3ea25f1b8af4dc749324d4ec0" alt="20/59 Ventures - Housing Referral Agency" class="logo-img">
+                <div>
+                    <div class="logo-text">20/59 VENTURES</div>
+                    <div class="logo-subtitle">Housing Referral Agency</div>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#services" class="nav-link">Services</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <section class="contact-section" style="padding-top: 120px; padding-bottom: 80px; min-height: 70vh; background: var(--gray-light);">
+        <div class="contact-container" style="max-width: 650px; margin: 0 auto; text-align: center;">
+            <h1 class="section-headline" style="font-size: 36px; margin-bottom: 10px; color: var(--black);">SMS Opt-In</h1>
+            <p class="section-subheadline" style="font-size: 18px; color: var(--gray-medium); margin-bottom: 40px; max-width: 100%;">Manage your communication preferences with 20/59 Ventures.</p>
+            
+            <div class="contact-form-wrapper" style="background: var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.05); padding: 40px; border-radius: 24px; border: 1px solid rgba(74, 124, 89, 0.1);">
+                <form action="https://formspree.io/f/meolndzb" method="POST" class="contact-form" style="width: 100%;">
+                    <div class="form-group" style="text-align: left; margin-bottom: 25px;">
+                        <label for="phone" style="display: block; font-size: 14px; font-weight: 600; color: var(--black); margin-bottom: 8px;">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required style="width: 100%; padding: 14px 20px; border: 1px solid rgba(74, 124, 89, 0.2); border-radius: 10px; font-size: 16px; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='var(--logo-green)'" onblur="this.style.borderColor='rgba(74, 124, 89, 0.2)'">
+                    </div>
+
+                    <div style="margin-bottom: 30px;">
+                        <div class="consent-row">
+                            <input type="checkbox" id="transactional_consent" name="transactional_consent" class="consent-checkbox">
+                            <label for="transactional_consent" class="consent-label">
+                                By checking this box, you consent to receive transactional text messages for account notifications, housing referral alerts, and placement updates from 20/59 Ventures. Reply STOP to opt out, HELP for help. Standard message and data rates may apply. Message frequency varies. View our <a href="terms-of-service.html">Terms</a> and <a href="privacy-policy.html">Privacy Policy</a>.
+                            </label>
+                        </div>
+
+                        <div class="consent-row">
+                            <input type="checkbox" id="informational_consent" name="informational_consent" class="consent-checkbox">
+                            <label for="informational_consent" class="consent-label">
+                                By checking this box, you consent to receive informational and general support text messages from 20/59 Ventures. Reply STOP to opt out, HELP for help. Standard message and data rates may apply. Message frequency varies. View our <a href="terms-of-service.html">Terms</a> and <a href="privacy-policy.html">Privacy Policy</a>.
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary full-width" style="padding: 16px; border-radius: 12px; font-size: 16px;">Update Preferences</button>
+                    
+                    <p style="font-size: 12px; color: var(--gray-medium); margin-top: 20px; line-height: 1.4;">
+                        SMS consent is separate from email or phone consent. Checkboxes are optional and unchecked by default. You can opt out at any time by replying STOP to any text message.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://page.gensparksite.com/v1/base64_upload/dc7d70c3ea25f1b8af4dc749324d4ec0" alt="20/59 Ventures - Housing Referral Agency" class="logo-img">
+                    <div>
+                        <div class="logo-text">20/59 VENTURES</div>
+                        <div class="logo-subtitle">Housing Referral Agency</div>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Services</h4>
+                        <a href="index.html#tenants">For Tenants</a>
+                        <a href="index.html#landlords">For Landlords</a>
+                        <a href="index.html#services">Our Services</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Company</h4>
+                        <a href="index.html#about">About Us</a>
+                        <a href="index.html#contact">Contact</a>
+                        <a href="https://limyefoundation.org" target="_blank">Limyè Foundation</a>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Legal & SMS</h4>
+                        <a href="phone-sms-mms-disclosure.html">SMS Disclosure</a>
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Service</a>
+                        <a href="sms-opt-in.html">SMS Opt-In</a>
+                        <a href="help-sms.html">SMS Help</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Contact</h4>
+                        <a href="tel:205-534-8492">205-534-8492</a>
+                        <a href="mailto:info@2059ventures.online">info@2059ventures.online</a>
+                        <p>212 W Troy St, Dothan, AL 36303</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 20/59 Ventures. All rights reserved.</p>
+                <p>Technology-Driven Housing Solutions for Veterans and Seniors</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
