@@ -11,7 +11,7 @@ A sophisticated, Apple-inspired website for 20/59 Ventures, a housing referral a
 - **Tagline:** Housing Referral Agency
 - **Address:** 212 W Troy St, Dothan, AL 36303
 - **Phone:** [205-534-8492](tel:205-534-8492)
-- **Email:** [info@2059ventures.online](mailto:info@2059ventures.online)
+- **Email:** [info@2059ventures.online](mailto:info@2059ventures.online) / [andrea.marcus@2059ventures.online](mailto:andrea.marcus@2059ventures.online)
 - **Mission:** "Technology-Driven Housing Solutions for Veterans and Seniors"
 - **Ownership:** Woman and Veteran-owned company
 
