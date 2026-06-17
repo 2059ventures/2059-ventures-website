@@ -2,18 +2,18 @@
 
 **Technology-Driven Housing Solutions for Veterans and Seniors**
 
-A sophisticated, Apple-inspired website for 20/59 Ventures, a property management and housing referral agency serving veterans and seniors in Dothan, Alabama. Built with modern design principles, smooth animations, and intuitive user experience.
+A sophisticated, Apple-inspired website for 20/59 Ventures, a housing referral agency serving veterans and seniors in Dothan, Alabama. Built with modern design principles, smooth animations, and intuitive user experience.
 
 ## 🏢 Company Information
 
 - **Name:** 20/59 Ventures
-- **Type:** Property Management & Housing Referral Agency  
-- **Tagline:** Real Estate Managers
+- **Type:** Housing Referral Agency  
+- **Tagline:** Housing Referral Agency
 - **Address:** 212 W Troy St, Dothan, AL 36303
 - **Phone:** [205-534-8492](tel:205-534-8492)
 - **Email:** [info@2059ventures.online](mailto:info@2059ventures.online)
 - **Mission:** "Technology-Driven Housing Solutions for Veterans and Seniors"
-- **Parent Company:** Subsidiary of Intelligent Algorithm Management
+- **Ownership:** Woman and Veteran-owned company
 
 ## 🍎 Apple-Inspired Design Features
 
