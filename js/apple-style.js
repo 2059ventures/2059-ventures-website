@@ -1,4 +1,4 @@
-// 20/59 Ventures - Apple-Style JavaScript
+// 20 59 Ventures Corp - Apple-Style JavaScript
 // Smooth animations, interactions, and form handling
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initTouchSupport();
     enhancedFormSubmission();
     
-    console.log('20/59 Ventures Apple-style website initialized');
+    console.log('20 59 Ventures Corp Apple-style website initialized');
 });
 
 // Navigation functionality with Apple-style behavior
@@ -906,4 +906,4 @@ function addCustomValidation() {
 // Initialize custom validation
 addCustomValidation();
 
-console.log('20/59 Ventures - Apple-style JavaScript fully loaded');
+console.log('20 59 Ventures Corp - Apple-style JavaScript fully loaded');

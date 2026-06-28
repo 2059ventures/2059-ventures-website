@@ -1,12 +1,12 @@
-# 20/59 Ventures - Apple-Style Website
+# 20 59 Ventures Corp - Apple-Style Website
 
 **Technology-Driven Housing Solutions for Veterans and Seniors**
 
-A sophisticated, Apple-inspired website for 20/59 Ventures, a housing referral agency serving veterans and seniors in Dothan, Alabama. Built with modern design principles, smooth animations, and intuitive user experience.
+A sophisticated, Apple-inspired website for 20 59 Ventures Corp, a housing referral agency serving veterans and seniors in Dothan, Alabama. Built with modern design principles, smooth animations, and intuitive user experience.
 
 ## 🏢 Company Information
 
-- **Name:** 20/59 Ventures
+- **Name:** 20 59 Ventures Corp
 - **Type:** Housing Referral Agency  
 - **Tagline:** Housing Referral Agency
 - **Address:** 212 W Troy St, Dothan, AL 36303
