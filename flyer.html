@@ -77,31 +77,32 @@
     /* ── Top Header Section (Clean White Split Band) ── */
     .flyer-header {
       background: #ffffff;
-      padding: 44px 52px 32px;
+      padding: 0 52px 0 0; /* Remove top, bottom, left padding to let logo sit flush */
       color: var(--slate);
       border-bottom: 2px solid var(--border);
       flex-shrink: 0;
       display: grid;
-      grid-template-columns: 180px 1fr;
+      grid-template-columns: 220px 1fr; /* Dedicate a bold 220px left block */
       gap: 36px;
-      align-items: center;
+      align-items: stretch; /* Stretch logo to full height */
       position: relative;
     }
     .header-logo-col {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
+      align-self: stretch;
+      overflow: hidden;
     }
     .logo-img {
-      height: 120px;
-      width: auto;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Fill the entire 220px block cleanly */
       display: block;
     }
     .header-text-col {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      padding: 34px 0 28px; /* Apply padding only to the text column */
     }
     .header-badge-row {
       display: flex;
@@ -374,7 +375,7 @@
     <!-- HEADER -->
     <div class="flyer-header">
       <div class="header-logo-col">
-        <img class="logo-img" src="img/logo-shield.jpg" alt="20 59 Ventures Corp Logo" style="height: 120px; width: auto;">
+        <img class="logo-img" src="img/logo-shield.jpg" alt="20 59 Ventures Corp Logo">
       </div>
       <div class="header-text-col">
         <div class="header-badge-row">
