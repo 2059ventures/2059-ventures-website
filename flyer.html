@@ -29,7 +29,7 @@
       align-items: flex-start;
       justify-content: center;
       font-family: 'Inter', sans-serif;
-      padding-top: 60px;
+      padding-top: 40px;
       padding-bottom: 40px;
       color: var(--text-main);
     }
@@ -39,7 +39,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       background: var(--slate);
-      padding: 12px 24px;
+      padding: 10px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -50,14 +50,14 @@
       background: var(--emerald);
       color: #fff;
       border: none;
-      padding: 8px 20px;
+      padding: 6px 16px;
       border-radius: 6px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       transition: opacity 0.2s;
     }
     .print-btn:hover { opacity: 0.9; }
@@ -77,7 +77,7 @@
     /* ── Top Header Section (Clean Slate Band) ───────── */
     .flyer-header {
       background: var(--slate);
-      padding: 40px 52px 36px;
+      padding: 34px 44px 28px;
       color: #ffffff;
       flex-shrink: 0;
     }
@@ -85,7 +85,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .logo-container {
       display: flex;
@@ -101,13 +101,13 @@
     }
     .logo-text-block { line-height: 1.15; }
     .company-title {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 800;
       letter-spacing: -0.3px;
     }
     .company-title span { color: var(--accent); }
     .company-subtitle {
-      font-size: 9px;
+      font-size: 10px;
       color: #94a3b8;
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -115,9 +115,9 @@
     }
     .header-badge {
       border: 1px solid #334155;
-      padding: 4px 12px;
+      padding: 5px 14px;
       border-radius: 4px;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
       color: #94a3b8;
       letter-spacing: 0.5px;
@@ -125,30 +125,30 @@
     }
 
     .main-headline {
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 800;
       line-height: 1.15;
       letter-spacing: -0.8px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .main-headline em {
       font-style: normal;
       color: var(--accent);
     }
     .sub-headline {
-      font-size: 13.5px;
+      font-size: 15px;
       line-height: 1.55;
-      color: #94a3b8;
-      max-width: 580px;
-      font-weight: 300;
+      color: #cbd5e1;
+      max-width: 620px;
+      font-weight: 400;
     }
 
     /* ── Main Body (Clean Grid) ──────────────────────── */
     .flyer-body {
       display: grid;
-      grid-template-columns: 1fr 200px;
-      gap: 48px;
-      padding: 40px 52px 30px;
+      grid-template-columns: 1fr 220px;
+      gap: 40px;
+      padding: 32px 44px 24px;
       flex: 1;
       min-height: 0;
     }
@@ -160,7 +160,7 @@
       justify-content: space-between;
     }
     .section-tagline {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
       color: var(--emerald);
       letter-spacing: 2px;
@@ -170,27 +170,27 @@
     .service-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 28px;
     }
     .service-card {
-      border-left: 2px solid var(--border);
-      padding-left: 18px;
+      border-left: 3px solid var(--border);
+      padding-left: 20px;
       transition: border-color 0.2s;
     }
     .service-card:hover {
       border-color: var(--emerald);
     }
     .service-card h3 {
-      font-size: 13.5px;
-      font-weight: 700;
+      font-size: 17px;
+      font-weight: 800;
       color: var(--slate);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       letter-spacing: -0.2px;
     }
     .service-card p {
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.5;
+      font-size: 13.5px;
+      color: #334155;
+      line-height: 1.55;
       font-weight: 400;
     }
 
@@ -200,31 +200,31 @@
       background: var(--bg-light);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 12px 16px;
+      padding: 14px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     .criteria-title {
-      font-size: 10px;
-      font-weight: 700;
+      font-size: 11px;
+      font-weight: 800;
       text-transform: uppercase;
       color: var(--text-muted);
       letter-spacing: 1px;
     }
     .criteria-list {
       display: flex;
-      gap: 16px;
+      gap: 20px;
     }
     .criteria-item {
-      font-size: 11px;
-      font-weight: 600;
+      font-size: 13px;
+      font-weight: 700;
       color: var(--slate);
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
     }
-    .criteria-item i { color: var(--emerald); font-size: 10px; }
+    .criteria-item i { color: var(--emerald); font-size: 12px; }
 
     /* QR / Apply Widget Column */
     .action-col {
@@ -233,19 +233,19 @@
       align-items: center;
       justify-content: center;
       border-left: 1px solid var(--border);
-      padding-left: 48px;
+      padding-left: 40px;
     }
     .widget-container {
       width: 100%;
       text-align: center;
     }
     .widget-label {
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       color: var(--text-muted);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
     .qr-frame {
       display: inline-block;
@@ -256,31 +256,31 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
     .widget-title {
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 15px;
+      font-weight: 800;
       color: var(--slate);
       margin-top: 14px;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
     .widget-sub {
-      font-size: 9.5px;
+      font-size: 11px;
       color: var(--text-muted);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
     .btn-apply-link {
       display: block;
       background: var(--slate);
       color: #fff;
       text-decoration: none;
-      font-size: 10.5px;
-      font-weight: 600;
-      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px 14px;
       border-radius: 4px;
       letter-spacing: 0.3px;
     }
     .security-note {
-      margin-top: 12px;
-      font-size: 9px;
+      margin-top: 14px;
+      font-size: 10px;
       color: var(--text-muted);
       line-height: 1.4;
     }
@@ -289,7 +289,7 @@
     .flyer-footer {
       background: var(--bg-light);
       border-top: 1px solid var(--border);
-      padding: 24px 52px;
+      padding: 24px 44px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
@@ -300,7 +300,7 @@
       flex-direction: column;
     }
     .footer-item span {
-      font-size: 8px;
+      font-size: 9px;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--text-muted);
@@ -308,7 +308,7 @@
       font-weight: 600;
     }
     .footer-item strong {
-      font-size: 11.5px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--slate);
     }
@@ -316,18 +316,18 @@
     /* ── Bottom Accent Line ──────────────────────────── */
     .accent-bar {
       background: var(--emerald);
-      padding: 10px 52px;
+      padding: 10px 44px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       color: rgba(255,255,255,0.9);
-      font-size: 9.5px;
+      font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.5px;
       flex-shrink: 0;
     }
     .accent-bar img {
-      height: 18px;
+      height: 20px;
       width: auto;
       background: #fff;
       border-radius: 3px;
