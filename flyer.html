@@ -74,73 +74,72 @@
       flex-shrink: 0;
     }
 
-    /* ── Top Header Section (Clean Slate Band) ───────── */
+    /* ── Top Header Section (Clean White Split Band) ── */
     .flyer-header {
-      background: var(--slate);
-      padding: 34px 44px 28px;
-      color: #ffffff;
+      background: #ffffff;
+      padding: 44px 52px 32px;
+      color: var(--slate);
+      border-bottom: 2px solid var(--border);
       flex-shrink: 0;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 36px;
+      align-items: center;
+      position: relative;
     }
-    .header-top {
+    .header-logo-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .logo-img {
+      height: 120px;
+      width: auto;
+      display: block;
+    }
+    .header-text-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .header-badge-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
-    }
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .logo-img {
-      height: 76px;
-      width: auto;
-      background: #fff;
-      border-radius: 6px;
-      padding: 4px;
-    }
-    .logo-text-block { line-height: 1.15; }
-    .company-title {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -0.3px;
-    }
-    .company-title span { color: var(--accent); }
-    .company-subtitle {
-      font-size: 12px;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-top: 1px;
+      margin-bottom: 4px;
     }
     .header-badge {
-      border: 1px solid #334155;
-      padding: 5px 14px;
+      border: 1.5px solid var(--border);
+      background: var(--bg-light);
+      padding: 4px 12px;
       border-radius: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #94a3b8;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--emerald);
       letter-spacing: 0.5px;
       text-transform: uppercase;
     }
 
     .main-headline {
-      font-size: 36px;
-      font-weight: 800;
+      font-size: 34px;
+      font-weight: 900;
       line-height: 1.15;
       letter-spacing: -0.8px;
-      margin-bottom: 8px;
+      color: var(--slate);
+      margin: 0;
     }
     .main-headline em {
       font-style: normal;
-      color: var(--accent);
+      color: var(--emerald); /* Cohesive corporate green for accent */
     }
     .sub-headline {
-      font-size: 16px;
-      line-height: 1.55;
-      color: #cbd5e1;
-      max-width: 620px;
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      max-width: 480px;
       font-weight: 400;
+      margin: 0;
     }
 
     /* ── Main Body (Clean Grid) ──────────────────────── */
@@ -374,19 +373,16 @@
 
     <!-- HEADER -->
     <div class="flyer-header">
-      <div class="header-top">
-        <div class="logo-container">
-          <img class="logo-img" src="https://page.gensparksite.com/v1/base64_upload/dc7d70c3ea25f1b8af4dc749324d4ec0" alt="Logo">
-          <div class="logo-text-block">
-            <div class="company-title">20 <span>59</span> Ventures Corp</div>
-            <div class="company-subtitle">Housing Referral Agency</div>
-          </div>
-        </div>
-        <div class="header-badge">Veterans &amp; Seniors Program</div>
+      <div class="header-logo-col">
+        <img class="logo-img" src="https://page.gensparksite.com/v1/base64_upload/dc7d70c3ea25f1b8af4dc749324d4ec0" alt="20 59 Ventures Corp Logo">
       </div>
-
-      <h1 class="main-headline">Stable Housing is a <em>Right, Not a Privilege.</em></h1>
-      <p class="sub-headline">Connecting individuals with stable, fully-managed housing solutions. We work directly with program coordinators and case managers to streamline the placement process.</p>
+      <div class="header-text-col">
+        <div class="header-badge-row">
+          <span class="header-badge">Veterans &amp; Seniors Program</span>
+        </div>
+        <h1 class="main-headline">Stable Housing is a <em>Right, Not a Privilege.</em></h1>
+        <p class="sub-headline">Connecting individuals with stable, fully-managed housing solutions. We work directly with program coordinators and case managers to streamline the placement process.</p>
+      </div>
     </div>
 
     <!-- BODY CONTENT -->
