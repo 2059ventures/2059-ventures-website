@@ -3,336 +3,356 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>20 59 Ventures Corp – Housing Assistance Flyer</title>
+  <title>20 59 Ventures Corp – Housing Program Flyer</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:       #0d1f2d;
-      --green:      #2a7a4f;
-      --green-light:#3aa86a;
-      --gold:       #e8a838;
-      --white:      #ffffff;
-      --gray-mid:   #e0e4ea;
-      --gray-text:  #4a5568;
-      --text-dark:  #1a202c;
+      --slate:      #0f172a; /* Sophisticated slate/navy */
+      --emerald:    #0f766e; /* Muted corporate teal/green */
+      --accent:     #d97706; /* Warm premium gold/amber */
+      --border:     #e2e8f0; /* Ultra-light border color */
+      --text-main:  #1e293b;
+      --text-muted: #64748b;
+      --bg-light:   #f8fafc;
     }
 
     html, body {
       width: 100%;
       min-height: 100vh;
-      background: #b0bbc6;
+      background: #cbd5e1;
       display: flex;
       align-items: flex-start;
       justify-content: center;
       font-family: 'Inter', sans-serif;
-      padding-top: 56px;
-      padding-bottom: 32px;
+      padding-top: 60px;
+      padding-bottom: 40px;
+      color: var(--text-main);
     }
 
-    /* ── Print Controls ─────────────────────────────── */
+    /* ── Print Controls (hidden when printing) ──────── */
     .print-bar {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: var(--navy);
-      padding: 10px 24px;
+      background: var(--slate);
+      padding: 12px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       z-index: 100;
-      gap: 12px;
     }
-    .print-bar span { color: rgba(255,255,255,0.7); font-size: 12px; }
+    .print-bar span { color: #94a3b8; font-size: 13px; font-weight: 500; }
     .print-btn {
-      background: var(--green);
+      background: var(--emerald);
       color: #fff;
       border: none;
-      padding: 7px 20px;
+      padding: 8px 20px;
       border-radius: 6px;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
+      transition: opacity 0.2s;
     }
-    .print-btn:hover { background: var(--green-light); }
+    .print-btn:hover { opacity: 0.9; }
 
-    /* ── Flyer: locked to exactly 8.5 × 11 in ──────── */
+    /* ── Flyer Core: Locked 8.5 x 11 Layout ────────── */
     .flyer {
       width: 8.5in;
       height: 11in;
-      background: var(--white);
-      box-shadow: 0 16px 64px rgba(0,0,0,0.4);
+      background: #ffffff;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
       display: flex;
       flex-direction: column;
       overflow: hidden;
       flex-shrink: 0;
     }
 
-    /* ── Header ─────────────────────────────────────── */
+    /* ── Top Header Section (Clean Slate Band) ───────── */
     .flyer-header {
-      background: linear-gradient(145deg, var(--navy) 0%, #1a3a50 55%, #14523a 100%);
-      padding: 22px 44px 18px;
-      position: relative;
-      overflow: hidden;
+      background: var(--slate);
+      padding: 40px 52px 36px;
+      color: #ffffff;
       flex-shrink: 0;
     }
-    .flyer-header::before {
-      content: '';
-      position: absolute;
-      bottom: -20px; right: -20px;
-      width: 160px; height: 160px;
-      border-radius: 50%;
-      background: rgba(42,122,79,0.18);
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
     }
-
-    .logo-row {
+    .logo-container {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 12px;
     }
-    .logo-text-block { line-height: 1.1; }
-    .logo-name {
-      font-size: 20px;
+    .logo-img {
+      height: 48px;
+      width: auto;
+      background: #fff;
+      border-radius: 6px;
+      padding: 3px;
+    }
+    .logo-text-block { line-height: 1.15; }
+    .company-title {
+      font-size: 18px;
       font-weight: 800;
-      color: var(--white);
       letter-spacing: -0.3px;
     }
-    .logo-name span { color: var(--gold); }
-    .logo-sub {
-      font-size: 10px;
-      color: rgba(255,255,255,0.5);
-      font-weight: 400;
-      letter-spacing: 1.5px;
+    .company-title span { color: var(--accent); }
+    .company-subtitle {
+      font-size: 9px;
+      color: #94a3b8;
       text-transform: uppercase;
+      letter-spacing: 1.5px;
       margin-top: 1px;
     }
-
-    .header-headline {
-      font-size: 28px;
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1.15;
-      letter-spacing: -0.5px;
-      position: relative;
-      z-index: 1;
-    }
-    .header-headline em { font-style: normal; color: var(--gold); }
-
-    .header-sub {
-      font-size: 12.5px;
-      color: rgba(255,255,255,0.68);
-      margin-top: 7px;
-      font-weight: 400;
-      position: relative; z-index: 1;
-      max-width: 500px;
-      line-height: 1.5;
-    }
-
-    .badge-row {
-      display: flex;
-      gap: 6px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-      position: relative; z-index: 1;
-    }
-    .badge {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.85);
+    .header-badge {
+      border: 1px solid #334155;
+      padding: 4px 12px;
+      border-radius: 4px;
       font-size: 10px;
       font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 20px;
+      color: #94a3b8;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
-    /* ── Body: services + QR ─────────────────────────── */
+    .main-headline {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.8px;
+      margin-bottom: 10px;
+    }
+    .main-headline em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .sub-headline {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: #94a3b8;
+      max-width: 580px;
+      font-weight: 300;
+    }
+
+    /* ── Main Body (Clean Grid) ──────────────────────── */
     .flyer-body {
       display: grid;
-      grid-template-columns: 1fr 3px 190px;
-      gap: 0;
-      padding: 18px 44px 14px;
+      grid-template-columns: 1fr 200px;
+      gap: 48px;
+      padding: 40px 52px 30px;
       flex: 1;
       min-height: 0;
     }
 
-    /* Services */
-    .services-col { padding-right: 26px; }
-
-    .section-label {
-      font-size: 9px;
+    /* Services Column */
+    .services-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .section-tagline {
+      font-size: 10px;
       font-weight: 700;
+      color: var(--emerald);
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 8px;
+      margin-bottom: 16px;
     }
-
-    .service-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--gray-mid);
+    .service-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
     }
-    .service-item:last-child { border-bottom: none; }
-    .service-icon {
-      width: 30px; height: 30px;
-      border-radius: 7px;
-      background: linear-gradient(135deg, #e8f5ee, #d0eedd);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px;
-      color: var(--green);
-      flex-shrink: 0;
+    .service-card {
+      border-left: 2px solid var(--border);
+      padding-left: 18px;
+      transition: border-color 0.2s;
     }
-    .service-text strong {
-      display: block;
-      font-size: 12px;
+    .service-card:hover {
+      border-color: var(--emerald);
+    }
+    .service-card h3 {
+      font-size: 13.5px;
       font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 2px;
+      color: var(--slate);
+      margin-bottom: 4px;
+      letter-spacing: -0.2px;
     }
-    .service-text p {
-      font-size: 10.5px;
-      color: var(--gray-text);
-      line-height: 1.45;
+    .service-card p {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      font-weight: 400;
     }
 
-    /* Divider */
-    .body-divider { background: var(--gray-mid); width: 1px; margin: 0; }
+    /* Quick Criteria list (Apartments.com style checklist) */
+    .criteria-box {
+      margin-top: 24px;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .criteria-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+    .criteria-list {
+      display: flex;
+      gap: 16px;
+    }
+    .criteria-item {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--slate);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .criteria-item i { color: var(--emerald); font-size: 10px; }
 
-    /* QR Column */
-    .qr-col {
-      padding-left: 24px;
+    /* QR / Apply Widget Column */
+    .action-col {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      border-left: 1px solid var(--border);
+      padding-left: 48px;
+    }
+    .widget-container {
+      width: 100%;
       text-align: center;
     }
-    .qr-label {
+    .widget-label {
       font-size: 9px;
       font-weight: 700;
-      letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--gray-text);
-      margin-bottom: 10px;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
     }
-    .qr-wrapper {
-      background: var(--white);
-      border: 2.5px solid var(--green);
-      border-radius: 10px;
-      padding: 8px;
-      box-shadow: 0 3px 14px rgba(42,122,79,0.15);
+    .qr-frame {
+      display: inline-block;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-    #qr-code canvas, #qr-code img { display: block; border-radius: 4px; }
-    .qr-cta {
-      margin-top: 10px;
+    .widget-title {
       font-size: 13px;
-      font-weight: 800;
-      color: var(--green);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--slate);
+      margin-top: 14px;
+      margin-bottom: 3px;
     }
-    .qr-url {
-      font-size: 9px;
-      color: var(--gray-text);
-      margin-top: 3px;
-      word-break: break-all;
-    }
-    .qr-note {
-      margin-top: 12px;
-      background: #f0faf4;
-      border-radius: 6px;
-      padding: 8px 10px;
+    .widget-sub {
       font-size: 9.5px;
-      color: var(--green);
-      line-height: 1.5;
-      font-weight: 500;
-      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .btn-apply-link {
+      display: block;
+      background: var(--slate);
+      color: #fff;
+      text-decoration: none;
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 4px;
+      letter-spacing: 0.3px;
+    }
+    .security-note {
+      margin-top: 12px;
+      font-size: 9px;
+      color: var(--text-muted);
+      line-height: 1.4;
     }
 
-    /* ── Footer Contact Bar ───────────────────────────── */
+    /* ── Footer Contact Grid ─────────────────────────── */
     .flyer-footer {
-      background: var(--navy);
-      padding: 14px 44px;
+      background: var(--bg-light);
+      border-top: 1px solid var(--border);
+      padding: 24px 52px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .footer-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .footer-item span {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+      font-weight: 600;
+    }
+    .footer-item strong {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--slate);
+    }
+
+    /* ── Bottom Accent Line ──────────────────────────── */
+    .accent-bar {
+      background: var(--emerald);
+      padding: 10px 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      flex-wrap: nowrap;
-      flex-shrink: 0;
-    }
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .contact-item .icon {
-      width: 26px; height: 26px;
-      border-radius: 6px;
-      background: rgba(255,255,255,0.1);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px;
-      color: var(--gold);
-      flex-shrink: 0;
-    }
-    .contact-item strong {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.2;
-    }
-    .contact-item span {
-      font-size: 9.5px;
-      color: rgba(255,255,255,0.45);
-    }
-
-    /* ── Bottom Tagline ───────────────────────────────── */
-    .flyer-tagline {
-      background: var(--green);
-      padding: 8px 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-    .flyer-tagline span {
-      font-size: 10px;
-      font-weight: 600;
       color: rgba(255,255,255,0.9);
-      letter-spacing: 0.8px;
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+    .accent-bar img {
+      height: 18px;
+      width: auto;
+      background: #fff;
+      border-radius: 3px;
+      padding: 1px 3px;
     }
 
-    /* ── Print Styles ─────────────────────────────────── */
+    /* ── Print Layout Controls ───────────────────────── */
     @media print {
       @page {
         size: 8.5in 11in portrait;
         margin: 0;
       }
       html, body {
-        background: white;
-        display: block;
-        width: 8.5in;
-        height: 11in;
+        background: #fff;
         padding: 0;
         margin: 0;
+        width: 8.5in;
+        height: 11in;
         overflow: hidden;
       }
       .print-bar { display: none !important; }
       .flyer {
+        box-shadow: none;
         width: 8.5in;
         height: 11in;
-        box-shadow: none;
-        overflow: hidden;
         page-break-after: avoid;
         page-break-inside: avoid;
       }
@@ -341,172 +361,138 @@
 </head>
 <body>
 
-  <!-- Print Controls -->
+  <!-- Top Action Bar -->
   <div class="print-bar">
-    <span>💡 Click <strong style="color:#fff">Print / Save as PDF</strong> → set margins to <strong style="color:#fff">None</strong> → single page</span>
+    <span>✨ Corporate Listing Style &bull; Perfect 1-Page Layout</span>
     <button class="print-btn" onclick="window.print()">
-      <i class="fas fa-print"></i> Print / Save as PDF
+      <i class="fas fa-print"></i> Save / Print PDF
     </button>
   </div>
 
+  <!-- FLYER CONTAINER -->
   <div class="flyer">
 
     <!-- HEADER -->
     <div class="flyer-header">
-      <div class="logo-row">
-        <img
-          src="https://page.gensparksite.com/v1/base64_upload/dc7d70c3ea25f1b8af4dc749324d4ec0"
-          alt="20 59 Ventures Corp"
-          style="height: 52px; width: auto; background: white; border-radius: 8px; padding: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);"
-        >
-        <div class="logo-text-block">
-          <div class="logo-name">20 <span>59</span> Ventures Corp</div>
-          <div class="logo-sub">Housing Referral Agency</div>
+      <div class="header-top">
+        <div class="logo-container">
+          <img class="logo-img" src="https://page.gensparksite.com/v1/base64_upload/dc7d70c3ea25f1b8af4dc749324d4ec0" alt="Logo">
+          <div class="logo-text-block">
+            <div class="company-title">20 <span>59</span> Ventures Corp</div>
+            <div class="company-subtitle">Housing Referral Agency</div>
+          </div>
         </div>
+        <div class="header-badge">Veterans &amp; Seniors Program</div>
       </div>
 
-      <div class="header-headline">
-        Stable Housing is a <em>Right, Not a Privilege.</em>
-      </div>
-      <div class="header-sub">
-        We provide free housing assistance, counseling, and referral services to families and individuals across our community.
-      </div>
-      <div class="badge-row">
-        <div class="badge">✓ Free Services</div>
-        <div class="badge">✓ Confidential</div>
-        <div class="badge">✓ No Income Limit to Apply</div>
-        <div class="badge">✓ Bilingual Support</div>
-        <div class="badge">✓ Veterans Welcome</div>
-      </div>
+      <h1 class="main-headline">Stable Housing is a <em>Right, Not a Privilege.</em></h1>
+      <p class="sub-headline">Connecting individuals with stable, fully-managed housing solutions. We work directly with program coordinators and case managers to streamline the placement process.</p>
     </div>
 
-    <!-- BODY -->
+    <!-- BODY CONTENT -->
     <div class="flyer-body">
-
-      <!-- Services -->
+      
+      <!-- Left Column: Services -->
       <div class="services-col">
-        <div class="section-label">How We Can Help You</div>
+        <div>
+          <div class="section-tagline">Housing Programs &amp; Assistance</div>
+          <div class="service-grid">
+            
+            <div class="service-card">
+              <h3>Housing Application Placement</h3>
+              <p>Direct assistance navigating waitlists, HUD-VASH vouchers, Section 8 waiting lists, and regional affordable housing program applications.</p>
+            </div>
 
-        <div class="service-item">
-          <div class="service-icon"><i class="fas fa-home"></i></div>
-          <div class="service-text">
-            <strong>Housing Application Assistance</strong>
-            <p>We guide you through every step of applying for affordable housing programs, Section 8, and public housing waiting lists.</p>
+            <div class="service-card">
+              <h3>Financial &amp; Tenant Counseling</h3>
+              <p>Structured support focusing on credit health, budget creation, rental history repair, and general housing sustainability.</p>
+            </div>
+
+            <div class="service-card">
+              <h3>Mediation &amp; Advocacy</h3>
+              <p>Professional support navigating landlord negotiations, tenant rights documentation, and placement security.</p>
+            </div>
+
+            <div class="service-card">
+              <h3>Rapid Matching &amp; Active Waitlists</h3>
+              <p>Know within 48 hours if housing is available in your city. Active waitlist monitoring provides you with regular, reliable status updates.</p>
+            </div>
+
           </div>
         </div>
 
-        <div class="service-item">
-          <div class="service-icon"><i class="fas fa-hand-holding-dollar"></i></div>
-          <div class="service-text">
-            <strong>Financial Counseling &amp; Budgeting</strong>
-            <p>Our certified counselors help you build credit, manage debt, and develop a plan for long-term housing stability.</p>
-          </div>
-        </div>
-
-        <div class="service-item">
-          <div class="service-icon"><i class="fas fa-people-roof"></i></div>
-          <div class="service-text">
-            <strong>Emergency Housing Referrals</strong>
-            <p>Facing eviction or displacement? We connect you with emergency shelter, rapid rehousing, and crisis support resources.</p>
-          </div>
-        </div>
-
-        <div class="service-item">
-          <div class="service-icon"><i class="fas fa-handshake"></i></div>
-          <div class="service-text">
-            <strong>Landlord &amp; Tenant Mediation</strong>
-            <p>We advocate on your behalf, helping navigate disputes, lease negotiations, and tenant rights education.</p>
-          </div>
-        </div>
-
-        <div class="service-item">
-          <div class="service-icon"><i class="fas fa-file-signature"></i></div>
-          <div class="service-text">
-            <strong>Program Enrollment Support</strong>
-            <p>From HUD-certified programs to state and local grants — we help you find and apply for every resource you qualify for.</p>
+        <!-- Rental Criteria Row -->
+        <div class="criteria-box">
+          <div class="criteria-title">Program Rules</div>
+          <div class="criteria-list">
+            <div class="criteria-item"><i class="fas fa-check"></i> HUD-VASH Accepted</div>
+            <div class="criteria-item"><i class="fas fa-check"></i> No Credit Check</div>
+            <div class="criteria-item"><i class="fas fa-check"></i> Free Service</div>
           </div>
         </div>
       </div>
 
-      <!-- Divider -->
-      <div class="body-divider"></div>
-
-      <!-- QR Code -->
-      <div class="qr-col">
-        <div class="qr-label">Apply Online</div>
-        <div class="qr-wrapper">
-          <div id="qr-code"></div>
-        </div>
-        <div class="qr-cta">Scan to Apply</div>
-        <div class="qr-url">www.2059ventures.online</div>
-        <div class="qr-note">
-          <i class="fas fa-lock" style="font-size:10px"></i>
-          Your information is <strong>private &amp; secure.</strong><br>
-          Applications take less than 10 minutes.
+      <!-- Right Column: Clean Portal Widget -->
+      <div class="action-col">
+        <div class="widget-container">
+          <div class="widget-label">Applicant Portal</div>
+          <div class="qr-frame">
+            <div id="qr-code"></div>
+          </div>
+          <div class="widget-title">Scan to Register</div>
+          <div class="widget-sub">Apply in under 10 minutes</div>
+          
+          <a href="https://www.2059ventures.online" class="btn-apply-link" target="_blank">
+            2059ventures.online
+          </a>
+          
+          <div class="security-note">
+            <i class="fas fa-shield-alt" style="color:var(--emerald)"></i><br>
+            Secure, encrypted registration for all program applicants.
+          </div>
         </div>
       </div>
 
-    </div><!-- /flyer-body -->
+    </div>
 
     <!-- FOOTER CONTACT BAR -->
     <div class="flyer-footer">
-
-      <div class="contact-item">
-        <div class="icon"><i class="fas fa-phone"></i></div>
-        <div>
-          <strong>1-888-919-2059</strong>
-          <span>Toll Free</span>
-        </div>
+      <div class="footer-item">
+        <span>Toll Free Line</span>
+        <strong>1-888-919-2059</strong>
       </div>
-
-      <div class="contact-item">
-        <div class="icon"><i class="fas fa-phone-alt"></i></div>
-        <div>
-          <strong>205-534-8492</strong>
-          <span>Local Office</span>
-        </div>
+      <div class="footer-item">
+        <span>Local Office</span>
+        <strong>205-534-8492</strong>
       </div>
-
-      <div class="contact-item">
-        <div class="icon"><i class="fas fa-envelope"></i></div>
-        <div>
-          <strong>support@2059ventures.online</strong>
-          <span>Email Us Anytime</span>
-        </div>
+      <div class="footer-item">
+        <span>Email Address</span>
+        <strong>support@2059ventures.online</strong>
       </div>
-
-      <div class="contact-item">
-        <div class="icon"><i class="fas fa-globe"></i></div>
-        <div>
-          <strong>www.2059ventures.online</strong>
-          <span>Visit Our Website</span>
-        </div>
+      <div class="footer-item">
+        <span>Web Portal</span>
+        <strong>www.2059ventures.online</strong>
       </div>
-
     </div>
 
-    <!-- BOTTOM TAGLINE -->
-    <div class="flyer-tagline">
-      <img
-        src="https://page.gensparksite.com/v1/base64_upload/dc7d70c3ea25f1b8af4dc749324d4ec0"
-        alt="20 59 Ventures Corp Logo"
-        style="height: 22px; width: auto; background: white; border-radius: 4px; padding: 2px 4px;"
-      >
-      <span>20 59 Ventures Corp &nbsp;|&nbsp; Serving Communities with Dignity &nbsp;|&nbsp; All services are free and confidential</span>
+    <!-- BOTTOM ACCENT BAR -->
+    <div class="accent-bar">
+      <span>All services are confidential. 20 59 Ventures Corp is an Equal Opportunity Housing Provider.</span>
+      <img src="https://page.gensparksite.com/v1/base64_upload/dc7d70c3ea25f1b8af4dc749324d4ec0" alt="Logo Accent">
     </div>
 
-  </div><!-- /flyer -->
+  </div>
 
   <!-- Generate QR Code -->
   <script>
     window.addEventListener('DOMContentLoaded', function () {
       new QRCode(document.getElementById("qr-code"), {
         text: "https://www.2059ventures.online",
-        width: 148,
-        height: 148,
-        colorDark: "#0d1f2d",
+        width: 120,
+        height: 120,
+        colorDark: "#0f172a",
         colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
+        correctLevel: QRCode.CorrectLevel.M
       });
     });
   </script>
