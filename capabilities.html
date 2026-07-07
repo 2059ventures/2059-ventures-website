@@ -43,7 +43,11 @@
       padding: 12px 24px;
       border-radius: 8px;
       font-weight: 600;
+      font-size: 16px;
+      font-family: inherit;
       text-decoration: none;
+      border: none;
+      cursor: pointer;
       transition: background 0.2s, transform 0.2s;
       box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
     }
@@ -374,9 +378,9 @@
     <div class="capabilities-hero-container">
       <h1>Capabilities Statement</h1>
       <p>Official Government Contracting Information for 20 59 Ventures Corp.</p>
-      <a href="pdf/capabilities-statement.pdf?v=1" target="_blank" class="capabilities-download-btn">
-        <i class="fas fa-file-pdf"></i> Download PDF Statement
-      </a>
+      <button onclick="window.print()" class="capabilities-download-btn">
+        <i class="fas fa-file-pdf"></i> Download / Print PDF Statement
+      </button>
     </div>
   </section>
 
