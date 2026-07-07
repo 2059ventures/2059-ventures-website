@@ -351,49 +351,77 @@
                 <div class="progress-bar-fill" id="progress-bar-fill"></div>
                 <div class="wizard-step active" id="step-node-1">
                     <div class="step-icon">1</div>
-                    <div class="step-label">Personal Info</div>
+                    <div class="step-label">Agency Info</div>
                 </div>
                 <div class="wizard-step" id="step-node-2">
                     <div class="step-icon">2</div>
-                    <div class="step-label">Living & Referral</div>
+                    <div class="step-label">Client Info</div>
                 </div>
                 <div class="wizard-step" id="step-node-3">
                     <div class="step-icon">3</div>
-                    <div class="step-label">Health & History</div>
+                    <div class="step-label">Housing Details</div>
                 </div>
                 <div class="wizard-step" id="step-node-4">
                     <div class="step-icon">4</div>
-                    <div class="step-label">Submit</div>
+                    <div class="step-label">Certify &amp; Submit</div>
                 </div>
             </div>
 
             <div class="form-card" id="form-card">
                 <form id="intakeForm" onsubmit="handleFormSubmit(event)">
                     
-                    <!-- STEP 1: Personal & Emergency Info -->
+                    <!-- STEP 1: Referring Agency Info -->
                     <div class="form-step-content active" id="step-1">
-                        <h2 class="step-title">Personal & Emergency Contact Info</h2>
-                        <p class="step-desc">Provide your basic contact information and emergency contact details.</p>
+                        <h2 class="step-title">Referring Agency Info</h2>
+                        <p class="step-desc">Provide your contact details as the referring coordinator or case manager.</p>
                         
                         <div class="form-grid-2">
                             <div class="form-field">
-                                <label for="fullName">Full Name *</label>
+                                <label for="referrerName">Referring Coordinator Name *</label>
+                                <input type="text" id="referrerName" name="referrerName" required placeholder="Officer Jane Smith">
+                            </div>
+                            <div class="form-field">
+                                <label for="referrerAgencyName">Agency / Organization Name *</label>
+                                <input type="text" id="referrerAgencyName" name="referrerAgencyName" required placeholder="VA Medical Center, Salvation Army, etc.">
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label for="referrerEmail">Coordinator Email Address *</label>
+                                <input type="email" id="referrerEmail" name="referrerEmail" required placeholder="worker@agency.org">
+                            </div>
+                            <div class="form-field">
+                                <label for="referrerPhone">Coordinator Phone Number *</label>
+                                <input type="tel" id="referrerPhone" name="referrerPhone" required placeholder="(555) 555-5557">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Client Demographics -->
+                    <div class="form-step-content" id="step-2">
+                        <h2 class="step-title">Client Demographics</h2>
+                        <p class="step-desc">Enter the personal details of the veteran or senior client you are referring.</p>
+
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label for="fullName">Client Full Name *</label>
                                 <input type="text" id="fullName" name="fullName" required placeholder="John Doe">
                             </div>
                             <div class="form-field">
-                                <label for="dob">Date of Birth *</label>
+                                <label for="dob">Client Date of Birth *</label>
                                 <input type="date" id="dob" name="dob" required>
                             </div>
                         </div>
 
                         <div class="form-grid-2">
                             <div class="form-field">
-                                <label for="email">Email Address *</label>
-                                <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
+                                <label for="email">Client Email Address (Optional)</label>
+                                <input type="email" id="email" name="email" placeholder="john.doe@example.com">
                             </div>
                             <div class="form-field">
-                                <label for="phone">Phone Number *</label>
-                                <input type="tel" id="phone" name="phone" required placeholder="(555) 555-5555">
+                                <label for="phone">Client Phone Number (Optional)</label>
+                                <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555">
                             </div>
                         </div>
 
@@ -425,10 +453,10 @@
                         </div>
                     </div>
 
-                    <!-- STEP 2: Living Situation & Referrals -->
-                    <div class="form-step-content" id="step-2">
-                        <h2 class="step-title">Living Situation & Referral Details</h2>
-                        <p class="step-desc">Information regarding your housing history and referring agencies.</p>
+                    <!-- STEP 3: Housing & Voucher Details -->
+                    <div class="form-step-content" id="step-3">
+                        <h2 class="step-title">Housing &amp; Voucher Details</h2>
+                        <p class="step-desc">Enter details about the client's current housing status and voucher eligibility.</p>
 
                         <div class="form-grid-2">
                             <div class="form-field">
@@ -457,37 +485,9 @@
                             </div>
                         </div>
 
-                        <h3 style="font-size: 16px; font-weight:600; margin: 25px 0 15px; color: var(--logo-green); border-bottom: 1px solid #eee; padding-bottom: 8px;">Referral Agency (If Applicable)</h3>
-
                         <div class="form-grid-2">
                             <div class="form-field">
-                                <label for="referralAgency">Agency Name</label>
-                                <input type="text" id="referralAgency" name="referralAgency" placeholder="VA, Dothan Rescue Mission, etc.">
-                            </div>
-                            <div class="form-field">
-                                <label for="caseManager">Case Manager Name</label>
-                                <input type="text" id="caseManager" name="caseManager" placeholder="Officer Smith">
-                            </div>
-                        </div>
-                        <div class="form-field">
-                            <label for="referralContact">Referral Contact Email/Phone</label>
-                            <input type="text" id="referralContact" name="referralContact" placeholder="555-555-5557 or worker@agency.org">
-                        </div>
-
-                        <div class="form-field">
-                            <label for="housingNeedSummary">Summary of Housing Need *</label>
-                            <textarea id="housingNeedSummary" name="housingNeedSummary" rows="4" required placeholder="Please describe your current housing circumstances and why you need placement support."></textarea>
-                        </div>
-                    </div>
-
-                    <!-- STEP 3: Support & Background -->
-                    <div class="form-step-content" id="step-3">
-                        <h2 class="step-title">Medical, Mental Health & Legal Background</h2>
-                        <p class="step-desc">All health information is kept strictly confidential and is used only to accommodate your needs.</p>
-
-                        <div class="form-grid-2">
-                            <div class="form-field">
-                                <label for="veteranStatus">Are you a Veteran? *</label>
+                                <label for="veteranStatus">Is the Client a Veteran? *</label>
                                 <select id="veteranStatus" name="veteranStatus" required>
                                     <option value="">Select an option</option>
                                     <option value="yes">Yes</option>
@@ -496,43 +496,34 @@
                             </div>
                             <div class="form-field">
                                 <label for="hudVash">Receiving HUD-VASH / VA Case Management? *</label>
-                                <select id="hudVash" name="hudVash">
+                                <select id="hudVash" name="hudVash" required>
                                     <option value="">Select an option</option>
                                     <option value="yes">Yes (Currently Assigned)</option>
                                     <option value="no">No</option>
                                     <option value="applying">Currently Applying</option>
+                                    <option value="other_voucher">Other Voucher Type (e.g. Section 8)</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-field">
-                            <label for="medicalConditions">Physical Health Conditions or Accessibility Needs</label>
-                            <textarea id="medicalConditions" name="medicalConditions" rows="3" placeholder="Mobility limitations, wheelchair access, medication storage needs, etc. (optional)"></textarea>
-                        </div>
-
-                        <div class="form-field">
-                            <label for="mentalHealth">Mental Health / Substance Support Background</label>
-                            <textarea id="mentalHealth" name="mentalHealth" rows="3" placeholder="Self-reported or diagnosed conditions, treatment, or support groups. (optional)"></textarea>
-                        </div>
-
-                        <div class="form-field">
-                            <label for="legalBackground">Legal History or Pending Issues</label>
-                            <textarea id="legalBackground" name="legalBackground" rows="3" placeholder="Parole/probation status, pending court dates, registry status, etc. (optional)"></textarea>
+                            <label for="housingNeedSummary">Summary of Housing Need &amp; Preferences *</label>
+                            <textarea id="housingNeedSummary" name="housingNeedSummary" rows="4" required placeholder="Describe any accessibility requirements, health concerns, target neighborhoods, or other notes (physical health, mental health, legal background details)."></textarea>
                         </div>
                     </div>
 
-                    <!-- STEP 4: Financial Info & Acknowledgment -->
+                    <!-- STEP 4: Financial & Referral Certification -->
                     <div class="form-step-content" id="step-4">
-                        <h2 class="step-title">Financial Info & Program Enrollment</h2>
-                        <p class="step-desc">Submit your income details and sign the agreement to complete your application.</p>
+                        <h2 class="step-title">Financial Info &amp; Referral Certification</h2>
+                        <p class="step-desc">Enter the client's income details and certify the referral request.</p>
 
                         <div class="form-grid-2">
                             <div class="form-field">
-                                <label for="monthlyIncome">Total Monthly Income ($) *</label>
+                                <label for="monthlyIncome">Client Total Monthly Income ($) *</label>
                                 <input type="number" id="monthlyIncome" name="monthlyIncome" required min="0" step="0.01" placeholder="1200.00">
                             </div>
                             <div class="form-field">
-                                <label>Income Sources (Select all that apply) *</label>
+                                <label>Client Income Sources (Select all that apply) *</label>
                                 <div class="checkbox-group">
                                     <label class="checkbox-item"><input type="checkbox" name="incomeSource" value="va_pension"> VA Pension/Comp</label>
                                     <label class="checkbox-item"><input type="checkbox" name="incomeSource" value="ssdi"> SSDI</label>
@@ -545,35 +536,35 @@
                         </div>
 
                         <div style="background: #f8fcf9; border: 1px solid rgba(74,124,89,0.15); border-radius:16px; padding:20px; margin:25px 0; text-align:left;">
-                            <h4 style="font-weight: 600; color: var(--logo-green); margin-bottom: 10px;">Program Enrollment Agreement</h4>
-                            <p style="font-size: 13px; color: var(--gray-dark); line-height: 1.5; margin-bottom: 10px;">
-                                By signing below, you certify that all information in this application is true and correct to the best of your knowledge. You authorize 20 59 Ventures Corp to share your referral information with partner housing providers and organizations (such as the Limyè Foundation) to secure placement.
+                            <h4 style="font-weight: 600; color: var(--logo-green); margin-bottom: 10px;">Referral &amp; Consent Certification</h4>
+                            <p style="font-size: 13.5px; color: var(--gray-dark); line-height: 1.5; margin-bottom: 15px;">
+                                By submitting this form, you certify that you are an authorized representative of the referring agency and that you have obtained the client's explicit consent to share their personal, financial, and housing information with 20 59 Ventures Corp.
                             </p>
-                        </div>
-
-                        <!-- Canvas Signature Pad -->
-                        <div class="form-field">
-                            <label>Participant Digital Signature * (Draw inside the box below)</label>
-                            <div class="signature-container">
-                                <canvas class="signature-canvas" id="sigCanvas"></canvas>
-                                <div class="signature-actions">
-                                    <button type="button" class="btn-clear" onclick="clearSignature()"><i class="fas fa-eraser"></i> Clear Signature</button>
-                                </div>
+                            
+                            <div class="form-field" style="margin-bottom: 15px;">
+                                <label class="checkbox-item" style="display: flex; align-items: flex-start; gap: 10px; font-weight: normal; cursor: pointer;">
+                                    <input type="checkbox" name="referralConsent" id="referralConsent" required style="margin-top: 3px; cursor: pointer;">
+                                    <span style="font-size: 13px; color: var(--text-dark); line-height: 1.4;">I certify that I have the client's consent to share this information and coordinate their housing placement. *</span>
+                                </label>
                             </div>
-                            <input type="hidden" id="signatureData" name="signatureData" required>
                         </div>
 
                         <div class="form-grid-2">
                             <div class="form-field">
-                                <label for="signatureDate">Date of Signature *</label>
+                                <label for="coordinatorSignature">Digital Certification Signature * (Type Coordinator Name)</label>
+                                <input type="text" id="coordinatorSignature" name="coordinatorSignature" required placeholder="Type your full name to sign">
+                            </div>
+                            <div class="form-field">
+                                <label for="signatureDate">Date of Referral *</label>
                                 <input type="date" id="signatureDate" name="signatureDate" required>
                             </div>
-                            <div class="form-field" style="display:flex; flex-direction:column; justify-content:center; padding-top:20px;">
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="smsConsent" required>
-                                    <span>I consent to receive SMS updates from 20 59 Ventures. *</span>
-                                </label>
-                            </div>
+                        </div>
+
+                        <div class="form-field" style="margin-top: 15px;">
+                            <label class="checkbox-item" style="display: flex; align-items: flex-start; gap: 10px; font-weight: normal;">
+                                <input type="checkbox" name="smsConsent" required checked>
+                                <span style="font-size: 12.5px; color: var(--gray-dark); line-height: 1.4;">I consent to receive SMS updates regarding the status of this referral from 20 59 Ventures. *</span>
+                            </label>
                         </div>
                     </div>
 
@@ -602,10 +593,6 @@
         let currentStep = 1;
         const totalSteps = 4;
         const form = document.getElementById("intakeForm");
-        const sigCanvas = document.getElementById("sigCanvas");
-        const signatureDataInput = document.getElementById("signatureData");
-        let ctx = null;
-        let isDrawing = false;
 
         // Auto-detect backend API based on environment
         const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
@@ -619,9 +606,6 @@
 
             // Load saved data if any
             loadFormData();
-
-            // Setup Canvas signature drawing
-            setupSignaturePad();
 
             // Save data on changes
             form.addEventListener("input", saveFormData);
@@ -692,115 +676,19 @@
             // Extra checks
 
             if (currentStep === 4) {
-                if (isCanvasBlank()) {
-                    sigCanvas.style.borderColor = "#c0392b";
-                    alert("A signature is required to complete the application.");
+                const consent = document.getElementById("referralConsent");
+                const sig = document.getElementById("coordinatorSignature");
+                if (consent && !consent.checked) {
+                    alert("You must certify the Referral & Consent checkbox to continue.");
                     isValid = false;
-                } else {
-                    sigCanvas.style.borderColor = "rgba(74, 124, 89, 0.3)";
-                    // Export canvas to hidden field
-                    signatureDataInput.value = sigCanvas.toDataURL("image/png");
+                }
+                if (sig && !sig.value.trim()) {
+                    sig.style.borderColor = "#c0392b";
+                    isValid = false;
                 }
             }
 
             return isValid;
-        }
-
-        // --- SIGNATURE CANVAS FUNCTIONS ---
-        function setupSignaturePad() {
-            ctx = sigCanvas.getContext("2d");
-            ctx.lineWidth = 3;
-            ctx.lineCap = "round";
-            ctx.strokeStyle = "#1a1a1a";
-
-            // Mouse events
-            sigCanvas.addEventListener("mousedown", startDrawing);
-            sigCanvas.addEventListener("mousemove", draw);
-            window.addEventListener("mouseup", stopDrawing);
-
-            // Touch events
-            sigCanvas.addEventListener("touchstart", startDrawingTouch);
-            sigCanvas.addEventListener("touchmove", drawTouch);
-            window.addEventListener("touchend", stopDrawing);
-
-            // Window resize support
-            window.addEventListener("resize", resizeCanvas);
-            resizeCanvas();
-        }
-
-        function resizeCanvas() {
-            if (!sigCanvas || sigCanvas.offsetWidth === 0) return;
-            // Capture image if already signed
-            let imgData = null;
-            if (!isCanvasBlank()) {
-                imgData = sigCanvas.toDataURL();
-            }
-
-            // Set coordinates width to match layout offsetWidth
-            sigCanvas.width = sigCanvas.offsetWidth;
-            sigCanvas.height = 180;
-            
-            // Reapply drawing styles
-            ctx.lineWidth = 3;
-            ctx.lineCap = "round";
-            ctx.strokeStyle = "#1a1a1a";
-
-            if (imgData) {
-                const img = new Image();
-                img.onload = () => ctx.drawImage(img, 0, 0);
-                img.src = imgData;
-            }
-        }
-
-        function startDrawing(e) {
-            isDrawing = true;
-            ctx.beginPath();
-            const rect = sigCanvas.getBoundingClientRect();
-            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
-        }
-
-        function draw(e) {
-            if (!isDrawing) return;
-            const rect = sigCanvas.getBoundingClientRect();
-            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
-            ctx.stroke();
-            saveFormData();
-        }
-
-        function startDrawingTouch(e) {
-            isDrawing = true;
-            ctx.beginPath();
-            const rect = sigCanvas.getBoundingClientRect();
-            const touch = e.touches[0];
-            ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
-            e.preventDefault();
-        }
-
-        function drawTouch(e) {
-            if (!isDrawing) return;
-            const rect = sigCanvas.getBoundingClientRect();
-            const touch = e.touches[0];
-            ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
-            ctx.stroke();
-            e.preventDefault();
-            saveFormData();
-        }
-
-        function stopDrawing() {
-            isDrawing = false;
-        }
-
-        function clearSignature() {
-            ctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
-            signatureDataInput.value = "";
-            saveFormData();
-        }
-
-        function isCanvasBlank() {
-            const blank = document.createElement('canvas');
-            blank.width = sigCanvas.width;
-            blank.height = sigCanvas.height;
-            return sigCanvas.toDataURL() === blank.toDataURL();
         }
 
         // --- LOCAL STORAGE AUTO-SAVE ---
@@ -866,29 +754,29 @@
             const payload = {
                 fullName: formData.get("fullName"),
                 dob: formData.get("dob"),
-                email: formData.get("email"),
-                phone: formData.get("phone"),
+                email: formData.get("email") || "",
+                phone: formData.get("phone") || "",
                 ssnLastFour: "",
                 housingPreference: formData.get("housingPreference"),
-                emergencyName: formData.get("emergencyName"),
-                emergencyPhone: formData.get("emergencyPhone"),
-                emergencyRelationship: formData.get("emergencyRelationship"),
+                emergencyName: formData.get("emergencyName") || "",
+                emergencyPhone: formData.get("emergencyPhone") || "",
+                emergencyRelationship: formData.get("emergencyRelationship") || "",
                 livingSituation: formData.get("livingSituation"),
                 homelessDuration: formData.get("homelessDuration"),
-                referralAgency: formData.get("referralAgency") || "",
-                caseManager: formData.get("caseManager") || "",
-                referralContact: formData.get("referralContact") || "",
+                referralAgency: formData.get("referrerAgencyName"),
+                caseManager: formData.get("referrerName"),
+                referralContact: "Email: " + formData.get("referrerEmail") + " | Phone: " + formData.get("referrerPhone"),
                 housingNeedSummary: formData.get("housingNeedSummary"),
                 veteranStatus: formData.get("veteranStatus"),
-                hudVash: formData.get("hudVash") || "",
-                medicalConditions: formData.get("medicalConditions") || "",
-                mentalHealth: formData.get("mentalHealth") || "",
-                legalBackground: formData.get("legalBackground") || "",
+                hudVash: formData.get("hudVash"),
+                medicalConditions: "",
+                mentalHealth: "",
+                legalBackground: "",
                 monthlyIncome: parseFloat(formData.get("monthlyIncome") || 0),
                 incomeSources: incomeSources,
-                signatureData: signatureDataInput.value, // Base64 signature
+                signatureData: "Certified by Coordinator: " + formData.get("coordinatorSignature"),
                 signatureDate: formData.get("signatureDate"),
-                smsConsent: formData.get("smsConsent") === "on"
+                smsConsent: formData.get("smsConsent") === "on" || formData.get("smsConsent") === true
             };
 
             try {
