@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capabilities Statement - 20 59 Ventures Corp</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --primary: #256041;
+      --primary-dark: #1b4730;
+      --accent: #d97706;
+      --text-dark: #111827;
+      --text-muted: #4b5563;
+      --bg-light: #f9fafb;
+      --border: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-dark);
+      background-color: #f3f4f6;
+      line-height: 1.5;
+      padding: 20px 0;
+    }
+
+    /* Single Page Container */
+    .capabilities-page {
+      width: 8.5in;
+      height: 11in;
+      background: #ffffff;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      padding: 40px;
+    }
+
+    /* HEADER */
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+      height: 100px;
+    }
+
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand-logo {
+      height: 80px;
+      width: auto;
+    }
+
+    .brand-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-text p {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .title-block {
+      text-align: right;
+    }
+
+    .title-block h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .title-block p {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* BODY LAYOUT */
+    .body-grid {
+      display: flex;
+      gap: 30px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Left Sidebar: Identifiers & Contact */
+    .sidebar {
+      width: 210px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar-section {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .sidebar-section h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+      border-bottom: 1.5px solid var(--primary);
+      padding-bottom: 4px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .code-list {
+      list-style: none;
+      font-size: 11.5px;
+    }
+
+    .code-list li {
+      margin-bottom: 8px;
+    }
+
+    .code-list li strong {
+      color: var(--primary-dark);
+      display: block;
+    }
+
+    .naics-item {
+      font-size: 11px;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .naics-item strong {
+      color: var(--primary);
+      display: inline-block;
+      width: 55px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 10px;
+      font-size: 11px;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .contact-item i {
+      color: var(--primary);
+      margin-top: 2px;
+      font-size: 12px;
+    }
+
+    /* Right Main Content Panel */
+    .main-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .overview-text {
+      font-size: 12.5px;
+      color: var(--text-dark);
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .main-section h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      background: var(--primary);
+      padding: 6px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .competency-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .competency-card {
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+    }
+
+    .competency-card h4 {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .competency-card p {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .bullet-list {
+      list-style-type: none;
+      padding-left: 5px;
+    }
+
+    .bullet-list li {
+      font-size: 11.5px;
+      margin-bottom: 6px;
+      position: relative;
+      padding-left: 15px;
+      line-height: 1.4;
+    }
+
+    .bullet-list li::before {
+      content: "\2022";
+      color: var(--accent);
+      font-weight: bold;
+      display: inline-block;
+      width: 10px;
+      margin-left: -15px;
+      position: absolute;
+      left: 15px;
+    }
+
+    .performance-card {
+      margin-bottom: 8px;
+    }
+
+    .performance-card h4 {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+    }
+
+    .performance-card p {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* FOOTER BAR */
+    .footer-bar {
+      border-top: 1.5px solid var(--border);
+      padding-top: 15px;
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      font-size: 9.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .footer-bar span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Print Controls */
+    @media print {
+      body {
+        background-color: #ffffff;
+        padding: 0;
+      }
+      .capabilities-page {
+        margin: 0;
+        box-shadow: none;
+        page-break-inside: avoid;
+        page-break-after: avoid;
+      }
+      /* Hide standard browser print headers/footers */
+      @page {
+        size: 8.5in 11in;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="capabilities-page">
+    
+    <!-- HEADER -->
+    <div class="header-row">
+      <div class="brand-block">
+        <img class="brand-logo" src="img/logo-shield.jpg" alt="20 59 Ventures Corp Logo">
+        <div class="brand-text">
+          <h1>20 59 VENTURES CORP</h1>
+          <p>Housing Referral Agency</p>
+        </div>
+      </div>
+      <div class="title-block">
+        <h2>Capabilities Statement</h2>
+        <p>Government &amp; Agency Housing Solutions</p>
+      </div>
+    </div>
+
+    <!-- BODY LAYOUT -->
+    <div class="body-grid">
+      
+      <!-- LEFT COLUMN: IDENTIFIERS & CONTACT -->
+      <div class="sidebar">
+        
+        <!-- Codes Block -->
+        <div class="sidebar-section">
+          <h3>Company Codes</h3>
+          <ul class="code-list">
+            <li>
+              <strong>Unique Entity ID (UEI)</strong>
+              GVR2NTGR4HU3
+            </li>
+            <li>
+              <strong>CAGE Code</strong>
+              Submitted (In Progress)
+            </li>
+            <li>
+              <strong>SAM.gov Status</strong>
+              Submitted / Active Entity
+            </li>
+          </ul>
+        </div>
+
+        <!-- NAICS Block -->
+        <div class="sidebar-section">
+          <h3>NAICS Codes</h3>
+          <div class="naics-item">
+            <strong>541611</strong> (Primary)<br>
+            Administrative &amp; General Management Consulting
+          </div>
+          <div class="naics-item">
+            <strong>624220</strong><br>
+            Community Housing Services
+          </div>
+          <div class="naics-item">
+            <strong>531311</strong><br>
+            Residential Property Management
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="sidebar-section">
+          <h3>Classifications</h3>
+          <ul class="code-list">
+            <li><i class="fas fa-certificate" style="color:var(--accent); margin-right:4px;"></i> 100% Veteran-Owned</li>
+            <li><i class="fas fa-certificate" style="color:var(--accent); margin-right:4px;"></i> SDVOSB Self-Certified</li>
+            <li><i class="fas fa-certificate" style="color:var(--accent); margin-right:4px;"></i> Small Business Enterprise</li>
+          </ul>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="sidebar-section" style="margin-top: auto;">
+          <h3>Key Contacts</h3>
+          
+          <div class="contact-item">
+            <i class="fas fa-user-tie"></i>
+            <div>
+              <strong>Marcus &amp; Andrea</strong><br>
+              Managing Directors
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              1-888-919-2059<br>
+              205-534-8492
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              support@2059ventures.online
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-globe"></i>
+            <div>
+              www.2059ventures.online
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              212 W Troy St<br>
+              Dothan, AL 36303
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN: CAPABILITIES & COMPETENCIES -->
+      <div class="main-panel">
+        
+        <!-- Corporate Overview -->
+        <div class="overview-text">
+          <strong>20 59 Ventures Corp</strong> is a technology-driven housing referral and tenancy management agency. We act as a direct extension of government coordinators, VSOs, and non-profits, providing rapid client placement and wrap-around tenancy coordination. We specialize in matching vulnerable, veteran, and senior populations with high-quality, fully-managed housing units while reducing administrative bottlenecking for case managers.
+        </div>
+
+        <!-- Core Competencies -->
+        <div class="main-section">
+          <h3>Core Competencies</h3>
+          <div class="competency-grid">
+            <div class="competency-card">
+              <h4>Client Placement Coordination</h4>
+              <p>Directly managing waitlists, voucher allocations, and lease-ups for HUD-VASH and Section 8 clients.</p>
+            </div>
+            <div class="competency-card">
+              <h4>Tenancy Management</h4>
+              <p>Delivering long-term housing sustainability through active mediation, credit counseling, and client support.</p>
+            </div>
+            <div class="competency-card">
+              <h4>Landlord Liaison Network</h4>
+              <p>Operating a dedicated network of pre-vetted housing providers accepting HUD and regional vouchers.</p>
+            </div>
+            <div class="competency-card">
+              <h4>Government Compliance</h4>
+              <p>Adhering to strict federal housing standards, lease requirements, and agency reporting regulations.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Differentiators -->
+        <div class="main-section">
+          <h3>Key Differentiators</h3>
+          <ul class="bullet-list">
+            <li><strong>Intelligent Dispatch (Harry):</strong> proprietary 24/7 AI coordinator routing and tracking client referrals.</li>
+            <li><strong>Real-Time Status Pipeline:</strong> Case managers receive dedicated secure access to monitor their clients' placement progress instantly.</li>
+            <li><strong>48-Hour Availability Response:</strong> Rapid unit inventory verification to keep active caseloads moving.</li>
+            <li><strong>Notary &amp; Administrative Support:</strong> In-house notary services to coordinate immediate document and lease certifications.</li>
+            <li><strong>Limyè Foundation Alliance:</strong> Joint care-coordination pipeline reinforcing long-term tenant stability.</li>
+          </ul>
+        </div>
+
+        <!-- Past Performance -->
+        <div class="main-section">
+          <h3>Past Performance</h3>
+          
+          <div class="performance-card">
+            <h4>Regional Housing Coordination (Dothan, AL)</h4>
+            <p>Administered placements, lease coordination, and landlord mediations for low-income seniors and veterans utilizing federal housing assistance vouchers.</p>
+          </div>
+
+          <div class="performance-card">
+            <h4>Limyè Foundation Strategic Care Integration</h4>
+            <p>Executed wrap-around tenant counseling and credit stabilization support, successfully reducing eviction rates and securing long-term placements.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- FOOTER BAR -->
+    <div class="footer-bar">
+      <span>20 59 Ventures Corp &bull; UEI: GVR2NTGR4HU3 &bull; SAM.gov Registered</span>
+      <span>Confidential Government Referral Document</span>
+    </div>
+
+  </div>
+
+</body>
+</html>
