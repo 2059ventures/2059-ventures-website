@@ -4,306 +4,344 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Capabilities Statement - 20 59 Ventures Corp</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="description" content="Official Government Capabilities Statement for 20 59 Ventures Corp. Primary NAICS: 541611. SDVOSB & Veteran-Owned Small Business providing housing referral solutions.">
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/apple-style.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-
-    :root {
-      --primary: #256041;
-      --primary-dark: #1b4730;
-      --accent: #d97706;
-      --text-dark: #111827;
-      --text-muted: #4b5563;
-      --bg-light: #f9fafb;
-      --border: #e5e7eb;
+    /* Custom Styling for Capabilities Web View */
+    .capabilities-hero {
+      background: linear-gradient(135deg, #1b4730 0%, #256041 100%);
+      color: #ffffff;
+      padding: 100px 20px 60px;
+      text-align: center;
+    }
+    
+    .capabilities-hero-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .capabilities-hero h1 {
+      font-size: 38px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    .capabilities-hero p {
+      font-size: 18px;
+      opacity: 0.9;
+      margin-bottom: 25px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    .capabilities-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #d97706;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
+    }
+    
+    .capabilities-download-btn:hover {
+      background: #b45309;
+      transform: translateY(-2px);
     }
 
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      color: var(--text-dark);
-      background-color: #f3f4f6;
-      line-height: 1.5;
-      padding: 20px 0;
+    /* Print-to-PDF Wrapper on Screen */
+    .sheet-wrapper {
+      padding: 60px 20px;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
     }
 
-    /* Single Page Container */
-    .capabilities-page {
+    /* 8.5" x 11" Clean Paper Layout */
+    .capabilities-sheet {
       width: 8.5in;
       height: 11in;
       background: #ffffff;
-      margin: 0 auto;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border-radius: 8px;
+      padding: 40px;
       display: flex;
       flex-direction: column;
-      position: relative;
-      overflow: hidden;
-      padding: 40px;
+      color: #111827;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
-    /* HEADER */
-    .header-row {
+    /* Sheet inner sections styles */
+    .sheet-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px solid var(--primary);
-      padding-bottom: 20px;
-      margin-bottom: 25px;
-      height: 100px;
+      border-bottom: 2.5px solid #256041;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+      height: 90px;
+      flex-shrink: 0;
     }
 
-    .brand-block {
+    .sheet-brand {
       display: flex;
       align-items: center;
       gap: 15px;
     }
 
-    .brand-logo {
-      height: 80px;
+    .sheet-logo {
+      height: 70px;
       width: auto;
     }
 
-    .brand-text h1 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 24px;
+    .sheet-brand-text h2 {
+      font-size: 22px;
       font-weight: 800;
-      color: var(--primary);
-      letter-spacing: 0.5px;
+      color: #256041;
       line-height: 1.1;
     }
 
-    .brand-text p {
-      font-size: 13px;
+    .sheet-brand-text p {
+      font-size: 11.5px;
       font-weight: 600;
-      color: var(--text-muted);
+      color: #4b5563;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
 
-    .title-block {
+    .sheet-title {
       text-align: right;
     }
 
-    .title-block h2 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 20px;
+    .sheet-title h3 {
+      font-size: 18px;
       font-weight: 700;
-      color: var(--accent);
+      color: #d97706;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
 
-    .title-block p {
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 500;
+    .sheet-title p {
+      font-size: 11px;
+      color: #4b5563;
     }
 
-    /* BODY LAYOUT */
-    .body-grid {
+    .sheet-body {
       display: flex;
       gap: 30px;
       flex: 1;
       min-height: 0;
     }
 
-    /* Left Sidebar: Identifiers & Contact */
-    .sidebar {
-      width: 210px;
+    /* Sidebar Identifiers */
+    .sheet-sidebar {
+      width: 200px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
+      flex-shrink: 0;
     }
 
-    .sidebar-section {
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 15px;
+    .sidebar-card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 12px;
     }
 
-    .sidebar-section h3 {
-      font-size: 12px;
+    .sidebar-card h4 {
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: var(--primary);
-      border-bottom: 1.5px solid var(--primary);
+      color: #256041;
+      border-bottom: 1.5px solid #256041;
       padding-bottom: 4px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-weight: 700;
     }
 
-    .code-list {
+    .sidebar-list {
       list-style: none;
-      font-size: 11.5px;
+      font-size: 11px;
     }
 
-    .code-list li {
-      margin-bottom: 8px;
+    .sidebar-list li {
+      margin-bottom: 6px;
+      line-height: 1.3;
     }
 
-    .code-list li strong {
-      color: var(--primary-dark);
+    .sidebar-list li strong {
+      color: #1b4730;
       display: block;
     }
 
-    .naics-item {
-      font-size: 11px;
+    .naics-block {
+      font-size: 10.5px;
       line-height: 1.3;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
-    .naics-item strong {
-      color: var(--primary);
+    .naics-block strong {
+      color: #256041;
       display: inline-block;
-      width: 55px;
+      width: 48px;
     }
 
-    .contact-item {
+    .sheet-contact-item {
       display: flex;
-      gap: 10px;
-      font-size: 11px;
-      margin-bottom: 10px;
-      line-height: 1.4;
+      gap: 8px;
+      font-size: 10px;
+      margin-bottom: 8px;
+      line-height: 1.3;
     }
 
-    .contact-item i {
-      color: var(--primary);
-      margin-top: 2px;
-      font-size: 12px;
+    .sheet-contact-item i {
+      color: #256041;
+      margin-top: 1px;
     }
 
-    /* Right Main Content Panel */
-    .main-panel {
+    /* Main Panel Content */
+    .sheet-main {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
     }
 
-    .overview-text {
-      font-size: 12.5px;
-      color: var(--text-dark);
-      line-height: 1.6;
+    .sheet-overview {
+      font-size: 12px;
+      line-height: 1.5;
       text-align: justify;
+      color: #111827;
     }
 
-    .main-section h3 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 14px;
+    .sheet-section h4 {
+      font-size: 12.5px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: #ffffff;
-      background: var(--primary);
-      padding: 6px 12px;
+      background: #256041;
+      padding: 5px 10px;
       border-radius: 4px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-weight: 600;
     }
 
-    .competency-grid {
+    .sheet-comp-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 15px;
+      gap: 12px;
     }
 
-    .competency-card {
-      border-left: 3px solid var(--accent);
-      padding-left: 10px;
+    .sheet-comp-card {
+      border-left: 2.5px solid #d97706;
+      padding-left: 8px;
     }
 
-    .competency-card h4 {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 4px;
-    }
-
-    .competency-card p {
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .bullet-list {
-      list-style-type: none;
-      padding-left: 5px;
-    }
-
-    .bullet-list li {
+    .sheet-comp-card h5 {
       font-size: 11.5px;
-      margin-bottom: 6px;
-      position: relative;
-      padding-left: 15px;
-      line-height: 1.4;
-    }
-
-    .bullet-list li::before {
-      content: "\2022";
-      color: var(--accent);
-      font-weight: bold;
-      display: inline-block;
-      width: 10px;
-      margin-left: -15px;
-      position: absolute;
-      left: 15px;
-    }
-
-    .performance-card {
-      margin-bottom: 8px;
-    }
-
-    .performance-card h4 {
-      font-size: 12px;
       font-weight: 700;
-      color: var(--text-dark);
+      color: #256041;
       margin-bottom: 2px;
     }
 
-    .performance-card p {
-      font-size: 11.5px;
-      color: var(--text-muted);
-      line-height: 1.4;
+    .sheet-comp-card p {
+      font-size: 10px;
+      color: #4b5563;
+      line-height: 1.3;
     }
 
-    /* FOOTER BAR */
-    .footer-bar {
-      border-top: 1.5px solid var(--border);
-      padding-top: 15px;
+    .sheet-bullets {
+      list-style: none;
+      padding-left: 5px;
+    }
+
+    .sheet-bullets li {
+      font-size: 11px;
+      margin-bottom: 5px;
+      position: relative;
+      padding-left: 12px;
+      line-height: 1.3;
+    }
+
+    .sheet-bullets li::before {
+      content: "\2022";
+      color: #d97706;
+      font-weight: bold;
+      display: inline-block;
+      width: 8px;
+      margin-left: -12px;
+      position: absolute;
+      left: 12px;
+    }
+
+    .sheet-perf-card {
+      margin-bottom: 6px;
+    }
+
+    .sheet-perf-card h5 {
+      font-size: 11px;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1px;
+    }
+
+    .sheet-perf-card p {
+      font-size: 10.5px;
+      color: #4b5563;
+      line-height: 1.3;
+    }
+
+    .sheet-footer {
+      border-top: 1.5px solid #e5e7eb;
+      padding-top: 10px;
       margin-top: auto;
       display: flex;
       justify-content: space-between;
-      font-size: 9.5px;
-      color: var(--text-muted);
+      font-size: 9px;
+      color: #4b5563;
       font-weight: 500;
+      flex-shrink: 0;
     }
 
-    .footer-bar span {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    /* Print Controls */
+    /* ── PRINT-SPECIFIC CSS RULES ───────────────────────── */
     @media print {
-      body {
-        background-color: #ffffff;
-        padding: 0;
+      /* Hide regular website layouts */
+      .nav,
+      .capabilities-hero,
+      .footer,
+      .footer-bottom {
+        display: none !important;
       }
-      .capabilities-page {
-        margin: 0;
-        box-shadow: none;
+
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .sheet-wrapper {
+        padding: 0 !important;
+        background: #ffffff !important;
+      }
+
+      .capabilities-sheet {
+        width: 8.5in !important;
+        height: 11in !important;
+        padding: 40px !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
         page-break-inside: avoid;
         page-break-after: avoid;
       }
-      /* Hide standard browser print headers/footers */
+
       @page {
-        size: 8.5in 11in;
+        size: 8.5in 11in portrait;
         margin: 0;
       }
     }
@@ -311,189 +349,205 @@
 </head>
 <body>
 
-  <div class="capabilities-page">
-    
-    <!-- HEADER -->
-    <div class="header-row">
-      <div class="brand-block">
-        <img class="brand-logo" src="img/logo-shield.jpg" alt="20 59 Ventures Corp Logo">
-        <div class="brand-text">
-          <h1>20 59 VENTURES CORP</h1>
-          <p>Housing Referral Agency</p>
+  <!-- Navigation (Website Header Sync) -->
+  <nav class="nav">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <img src="https://page.gensparksite.com/v1/base64_upload/dc7d70c3ea25f1b8af4dc749324d4ec0" alt="20 59 Ventures Corp - Housing Referral Agency" class="logo-img">
+        <div>
+          <div class="logo-text">20 59 VENTURES CORP</div>
+          <div class="logo-subtitle">Housing Referral Agency</div>
         </div>
       </div>
-      <div class="title-block">
-        <h2>Capabilities Statement</h2>
-        <p>Government &amp; Agency Housing Solutions</p>
+      <div class="nav-links">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+        <a href="intake.html" class="nav-link" style="color: var(--logo-green); font-weight: 600;">Apply Now</a>
       </div>
     </div>
+  </nav>
 
-    <!-- BODY LAYOUT -->
-    <div class="body-grid">
+  <!-- Capabilities Statement Hero Section (Web Only) -->
+  <section class="capabilities-hero">
+    <div class="capabilities-hero-container">
+      <h1>Capabilities Statement</h1>
+      <p>Official Government Contracting Information for 20 59 Ventures Corp.</p>
+      <a href="capabilities-statement.pdf" target="_blank" class="capabilities-download-btn">
+        <i class="fas fa-file-pdf"></i> Download PDF Statement
+      </a>
+    </div>
+  </section>
+
+  <!-- Printable 8.5x11 Sheet Container -->
+  <div class="sheet-wrapper">
+    <div class="capabilities-sheet">
       
-      <!-- LEFT COLUMN: IDENTIFIERS & CONTACT -->
-      <div class="sidebar">
+      <!-- HEADER -->
+      <div class="sheet-header">
+        <div class="sheet-brand">
+          <img class="sheet-logo" src="img/logo-shield.jpg" alt="20 59 Ventures Corp Logo">
+          <div class="sheet-brand-text">
+            <h2>20 59 VENTURES CORP</h2>
+            <p>Housing Referral Agency</p>
+          </div>
+        </div>
+        <div class="sheet-title">
+          <h3>Capabilities Statement</h3>
+          <p>Government &amp; Agency Housing Solutions</p>
+        </div>
+      </div>
+
+      <!-- BODY CONTENT -->
+      <div class="sheet-body">
         
-        <!-- Codes Block -->
-        <div class="sidebar-section">
-          <h3>Company Codes</h3>
-          <ul class="code-list">
-            <li>
-              <strong>Unique Entity ID (UEI)</strong>
-              GVR2NTGR4HU3
-            </li>
-            <li>
-              <strong>CAGE Code</strong>
-              Submitted (In Progress)
-            </li>
-            <li>
-              <strong>SAM.gov Status</strong>
-              Submitted / Active Entity
-            </li>
-          </ul>
-        </div>
-
-        <!-- NAICS Block -->
-        <div class="sidebar-section">
-          <h3>NAICS Codes</h3>
-          <div class="naics-item">
-            <strong>541611</strong> (Primary)<br>
-            Administrative &amp; General Management Consulting
-          </div>
-          <div class="naics-item">
-            <strong>624220</strong><br>
-            Community Housing Services
-          </div>
-          <div class="naics-item">
-            <strong>531311</strong><br>
-            Residential Property Management
-          </div>
-        </div>
-
-        <!-- Certifications -->
-        <div class="sidebar-section">
-          <h3>Classifications</h3>
-          <ul class="code-list">
-            <li><i class="fas fa-certificate" style="color:var(--accent); margin-right:4px;"></i> 100% Veteran-Owned</li>
-            <li><i class="fas fa-certificate" style="color:var(--accent); margin-right:4px;"></i> SDVOSB Self-Certified</li>
-            <li><i class="fas fa-certificate" style="color:var(--accent); margin-right:4px;"></i> Small Business Enterprise</li>
-          </ul>
-        </div>
-
-        <!-- Contact Section -->
-        <div class="sidebar-section" style="margin-top: auto;">
-          <h3>Key Contacts</h3>
+        <!-- SIDEBAR -->
+        <div class="sheet-sidebar">
           
-          <div class="contact-item">
-            <i class="fas fa-user-tie"></i>
-            <div>
-              <strong>Marcus &amp; Andrea</strong><br>
-              Managing Directors
+          <div class="sidebar-card">
+            <h4>Company Codes</h4>
+            <ul class="sidebar-list">
+              <li>
+                <strong>Unique Entity ID (UEI)</strong>
+                GVR2NTGR4HU3
+              </li>
+              <li>
+                <strong>CAGE Code</strong>
+                Submitted (In Progress)
+              </li>
+              <li>
+                <strong>SAM.gov Status</strong>
+                Submitted / Active Entity
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-card">
+            <h4>NAICS Codes</h4>
+            <div class="naics-block">
+              <strong>541611</strong> (Primary)<br>
+              Admin &amp; General Management Consulting
+            </div>
+            <div class="naics-block">
+              <strong>624220</strong><br>
+              Community Housing Services
+            </div>
+            <div class="naics-block">
+              <strong>531311</strong><br>
+              Property Management
             </div>
           </div>
 
-          <div class="contact-item">
-            <i class="fas fa-phone-alt"></i>
-            <div>
-              1-888-919-2059<br>
-              205-534-8492
+          <div class="sidebar-card">
+            <h4>Classifications</h4>
+            <ul class="sidebar-list">
+              <li><i class="fas fa-certificate" style="color:var(--accent); margin-right:4px;"></i> 100% Veteran-Owned</li>
+              <li><i class="fas fa-certificate" style="color:var(--accent); margin-right:4px;"></i> SDVOSB Self-Certified</li>
+              <li><i class="fas fa-certificate" style="color:var(--accent); margin-right:4px;"></i> Small Business</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-card" style="margin-top: auto;">
+            <h4>Key Contacts</h4>
+            <div class="sheet-contact-item">
+              <i class="fas fa-phone-alt"></i>
+              <div>
+                1-888-919-2059<br>
+                205-534-8492
+              </div>
+            </div>
+            <div class="sheet-contact-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                support@2059ventures.online
+              </div>
+            </div>
+            <div class="sheet-contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                212 W Troy St<br>
+                Dothan, AL 36303
+              </div>
             </div>
           </div>
 
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <div>
-              support@2059ventures.online
+        </div>
+
+        <!-- MAIN PANEL -->
+        <div class="sheet-main">
+          
+          <div class="sheet-overview">
+            <strong>20 59 Ventures Corp</strong> is a technology-driven housing referral and tenancy management agency. We act as a direct extension of government coordinators, VSOs, and non-profits, providing rapid client placement and wrap-around tenancy coordination. We specialize in matching vulnerable, veteran, and senior populations with high-quality, fully-managed housing units while reducing administrative bottlenecking for case managers.
+          </div>
+
+          <div class="sheet-section">
+            <h4>Core Competencies</h4>
+            <div class="sheet-comp-grid">
+              <div class="sheet-comp-card">
+                <h5>Client Placement Coordination</h5>
+                <p>Directly managing waitlists, voucher allocations, and lease-ups for HUD-VASH and Section 8 clients.</p>
+              </div>
+              <div class="sheet-comp-card">
+                <h5>Tenancy Management</h5>
+                <p>Delivering long-term housing sustainability through active mediation, credit counseling, and client support.</p>
+              </div>
+              <div class="sheet-comp-card">
+                <h5>Landlord Liaison Network</h5>
+                <p>Operating a dedicated network of pre-vetted housing providers accepting HUD and regional vouchers.</p>
+              </div>
+              <div class="sheet-comp-card">
+                <h5>Government Compliance</h5>
+                <p>Adhering to strict federal housing standards, lease requirements, and agency reporting regulations.</p>
+              </div>
             </div>
           </div>
 
-          <div class="contact-item">
-            <i class="fas fa-globe"></i>
-            <div>
-              www.2059ventures.online
+          <div class="sheet-section">
+            <h4>Key Differentiators</h4>
+            <ul class="sheet-bullets">
+              <li><strong>Intelligent Dispatch (Harry):</strong> Proprietary 24/7 AI coordinator routing and tracking client referrals.</li>
+              <li><strong>Real-Time Status Pipeline:</strong> Case managers receive dedicated secure access to monitor their clients' placement progress instantly.</li>
+              <li><strong>48-Hour Availability Response:</strong> Rapid unit inventory verification to keep active caseloads moving.</li>
+              <li><strong>Notary &amp; Administrative Support:</strong> In-house notary services to coordinate immediate document and lease certifications.</li>
+              <li><strong>Limyè Foundation Alliance:</strong> Joint care-coordination pipeline reinforcing long-term tenant stability.</li>
+            </ul>
+          </div>
+
+          <div class="sheet-section">
+            <h4>Past Performance</h4>
+            <div class="sheet-perf-card">
+              <h5>Regional Housing Coordination (Dothan, AL)</h5>
+              <p>Administered placements, lease coordination, and landlord mediations for low-income seniors and veterans utilizing federal housing assistance vouchers.</p>
+            </div>
+            <div class="sheet-perf-card">
+              <h5>Limyè Foundation Strategic Care Integration</h5>
+              <p>Executed wrap-around tenant counseling and credit stabilization support, successfully reducing eviction rates and securing long-term placements.</p>
             </div>
           </div>
 
-          <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <div>
-              212 W Troy St<br>
-              Dothan, AL 36303
-            </div>
-          </div>
         </div>
 
       </div>
 
-      <!-- RIGHT COLUMN: CAPABILITIES & COMPETENCIES -->
-      <div class="main-panel">
-        
-        <!-- Corporate Overview -->
-        <div class="overview-text">
-          <strong>20 59 Ventures Corp</strong> is a technology-driven housing referral and tenancy management agency. We act as a direct extension of government coordinators, VSOs, and non-profits, providing rapid client placement and wrap-around tenancy coordination. We specialize in matching vulnerable, veteran, and senior populations with high-quality, fully-managed housing units while reducing administrative bottlenecking for case managers.
-        </div>
-
-        <!-- Core Competencies -->
-        <div class="main-section">
-          <h3>Core Competencies</h3>
-          <div class="competency-grid">
-            <div class="competency-card">
-              <h4>Client Placement Coordination</h4>
-              <p>Directly managing waitlists, voucher allocations, and lease-ups for HUD-VASH and Section 8 clients.</p>
-            </div>
-            <div class="competency-card">
-              <h4>Tenancy Management</h4>
-              <p>Delivering long-term housing sustainability through active mediation, credit counseling, and client support.</p>
-            </div>
-            <div class="competency-card">
-              <h4>Landlord Liaison Network</h4>
-              <p>Operating a dedicated network of pre-vetted housing providers accepting HUD and regional vouchers.</p>
-            </div>
-            <div class="competency-card">
-              <h4>Government Compliance</h4>
-              <p>Adhering to strict federal housing standards, lease requirements, and agency reporting regulations.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Differentiators -->
-        <div class="main-section">
-          <h3>Key Differentiators</h3>
-          <ul class="bullet-list">
-            <li><strong>Intelligent Dispatch (Harry):</strong> proprietary 24/7 AI coordinator routing and tracking client referrals.</li>
-            <li><strong>Real-Time Status Pipeline:</strong> Case managers receive dedicated secure access to monitor their clients' placement progress instantly.</li>
-            <li><strong>48-Hour Availability Response:</strong> Rapid unit inventory verification to keep active caseloads moving.</li>
-            <li><strong>Notary &amp; Administrative Support:</strong> In-house notary services to coordinate immediate document and lease certifications.</li>
-            <li><strong>Limyè Foundation Alliance:</strong> Joint care-coordination pipeline reinforcing long-term tenant stability.</li>
-          </ul>
-        </div>
-
-        <!-- Past Performance -->
-        <div class="main-section">
-          <h3>Past Performance</h3>
-          
-          <div class="performance-card">
-            <h4>Regional Housing Coordination (Dothan, AL)</h4>
-            <p>Administered placements, lease coordination, and landlord mediations for low-income seniors and veterans utilizing federal housing assistance vouchers.</p>
-          </div>
-
-          <div class="performance-card">
-            <h4>Limyè Foundation Strategic Care Integration</h4>
-            <p>Executed wrap-around tenant counseling and credit stabilization support, successfully reducing eviction rates and securing long-term placements.</p>
-          </div>
-        </div>
-
+      <!-- FOOTER -->
+      <div class="sheet-footer">
+        <span>20 59 Ventures Corp &bull; UEI: GVR2NTGR4HU3 &bull; SAM.gov Registered</span>
+        <span>Confidential Government Referral Document</span>
       </div>
 
     </div>
-
-    <!-- FOOTER BAR -->
-    <div class="footer-bar">
-      <span>20 59 Ventures Corp &bull; UEI: GVR2NTGR4HU3 &bull; SAM.gov Registered</span>
-      <span>Confidential Government Referral Document</span>
-    </div>
-
   </div>
+
+  <!-- Footer (Website Footer Sync) -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 20 59 Ventures Corp. All rights reserved. &nbsp;|&nbsp; Unique Entity ID (UEI): GVR2NTGR4HU3</p>
+        <p>Technology-Driven Housing Solutions for Veterans and Seniors</p>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
