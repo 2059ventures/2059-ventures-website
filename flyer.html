@@ -316,7 +316,8 @@
     /* ── Bottom Accent Line ──────────────────────────── */
     .accent-bar {
       background: var(--emerald);
-      padding: 10px 44px;
+      padding: 0 44px; /* Remove top and bottom padding */
+      height: 38px; /* Lock height to maintain footer dimensions */
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -327,11 +328,9 @@
       flex-shrink: 0;
     }
     .accent-bar img {
-      height: 20px;
-      width: auto;
-      background: #fff;
-      border-radius: 3px;
-      padding: 1px 3px;
+      height: 100%; /* Stretch vertically to match the 38px bar */
+      width: auto; /* Preserve square aspect ratio */
+      display: block;
     }
 
     /* ── Print Layout Controls ───────────────────────── */
@@ -476,7 +475,7 @@
     <!-- BOTTOM ACCENT BAR -->
     <div class="accent-bar">
       <span>All services are confidential. 20 59 Ventures Corp is an Equal Opportunity Housing Provider &bull; UEI: GVR2NTGR4HU3</span>
-      <img src="img/logo-shield.jpg" alt="Logo Accent" style="height: 24px; width: auto; background: none; padding: 0;">
+      <img src="img/logo-shield.jpg" alt="Logo Accent">
     </div>
 
   </div>
