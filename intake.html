@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participant Intake Form - 20 59 Ventures Corp</title>
+    <meta name="description" content="Complete your participant intake and program enrollment application for 20 59 Ventures Corp.">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/apple-style.css">
+    <style>
+        :root {
+            --step-color-active: var(--logo-green);
+            --step-color-inactive: #e5e5e5;
+            --step-text-inactive: var(--gray-medium);
+        }
+
+        .intake-wrapper {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            background: var(--gray-light);
+            min-height: 100vh;
+        }
+
+        .intake-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Multi-step progress bar */
+        .progress-wizard {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .progress-wizard::before {
+            content: "";
+            background: var(--step-color-inactive);
+            position: absolute;
+            top: 25px;
+            left: 0;
+            height: 4px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .progress-bar-fill {
+            background: var(--step-color-active);
+            position: absolute;
+            top: 25px;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            z-index: 1;
+            transition: width 0.4s ease;
+        }
+
+        .wizard-step {
+            z-index: 2;
+            text-align: center;
+            flex: 1;
+        }
+
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--step-color-inactive);
+            color: var(--step-text-inactive);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.4s ease;
+        }
+
+        .wizard-step.active .step-icon {
+            border-color: var(--step-color-active);
+            background: var(--step-color-active);
+            color: var(--white);
+            box-shadow: 0 0 15px rgba(74, 124, 89, 0.3);
+        }
+
+        .wizard-step.completed .step-icon {
+            border-color: var(--step-color-active);
+            background: var(--white);
+            color: var(--step-color-active);
+        }
+
+        .step-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--step-text-inactive);
+            transition: color 0.4s ease;
+        }
+
+        .wizard-step.active .step-label {
+            color: var(--black);
+            font-weight: 600;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            border: 1px solid rgba(74, 124, 89, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .form-step-content {
+            display: none;
+        }
+
+        .form-step-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .step-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--gray-light);
+            padding-bottom: 15px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: var(--gray-medium);
+            margin-bottom: 25px;
+        }
+
+        /* Grid inputs */
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .form-card {
+                padding: 25px;
+            }
+        }
+
+        .form-field {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-field label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .form-field input[type="text"],
+        .form-field input[type="email"],
+        .form-field input[type="tel"],
+        .form-field input[type="date"],
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid rgba(74, 124, 89, 0.2);
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            background: var(--white);
+            color: var(--black);
+            transition: all 0.3s;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            border-color: var(--logo-green);
+            box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
+        }
+
+        .form-field textarea {
+            resize: vertical;
+        }
+
+        /* Checkbox groups */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--gray-dark);
+            cursor: pointer;
+        }
+
+        .checkbox-item input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--logo-green);
+            cursor: pointer;
+        }
+
+        /* Signature Canvas */
+        .signature-container {
+            border: 2px dashed rgba(74, 124, 89, 0.3);
+            border-radius: 12px;
+            background: #fafafa;
+            position: relative;
+            margin-top: 10px;
+            touch-action: none;
+        }
+
+        .signature-canvas {
+            width: 100%;
+            height: 180px;
+            display: block;
+            border-radius: 10px;
+            cursor: crosshair;
+        }
+
+        .signature-actions {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+            background: #f1f5f2;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-top: 1px solid rgba(74, 124, 89, 0.1);
+        }
+
+        .btn-clear {
+            background: none;
+            border: none;
+            color: #8b2222;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Navigation Buttons */
+        .wizard-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn-nav {
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-prev {
+            background: var(--white);
+            color: var(--logo-green);
+            border: 1px solid var(--logo-green);
+        }
+
+        .btn-prev:hover {
+            background: var(--logo-cream);
+        }
+
+        .btn-next {
+            background: var(--logo-green);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-next:hover {
+            background: var(--logo-dark-green);
+        }
+
+        /* Success screen */
+        .success-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 64px;
+            color: var(--logo-green);
+            margin-bottom: 20px;
+            animation: scaleUp 0.5s ease;
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://page.gensparksite.com/v1/base64_upload/dc7d70c3ea25f1b8af4dc749324d4ec0" alt="20 59 Ventures Corp - Housing Referral Agency" class="logo-img">
+                <div>
+                    <div class="logo-text">20 59 VENTURES CORP</div>
+                    <div class="logo-subtitle">Housing Referral Agency</div>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#services" class="nav-link">Services</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="intake-wrapper">
+        <div class="intake-container">
+            <div class="progress-wizard">
+                <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                <div class="wizard-step active" id="step-node-1">
+                    <div class="step-icon">1</div>
+                    <div class="step-label">Personal Info</div>
+                </div>
+                <div class="wizard-step" id="step-node-2">
+                    <div class="step-icon">2</div>
+                    <div class="step-label">Living & Referral</div>
+                </div>
+                <div class="wizard-step" id="step-node-3">
+                    <div class="step-icon">3</div>
+                    <div class="step-label">Health & History</div>
+                </div>
+                <div class="wizard-step" id="step-node-4">
+                    <div class="step-icon">4</div>
+                    <div class="step-label">Submit</div>
+                </div>
+            </div>
+
+            <div class="form-card" id="form-card">
+                <form id="intakeForm" onsubmit="handleFormSubmit(event)">
+                    
+                    <!-- STEP 1: Personal & Emergency Info -->
+                    <div class="form-step-content active" id="step-1">
+                        <h2 class="step-title">Personal & Emergency Contact Info</h2>
+                        <p class="step-desc">Provide your basic contact information and emergency contact details.</p>
+                        
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" name="fullName" required placeholder="John Doe">
+                            </div>
+                            <div class="form-field">
+                                <label for="dob">Date of Birth *</label>
+                                <input type="date" id="dob" name="dob" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
+                            </div>
+                            <div class="form-field">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="(555) 555-5555">
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label for="ssnLastFour">SSN (Last 4 Digits) *</label>
+                                <input type="text" id="ssnLastFour" name="ssnLastFour" required maxlength="4" pattern="\d{4}" placeholder="1234">
+                            </div>
+                            <div class="form-field">
+                                <label for="housingPreference">Room Preference *</label>
+                                <select id="housingPreference" name="housingPreference" required>
+                                    <option value="">Select an option</option>
+                                    <option value="shared">Shared Room (2 beds per room - affordable)</option>
+                                    <option value="private">Private Room (additional fee)</option>
+                                    <option value="either">Either Option</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h3 style="font-size: 16px; font-weight:600; margin: 25px 0 15px; color: var(--logo-green); border-bottom: 1px solid #eee; padding-bottom: 8px;">Emergency Contact</h3>
+                        
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label for="emergencyName">Emergency Contact Name *</label>
+                                <input type="text" id="emergencyName" name="emergencyName" required placeholder="Jane Doe">
+                            </div>
+                            <div class="form-field">
+                                <label for="emergencyPhone">Emergency Contact Phone *</label>
+                                <input type="tel" id="emergencyPhone" name="emergencyPhone" required placeholder="(555) 555-5556">
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="emergencyRelationship">Relationship to Participant *</label>
+                            <input type="text" id="emergencyRelationship" name="emergencyRelationship" required placeholder="Spouse, Parent, Case Manager...">
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Living Situation & Referrals -->
+                    <div class="form-step-content" id="step-2">
+                        <h2 class="step-title">Living Situation & Referral Details</h2>
+                        <p class="step-desc">Information regarding your housing history and referring agencies.</p>
+
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label for="livingSituation">Current Living Situation *</label>
+                                <select id="livingSituation" name="livingSituation" required>
+                                    <option value="">Select an option</option>
+                                    <option value="street">Homeless (Living on Street/Car/Tent)</option>
+                                    <option value="shelter">Homeless (Emergency Shelter)</option>
+                                    <option value="at_risk">At Risk of Homelessness</option>
+                                    <option value="stably_housed">Stably Housed (Rent/Own)</option>
+                                    <option value="transferred">Transferred from another facility</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="homelessDuration">Duration of Homelessness *</label>
+                                <select id="homelessDuration" name="homelessDuration" required>
+                                    <option value="">Select an option</option>
+                                    <option value="none">Not Homeless</option>
+                                    <option value="less_than_month">Less than 1 month</option>
+                                    <option value="1_to_6_months">1 to 6 months</option>
+                                    <option value="6_to_12_months">6 to 12 months</option>
+                                    <option value="1_year_plus">1 year or more</option>
+                                    <option value="3_years_plus">3 years or more</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h3 style="font-size: 16px; font-weight:600; margin: 25px 0 15px; color: var(--logo-green); border-bottom: 1px solid #eee; padding-bottom: 8px;">Referral Agency (If Applicable)</h3>
+
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label for="referralAgency">Agency Name</label>
+                                <input type="text" id="referralAgency" name="referralAgency" placeholder="VA, Dothan Rescue Mission, etc.">
+                            </div>
+                            <div class="form-field">
+                                <label for="caseManager">Case Manager Name</label>
+                                <input type="text" id="caseManager" name="caseManager" placeholder="Officer Smith">
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="referralContact">Referral Contact Email/Phone</label>
+                            <input type="text" id="referralContact" name="referralContact" placeholder="555-555-5557 or worker@agency.org">
+                        </div>
+
+                        <div class="form-field">
+                            <label for="housingNeedSummary">Summary of Housing Need *</label>
+                            <textarea id="housingNeedSummary" name="housingNeedSummary" rows="4" required placeholder="Please describe your current housing circumstances and why you need placement support."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Support & Background -->
+                    <div class="form-step-content" id="step-3">
+                        <h2 class="step-title">Medical, Mental Health & Legal Background</h2>
+                        <p class="step-desc">All health information is kept strictly confidential and is used only to accommodate your needs.</p>
+
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label for="veteranStatus">Are you a Veteran? *</label>
+                                <select id="veteranStatus" name="veteranStatus" required>
+                                    <option value="">Select an option</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="hudVash">Receiving HUD-VASH / VA Case Management? *</label>
+                                <select id="hudVash" name="hudVash">
+                                    <option value="">Select an option</option>
+                                    <option value="yes">Yes (Currently Assigned)</option>
+                                    <option value="no">No</option>
+                                    <option value="applying">Currently Applying</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="medicalConditions">Physical Health Conditions or Accessibility Needs</label>
+                            <textarea id="medicalConditions" name="medicalConditions" rows="3" placeholder="Mobility limitations, wheelchair access, medication storage needs, etc. (optional)"></textarea>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="mentalHealth">Mental Health / Substance Support Background</label>
+                            <textarea id="mentalHealth" name="mentalHealth" rows="3" placeholder="Self-reported or diagnosed conditions, treatment, or support groups. (optional)"></textarea>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="legalBackground">Legal History or Pending Issues</label>
+                            <textarea id="legalBackground" name="legalBackground" rows="3" placeholder="Parole/probation status, pending court dates, registry status, etc. (optional)"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: Financial Info & Acknowledgment -->
+                    <div class="form-step-content" id="step-4">
+                        <h2 class="step-title">Financial Info & Program Enrollment</h2>
+                        <p class="step-desc">Submit your income details and sign the agreement to complete your application.</p>
+
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label for="monthlyIncome">Total Monthly Income ($) *</label>
+                                <input type="number" id="monthlyIncome" name="monthlyIncome" required min="0" step="0.01" placeholder="1200.00">
+                            </div>
+                            <div class="form-field">
+                                <label>Income Sources (Select all that apply) *</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-item"><input type="checkbox" name="incomeSource" value="va_pension"> VA Pension/Comp</label>
+                                    <label class="checkbox-item"><input type="checkbox" name="incomeSource" value="ssdi"> SSDI</label>
+                                    <label class="checkbox-item"><input type="checkbox" name="incomeSource" value="ssi"> SSI</label>
+                                    <label class="checkbox-item"><input type="checkbox" name="incomeSource" value="employment"> Employment</label>
+                                    <label class="checkbox-item"><input type="checkbox" name="incomeSource" value="other"> Other</label>
+                                    <label class="checkbox-item"><input type="checkbox" id="incomeNone" name="incomeSource" value="none"> No Income</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: #f8fcf9; border: 1px solid rgba(74,124,89,0.15); border-radius:16px; padding:20px; margin:25px 0; text-align:left;">
+                            <h4 style="font-weight: 600; color: var(--logo-green); margin-bottom: 10px;">Program Enrollment Agreement</h4>
+                            <p style="font-size: 13px; color: var(--gray-dark); line-height: 1.5; margin-bottom: 10px;">
+                                By signing below, you certify that all information in this application is true and correct to the best of your knowledge. You authorize 20 59 Ventures Corp to share your referral information with partner housing providers and organizations (such as the Limyè Foundation) to secure placement.
+                            </p>
+                        </div>
+
+                        <!-- Canvas Signature Pad -->
+                        <div class="form-field">
+                            <label>Participant Digital Signature * (Draw inside the box below)</label>
+                            <div class="signature-container">
+                                <canvas class="signature-canvas" id="sigCanvas"></canvas>
+                                <div class="signature-actions">
+                                    <button type="button" class="btn-clear" onclick="clearSignature()"><i class="fas fa-eraser"></i> Clear Signature</button>
+                                </div>
+                            </div>
+                            <input type="hidden" id="signatureData" name="signatureData" required>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label for="signatureDate">Date of Signature *</label>
+                                <input type="date" id="signatureDate" name="signatureDate" required>
+                            </div>
+                            <div class="form-field" style="display:flex; flex-direction:column; justify-content:center; padding-top:20px;">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="smsConsent" required>
+                                    <span>I consent to receive SMS updates from 20 59 Ventures. *</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="wizard-buttons">
+                        <button type="button" class="btn-nav btn-prev" id="btnPrev" onclick="navigateStep(-1)" style="visibility: hidden;"><i class="fas fa-chevron-left"></i> Previous</button>
+                        <button type="button" class="btn-nav btn-next" id="btnNext" onclick="navigateStep(1)">Next <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 20 59 Ventures Corp. All rights reserved.</p>
+                <p>Technology-Driven Housing Solutions for Veterans and Seniors</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Form Wizard Logic -->
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+        const form = document.getElementById("intakeForm");
+        const sigCanvas = document.getElementById("sigCanvas");
+        const signatureDataInput = document.getElementById("signatureData");
+        let ctx = null;
+        let isDrawing = false;
+
+        // Auto-detect backend API based on environment
+        const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+            ? "http://localhost:5000"
+            : "https://housing-platform-a2btefckcwf9apcd.centralus-01.azurewebsites.net";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Set today's date on date inputs
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById("signatureDate").value = today;
+
+            // Load saved data if any
+            loadFormData();
+
+            // Setup Canvas signature drawing
+            setupSignaturePad();
+
+            // Save data on changes
+            form.addEventListener("input", saveFormData);
+        });
+
+        function navigateStep(direction) {
+            if (direction === 1 && !validateCurrentStep()) {
+                return; // Block navigation if step is invalid
+            }
+
+            // Hide current step
+            document.getElementById(`step-${currentStep}`).classList.remove("active");
+            document.getElementById(`step-node-${currentStep}`).classList.remove("active");
+            if (direction === 1) {
+                document.getElementById(`step-node-${currentStep}`).classList.add("completed");
+            } else {
+                document.getElementById(`step-node-${currentStep - 1}`).classList.remove("completed");
+            }
+
+            currentStep += direction;
+
+            // Show new step
+            document.getElementById(`step-${currentStep}`).classList.add("active");
+            document.getElementById(`step-node-${currentStep}`).classList.add("active");
+
+            // Update buttons
+            const btnPrev = document.getElementById("btnPrev");
+            const btnNext = document.getElementById("btnNext");
+
+            if (currentStep === 1) {
+                btnPrev.style.visibility = "hidden";
+            } else {
+                btnPrev.style.visibility = "visible";
+            }
+
+            if (currentStep === totalSteps) {
+                btnNext.innerHTML = "Submit Intake <i class='fas fa-check'></i>";
+                btnNext.type = "submit";
+                btnNext.onclick = null; // Let the form submit natively
+                // Canvas might need resizing/setup when step becomes visible
+                resizeCanvas();
+            } else {
+                btnNext.innerHTML = "Next <i class='fas fa-chevron-right'></i>";
+                btnNext.type = "button";
+                btnNext.onclick = () => navigateStep(1);
+            }
+
+            // Update progress bar line
+            const fillPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById("progress-bar-fill").style.width = `${fillPercent}%`;
+            
+            // Scroll to form top
+            document.getElementById("form-card").scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function validateCurrentStep() {
+            const inputs = document.getElementById(`step-${currentStep}`).querySelectorAll("input[required], select[required], textarea[required]");
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = "#c0392b";
+                    isValid = false;
+                } else {
+                    input.style.borderColor = "rgba(74, 124, 89, 0.2)";
+                }
+            });
+
+            // Extra checks
+            if (currentStep === 1) {
+                const ssn = document.getElementById("ssnLastFour");
+                if (ssn.value && !/^\d{4}$/.test(ssn.value)) {
+                    ssn.style.borderColor = "#c0392b";
+                    alert("SSN must be exactly 4 digits.");
+                    isValid = false;
+                }
+            }
+
+            if (currentStep === 4) {
+                if (isCanvasBlank()) {
+                    sigCanvas.style.borderColor = "#c0392b";
+                    alert("A signature is required to complete the application.");
+                    isValid = false;
+                } else {
+                    sigCanvas.style.borderColor = "rgba(74, 124, 89, 0.3)";
+                    // Export canvas to hidden field
+                    signatureDataInput.value = sigCanvas.toDataURL("image/png");
+                }
+            }
+
+            return isValid;
+        }
+
+        // --- SIGNATURE CANVAS FUNCTIONS ---
+        function setupSignaturePad() {
+            ctx = sigCanvas.getContext("2d");
+            ctx.lineWidth = 3;
+            ctx.lineCap = "round";
+            ctx.strokeStyle = "#1a1a1a";
+
+            // Mouse events
+            sigCanvas.addEventListener("mousedown", startDrawing);
+            sigCanvas.addEventListener("mousemove", draw);
+            window.addEventListener("mouseup", stopDrawing);
+
+            // Touch events
+            sigCanvas.addEventListener("touchstart", startDrawingTouch);
+            sigCanvas.addEventListener("touchmove", drawTouch);
+            window.addEventListener("touchend", stopDrawing);
+
+            // Window resize support
+            window.addEventListener("resize", resizeCanvas);
+            resizeCanvas();
+        }
+
+        function resizeCanvas() {
+            if (!sigCanvas || sigCanvas.offsetWidth === 0) return;
+            // Capture image if already signed
+            let imgData = null;
+            if (!isCanvasBlank()) {
+                imgData = sigCanvas.toDataURL();
+            }
+
+            // Set coordinates width to match layout offsetWidth
+            sigCanvas.width = sigCanvas.offsetWidth;
+            sigCanvas.height = 180;
+            
+            // Reapply drawing styles
+            ctx.lineWidth = 3;
+            ctx.lineCap = "round";
+            ctx.strokeStyle = "#1a1a1a";
+
+            if (imgData) {
+                const img = new Image();
+                img.onload = () => ctx.drawImage(img, 0, 0);
+                img.src = imgData;
+            }
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            ctx.beginPath();
+            const rect = sigCanvas.getBoundingClientRect();
+            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const rect = sigCanvas.getBoundingClientRect();
+            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            ctx.stroke();
+            saveFormData();
+        }
+
+        function startDrawingTouch(e) {
+            isDrawing = true;
+            ctx.beginPath();
+            const rect = sigCanvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+            e.preventDefault();
+        }
+
+        function drawTouch(e) {
+            if (!isDrawing) return;
+            const rect = sigCanvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+            ctx.stroke();
+            e.preventDefault();
+            saveFormData();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function clearSignature() {
+            ctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+            signatureDataInput.value = "";
+            saveFormData();
+        }
+
+        function isCanvasBlank() {
+            const blank = document.createElement('canvas');
+            blank.width = sigCanvas.width;
+            blank.height = sigCanvas.height;
+            return sigCanvas.toDataURL() === blank.toDataURL();
+        }
+
+        // --- LOCAL STORAGE AUTO-SAVE ---
+        function saveFormData() {
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                if (key === 'incomeSource') {
+                    if (!data[key]) data[key] = [];
+                    data[key].push(value);
+                } else if (key !== 'signatureData') { // Don't auto-save full base64 signature in local storage to keep storage light
+                    data[key] = value;
+                }
+            });
+            localStorage.setItem("2059_intake_draft", JSON.stringify(data));
+        }
+
+        function loadFormData() {
+            const saved = localStorage.getItem("2059_intake_draft");
+            if (!saved) return;
+            try {
+                const data = JSON.parse(saved);
+                Object.keys(data).forEach(key => {
+                    const input = form.elements[key];
+                    if (!input) return;
+                    if (key === 'incomeSource') {
+                        const vals = data[key];
+                        const checkBoxes = document.querySelectorAll(`input[name="incomeSource"]`);
+                        checkBoxes.forEach(cb => {
+                            if (vals.includes(cb.value)) cb.checked = true;
+                        });
+                    } else if (input.type === 'checkbox') {
+                        input.checked = data[key] === 'on' || data[key] === true;
+                    } else {
+                        input.value = data[key];
+                    }
+                });
+            } catch (e) {
+                console.error("Error loading form draft", e);
+            }
+        }
+
+        // --- SUBMIT HANDLING ---
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+
+            if (!validateCurrentStep()) {
+                return;
+            }
+
+            const btnNext = document.getElementById("btnNext");
+            btnNext.disabled = true;
+            btnNext.innerHTML = "Submitting... <i class='fas fa-spinner fa-spin'></i>";
+
+            // Collect all checkbox values for incomeSource
+            const incomeSources = [];
+            document.querySelectorAll('input[name="incomeSource"]:checked').forEach(cb => {
+                incomeSources.push(cb.value);
+            });
+
+            // Prepare Payload
+            const formData = new FormData(form);
+            const payload = {
+                fullName: formData.get("fullName"),
+                dob: formData.get("dob"),
+                email: formData.get("email"),
+                phone: formData.get("phone"),
+                ssnLastFour: formData.get("ssnLastFour"),
+                housingPreference: formData.get("housingPreference"),
+                emergencyName: formData.get("emergencyName"),
+                emergencyPhone: formData.get("emergencyPhone"),
+                emergencyRelationship: formData.get("emergencyRelationship"),
+                livingSituation: formData.get("livingSituation"),
+                homelessDuration: formData.get("homelessDuration"),
+                referralAgency: formData.get("referralAgency") || "",
+                caseManager: formData.get("caseManager") || "",
+                referralContact: formData.get("referralContact") || "",
+                housingNeedSummary: formData.get("housingNeedSummary"),
+                veteranStatus: formData.get("veteranStatus"),
+                hudVash: formData.get("hudVash") || "",
+                medicalConditions: formData.get("medicalConditions") || "",
+                mentalHealth: formData.get("mentalHealth") || "",
+                legalBackground: formData.get("legalBackground") || "",
+                monthlyIncome: parseFloat(formData.get("monthlyIncome") || 0),
+                incomeSources: incomeSources,
+                signatureData: signatureDataInput.value, // Base64 signature
+                signatureDate: formData.get("signatureDate"),
+                smsConsent: formData.get("smsConsent") === "on"
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/api/public/intake`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    // Clear draft on success
+                    localStorage.removeItem("2059_intake_draft");
+                    
+                    // Display success screen
+                    document.getElementById("form-card").innerHTML = `
+                        <div class="success-screen">
+                            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+                            <h2>Application Submitted Successfully!</h2>
+                            <p style="margin-bottom: 25px; color: var(--gray-dark);">Thank you for applying. A copy of your signed intake application has been compiled and emailed to the 20 59 Ventures placement staff. We will contact you shortly.</p>
+                            <a href="index.html" class="btn-primary" style="display: inline-block; padding: 12px 24px; text-decoration: none;">Return to Home</a>
+                        </div>
+                    `;
+                    // Hide progress bar
+                    document.querySelector(".progress-wizard").style.display = "none";
+                } else {
+                    const errData = await response.json();
+                    throw new Error(errData.error || "Server error while submitting intake.");
+                }
+            } catch (err) {
+                console.error("Submission error:", err);
+                alert(`Error submitting form: ${err.message}. Please try again.`);
+                btnNext.disabled = false;
+                btnNext.innerHTML = "Submit Intake <i class='fas fa-check'></i>";
+            }
+        }
+    </script>
+</body>
+</html>
