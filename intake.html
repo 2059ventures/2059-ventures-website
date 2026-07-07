@@ -397,37 +397,31 @@
                             </div>
                         </div>
 
-                        <div class="form-grid-2">
-                            <div class="form-field">
-                                <label for="ssnLastFour">SSN (Last 4 Digits) *</label>
-                                <input type="text" id="ssnLastFour" name="ssnLastFour" required maxlength="4" pattern="\d{4}" placeholder="1234">
-                            </div>
-                            <div class="form-field">
-                                <label for="housingPreference">Room Preference *</label>
-                                <select id="housingPreference" name="housingPreference" required>
-                                    <option value="">Select an option</option>
-                                    <option value="shared">Shared Room (2 beds per room - affordable)</option>
-                                    <option value="private">Private Room (additional fee)</option>
-                                    <option value="either">Either Option</option>
-                                </select>
-                            </div>
+                        <div class="form-field">
+                            <label for="housingPreference">Room Preference *</label>
+                            <select id="housingPreference" name="housingPreference" required>
+                                <option value="">Select an option</option>
+                                <option value="shared">Shared Room (2 beds per room - affordable)</option>
+                                <option value="private">Private Room (additional fee)</option>
+                                <option value="either">Either Option</option>
+                            </select>
                         </div>
 
-                        <h3 style="font-size: 16px; font-weight:600; margin: 25px 0 15px; color: var(--logo-green); border-bottom: 1px solid #eee; padding-bottom: 8px;">Emergency Contact</h3>
+                        <h3 style="font-size: 16px; font-weight:600; margin: 25px 0 15px; color: var(--logo-green); border-bottom: 1px solid #eee; padding-bottom: 8px;">Emergency Contact (Optional)</h3>
                         
                         <div class="form-grid-2">
                             <div class="form-field">
-                                <label for="emergencyName">Emergency Contact Name *</label>
-                                <input type="text" id="emergencyName" name="emergencyName" required placeholder="Jane Doe">
+                                <label for="emergencyName">Emergency Contact Name</label>
+                                <input type="text" id="emergencyName" name="emergencyName" placeholder="Jane Doe">
                             </div>
                             <div class="form-field">
-                                <label for="emergencyPhone">Emergency Contact Phone *</label>
-                                <input type="tel" id="emergencyPhone" name="emergencyPhone" required placeholder="(555) 555-5556">
+                                <label for="emergencyPhone">Emergency Contact Phone</label>
+                                <input type="tel" id="emergencyPhone" name="emergencyPhone" placeholder="(555) 555-5556">
                             </div>
                         </div>
                         <div class="form-field">
-                            <label for="emergencyRelationship">Relationship to Participant *</label>
-                            <input type="text" id="emergencyRelationship" name="emergencyRelationship" required placeholder="Spouse, Parent, Case Manager...">
+                            <label for="emergencyRelationship">Relationship to Participant</label>
+                            <input type="text" id="emergencyRelationship" name="emergencyRelationship" placeholder="Spouse, Parent, Case Manager...">
                         </div>
                     </div>
 
@@ -696,14 +690,6 @@
             });
 
             // Extra checks
-            if (currentStep === 1) {
-                const ssn = document.getElementById("ssnLastFour");
-                if (ssn.value && !/^\d{4}$/.test(ssn.value)) {
-                    ssn.style.borderColor = "#c0392b";
-                    alert("SSN must be exactly 4 digits.");
-                    isValid = false;
-                }
-            }
 
             if (currentStep === 4) {
                 if (isCanvasBlank()) {
@@ -882,7 +868,7 @@
                 dob: formData.get("dob"),
                 email: formData.get("email"),
                 phone: formData.get("phone"),
-                ssnLastFour: formData.get("ssnLastFour"),
+                ssnLastFour: "",
                 housingPreference: formData.get("housingPreference"),
                 emergencyName: formData.get("emergencyName"),
                 emergencyPhone: formData.get("emergencyPhone"),
