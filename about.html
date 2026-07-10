@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - 20 59 Ventures Corp</title>
+    <meta name="description" content="Learn about 20 59 Ventures Corp, a premier veteran-owned consulting and referral firm dedicated to operational excellence, regulatory compliance, and housing referral.">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/apple-style.css">
+    <style>
+        /* Custom styling for About Page */
+        .about-hero {
+            background: linear-gradient(135deg, var(--logo-dark-green) 0%, var(--logo-green) 100%);
+            color: var(--white);
+            padding: 140px 24px 80px;
+            text-align: center;
+        }
+        .about-hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .about-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+        .about-hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .about-company-section {
+            padding: 80px 24px;
+            background: var(--white);
+        }
+        .about-company-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .company-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--gray-dark);
+        }
+        .company-text p {
+            margin-bottom: 25px;
+        }
+        .company-text p:last-child {
+            margin-bottom: 0;
+        }
+        .company-details-card {
+            background: var(--logo-cream);
+            border: 1px solid rgba(74, 124, 89, 0.15);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(74, 124, 89, 0.05);
+        }
+        .company-details-card h3 {
+            color: var(--logo-green);
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            border-bottom: 2px solid rgba(74, 124, 89, 0.15);
+            padding-bottom: 10px;
+        }
+        .detail-item {
+            margin-bottom: 15px;
+        }
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+        .detail-item strong {
+            color: var(--black);
+            display: block;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+        .detail-item span {
+            color: var(--gray-dark);
+            font-size: 16px;
+        }
+
+        .leadership-section {
+            padding: 100px 24px;
+            background: var(--gray-light);
+        }
+        .leadership-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .leadership-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .leadership-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--black);
+        }
+        .leadership-header p {
+            font-size: 18px;
+            color: var(--gray-medium);
+            margin-top: 10px;
+        }
+        .leadership-profile {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .profile-image-container {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+            background: var(--white);
+            aspect-ratio: 4 / 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .profile-image-container:hover .profile-image {
+            transform: scale(1.03);
+        }
+        .profile-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: var(--logo-green);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
+        }
+        .profile-info h3 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 5px;
+        }
+        .profile-info .title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--logo-green);
+            margin-bottom: 25px;
+        }
+        .profile-bio {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--gray-dark);
+        }
+        .profile-bio p {
+            margin-bottom: 20px;
+        }
+        .profile-bio p:last-child {
+            margin-bottom: 0;
+        }
+        .profile-credentials {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        .credential-tag {
+            background: rgba(74, 124, 89, 0.08);
+            border: 1px solid rgba(74, 124, 89, 0.2);
+            color: var(--logo-green);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pillars-section {
+            padding: 100px 24px;
+            background: var(--white);
+        }
+        .pillars-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .pillars-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .pillars-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        @media (max-width: 992px) {
+            .about-company-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .leadership-profile {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .profile-image-container {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://page.gensparksite.com/v1/base64_upload/dc7d70c3ea25f1b8af4dc749324d4ec0" alt="20 59 Ventures Corp - Housing Referral Agency" class="logo-img">
+                <div>
+                    <div class="logo-text">20 59 VENTURES CORP</div>
+                    <div class="logo-subtitle">Housing Referral Agency</div>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link active">About</a>
+                <a href="index.html#services" class="nav-link">Services</a>
+                <a href="index.html#contracting" class="nav-link">Government</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+                <a href="intake.html" class="nav-link" style="color: var(--logo-green); font-weight: 600;">Apply Now</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="about-hero-container">
+            <span style="text-transform: uppercase; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; color: var(--logo-cream); display: block; margin-bottom: 10px;">About 20/59 Ventures</span>
+            <h1>Our Identity & Mission</h1>
+            <p>Combining seasoned executive oversight with modern corporate infrastructure to deliver reliable, compliant, and scalable consulting and referral solutions.</p>
+        </div>
+    </section>
+
+    <!-- Company Overview -->
+    <section class="about-company-section">
+        <div class="about-company-container">
+            <div class="company-text">
+                <p><strong>20/59 Ventures Corp</strong> is a premier, veteran-owned professional consulting and strategic referral firm. We are dedicated to driving operational excellence, regulatory compliance, and structured organizational management across both public and private sectors.</p>
+                <p>Grounded in a culture of discipline and precision, we specialize in helping organizations navigate complex institutional frameworks, optimize administrative workflows, and facilitate critical housing referral and community-focused initiatives. At 20/59 Ventures, we combine seasoned executive oversight with modern corporate infrastructure to deliver reliable, compliant, and scalable solutions for our partners, financial institutions, and government agencies.</p>
+            </div>
+            
+            <div class="company-details-card">
+                <h3>Corporate Profile</h3>
+                <div class="detail-item">
+                    <strong>Business Status</strong>
+                    <span>Woman & Veteran-Owned Small Business</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Unique Entity ID (UEI)</strong>
+                    <span>GVR2NTGR4HU3</span>
+                </div>
+                <div class="detail-item">
+                    <strong>CAGE Code</strong>
+                    <span>Submitted (In Progress)</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Primary NAICS Code</strong>
+                    <span>624220 (Community Housing Services)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Leadership -->
+    <section class="leadership-section">
+        <div class="leadership-container">
+            <div class="leadership-header">
+                <h2>Executive Leadership</h2>
+                <p>Decades of master-level discipline and institutional management</p>
+            </div>
+            
+            <div class="leadership-profile">
+                <div class="profile-image-container">
+                    <img src="img/andrea-marcus.png" alt="Andrea Marcus - President & Owner" class="profile-image">
+                    <div class="profile-badge"><i class="fas fa-shield-halved"></i> Veteran-Owned</div>
+                </div>
+                
+                <div class="profile-info">
+                    <h3>Andrea Marcus</h3>
+                    <div class="title">President & Owner</div>
+                    
+                    <div class="profile-bio">
+                        <p>Andrea Marcus brings decades of disciplined leadership, administrative oversight, and regulatory expertise to 20/59 Ventures. As a military veteran and retired state supervisor, Andrea has spent her career mastering the complexities of compliance, systemic management, and institutional frameworks.</p>
+                        <p>As President and founder, she establishes the strategic direction of the firm, ensures strict adherence to corporate governance, and champions the company’s mission-driven community and referral initiatives. Her extensive background in public-sector oversight and operational discipline makes her uniquely equipped to navigate joint ventures, federal contracting systems, and housing authority relationships. Under her leadership, 20/59 Ventures maintains an unwavering commitment to integrity, structure, and reliable execution.</p>
+                    </div>
+                    
+                    <div class="profile-credentials">
+                        <div class="credential-tag">
+                            <i class="fas fa-medal"></i> Military Veteran
+                        </div>
+                        <div class="credential-tag">
+                            <i class="fas fa-user-tie"></i> Retired State Supervisor
+                        </div>
+                        <div class="credential-tag">
+                            <i class="fas fa-scale-balanced"></i> Regulatory Expert
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Pillars -->
+    <section class="pillars-section">
+        <div class="pillars-container">
+            <div class="pillars-header">
+                <h2>Our Core Pillars</h2>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h4>Veteran-Led Discipline</h4>
+                    <p>Rooted in military precision and state-level supervisory experience, we bring unmatched structure and regulatory compliance to every consulting engagement.</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h4>Strategic Navigation</h4>
+                    <p>We specialize in connecting the dots between complex federal, state, and private resources to deliver high-impact referral and organizational solutions.</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-file-shield"></i>
+                    </div>
+                    <h4>Administrative Excellence</h4>
+                    <p>We design and deploy structured corporate workflows that ensure data integrity, modern security standards, and seamless operational execution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://page.gensparksite.com/v1/base64_upload/dc7d70c3ea25f1b8af4dc749324d4ec0" alt="20 59 Ventures Corp - Housing Referral Agency" class="logo-img">
+                    <div>
+                        <div class="logo-text">20 59 VENTURES CORP</div>
+                        <div class="logo-subtitle">Housing Referral Agency</div>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Services</h4>
+                        <a href="index.html#tenants">For Tenants</a>
+                        <a href="index.html#landlords">For Landlords</a>
+                        <a href="index.html#services">Our Services</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Company</h4>
+                        <a href="about.html">About Us</a>
+                        <a href="index.html#contact">Contact</a>
+                        <a href="capabilities.html" target="_blank">Capabilities Statement</a>
+                        <a href="https://limyefoundation.org" target="_blank">Limyè Foundation</a>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Legal & SMS</h4>
+                        <a href="phone-sms-mms-disclosure.html">SMS Disclosure</a>
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Service</a>
+                        <a href="sms-opt-in.html">SMS Opt-In</a>
+                        <a href="help-sms.html">SMS Help</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Contact</h4>
+                        <a href="tel:1-888-919-2059">1-888-919-2059</a>
+                        <a href="tel:205-534-8492">205-534-8492</a>
+                        <a href="mailto:info@2059ventures.online">info@2059ventures.online</a>
+                        <a href="mailto:andrea.marcus@2059ventures.online">andrea.marcus@2059ventures.online</a>
+                        <p>212 W Troy St, Dothan, AL 36303</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 20 59 Ventures Corp. All rights reserved. &nbsp;|&nbsp; Unique Entity ID (UEI): GVR2NTGR4HU3</p>
+                <p>Technology-Driven Housing Solutions for Veterans and Seniors</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/apple-style.js"></script>
+</body>
+</html>
