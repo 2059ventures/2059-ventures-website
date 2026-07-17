@@ -352,12 +352,12 @@
                     
                     <div class="detail-item">
                         <strong>CAGE Code</strong>
-                        <span id="sam-cage">Submitted (In Progress)</span>
+                        <span id="sam-cage">22DH9</span>
                     </div>
                     
                     <div class="detail-item">
                         <strong>Registration Status</strong>
-                        <span id="sam-status-text" style="font-weight: 600; color: var(--logo-green); text-transform: uppercase;">Submitted / Active</span>
+                        <span id="sam-status-text" style="font-weight: 600; color: var(--logo-green); text-transform: uppercase;">Active</span>
                     </div>
                     
                     <div class="detail-item" style="margin-top: 20px; border-top: 1px dashed rgba(74, 124, 89, 0.15); padding-top: 15px; font-size: 11px;">
@@ -440,14 +440,14 @@
                 .then(data => {
                     if (data) {
                         document.getElementById('sam-uei').textContent = data.uei || 'GVR2NTGR4HU3';
-                        document.getElementById('sam-cage').textContent = data.cageCode || 'Submitted (In Progress)';
+                        document.getElementById('sam-cage').textContent = data.cageCode || '22DH9';
                         
                         // Parse date/time friendly format
                         let syncTime = data.lastSync || 'Just Now';
                         document.getElementById('sam-last-sync').textContent = syncTime;
                         
                         const statusText = document.getElementById('sam-status-text');
-                        statusText.textContent = data.registrationStatus || 'Submitted / Active';
+                        statusText.textContent = data.registrationStatus || 'Active';
                     }
                 })
                 .catch(err => {

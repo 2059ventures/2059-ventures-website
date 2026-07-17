@@ -637,7 +637,7 @@
                         </div>
                         <div class="credential-box">
                             <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 6px;">CAGE Code</div>
-                            <div style="font-size: 16px; font-weight: 700; color: var(--text-dark);">Submitted <span style="font-size: 11px; font-weight: normal; color: var(--text-muted);">(Pending)</span></div>
+                            <div style="font-size: 16px; font-weight: 700; color: var(--text-dark);">22DH9</div>
                         </div>
                         <div class="credential-box">
                             <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 6px;">Socio-Economic</div>
@@ -689,7 +689,7 @@
                             </div>
                             <div style="margin-bottom: 10px; display: flex; justify-content: space-between; border-bottom: 1px dashed #eaeaea; padding-bottom: 8px;">
                                 <span style="color: var(--text-muted);">CAGE Code:</span>
-                                <strong id="sam-cage" style="color: var(--text-dark);">Submitted (In Progress)</strong>
+                                <strong id="sam-cage" style="color: var(--text-dark);">22DH9</strong>
                             </div>
                             <div style="margin-bottom: 10px; display: flex; justify-content: space-between; padding-bottom: 8px;">
                                 <span style="color: var(--text-muted);">Last Sync Verification:</span>
@@ -1184,14 +1184,14 @@
                     if (data) {
                         document.getElementById('sam-legal-name').textContent = data.legalBusinessName || '20 59 Ventures Corp';
                         document.getElementById('sam-uei').textContent = data.uei || 'GVR2NTGR4HU3';
-                        document.getElementById('sam-cage').textContent = data.cageCode || 'Submitted (In Progress)';
+                        document.getElementById('sam-cage').textContent = data.cageCode || '22DH9';
                         
                         // Parse date/time friendly format
                         let syncTime = data.lastSync || 'Just Now';
                         document.getElementById('sam-last-sync').textContent = syncTime;
                         
                         const statusText = document.getElementById('sam-status-text');
-                        statusText.textContent = (data.registrationStatus || 'Submitted / Active').toUpperCase();
+                        statusText.textContent = (data.registrationStatus || 'Active').toUpperCase();
                     }
                 })
                 .catch(err => {
