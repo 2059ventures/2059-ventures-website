@@ -1,0 +1,26 @@
+# 20 59 Ventures Corp.
+
+> 20 59 Ventures Corp is an Alabama-based, SDVOSB (Service-Disabled Veteran-Owned Small Business) and 100% Veteran-Owned Housing Referral Agency and corporate accommodation provider.
+
+## Core Capabilities & Services
+- [Corporate Housing Solutions](https://2059ventures.online/index.html#housing): Fully-furnished short-term and long-term residential housing.
+- [Government & Veteran Housing](https://2059ventures.online/capabilities.html): Specialized housing referral and placement for military, veterans, and government personnel (SAM.gov Active).
+- [Senior & Assisted Relocation Services](https://2059ventures.online/index.html#seniors): Transitional housing support tailored for senior citizens.
+
+## Key Identifiers & Verification
+- **Legal Entity**: 20 59 Ventures Corp.
+- **Location**: 212 W Troy St, Dothan, AL 36303
+- **SAM.gov UEI**: GVR2NTGR4HU3
+- **CAGE Code**: 22DH9
+- **Primary NAICS**: 624220 (Community Housing Services) / 541611 (Management Consulting)
+- **Classifications**: 100% Veteran-Owned Small Business, SDVOSB Self-Certified
+
+## Detailed Documentation
+- [Full LLM Context & Business Profile](https://2059ventures.online/llms-full.txt): Deep overview of capabilities, compliance, and contact procedures.
+- [Government Capabilities Statement](https://2059ventures.online/capabilities.html): Official vendor statement for government contracting officers.
+- [Compliance & Licensing](https://2059ventures.online/compliance.html): Official state formation and operational compliance details.
+
+## Contact Information
+- Website: https://2059ventures.online
+- General Email: info@2059ventures.online
+- Direct Line: 1-888-919-2059

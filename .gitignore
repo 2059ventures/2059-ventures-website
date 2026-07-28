@@ -47,3 +47,10 @@ Gemini_Generated_Image_pze67ppze67ppze6.png
 # Scratch / credentials folder
 scratch/
 sam_entity_status_private.json
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
