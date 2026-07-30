@@ -1,24 +1,25 @@
 # 20 59 Ventures Corp.
 
-> 20 59 Ventures Corp is an Alabama-based, SDVOSB (Service-Disabled Veteran-Owned Small Business) and 100% Veteran-Owned Housing Referral Agency and corporate accommodation provider.
+> 20 59 Ventures Corp is an Alabama-based, CMS-registered Multi-Specialty Provider (NPI: 1932035060), VOSB (Veteran-Owned Small Business), and WOSB (Woman-Owned Small Business) offering integrated Housing Referral, Non-Emergency Medical Transportation (NEMT), and Home Meal Coordination services across Tuscaloosa, Dothan, and Montgomery regional hubs.
 
 ## Core Capabilities & Services
-- [Corporate Housing Solutions](https://2059ventures.online/index.html#housing): Fully-furnished short-term and long-term residential housing.
-- [Government & Veteran Housing](https://2059ventures.online/capabilities.html): Specialized housing referral and placement for military, veterans, and government personnel (SAM.gov Active).
-- [Senior & Assisted Relocation Services](https://2059ventures.online/index.html#seniors): Transitional housing support tailored for senior citizens.
+- [Client Placement & Housing Navigation](https://2059ventures.online/capabilities.html): Specialized housing referral and placement for HUD-VASH, veterans, seniors, and Medicaid waiver clients (SAM.gov Active).
+- [Non-Emergency Medical Transportation (NEMT)](https://2059ventures.online/index.html#services): Specialized van transport and transportation brokerage to ensure clients reach clinical appointments and VA medical centers.
+- [Nutritional & Home Meal Coordination](https://2059ventures.online/index.html#services): Home-delivered meal pipelines to maintain long-term independent living stability.
 
 ## Key Identifiers & Verification
 - **Legal Entity**: 20 59 Ventures Corp.
-- **Location**: 212 W Troy St, Dothan, AL 36303
+- **Location & Hubs**: Dothan HQ (212 W Troy St) | Regional Hubs: Tuscaloosa, Dothan & Montgomery, AL
+- **NPI Number**: 1932035060 (Taxonomy: 193200000X Multi-Specialty Group)
 - **SAM.gov UEI**: GVR2NTGR4HU3
 - **CAGE Code**: 22DH9
-- **Primary NAICS**: 624220 (Community Housing Services) / 541611 (Management Consulting)
-- **Classifications**: 100% Veteran-Owned Small Business, SDVOSB Self-Certified
+- **Core NAICS**: 624220 (Housing Services) / 485991 (NEMT Transport) / 624210 (Home Meals) / 541611 (Admin Consulting) / 531311 (Property Mgmt)
+- **Classifications**: Veteran-Owned Small Business (VOSB), Woman-Owned Small Business (WOSB), Small Business
 
 ## Detailed Documentation
-- [Full LLM Context & Business Profile](https://2059ventures.online/llms-full.txt): Deep overview of capabilities, compliance, and contact procedures.
-- [Government Capabilities Statement](https://2059ventures.online/capabilities.html): Official vendor statement for government contracting officers.
-- [Compliance & Licensing](https://2059ventures.online/compliance.html): Official state formation and operational compliance details.
+- [Full LLM Context & Business Profile](https://2059ventures.online/llms-full.txt): Deep overview of capabilities, compliance, NPI credentials, and contact procedures.
+- [Government Capabilities Statement](https://2059ventures.online/capabilities.html): Official vendor statement for government case managers and contracting officers.
+- [Compliance & Licensing](https://2059ventures.online/compliance.html): Official state formation, E-Verify, and healthcare logistics compliance details.
 
 ## Contact Information
 - Website: https://2059ventures.online

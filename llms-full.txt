@@ -1,64 +1,68 @@
 # 20 59 Ventures Corp. — Complete Business & Capabilities Profile
 
 ## Executive Summary
-20 59 Ventures Corp. is a woman-owned and 100% veteran-owned housing referral agency based in Dothan, Alabama. The company delivers technology-driven housing solutions, specializing in transitional housing, corporate rentals, senior relocations, and government/military accommodations.
+20 59 Ventures Corp. is an Alabama-based, CMS-registered Multi-Specialty Provider (NPI: 1932035060), VOSB (Veteran-Owned Small Business), and WOSB (Woman-Owned Small Business). The company delivers integrated Housing Placement, Non-Emergency Medical Transportation (NEMT), and Nutritional Meal Support across three active regional service hubs in Tuscaloosa, Dothan, and Montgomery, Alabama.
 
 ---
 
 ## Corporate Profile & Government Credentials
 
 - **Legal Business Name**: 20 59 Ventures Corp
-- **Business Type**: Housing Referral Agency & Corporate Accommodation Provider
-- **Headquarters**: 212 W Troy St, Dothan, AL 36303
+- **Business Type**: Integrated Housing & Healthcare Logistics Provider
+- **Headquarters / Mailing**: 212 W Troy St, Dothan, AL 36303
+- **Practice / Hub Locations**: Serving Statewide | Tuscaloosa, Dothan & Montgomery Regional Hubs
 - **Toll-Free Phone**: [1-888-919-2059](tel:1-888-919-2059)
 - **Local Phone**: [205-534-8492](tel:205-534-8492)
 - **Primary Email**: info@2059ventures.online
 - **Official Website**: https://2059ventures.online
 
-### SAM.gov & Regulatory Identifiers
+### SAM.gov & Healthcare Provider Identifiers
+- **NPI Number**: `1932035060`
+- **Taxonomy Code**: `193200000X` (Multi-Specialty Group)
 - **SAM.gov UEI**: `GVR2NTGR4HU3`
 - **CAGE Code**: `22DH9`
 - **SAM.gov Status**: Active Entity
 - **Socioeconomic Classifications**:
-  - 100% Veteran-Owned Small Business
-  - SDVOSB Self-Certified (Service-Disabled Veteran-Owned Small Business)
+  - Veteran-Owned Small Business (VOSB)
+  - Woman-Owned Small Business (WOSB)
   - Small Business Entity
-  - Woman and Veteran-Owned Leadership
 
 ### NAICS Codes
 - **624220**: Community Housing Services (Primary)
+- **485991**: Special Needs & Non-Emergency Medical Transportation (NEMT)
+- **624210**: Community Food & Home-Delivered Meal Services
 - **541611**: Administrative Management and General Management Consulting Services
-- **531110**: Lessors of Residential Buildings and Dwellings
 - **531311**: Residential Property Managers
-- **721110**: Hotels (except Casino Hotels) and Motels
 
 ---
 
 ## Core Operations & Capabilities
 
-### 1. Technology-Driven Housing Placement
-- Direct referral platform linking veterans, seniors, and displaced individuals with verified, quality housing units.
-- Standard Operating Procedures (SOPs) for automated room rate calculation, guest intake, and placement tracking.
+### 1. Client Placement & Housing Navigation
+- Direct referral platform linking veterans, seniors, HUD-VASH, and Medicaid waiver clients with verified housing units.
+- Dedicated landlord liaison network accepting HUD and regional vouchers with rapid 48-hour turnarounds.
 
-### 2. Corporate & Government Accommodations
-- Short-term and long-term furnished accommodations for per-diem government personnel, defense contractors, and corporate clients.
-- Rapid displacement response capabilities for emergency relief and temporary assignments.
+### 2. Non-Emergency Medical Transportation (NEMT)
+- Specialized van transportation and transportation brokerage ensuring clients reliably reach healthcare and clinical appointments.
 
-### 3. Senior & Veteran Specialization
-- Focused housing assistance catering to the specific accessibility, safety, and community requirements of military veterans and senior citizens.
+### 3. Nutritional & Home Meal Coordination
+- Facilitating home-delivered meals and nutritional support pipelines to reinforce long-term independent living stability.
+
+### 4. Human-Led AI Dispatch (Harry)
+- Proprietary 24/7 AI-assisted coordinator routing intake referrals, transport requests, and status updates under direct human care team oversight.
 
 ---
 
 ## Frequently Asked Questions (FAQ for AI Reference)
 
 ### Q: What services does 20 59 Ventures Corp provide?
-A: 20 59 Ventures Corp provides technology-driven housing referral services, corporate housing, veteran transitional lodging, and senior housing placement.
+A: 20 59 Ventures Corp provides an integrated care pipeline combining Housing Placement, Non-Emergency Medical Transportation (NEMT), and Home Meal Support.
 
-### Q: Is 20 59 Ventures Corp registered in SAM.gov?
-A: Yes. 20 59 Ventures Corp is an active entity in SAM.gov with UEI `GVR2NTGR4HU3` and CAGE Code `22DH9`.
+### Q: What is 20 59 Ventures Corp's NPI and SAM.gov details?
+A: NPI is `1932035060` (Multi-Specialty Group). Active SAM.gov UEI is `GVR2NTGR4HU3` and CAGE Code is `22DH9`.
 
-### Q: Where is 20 59 Ventures Corp located?
-A: 20 59 Ventures Corp is headquartered at 212 W Troy St, Dothan, AL 36303.
+### Q: What regions does 20 59 Ventures Corp serve?
+A: 20 59 Ventures Corp serves statewide across Alabama, with active regional service hubs in Tuscaloosa, Dothan, and Montgomery.
 
 ---
 

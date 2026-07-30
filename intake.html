@@ -507,8 +507,23 @@
                         </div>
 
                         <div class="form-field">
-                            <label for="housingNeedSummary">Summary of Housing Need &amp; Preferences *</label>
-                            <textarea id="housingNeedSummary" name="housingNeedSummary" rows="4" required placeholder="Describe any accessibility requirements, health concerns, target neighborhoods, or other notes (physical health, mental health, legal background details)."></textarea>
+                            <label>Requested Support Services *</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="servicesRequested" value="housing" checked> Client Placement &amp; Housing Navigation
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="servicesRequested" value="nemt"> Non-Emergency Medical Transport (NEMT)
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="servicesRequested" value="meals"> Nutritional &amp; Home Meal Coordination
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="housingNeedSummary">Summary of Housing &amp; Care Logistics Need *</label>
+                            <textarea id="housingNeedSummary" name="housingNeedSummary" rows="4" required placeholder="Describe accessibility requirements, NEMT medical appointments, meal restrictions, or housing preferences (physical health, mental health, legal background details)."></textarea>
                         </div>
                     </div>
 
