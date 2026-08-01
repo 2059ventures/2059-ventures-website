@@ -22,6 +22,7 @@
 - **SAM.gov UEI**: `GVR2NTGR4HU3`
 - **CAGE Code**: `22DH9`
 - **SAM.gov Status**: Active Entity
+- **Payment Acceptance**: Government Purchase Cards (GPC / Credit Card) Accepted
 - **Socioeconomic Classifications**:
   - Veteran-Owned Small Business (VOSB)
   - Woman-Owned Small Business (WOSB)

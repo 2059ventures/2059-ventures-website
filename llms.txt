@@ -13,6 +13,7 @@
 - **NPI Number**: 1932035060 (Taxonomy: 193200000X Multi-Specialty Group)
 - **SAM.gov UEI**: GVR2NTGR4HU3
 - **CAGE Code**: 22DH9
+- **Payment Acceptance**: Government Purchase Cards (GPC / Credit Card) Accepted
 - **Core NAICS**: 624220 (Housing Services) / 485991 (NEMT Transport) / 624210 (Home Meals) / 541611 (Admin Consulting) / 531311 (Property Mgmt)
 - **Classifications**: Veteran-Owned Small Business (VOSB), Woman-Owned Small Business (WOSB), Small Business
 
