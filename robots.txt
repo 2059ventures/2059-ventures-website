@@ -1,0 +1,15 @@
+﻿# robots.txt for 2059ventures.online
+# Updated: 2026-08-09
+
+User-agent: *
+Allow: /
+
+# Disallow utility/SMS pages with no organic search value
+Disallow: /help-sms.html
+Disallow: /sms-opt-in.html
+Disallow: /phone-sms-mms-disclosure.html
+Disallow: /flyer.html
+Disallow: /flyer-classic.html
+
+# Sitemap location
+Sitemap: https://2059ventures.online/sitemap.xml
