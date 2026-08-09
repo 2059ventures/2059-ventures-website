@@ -8,6 +8,11 @@
   "assets": {
     "directory": "."
   },
+  "workers_dev": true,
+  "routes": [
+    { "pattern": "2059ventures.online/*", "zone_name": "2059ventures.online" },
+    { "pattern": "www.2059ventures.online/*", "zone_name": "2059ventures.online" }
+  ],
   "compatibility_flags": [
     "nodejs_compat"
   ]
