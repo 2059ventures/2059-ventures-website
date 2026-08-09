@@ -1,0 +1,15 @@
+﻿# Exclude git internals
+.git/
+.gitignore
+
+# Exclude Cloudflare/Wrangler internals
+.wrangler/
+
+# Exclude non-web source files
+*.odt
+scratch/
+node_modules/
+
+# Exclude source documents
+Website setup.odt
+outbound json.odt

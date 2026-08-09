@@ -6,14 +6,7 @@
     "enabled": true
   },
   "assets": {
-    "directory": ".",
-    "exclude": [
-      ".git/*",
-      ".wrangler/*",
-      "*.odt",
-      "scratch/*",
-      "node_modules/*"
-    ]
+    "directory": "."
   },
   "compatibility_flags": [
     "nodejs_compat"
