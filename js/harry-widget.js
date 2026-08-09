@@ -260,6 +260,49 @@
         scriptNode.connect(audioCtx.destination);
     }
 
+    let maxCallTimer = null;
+    let silenceTimer15 = null;
+    let silenceTimer30 = null;
+    let silenceTimer45 = null;
+    let zeroVolumeCounter = 0;
+    const MAX_CALL_DURATION_MS = 300000; // 5 minutes max session cap for safety
+
+    function resetSilenceTimers() {
+        if (silenceTimer15) clearTimeout(silenceTimer15);
+        if (silenceTimer30) clearTimeout(silenceTimer30);
+        if (silenceTimer45) clearTimeout(silenceTimer45);
+
+        if (!isConnected || isHarrySpeaking) return;
+
+        // 15 Seconds Silence Check-in
+        silenceTimer15 = setTimeout(() => {
+            if (isConnected && !isHarrySpeaking && !isUserSpeaking) {
+                appendSystemNotice('15s Silence: Are you still there? You can speak or click Desk Phone below.');
+            }
+        }, 15000);
+
+        // 30 Seconds Silence Guidance
+        silenceTimer30 = setTimeout(() => {
+            if (isConnected && !isHarrySpeaking && !isUserSpeaking) {
+                appendSystemNotice('30s Silence: Still here! Speak now or submit lead info in the Lead form.');
+            }
+        }, 30000);
+
+        // 45 Seconds Silence Auto-Disconnect Guardrail
+        silenceTimer45 = setTimeout(() => {
+            if (isConnected && !isHarrySpeaking) {
+                appendSystemNotice('45s Silence Limit: Call auto-disconnected to save API costs.');
+                disconnectCall();
+            }
+        }, 45000);
+    }
+
+    function clearSilenceTimers() {
+        if (silenceTimer15) clearTimeout(silenceTimer15);
+        if (silenceTimer30) clearTimeout(silenceTimer30);
+        if (silenceTimer45) clearTimeout(silenceTimer45);
+    }
+
     function connectWebSocket() {
         ws = new WebSocket(CONFIG.wsUrl);
 
@@ -267,6 +310,18 @@
             isConnected = true;
             updateStatus('Connected & Listening', 'online');
             appendSystemNotice('Voice session connected to Harry. You can speak now!');
+
+            resetSilenceTimers();
+
+            // Guardrail: Set 5-minute max call session timer to prevent runaway API billing
+            if (maxCallTimer) clearTimeout(maxCallTimer);
+            maxCallTimer = setTimeout(() => {
+                if (isConnected) {
+                    appendSystemNotice('Maximum 5-minute session limit reached. Disconnecting call.');
+                    alert('Session limit reached (5 mins). Call ended automatically to protect billing.');
+                    disconnectCall();
+                }
+            }, MAX_CALL_DURATION_MS);
         };
 
         ws.onmessage = (event) => {
@@ -300,6 +355,7 @@
 
             case 'input_audio_buffer.speech_started':
                 isUserSpeaking = true;
+                resetSilenceTimers();
                 updateStatus('User Speaking...', 'online');
                 // Trigger auto barge-in if Harry is currently responding
                 if (isHarrySpeaking) {
@@ -309,6 +365,7 @@
 
             case 'input_audio_buffer.speech_stopped':
                 isUserSpeaking = false;
+                resetSilenceTimers();
                 updateStatus('Harry is thinking...', 'connecting');
                 break;
 
@@ -320,6 +377,7 @@
 
             case 'response.created':
                 isHarrySpeaking = true;
+                clearSilenceTimers();
                 updateStatus('Harry is speaking...', 'speaking');
                 prepareAssistantBubble();
                 break;
@@ -340,6 +398,7 @@
 
             case 'response.done':
                 isHarrySpeaking = false;
+                resetSilenceTimers();
                 updateStatus('Listening...', 'online');
                 currentAssistantBubble = null;
                 currentAssistantText = '';
@@ -419,6 +478,11 @@
     }
 
     function disconnectCall() {
+        clearSilenceTimers();
+        if (maxCallTimer) {
+            clearTimeout(maxCallTimer);
+            maxCallTimer = null;
+        }
         if (ws) {
             ws.close();
             ws = null;
