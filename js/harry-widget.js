@@ -1,8 +1,8 @@
 /**
  * ==========================================================================
- * 20/59 Ventures Corp - Harry (Telnyx Voice AI Assistant) Widget Engine
+ * 20/59 Ventures Corp - Harry (Telnyx AI Assistant) Dual-Mode Widget Engine
+ * Supports: Text Chat Mode (Cost-Saving) & Voice Call Mode (Real-Time Audio)
  * Assistant ID: assistant-a13e9614-4795-4962-b7e2-abdcba418c12
- * WebSocket URL: wss://api.telnyx.com/v2/ai/assistants/assistant-a13e9614-4795-4962-b7e2-abdcba418c12/conversation
  * ==========================================================================
  */
 
@@ -17,6 +17,7 @@
     };
 
     // State Variables
+    let currentMode = 'text'; // 'text' (default, free/low cost) or 'voice'
     let ws = null;
     let audioCtx = null;
     let micStream = null;
@@ -34,27 +35,33 @@
     let visualizerAnimFrame = null;
     let audioLevel = 0;
 
+    let maxCallTimer = null;
+    let silenceTimer15 = null;
+    let silenceTimer30 = null;
+    let silenceTimer45 = null;
+    const MAX_CALL_DURATION_MS = 300000; // 5 minutes max session cap
+
     // Initialize UI on DOM Ready
     document.addEventListener('DOMContentLoaded', initWidgetUI);
 
     function initWidgetUI() {
         if (document.getElementById('harry-widget-launcher')) return;
 
-        // Render Launcher Button
+        // Render Floating Launcher Button
         const launcherHtml = `
-            <div id="harry-widget-launcher" title="Talk to Harry - 20/59 Ventures Voice AI">
+            <div id="harry-widget-launcher" title="Talk or Chat with Harry - 20/59 Ventures AI Assistant">
                 <div class="harry-launcher-avatar">
-                    <i class="fa-solid fa-headset"></i>
+                    <i class="fa-solid fa-comments"></i>
                 </div>
                 <div class="harry-launcher-text">
-                    <span class="harry-launcher-title">Talk to Harry</span>
-                    <span class="harry-launcher-sub">20/59 Voice AI Assistant</span>
+                    <span class="harry-launcher-title">Ask Harry AI</span>
+                    <span class="harry-launcher-sub">20/59 Ventures Coordinator</span>
                 </div>
             </div>
         `;
         document.body.insertAdjacentHTML('beforeend', launcherHtml);
 
-        // Render Voice Modal
+        // Render Dual-Mode Voice & Text Modal
         const modalHtml = `
             <div id="harry-widget-modal">
                 <!-- Header -->
@@ -64,12 +71,11 @@
                             <div class="harry-avatar">
                                 <i class="fa-solid fa-user-astronaut"></i>
                             </div>
-                            <div id="harry-status-dot" class="harry-status-dot"></div>
+                            <div id="harry-status-dot" class="harry-status-dot online"></div>
                         </div>
                         <div class="harry-header-details">
                             <span class="harry-name">Harry</span>
-                            <span class="harry-role">Inbound Coordinator — 20/59 Ventures</span>
-                            <span id="harry-status-badge" class="harry-status-badge">Offline</span>
+                            <span class="harry-role">Inbound Housing Coordinator</span>
                         </div>
                     </div>
                     <button id="harry-close-btn" class="harry-close-btn" title="Close">
@@ -77,36 +83,54 @@
                     </button>
                 </div>
 
-                <!-- Canvas Visualizer -->
-                <div class="harry-visualizer-container">
+                <!-- Mode Selector Tabs -->
+                <div class="harry-mode-bar">
+                    <button id="harry-tab-text" class="harry-mode-tab active">
+                        <i class="fa-solid fa-comment-dots"></i> Text Chat
+                    </button>
+                    <button id="harry-tab-voice" class="harry-mode-tab">
+                        <i class="fa-solid fa-microphone"></i> Voice Call
+                    </button>
+                </div>
+
+                <!-- Canvas Visualizer (Voice Mode Only) -->
+                <div id="harry-visualizer-section" class="harry-visualizer-container" style="display:none;">
                     <canvas id="harry-audio-canvas"></canvas>
                     <span id="harry-visualizer-status" class="harry-visualizer-status">Click Start to Call Harry</span>
                 </div>
 
-                <!-- Transcript Window -->
+                <!-- Transcript / Chat Area -->
                 <div id="harry-transcript-container" class="harry-transcript-area">
                     <div class="harry-chat-msg assistant">
                         <div class="harry-chat-sender">Harry</div>
-                        Hello! I'm Harry, the Inbound Coordinator for 20/59 Ventures. How can I assist you today with our veteran and senior housing services?
+                        Hello! I'm Harry, the Inbound Coordinator for 20/59 Ventures. How can I assist you today with veteran or senior housing, case worker referrals, or property partnerships?
                     </div>
                 </div>
 
-                <!-- Lead Capture Drawer -->
+                <!-- Text Chat Input Bar (Text Mode) -->
+                <div id="harry-chat-input-bar" class="harry-input-bar">
+                    <input type="text" id="harry-text-input" class="harry-text-input" placeholder="Type your message to Harry here..." autocomplete="off">
+                    <button id="harry-send-text-btn" class="harry-send-btn" title="Send Message">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+
+                <!-- Lead Capture Drawer (Expandable) -->
                 <div id="harry-lead-drawer" class="harry-lead-drawer">
                     <div class="harry-lead-title">
-                        <span><i class="fa-solid fa-id-card"></i> Lead Capture Info</span>
+                        <span><i class="fa-solid fa-id-card"></i> Lead / Message Info</span>
                         <button id="harry-close-drawer-btn" style="background:none;border:none;cursor:pointer;color:#86868B;"><i class="fa-solid fa-chevron-down"></i></button>
                     </div>
                     <input type="text" id="harry-lead-name" class="harry-lead-input" placeholder="Full Name">
                     <input type="tel" id="harry-lead-phone" class="harry-lead-input" placeholder="Phone Number">
                     <input type="email" id="harry-lead-email" class="harry-lead-input" placeholder="Email Address">
                     <input type="text" id="harry-lead-inquiry" class="harry-lead-input" placeholder="Housing / Referral Inquiry">
-                    <button id="harry-submit-lead-btn" class="harry-lead-submit">Submit Lead Details</button>
+                    <button id="harry-submit-lead-btn" class="harry-lead-submit">Submit Details to Team</button>
                 </div>
 
-                <!-- Toolbar Actions -->
+                <!-- Toolbar Control Actions -->
                 <div class="harry-control-bar">
-                    <button id="harry-start-btn" class="harry-btn start-call-btn">
+                    <button id="harry-start-btn" class="harry-btn start-call-btn" style="display:none;">
                         <i class="fa-solid fa-phone"></i> Start Voice Call
                     </button>
                     <button id="harry-mic-btn" class="harry-btn mic-btn" style="display:none;" title="Mute/Unmute Mic">
@@ -115,10 +139,10 @@
                     <button id="harry-bargein-btn" class="harry-btn bargein-btn" style="display:none;" title="Barge-in / Stop Harry">
                         <i class="fa-solid fa-hand"></i> Stop / Barge-in
                     </button>
-                    <button id="harry-lead-btn" class="harry-btn" style="display:none;" title="Lead Capture Form">
-                        <i class="fa-solid fa-user-plus"></i> Lead
+                    <button id="harry-lead-btn" class="harry-btn" title="Quick Contact / Lead Form">
+                        <i class="fa-solid fa-user-plus"></i> Lead Form
                     </button>
-                    <button id="harry-agent-btn" class="harry-btn agent-btn" style="display:none;" title="Transfer to Live Desk Phone">
+                    <button id="harry-agent-btn" class="harry-btn agent-btn" title="Transfer to Live Desk Phone">
                         <i class="fa-solid fa-headset"></i> Desk Phone
                     </button>
                 </div>
@@ -129,15 +153,28 @@
         // Bind UI Events
         document.getElementById('harry-widget-launcher').addEventListener('click', toggleModal);
         document.getElementById('harry-close-btn').addEventListener('click', toggleModal);
+        document.getElementById('harry-tab-text').addEventListener('click', () => switchMode('text'));
+        document.getElementById('harry-tab-voice').addEventListener('click', () => switchMode('voice'));
+        
+        // Text Input Events
+        document.getElementById('harry-send-text-btn').addEventListener('click', handleSendTextMessage);
+        document.getElementById('harry-text-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSendTextMessage();
+        });
+
+        // Voice Controls
         document.getElementById('harry-start-btn').addEventListener('click', handleStartStopCall);
         document.getElementById('harry-mic-btn').addEventListener('click', toggleMute);
         document.getElementById('harry-bargein-btn').addEventListener('click', triggerBargeIn);
+        
+        // Lead & Escalation Buttons
         document.getElementById('harry-lead-btn').addEventListener('click', toggleLeadDrawer);
         document.getElementById('harry-close-drawer-btn').addEventListener('click', toggleLeadDrawer);
         document.getElementById('harry-submit-lead-btn').addEventListener('click', submitLeadForm);
         document.getElementById('harry-agent-btn').addEventListener('click', connectToDeskPhone);
 
         initCanvasVisualizer();
+        connectWebSocketConnectionIfNeeded();
     }
 
     function toggleModal() {
@@ -150,12 +187,53 @@
         drawer.classList.toggle('active');
     }
 
+    function switchMode(mode) {
+        if (currentMode === mode) return;
+        currentMode = mode;
+
+        const tabText = document.getElementById('harry-tab-text');
+        const tabVoice = document.getElementById('harry-tab-voice');
+        const vizSection = document.getElementById('harry-visualizer-section');
+        const inputBar = document.getElementById('harry-chat-input-bar');
+        const startBtn = document.getElementById('harry-start-btn');
+        const micBtn = document.getElementById('harry-mic-btn');
+        const bargeBtn = document.getElementById('harry-bargein-btn');
+
+        if (mode === 'text') {
+            tabText.classList.add('active');
+            tabVoice.classList.remove('active');
+            vizSection.style.display = 'none';
+            inputBar.style.display = 'flex';
+            startBtn.style.display = 'none';
+            micBtn.style.display = 'none';
+            bargeBtn.style.display = 'none';
+
+            // Stop voice audio recording/stream when switching to text
+            if (micStream) {
+                micStream.getTracks().forEach(t => t.stop());
+                micStream = null;
+            }
+            updateStatus('Text Chat Active', 'online');
+            appendSystemNotice('Switched to Text Chat Mode. Type your message below.');
+        } else {
+            tabVoice.classList.add('active');
+            tabText.classList.remove('active');
+            vizSection.style.display = 'flex';
+            inputBar.style.display = 'none';
+            startBtn.style.display = 'flex';
+            if (isConnected) {
+                micBtn.style.display = 'flex';
+                bargeBtn.style.display = 'flex';
+            }
+            updateStatus('Voice Mode Ready', 'online');
+            appendSystemNotice('Switched to Voice Mode. Click Start Voice Call to speak.');
+        }
+    }
+
     function updateStatus(stateText, dotClass = '') {
-        const badge = document.getElementById('harry-status-badge');
         const dot = document.getElementById('harry-status-dot');
         const vizText = document.getElementById('harry-visualizer-status');
 
-        if (badge) badge.innerText = stateText;
         if (vizText) vizText.innerText = stateText;
         if (dot) {
             dot.className = 'harry-status-dot ' + dotClass;
@@ -163,31 +241,101 @@
     }
 
     // =========================================================================
-    // 1. Audio Recording & WebSocket Voice Engine
+    // 1. Text Chat Message Handler (Cost-Saving Mode)
     // =========================================================================
+    function handleSendTextMessage() {
+        const input = document.getElementById('harry-text-input');
+        const text = input.value.trim();
+        if (!text) return;
+
+        // Render user message bubble
+        appendUserTranscript(text);
+        input.value = '';
+
+        // Ensure WebSocket connection is open
+        connectWebSocketConnectionIfNeeded();
+
+        // Prepare assistant response bubble
+        prepareAssistantBubble();
+
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            // Send conversation item to Telnyx Assistant
+            ws.send(JSON.stringify({
+                type: 'conversation.item.create',
+                item: {
+                    type: 'message',
+                    role: 'user',
+                    content: [{ type: 'input_text', text: text }]
+                }
+            }));
+        } else {
+            // Re-establish connection and send once opened
+            ws.addEventListener('open', () => {
+                ws.send(JSON.stringify({
+                    type: 'conversation.item.create',
+                    item: {
+                        type: 'message',
+                        role: 'user',
+                        content: [{ type: 'input_text', text: text }]
+                    }
+                }));
+            }, { once: true });
+        }
+    }
+
+    // =========================================================================
+    // 2. Audio Recording & WebSocket Voice Engine
+    // =========================================================================
+    function connectWebSocketConnectionIfNeeded() {
+        if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) return;
+
+        ws = new WebSocket(CONFIG.wsUrl);
+
+        ws.onopen = () => {
+            isConnected = true;
+            updateStatus('Connected & Ready', 'online');
+        };
+
+        ws.onmessage = (event) => {
+            try {
+                const msg = JSON.parse(event.data);
+                handleTelnyxEvent(msg);
+            } catch (err) {
+                console.error('Telnyx event parse error:', err);
+            }
+        };
+
+        ws.onerror = (error) => {
+            console.error('Telnyx WebSocket error:', error);
+            updateStatus('Connection Error', '');
+        };
+
+        ws.onclose = () => {
+            isConnected = false;
+            updateStatus('Disconnected', '');
+        };
+    }
+
     async function handleStartStopCall() {
         const startBtn = document.getElementById('harry-start-btn');
         const micBtn = document.getElementById('harry-mic-btn');
         const bargeBtn = document.getElementById('harry-bargein-btn');
-        const leadBtn = document.getElementById('harry-lead-btn');
-        const agentBtn = document.getElementById('harry-agent-btn');
 
-        if (!isConnected) {
-            startBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Connecting...';
-            updateStatus('Connecting...', 'connecting');
+        if (!micStream) {
+            startBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Starting Mic...';
+            updateStatus('Connecting Mic...', 'connecting');
 
             try {
                 await initAudioContext();
-                connectWebSocket();
+                connectWebSocketConnectionIfNeeded();
                 startBtn.innerHTML = '<i class="fa-solid fa-phone-slash"></i> End Voice Call';
                 startBtn.style.background = '#FF3B30';
                 micBtn.style.display = 'flex';
                 bargeBtn.style.display = 'flex';
-                leadBtn.style.display = 'flex';
-                agentBtn.style.display = 'flex';
+                updateStatus('Voice Call Connected', 'online');
             } catch (err) {
-                console.error('Audio/Mic init error:', err);
-                alert('Microphone access is required to speak with Harry: ' + err.message);
+                console.error('Mic error:', err);
+                alert('Microphone access is required for voice calls: ' + err.message);
                 startBtn.innerHTML = '<i class="fa-solid fa-phone"></i> Start Voice Call';
                 startBtn.style.background = '#4A7C59';
                 updateStatus('Mic Error', '');
@@ -198,8 +346,6 @@
             startBtn.style.background = '#4A7C59';
             micBtn.style.display = 'none';
             bargeBtn.style.display = 'none';
-            leadBtn.style.display = 'none';
-            agentBtn.style.display = 'none';
         }
     }
 
@@ -222,32 +368,26 @@
         });
 
         micSource = audioCtx.createMediaStreamSource(micStream);
-        // Using ScriptProcessorNode for standard cross-browser PCM extraction
         scriptNode = audioCtx.createScriptProcessor(4096, 1, 1);
 
         scriptNode.onaudioprocess = (e) => {
-            if (!isConnected || isMuted) return;
+            if (!isConnected || isMuted || currentMode !== 'voice') return;
 
             const inputData = e.inputBuffer.getChannelData(0);
-            
-            // Calculate audio level for visualizer
             let sum = 0;
             for (let i = 0; i < inputData.length; i++) {
                 sum += inputData[i] * inputData[i];
             }
             audioLevel = Math.sqrt(sum / inputData.length);
 
-            // Convert Float32 array to PCM16 Int16Array
             const pcm16 = new Int16Array(inputData.length);
             for (let i = 0; i < inputData.length; i++) {
                 const s = Math.max(-1, Math.min(1, inputData[i]));
                 pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
             }
 
-            // Convert Int16Array to Base64
             const base64Audio = arrayBufferToBase64(pcm16.buffer);
 
-            // Send Telnyx input_audio_buffer.append WS frame
             if (ws && ws.readyState === WebSocket.OPEN) {
                 ws.send(JSON.stringify({
                     type: 'input_audio_buffer.append',
@@ -260,38 +400,25 @@
         scriptNode.connect(audioCtx.destination);
     }
 
-    let maxCallTimer = null;
-    let silenceTimer15 = null;
-    let silenceTimer30 = null;
-    let silenceTimer45 = null;
-    let zeroVolumeCounter = 0;
-    const MAX_CALL_DURATION_MS = 300000; // 5 minutes max session cap for safety
-
     function resetSilenceTimers() {
-        if (silenceTimer15) clearTimeout(silenceTimer15);
-        if (silenceTimer30) clearTimeout(silenceTimer30);
-        if (silenceTimer45) clearTimeout(silenceTimer45);
+        clearSilenceTimers();
+        if (!isConnected || isHarrySpeaking || currentMode !== 'voice') return;
 
-        if (!isConnected || isHarrySpeaking) return;
-
-        // 15 Seconds Silence Check-in
         silenceTimer15 = setTimeout(() => {
             if (isConnected && !isHarrySpeaking && !isUserSpeaking) {
-                appendSystemNotice('15s Silence: Are you still there? You can speak or click Desk Phone below.');
+                appendSystemNotice('15s Silence: Are you still there? Speak or type your question below.');
             }
         }, 15000);
 
-        // 30 Seconds Silence Guidance
         silenceTimer30 = setTimeout(() => {
             if (isConnected && !isHarrySpeaking && !isUserSpeaking) {
-                appendSystemNotice('30s Silence: Still here! Speak now or submit lead info in the Lead form.');
+                appendSystemNotice('30s Silence: Still here! Feel free to click Desk Phone to talk to a live agent.');
             }
         }, 30000);
 
-        // 45 Seconds Silence Auto-Disconnect Guardrail
         silenceTimer45 = setTimeout(() => {
             if (isConnected && !isHarrySpeaking) {
-                appendSystemNotice('45s Silence Limit: Call auto-disconnected to save API costs.');
+                appendSystemNotice('45s Silence Limit: Voice session disconnected automatically.');
                 disconnectCall();
             }
         }, 45000);
@@ -303,61 +430,18 @@
         if (silenceTimer45) clearTimeout(silenceTimer45);
     }
 
-    function connectWebSocket() {
-        ws = new WebSocket(CONFIG.wsUrl);
-
-        ws.onopen = () => {
-            isConnected = true;
-            updateStatus('Connected & Listening', 'online');
-            appendSystemNotice('Voice session connected to Harry. You can speak now!');
-
-            resetSilenceTimers();
-
-            // Guardrail: Set 5-minute max call session timer to prevent runaway API billing
-            if (maxCallTimer) clearTimeout(maxCallTimer);
-            maxCallTimer = setTimeout(() => {
-                if (isConnected) {
-                    appendSystemNotice('Maximum 5-minute session limit reached. Disconnecting call.');
-                    alert('Session limit reached (5 mins). Call ended automatically to protect billing.');
-                    disconnectCall();
-                }
-            }, MAX_CALL_DURATION_MS);
-        };
-
-        ws.onmessage = (event) => {
-            try {
-                const msg = JSON.parse(event.data);
-                handleTelnyxEvent(msg);
-            } catch (err) {
-                console.error('Telnyx event parse error:', err);
-            }
-        };
-
-        ws.onerror = (error) => {
-            console.error('Telnyx WebSocket error:', error);
-            updateStatus('Connection Error', '');
-        };
-
-        ws.onclose = () => {
-            isConnected = false;
-            updateStatus('Call Ended', '');
-            appendSystemNotice('Voice call ended.');
-        };
-    }
-
     function handleTelnyxEvent(msg) {
         const type = msg.type || msg.event;
 
         switch (type) {
             case 'session.created':
-                updateStatus('Connected & Listening', 'online');
+                updateStatus('Connected & Ready', 'online');
                 break;
 
             case 'input_audio_buffer.speech_started':
                 isUserSpeaking = true;
                 resetSilenceTimers();
                 updateStatus('User Speaking...', 'online');
-                // Trigger auto barge-in if Harry is currently responding
                 if (isHarrySpeaking) {
                     triggerBargeIn();
                 }
@@ -378,8 +462,7 @@
             case 'response.created':
                 isHarrySpeaking = true;
                 clearSilenceTimers();
-                updateStatus('Harry is speaking...', 'speaking');
-                prepareAssistantBubble();
+                updateStatus('Harry is replying...', 'speaking');
                 break;
 
             case 'response.audio_transcript.delta':
@@ -391,7 +474,7 @@
 
             case 'response.output_audio.delta':
             case 'response.audio.delta':
-                if (msg.delta) {
+                if (msg.delta && currentMode === 'voice') {
                     playPcm16Chunk(msg.delta);
                 }
                 break;
@@ -399,7 +482,7 @@
             case 'response.done':
                 isHarrySpeaking = false;
                 resetSilenceTimers();
-                updateStatus('Listening...', 'online');
+                updateStatus('Ready', 'online');
                 currentAssistantBubble = null;
                 currentAssistantText = '';
                 break;
@@ -410,7 +493,7 @@
     }
 
     // =========================================================================
-    // 2. Real-Time PCM16 Playback & Queue Management
+    // 3. Audio Playback & Barge-In
     // =========================================================================
     function playPcm16Chunk(base64Audio) {
         if (!audioCtx) return;
@@ -443,13 +526,12 @@
             const idx = scheduledSources.indexOf(source);
             if (idx > -1) scheduledSources.splice(idx, 1);
             if (scheduledSources.length === 0 && !isHarrySpeaking) {
-                updateStatus('Listening...', 'online');
+                updateStatus('Ready', 'online');
             }
         };
     }
 
     function triggerBargeIn() {
-        // Stop all scheduled playback
         scheduledSources.forEach(src => {
             try { src.stop(); } catch (e) {}
         });
@@ -457,12 +539,11 @@
         nextStartTime = 0;
         isHarrySpeaking = false;
 
-        // Send Telnyx response.cancel WS frame
         if (ws && ws.readyState === WebSocket.OPEN) {
             ws.send(JSON.stringify({ type: 'response.cancel' }));
         }
 
-        updateStatus('Barge-in / Stopped', 'online');
+        updateStatus('Stopped', 'online');
     }
 
     function toggleMute() {
@@ -483,10 +564,6 @@
             clearTimeout(maxCallTimer);
             maxCallTimer = null;
         }
-        if (ws) {
-            ws.close();
-            ws = null;
-        }
         if (micStream) {
             micStream.getTracks().forEach(t => t.stop());
             micStream = null;
@@ -497,29 +574,27 @@
         }
         triggerBargeIn();
         
-        // Auto-send call transcript email if user interacted during the call
+        // Auto-send call transcript email if user interacted during session
         const transcriptContainer = document.getElementById('harry-transcript-container');
         if (transcriptContainer && isConnected) {
             const userMsgs = transcriptContainer.querySelectorAll('.harry-chat-msg.user');
             if (userMsgs.length > 0) {
                 const callTranscript = transcriptContainer.innerText;
                 sendEmailNotification({
-                    name: 'Voice AI Web Visitor',
-                    phone: 'Captured via Voice Session',
+                    name: 'AI Web Visitor',
+                    phone: 'Captured via Web AI Session',
                     email: 'intake@2059ventures.online',
-                    inquiry: 'Web Voice Session Call Log',
+                    inquiry: `Web ${currentMode.toUpperCase()} Session Log`,
                     timestamp: new Date().toLocaleString(),
                     transcript: callTranscript
                 });
             }
         }
-
-        isConnected = false;
-        updateStatus('Offline', '');
+        updateStatus('Ready', 'online');
     }
 
     // =========================================================================
-    // 3. Transcript UI Helpers
+    // 4. Transcript UI Helpers
     // =========================================================================
     function appendUserTranscript(text) {
         const container = document.getElementById('harry-transcript-container');
@@ -566,7 +641,7 @@
     }
 
     // =========================================================================
-    // 4. Lead Capture & Direct Email Dispatch (intake@2059ventures.online)
+    // 5. Lead Capture & Direct Email Dispatch (intake@2059ventures.online)
     // =========================================================================
     function submitLeadForm() {
         const name = document.getElementById('harry-lead-name').value.trim();
@@ -579,7 +654,6 @@
             return;
         }
 
-        // Get live conversation transcript history
         const transcriptContainer = document.getElementById('harry-transcript-container');
         const transcriptText = transcriptContainer ? transcriptContainer.innerText : '';
 
@@ -592,7 +666,6 @@
             transcript: transcriptText
         };
 
-        // 1. Inject as text turn into Telnyx assistant conversation if connected
         if (ws && ws.readyState === WebSocket.OPEN) {
             const leadPrompt = `User submitted lead details: Name: ${name}, Phone: ${phone}, Email: ${email}, Inquiry: ${inquiry}`;
             ws.send(JSON.stringify({
@@ -605,7 +678,6 @@
             }));
         }
 
-        // 2. Dispatch Email directly to intake@2059ventures.online & support@2059ventures.online
         sendEmailNotification(leadData);
 
         appendSystemNotice(`Lead Submitted & Emailed: ${name} (${phone || email})`);
@@ -614,9 +686,8 @@
     }
 
     function sendEmailNotification(leadData) {
-        // Send email via FormSubmit AJAX to intake@2059ventures.online
         const formData = new FormData();
-        formData.append('_subject', `[Harry Voice AI Lead] New Lead from ${leadData.name}`);
+        formData.append('_subject', `[Harry AI Lead] New Lead from ${leadData.name}`);
         formData.append('_template', 'table');
         formData.append('_captcha', 'false');
         formData.append('Name', leadData.name);
@@ -626,7 +697,6 @@
         formData.append('Timestamp', leadData.timestamp);
         formData.append('Conversation_Transcript', leadData.transcript || 'No transcript text');
 
-        // Post to intake@2059ventures.online
         fetch('https://formsubmit.co/ajax/intake@2059ventures.online', {
             method: 'POST',
             body: formData,
@@ -638,7 +708,6 @@
         })
         .catch(err => {
             console.warn('Primary email dispatch notice:', err);
-            // Fallback to Formspree endpoint existing on site
             fetch('https://formspree.io/f/meolndzb', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -653,7 +722,7 @@
     }
 
     // =========================================================================
-    // 5. Canvas Waveform Visualizer
+    // 6. Canvas Waveform Visualizer
     // =========================================================================
     function initCanvasVisualizer() {
         const canvas = document.getElementById('harry-audio-canvas');
