@@ -129,7 +129,13 @@
                     <input type="text" id="harry-lead-name" class="harry-lead-input" placeholder="Full Name">
                     <input type="tel" id="harry-lead-phone" class="harry-lead-input" placeholder="Phone Number">
                     <input type="email" id="harry-lead-email" class="harry-lead-input" placeholder="Email Address">
-                    <input type="text" id="harry-lead-inquiry" class="harry-lead-input" placeholder="Housing / Referral Inquiry">
+                    <select id="harry-lead-type" class="harry-lead-input" style="background:#fff;color:#1d1d1f;padding:8px;border-radius:6px;border:1px solid #ccc;margin-bottom:6px;">
+                        <option value="Private Pay / Direct Housing">Private Pay / Direct Housing</option>
+                        <option value="Agency / Case Worker Referral">Agency / Case Worker Referral</option>
+                        <option value="Property Partner / Landlord">Property Partner / Landlord</option>
+                        <option value="General Inquiry">General Inquiry</option>
+                    </select>
+                    <input type="text" id="harry-lead-inquiry" class="harry-lead-input" placeholder="Housing / Placement Details">
                     <button id="harry-submit-lead-btn" class="harry-lead-submit">Submit Details to Team</button>
                 </div>
 
@@ -672,6 +678,7 @@
         const name = document.getElementById('harry-lead-name').value.trim();
         const phone = document.getElementById('harry-lead-phone').value.trim();
         const email = document.getElementById('harry-lead-email').value.trim();
+        const leadType = document.getElementById('harry-lead-type')?.value || 'Private Pay / Direct Housing';
         const inquiry = document.getElementById('harry-lead-inquiry').value.trim();
 
         if (!name || (!phone && !email)) {
@@ -686,13 +693,14 @@
             name: name,
             phone: phone,
             email: email,
+            leadType: leadType,
             inquiry: inquiry,
             timestamp: new Date().toLocaleString(),
             transcript: transcriptText
         };
 
         if (ws && ws.readyState === WebSocket.OPEN) {
-            const leadPrompt = `User submitted lead details: Name: ${name}, Phone: ${phone}, Email: ${email}, Inquiry: ${inquiry}`;
+            const leadPrompt = `User submitted lead details: Name: ${name}, Phone: ${phone}, Email: ${email}, Type: ${leadType}, Details: ${inquiry}`;
             ws.send(JSON.stringify({
                 type: 'conversation.item.create',
                 item: {
@@ -707,18 +715,20 @@
 
         appendSystemNotice(`Lead Submitted & Emailed: ${name} (${phone || email})`);
         toggleLeadDrawer();
-        alert('Thank you! Your information has been captured and emailed directly to intake@2059ventures.online.');
+        alert('Thank you! Your information has been captured and dispatched to our placement coordinators.');
     }
 
     function sendEmailNotification(leadData) {
         const formData = new FormData();
-        formData.append('_subject', `[Harry AI Lead] New Lead from ${leadData.name}`);
+        formData.append('_subject', `[Harry AI Lead] ${leadData.leadType || 'Housing Lead'} - ${leadData.name}`);
         formData.append('_template', 'table');
         formData.append('_captcha', 'false');
+        formData.append('_cc', 'qruffin@2059ventures.online,info@2059ventures.online');
         formData.append('Name', leadData.name);
         formData.append('Phone', leadData.phone || 'N/A');
         formData.append('Email', leadData.email || 'N/A');
-        formData.append('Inquiry', leadData.inquiry || 'Housing / Referral Inquiry');
+        formData.append('Lead_Type', leadData.leadType || 'Direct Inquiry');
+        formData.append('Inquiry_Details', leadData.inquiry || 'Housing / Placement Request');
         formData.append('Timestamp', leadData.timestamp);
         formData.append('Conversation_Transcript', leadData.transcript || 'No transcript text');
 
@@ -729,7 +739,7 @@
         })
         .then(res => res.json())
         .then(data => {
-            console.log('Email dispatched to intake@2059ventures.online:', data);
+            console.log('Email dispatched to intake@2059ventures.online & team:', data);
         })
         .catch(err => {
             console.warn('Primary email dispatch notice:', err);
