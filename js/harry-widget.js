@@ -12,12 +12,14 @@
     const CONFIG = {
         assistantId: 'assistant-a13e9614-4795-4962-b7e2-abdcba418c12',
         wsUrl: 'wss://api.telnyx.com/v2/ai/assistants/assistant-a13e9614-4795-4962-b7e2-abdcba418c12/conversation',
+        apiChatUrl: '/api/chat',
         deskPhone: '+18889192059',
         targetSampleRate: 16000
     };
 
     // State Variables
     let currentMode = 'text'; // 'text' (default, free/low cost) or 'voice'
+    let currentConversationId = localStorage.getItem('harry_conv_id') || null;
     let ws = null;
     let audioCtx = null;
     let micStream = null;
@@ -252,34 +254,44 @@
         appendUserTranscript(text);
         input.value = '';
 
-        // Ensure WebSocket connection is open
-        connectWebSocketConnectionIfNeeded();
-
         // Prepare assistant response bubble
         prepareAssistantBubble();
 
-        if (ws && ws.readyState === WebSocket.OPEN) {
-            // Send conversation item to Telnyx Assistant
-            ws.send(JSON.stringify({
-                type: 'conversation.item.create',
-                item: {
-                    type: 'message',
-                    role: 'user',
-                    content: [{ type: 'input_text', text: text }]
+        // Send via HTTP API proxy
+        sendChatMessageToApi(text);
+    }
+
+    async function sendChatMessageToApi(text) {
+        updateStatus('Harry is thinking...', 'connecting');
+
+        try {
+            const res = await fetch(CONFIG.apiChatUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    content: text,
+                    assistantId: CONFIG.assistantId,
+                    conversationId: currentConversationId || 'new'
+                })
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                if (data.conversationId) {
+                    currentConversationId = data.conversationId;
+                    localStorage.setItem('harry_conv_id', data.conversationId);
                 }
-            }));
-        } else {
-            // Re-establish connection and send once opened
-            ws.addEventListener('open', () => {
-                ws.send(JSON.stringify({
-                    type: 'conversation.item.create',
-                    item: {
-                        type: 'message',
-                        role: 'user',
-                        content: [{ type: 'input_text', text: text }]
-                    }
-                }));
-            }, { once: true });
+                const replyText = data.content || data.reply || "Thank you for your message!";
+                updateAssistantTranscript(replyText);
+                updateStatus('Ready', 'online');
+            } else {
+                updateAssistantTranscript("I'm sorry, I'm having trouble connecting to the network right now. Please feel free to use the Lead Form or call our desk phone.");
+                updateStatus('Connection Error', '');
+            }
+        } catch (err) {
+            console.error('Chat API Error:', err);
+            updateAssistantTranscript("I encountered a connection error. Please try again or reach out directly using the Lead Form below.");
+            updateStatus('Connection Error', '');
         }
     }
 
