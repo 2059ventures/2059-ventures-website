@@ -23,7 +23,7 @@ export default {
         const url = new URL(request.url);
 
         // ── Handle CORS preflight ──────────────────────────────────────────
-        if (request.method === 'OPTIONS' && (url.pathname === '/api/chat' || url.pathname === '/api/lead')) {
+        if (request.method === 'OPTIONS' && (url.pathname === '/api/chat' || url.pathname === '/api/lead' || url.pathname === '/api/linkedin-conversion')) {
             return new Response(null, { status: 204, headers: CORS_HEADERS });
         }
 
@@ -35,6 +35,11 @@ export default {
         // ── Handle Harry Lead Email Alert Proxy (via Resend) ───────────────
         if (request.method === 'POST' && url.pathname === '/api/lead') {
             return handleHarryLead(request, env);
+        }
+
+        // ── Handle LinkedIn Conversions API ────────────────────────────────
+        if (request.method === 'POST' && url.pathname === '/api/linkedin-conversion') {
+            return handleLinkedInConversion(request, env);
         }
 
         // ── Serve static assets (with cache-busting for HTML, CSS, JS) ──────
@@ -243,10 +248,132 @@ async function handleHarryLead(request, env) {
         const resendData = await resendRes.json();
         console.log('[Harry Lead] Resend API Response:', resendData);
 
+        // ── Trigger LinkedIn Conversions API Event (Async/Background) ────────
+        try {
+            ctx.waitUntil(sendLinkedInConversionEvent({
+                email: email,
+                phone: phone,
+                name: name,
+                eventName: leadCategory || 'Lead',
+                conversionValue: '0.00'
+            }, env));
+        } catch (capiErr) {
+            console.error('[Harry Lead] CAPI queue warning:', capiErr);
+        }
+
         return jsonResponse({ success: true, message: 'Lead email alert dispatched successfully', resend: resendData }, 200);
     } catch (err) {
         console.error('[Harry Lead] Worker error:', err);
         return jsonResponse({ error: err.message }, 500);
     }
 }
+
+// ── LinkedIn Conversions API Handler & Helpers ──────────────────────────────
+async function handleLinkedInConversion(request, env) {
+    try {
+        const body = await request.json();
+        const result = await sendLinkedInConversionEvent(body, env);
+        return jsonResponse(result, result.success ? 200 : 400);
+    } catch (err) {
+        console.error('[LinkedIn CAPI] Handler Error:', err);
+        return jsonResponse({ error: err.message }, 500);
+    }
+}
+
+async function sha256Hex(text) {
+    if (!text) return '';
+    const cleanText = text.trim().toLowerCase();
+    const encoder = new TextEncoder();
+    const data = encoder.encode(cleanText);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function sendLinkedInConversionEvent(data, env) {
+    const accessToken = env.LINKEDIN_ACCESS_TOKEN;
+    if (!accessToken) {
+        console.warn('[LinkedIn CAPI] LINKEDIN_ACCESS_TOKEN not set in environment.');
+        return { success: false, error: 'LINKEDIN_ACCESS_TOKEN not configured in Worker' };
+    }
+
+    const { email, phone, name, eventName, liFatId, conversionValue } = data;
+
+    const userIds = [];
+    if (email) {
+        const hashedEmail = await sha256Hex(email);
+        userIds.push({
+            idType: 'SHA256_EMAIL',
+            idValue: hashedEmail
+        });
+    }
+    if (phone) {
+        const cleanPhone = phone.replace(/\D/g, '');
+        if (cleanPhone) {
+            const hashedPhone = await sha256Hex(cleanPhone);
+            userIds.push({
+                idType: 'SHA256_PHONE',
+                idValue: hashedPhone
+            });
+        }
+    }
+    if (liFatId) {
+        userIds.push({
+            idType: 'LINKEDIN_FIRST_PARTY_ADS_TRACKING_UUID',
+            idValue: liFatId
+        });
+    }
+
+    let firstName = '';
+    let lastName = '';
+    if (name) {
+        const parts = name.trim().split(/\s+/);
+        firstName = parts[0] || '';
+        lastName = parts.slice(1).join(' ') || '';
+    }
+
+    const payload = {
+        conversionHappenedAt: Date.now(),
+        conversionValue: {
+            currencyCode: 'USD',
+            amount: conversionValue || '0.00'
+        },
+        user: {
+            userIds: userIds,
+            userInfo: {
+                firstName: firstName,
+                lastName: lastName
+            }
+        }
+    };
+
+    try {
+        const res = await fetch('https://api.linkedin.com/rest/conversionEvents', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'LinkedIn-Version': '202401',
+                'X-Restli-Protocol-Version': '2.0.0',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const resText = await res.text();
+        let resJson = {};
+        try { resJson = JSON.parse(resText); } catch (e) {}
+
+        if (res.ok || res.status === 201) {
+            console.log('[LinkedIn CAPI] Event logged successfully:', res.status);
+            return { success: true, status: res.status, data: resJson };
+        } else {
+            console.error('[LinkedIn CAPI] API status error:', res.status, resText);
+            return { success: false, status: res.status, message: resText };
+        }
+    } catch (err) {
+        console.error('[LinkedIn CAPI] Event transmission failed:', err);
+        return { success: false, error: err.message };
+    }
+}
+
 

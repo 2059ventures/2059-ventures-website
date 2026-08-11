@@ -812,6 +812,16 @@
                 });
 
                 if (response.ok) {
+                    // Trigger LinkedIn CAPI Event
+                    if (window.trackLinkedInConversion) {
+                        window.trackLinkedInConversion('IntakeSubmission', {
+                            email: payload.email || formData.get("referrerEmail") || "",
+                            phone: payload.phone || formData.get("referrerPhone") || "",
+                            name: payload.fullName || "",
+                            company: payload.referralAgency || ""
+                        });
+                    }
+
                     // Clear draft on success
                     localStorage.removeItem("2059_intake_draft");
                     
@@ -838,6 +848,7 @@
             }
         }
     </script>
+    <script src="js/linkedin-tracker.js" defer></script>
     <!-- Telnyx Voice AI Harry Widget -->
     <script src="js/harry-widget.js" defer></script>
 </body>

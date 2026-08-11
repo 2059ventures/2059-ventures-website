@@ -1,0 +1,81 @@
+/**
+ * linkedin-tracker.js — 20/59 Ventures LinkedIn Conversions & Attribution Tracker
+ * 
+ * Captures LinkedIn ad click ID (li_fat_id) from URL and provides helper to dispatch
+ * server-side conversion events via Cloudflare Worker CAPI endpoint.
+ */
+
+(function () {
+    'use strict';
+
+    // ── 1. Capture & Persist LinkedIn Click ID (li_fat_id) ──────────────────
+    function initLinkedInTracking() {
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const liFatId = urlParams.get('li_fat_id');
+            if (liFatId) {
+                localStorage.setItem('2059_li_fat_id', liFatId);
+                // Also set first-party cookie valid for 30 days
+                const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+                document.cookie = `li_fat_id=${encodeURIComponent(liFatId)}; expires=${expires}; path=/; SameSite=Lax`;
+            }
+        } catch (e) {
+            console.warn('[LinkedIn Tracker] Storage access restricted:', e);
+        }
+    }
+
+    // ── 2. Retrieve Stored Click ID ──────────────────────────────────────────
+    function getLiFatId() {
+        try {
+            const fromStorage = localStorage.getItem('2059_li_fat_id');
+            if (fromStorage) return fromStorage;
+
+            const match = document.cookie.match(/(?:^|; )li_fat_id=([^;]*)/);
+            return match ? decodeURIComponent(match[1]) : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    // ── 3. Dispatch Conversion to Cloudflare Worker ────────────────────────
+    async function trackLinkedInConversion(eventName, userData = {}) {
+        try {
+            const liFatId = getLiFatId();
+            const payload = {
+                eventName: eventName || 'Lead',
+                timestamp: Date.now(),
+                url: window.location.href,
+                liFatId: liFatId,
+                email: userData.email || '',
+                phone: userData.phone || '',
+                name: userData.name || '',
+                company: userData.company || '',
+                conversionValue: userData.value || '0.00'
+            };
+
+            const response = await fetch('/api/linkedin-conversion', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const resData = await response.json();
+            console.log('[LinkedIn Tracker] Conversion dispatch result:', resData);
+            return resData;
+        } catch (err) {
+            console.error('[LinkedIn Tracker] Conversion dispatch error:', err);
+            return { error: err.message };
+        }
+    }
+
+    // Export globally
+    window.trackLinkedInConversion = trackLinkedInConversion;
+    window.getLiFatId = getLiFatId;
+
+    // Run on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLinkedInTracking);
+    } else {
+        initLinkedInTracking();
+    }
+})();
