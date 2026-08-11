@@ -34,11 +34,7 @@ export default {
 
         // ── Handle Harry Lead Email Alert Proxy (via Resend) ───────────────
         if (request.method === 'POST' && url.pathname === '/api/lead') {
-            return fetch('https://voice.iamalgo.com/api/harry/lead', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: await request.text()
-            });
+            return handleHarryLead(request, env);
         }
 
         // ── Serve static assets (with cache-busting for widget JS) ─────────
@@ -188,3 +184,71 @@ function jsonResponse(data, status = 200) {
         headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }
     });
 }
+
+async function handleHarryLead(request, env) {
+    try {
+        const body = await request.json();
+        const { name, phone, email, leadType, inquiry, transcript, timestamp } = body;
+        const resendKey = env.RESEND_API_KEY;
+
+        const leadCategory = leadType || 'General Housing Inquiry';
+        const leadTime = timestamp || new Date().toLocaleString();
+
+        const htmlContent = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background-color: #ffffff;">
+            <div style="background-color: #1e3a8a; color: #ffffff; padding: 24px; text-align: center;">
+              <h2 style="margin: 0; font-size: 22px;">20/59 Ventures • New Lead Alert</h2>
+              <p style="margin: 6px 0 0 0; color: #93c5fd; font-size: 14px;">Captured by Harry AI Assistant</p>
+            </div>
+            <div style="padding: 24px;">
+              <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
+                <span style="display: inline-block; background-color: #dbeafe; color: #1e40af; font-size: 12px; font-weight: bold; padding: 4px 10px; border-radius: 12px; text-transform: uppercase; margin-bottom: 12px;">
+                  ${leadCategory}
+                </span>
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Applicant:</td><td style="padding: 6px 0; color: #0f172a; font-weight: bold;">${name}</td></tr>
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Phone:</td><td style="padding: 6px 0; color: #0f172a;">${phone || 'N/A'}</td></tr>
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Email:</td><td style="padding: 6px 0; color: #0f172a;">${email || 'N/A'}</td></tr>
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Details:</td><td style="padding: 6px 0; color: #0f172a;">${inquiry || 'Housing / Placement Inquiry'}</td></tr>
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Timestamp:</td><td style="padding: 6px 0; color: #64748b;">${leadTime}</td></tr>
+                </table>
+              </div>
+              ${transcript ? `
+                <div>
+                  <h4 style="margin: 0 0 10px 0; color: #1e293b;">Session Transcript:</h4>
+                  <div style="background-color: #f1f5f9; border-left: 4px solid #2563eb; padding: 14px; border-radius: 4px; font-size: 13px; color: #334155; white-space: pre-wrap;">${transcript}</div>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+
+        const recipients = ['qruffin@iamalgo.com', 'qruffin@2059ventures.online', 'info@2059ventures.online'];
+
+        for (const to of recipients) {
+            try {
+                await fetch('https://api.resend.com/emails', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${resendKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        from: 'onboarding@resend.dev',
+                        to: [to],
+                        subject: `[Harry AI Lead] ${leadCategory} - ${name}`,
+                        html: htmlContent
+                    })
+                });
+            } catch (e) {
+                console.error('[Harry Lead] Single recipient email dispatch warning:', e);
+            }
+        }
+
+        return jsonResponse({ success: true, message: 'Lead email alert dispatched successfully' }, 200);
+    } catch (err) {
+        console.error('[Harry Lead] Worker error:', err);
+        return jsonResponse({ error: err.message }, 500);
+    }
+}
+
