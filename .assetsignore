@@ -1,9 +1,14 @@
-﻿# Exclude git internals
+# Exclude git internals
 .git/
 .gitignore
 
 # Exclude Cloudflare/Wrangler internals
 .wrangler/
+wrangler.jsonc
+
+# Exclude Worker source files (not for public download)
+_worker.js
+functions/
 
 # Exclude non-web source files
 *.odt

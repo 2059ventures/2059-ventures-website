@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "2059-ventures",
+  "main": "_worker.js",
   "compatibility_date": "2026-07-28",
   "observability": {
     "enabled": true
@@ -17,3 +18,4 @@
     "nodejs_compat"
   ]
 }
+
