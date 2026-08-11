@@ -13,11 +13,12 @@
         assistantId: 'assistant-a13e9614-4795-4962-b7e2-abdcba418c12',
         // WebSocket URL used ONLY for authenticated voice calls (requires backend-issued token)
         wsUrl: 'wss://api.telnyx.com/v2/ai/assistants/assistant-a13e9614-4795-4962-b7e2-abdcba418c12/conversation?input_sample_rate=16000&output_sample_rate=24000',
-        // Backend chat proxy — handles auth server-side, safe to call from browser
-        apiChatUrl: 'https://voice.iamalgo.com/api/harry/chat',
+        // Cloudflare Pages Function at /api/chat — same-origin, reads TELNYX_API_KEY from CF secrets
+        apiChatUrl: '/api/chat',
         deskPhone: '+18889192059',
         targetSampleRate: 16000
     };
+
 
     // State Variables
     let currentMode = 'text'; // 'text' (default, free/low cost) or 'voice'
