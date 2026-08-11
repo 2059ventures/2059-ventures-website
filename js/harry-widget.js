@@ -287,18 +287,26 @@
                     localStorage.setItem('harry_conv_id', data.conversationId);
                 }
                 const replyText = data.content || data.reply || "Thank you for your message!";
+                // Replace the temporary '...' with Harry's response
+                currentAssistantText = '';
                 updateAssistantTranscript(replyText);
                 updateStatus('Ready', 'online');
             } else {
+                currentAssistantText = '';
                 updateAssistantTranscript("I'm sorry, I'm having trouble connecting to the network right now. Please feel free to use the Lead Form or call our desk phone.");
                 updateStatus('Connection Error', '');
             }
         } catch (err) {
             console.error('Chat API Error:', err);
+            currentAssistantText = '';
             updateAssistantTranscript("I encountered a connection error. Please try again or reach out directly using the Lead Form below.");
             updateStatus('Connection Error', '');
+        } finally {
+            currentAssistantBubble = null;
+            currentAssistantText = '';
         }
     }
+
 
     // =========================================================================
     // 2. Audio Recording & WebSocket Voice Engine
