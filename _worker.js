@@ -23,13 +23,22 @@ export default {
         const url = new URL(request.url);
 
         // ── Handle CORS preflight ──────────────────────────────────────────
-        if (request.method === 'OPTIONS' && url.pathname === '/api/chat') {
+        if (request.method === 'OPTIONS' && (url.pathname === '/api/chat' || url.pathname === '/api/lead')) {
             return new Response(null, { status: 204, headers: CORS_HEADERS });
         }
 
         // ── Handle Harry AI Chat Proxy ─────────────────────────────────────
         if (request.method === 'POST' && url.pathname === '/api/chat') {
             return handleHarryChat(request, env);
+        }
+
+        // ── Handle Harry Lead Email Alert Proxy (via Resend) ───────────────
+        if (request.method === 'POST' && url.pathname === '/api/lead') {
+            return fetch('https://voice.iamalgo.com/api/harry/lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: await request.text()
+            });
         }
 
         // ── Serve static assets (with cache-busting for widget JS) ─────────

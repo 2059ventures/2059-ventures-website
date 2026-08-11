@@ -719,35 +719,38 @@
     }
 
     function sendEmailNotification(leadData) {
-        const formData = new FormData();
-        formData.append('_subject', `[Harry AI Lead] ${leadData.leadType || 'Housing Lead'} - ${leadData.name}`);
-        formData.append('_template', 'table');
-        formData.append('_captcha', 'false');
-        formData.append('_cc', 'qruffin@2059ventures.online,info@2059ventures.online');
-        formData.append('Name', leadData.name);
-        formData.append('Phone', leadData.phone || 'N/A');
-        formData.append('Email', leadData.email || 'N/A');
-        formData.append('Lead_Type', leadData.leadType || 'Direct Inquiry');
-        formData.append('Inquiry_Details', leadData.inquiry || 'Housing / Placement Request');
-        formData.append('Timestamp', leadData.timestamp);
-        formData.append('Conversation_Transcript', leadData.transcript || 'No transcript text');
-
-        fetch('https://formsubmit.co/ajax/intake@2059ventures.online', {
+        // 1. Primary Dispatch: Direct Resend API via /api/lead (Instant Enterprise Delivery)
+        fetch('/api/lead', {
             method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(leadData)
         })
         .then(res => res.json())
         .then(data => {
-            console.log('Email dispatched to intake@2059ventures.online & team:', data);
+            console.log('[Harry Lead] Resend email dispatched:', data);
         })
         .catch(err => {
-            console.warn('Primary email dispatch notice:', err);
-            fetch('https://formspree.io/f/meolndzb', {
+            console.warn('[Harry Lead] Primary Resend dispatch error, using fallback:', err);
+            
+            // 2. Secondary Fallback: FormSubmit
+            const formData = new FormData();
+            formData.append('_subject', `[Harry AI Lead] ${leadData.leadType || 'Housing Lead'} - ${leadData.name}`);
+            formData.append('_template', 'table');
+            formData.append('_captcha', 'false');
+            formData.append('_cc', 'qruffin@2059ventures.online,info@2059ventures.online');
+            formData.append('Name', leadData.name);
+            formData.append('Phone', leadData.phone || 'N/A');
+            formData.append('Email', leadData.email || 'N/A');
+            formData.append('Lead_Type', leadData.leadType || 'Direct Inquiry');
+            formData.append('Inquiry_Details', leadData.inquiry || 'Housing / Placement Request');
+            formData.append('Timestamp', leadData.timestamp);
+            formData.append('Conversation_Transcript', leadData.transcript || 'No transcript text');
+
+            fetch('https://formsubmit.co/ajax/intake@2059ventures.online', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(leadData)
-            }).catch(e => console.error('Formspree fallback error:', e));
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            }).catch(e => console.error('FormSubmit fallback error:', e));
         });
     }
 
