@@ -11,8 +11,10 @@
 
     const CONFIG = {
         assistantId: 'assistant-a13e9614-4795-4962-b7e2-abdcba418c12',
+        // WebSocket URL used ONLY for authenticated voice calls (requires backend-issued token)
         wsUrl: 'wss://api.telnyx.com/v2/ai/assistants/assistant-a13e9614-4795-4962-b7e2-abdcba418c12/conversation?input_sample_rate=16000&output_sample_rate=24000',
-        apiChatUrl: '/api/chat',
+        // Backend chat proxy — handles auth server-side, safe to call from browser
+        apiChatUrl: 'https://voice.iamalgo.com/api/harry/chat',
         deskPhone: '+18889192059',
         targetSampleRate: 16000
     };
@@ -176,7 +178,8 @@
         document.getElementById('harry-agent-btn').addEventListener('click', connectToDeskPhone);
 
         initCanvasVisualizer();
-        connectWebSocketConnectionIfNeeded();
+        // Note: WebSocket connection is only established on voice call start.
+        // Text chat always uses the HTTP proxy (apiChatUrl) to avoid auth errors.
     }
 
     function toggleModal() {
@@ -257,30 +260,9 @@
         // Prepare assistant response bubble
         prepareAssistantBubble();
 
-        // Ensure WebSocket connection is initialized
-        connectWebSocketConnectionIfNeeded();
-
-        const sendWsTurn = () => {
-            updateStatus('Harry is thinking...', 'connecting');
-            ws.send(JSON.stringify({
-                type: 'conversation.item.create',
-                item: {
-                    type: 'message',
-                    role: 'user',
-                    content: [{ type: 'input_text', text: text }]
-                }
-            }));
-            ws.send(JSON.stringify({ type: 'response.create' }));
-        };
-
-        if (ws && ws.readyState === WebSocket.OPEN) {
-            sendWsTurn();
-        } else if (ws && ws.readyState === WebSocket.CONNECTING) {
-            ws.addEventListener('open', sendWsTurn, { once: true });
-        } else {
-            // Fallback to HTTP API proxy
-            sendChatMessageToApi(text);
-        }
+        // Text chat always uses the secure HTTP proxy (WebSocket requires API key auth
+        // which cannot be exposed in the browser). Voice mode uses WebSocket separately.
+        sendChatMessageToApi(text);
     }
 
     async function sendChatMessageToApi(text) {
