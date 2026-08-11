@@ -37,9 +37,10 @@ export default {
             return handleHarryLead(request, env);
         }
 
-        // ── Serve static assets (with cache-busting for widget JS) ─────────
+        // ── Serve static assets (with cache-busting for HTML, CSS, JS) ──────
         const assetResponse = await env.ASSETS.fetch(request);
-        if (url.pathname.includes('harry-widget.js')) {
+        const path = url.pathname.toLowerCase();
+        if (path === '/' || path.endsWith('.html') || path.endsWith('.css') || path.endsWith('.js') || path.includes('harry-widget')) {
             const newHeaders = new Headers(assetResponse.headers);
             newHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
             newHeaders.set('Pragma', 'no-cache');
