@@ -225,27 +225,24 @@ async function handleHarryLead(request, env) {
 
         const recipients = ['qruffin@iamalgo.com', 'qruffin@2059ventures.online', 'info@2059ventures.online'];
 
-        for (const to of recipients) {
-            try {
-                await fetch('https://api.resend.com/emails', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${resendKey}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        from: 'onboarding@resend.dev',
-                        to: [to],
-                        subject: `[Harry AI Lead] ${leadCategory} - ${name}`,
-                        html: htmlContent
-                    })
-                });
-            } catch (e) {
-                console.error('[Harry Lead] Single recipient email dispatch warning:', e);
-            }
-        }
+        const resendRes = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${resendKey}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                from: 'Harry AI Lead Alert <harry@purposehomes.limyefoundation.org>',
+                to: recipients,
+                subject: `[Harry AI Lead] ${leadCategory} - ${name}`,
+                html: htmlContent
+            })
+        });
 
-        return jsonResponse({ success: true, message: 'Lead email alert dispatched successfully' }, 200);
+        const resendData = await resendRes.json();
+        console.log('[Harry Lead] Resend API Response:', resendData);
+
+        return jsonResponse({ success: true, message: 'Lead email alert dispatched successfully', resend: resendData }, 200);
     } catch (err) {
         console.error('[Harry Lead] Worker error:', err);
         return jsonResponse({ error: err.message }, 500);
