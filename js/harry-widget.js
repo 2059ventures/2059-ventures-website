@@ -11,7 +11,7 @@
 
     const CONFIG = {
         assistantId: 'assistant-a13e9614-4795-4962-b7e2-abdcba418c12',
-        wsUrl: 'wss://api.telnyx.com/v2/ai/assistants/assistant-a13e9614-4795-4962-b7e2-abdcba418c12/conversation',
+        wsUrl: 'wss://api.telnyx.com/v2/ai/assistants/assistant-a13e9614-4795-4962-b7e2-abdcba418c12/conversation?input_sample_rate=16000&output_sample_rate=24000',
         apiChatUrl: '/api/chat',
         deskPhone: '+18889192059',
         targetSampleRate: 16000
@@ -257,8 +257,30 @@
         // Prepare assistant response bubble
         prepareAssistantBubble();
 
-        // Send via HTTP API proxy
-        sendChatMessageToApi(text);
+        // Ensure WebSocket connection is initialized
+        connectWebSocketConnectionIfNeeded();
+
+        const sendWsTurn = () => {
+            updateStatus('Harry is thinking...', 'connecting');
+            ws.send(JSON.stringify({
+                type: 'conversation.item.create',
+                item: {
+                    type: 'message',
+                    role: 'user',
+                    content: [{ type: 'input_text', text: text }]
+                }
+            }));
+            ws.send(JSON.stringify({ type: 'response.create' }));
+        };
+
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            sendWsTurn();
+        } else if (ws && ws.readyState === WebSocket.CONNECTING) {
+            ws.addEventListener('open', sendWsTurn, { once: true });
+        } else {
+            // Fallback to HTTP API proxy
+            sendChatMessageToApi(text);
+        }
     }
 
     async function sendChatMessageToApi(text) {
