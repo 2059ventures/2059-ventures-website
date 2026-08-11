@@ -23,7 +23,7 @@ export default {
         const url = new URL(request.url);
 
         // ── Handle CORS preflight ──────────────────────────────────────────
-        if (request.method === 'OPTIONS' && (url.pathname === '/api/chat' || url.pathname === '/api/lead' || url.pathname === '/api/linkedin-conversion')) {
+        if (request.method === 'OPTIONS' && (url.pathname === '/api/chat' || url.pathname === '/api/lead' || url.pathname === '/api/linkedin-conversion' || url.pathname === '/api/linkedin-lead-webhook')) {
             return new Response(null, { status: 204, headers: CORS_HEADERS });
         }
 
@@ -40,6 +40,11 @@ export default {
         // ── Handle LinkedIn Conversions API ────────────────────────────────
         if (request.method === 'POST' && url.pathname === '/api/linkedin-conversion') {
             return handleLinkedInConversion(request, env);
+        }
+
+        // ── Handle LinkedIn Lead Webhook ───────────────────────────────────
+        if (url.pathname === '/api/linkedin-lead-webhook') {
+            return handleLinkedInLeadWebhook(request, env);
         }
 
         // ── Serve static assets (with cache-busting for HTML, CSS, JS) ──────
@@ -375,5 +380,63 @@ async function sendLinkedInConversionEvent(data, env) {
         return { success: false, error: err.message };
     }
 }
+
+// ── LinkedIn Lead Webhook Handler (Organic & Paid Lead Gen Integration) ────
+async function handleLinkedInLeadWebhook(request, env) {
+    try {
+        const resendKey = env.RESEND_API_KEY;
+        const body = await request.json().catch(() => ({}));
+        
+        console.log('[LinkedIn Webhook] Inbound Lead Data:', JSON.stringify(body));
+
+        const name = body.name || body.fullName || body.firstName ? `${body.firstName || ''} ${body.lastName || ''}`.trim() : 'LinkedIn Lead';
+        const email = body.email || body.emailAddress || 'N/A';
+        const phone = body.phone || body.phoneNumber || 'N/A';
+        const organization = body.company || body.organization || 'N/A';
+        const leadCategory = body.leadCategory || 'LinkedIn Inquiry / Referral';
+
+        if (resendKey) {
+            const htmlContent = `
+              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background-color: #ffffff;">
+                <div style="background-color: #0077b5; color: #ffffff; padding: 24px; text-align: center;">
+                  <h2 style="margin: 0; font-size: 22px;">20/59 Ventures • LinkedIn Lead Alert</h2>
+                  <p style="margin: 6px 0 0 0; color: #e0f2fe; font-size: 14px;">Captured via LinkedIn Webhook Integration</p>
+                </div>
+                <div style="padding: 24px;">
+                  <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                      <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Lead Name:</td><td style="padding: 6px 0; color: #0f172a; font-weight: bold;">${name}</td></tr>
+                      <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Phone:</td><td style="padding: 6px 0; color: #0f172a;">${phone}</td></tr>
+                      <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Email:</td><td style="padding: 6px 0; color: #0f172a;">${email}</td></tr>
+                      <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Organization:</td><td style="padding: 6px 0; color: #0f172a;">${organization}</td></tr>
+                      <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Timestamp:</td><td style="padding: 6px 0; color: #64748b;">${new Date().toLocaleString()}</td></tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            `;
+
+            await fetch('https://api.resend.com/emails', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${resendKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    from: 'LinkedIn Lead Alert <harry@purposehomes.limyefoundation.org>',
+                    to: ['qruffin@2059ventures.online', 'andrea.marcus@2059ventures.online', 'info@2059ventures.online'],
+                    subject: `[LinkedIn Lead] ${leadCategory} - ${name}`,
+                    html: htmlContent
+                })
+            });
+        }
+
+        return jsonResponse({ success: true, message: 'LinkedIn lead webhook processed' }, 200);
+    } catch (err) {
+        console.error('[LinkedIn Webhook] Error:', err);
+        return jsonResponse({ error: err.message }, 500);
+    }
+}
+
 
 

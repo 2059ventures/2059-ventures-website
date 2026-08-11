@@ -1,8 +1,9 @@
 /**
  * linkedin-tracker.js — 20/59 Ventures LinkedIn Conversions & Attribution Tracker
  * 
- * Captures LinkedIn ad click ID (li_fat_id) from URL and provides helper to dispatch
- * server-side conversion events via Cloudflare Worker CAPI endpoint.
+ * 1. Captures LinkedIn ad click ID (li_fat_id) from URL and stores in first-party storage.
+ * 2. Dispatches server-side conversion events via Cloudflare Worker CAPI endpoint.
+ * 3. Supports LinkedIn Insight Tag for building retargeting audiences at $0 cost.
  */
 
 (function () {
@@ -15,16 +16,36 @@
             const liFatId = urlParams.get('li_fat_id');
             if (liFatId) {
                 localStorage.setItem('2059_li_fat_id', liFatId);
-                // Also set first-party cookie valid for 30 days
                 const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
                 document.cookie = `li_fat_id=${encodeURIComponent(liFatId)}; expires=${expires}; path=/; SameSite=Lax`;
             }
         } catch (e) {
             console.warn('[LinkedIn Tracker] Storage access restricted:', e);
         }
+
+        // Initialize LinkedIn Insight Tag loader
+        initLinkedInInsightTag();
     }
 
-    // ── 2. Retrieve Stored Click ID ──────────────────────────────────────────
+    // ── 2. LinkedIn Insight Tag Audience Builder ─────────────────────────────
+    function initLinkedInInsightTag() {
+        if (window._linkedin_partner_id) {
+            window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+            window._linkedin_data_partner_ids.push(window._linkedin_partner_id);
+
+            if (!document.getElementById('linkedin-insight-script')) {
+                const s = document.getElementsByTagName('script')[0];
+                const b = document.createElement('script');
+                b.id = 'linkedin-insight-script';
+                b.type = 'text/javascript';
+                b.async = true;
+                b.src = 'https://snap.licdn.com/li.lms-analytics/insight.min.js';
+                s.parentNode.insertBefore(b, s);
+            }
+        }
+    }
+
+    // ── 3. Retrieve Stored Click ID ──────────────────────────────────────────
     function getLiFatId() {
         try {
             const fromStorage = localStorage.getItem('2059_li_fat_id');
@@ -37,7 +58,7 @@
         }
     }
 
-    // ── 3. Dispatch Conversion to Cloudflare Worker ────────────────────────
+    // ── 4. Dispatch Conversion to Cloudflare Worker CAPI ───────────────────
     async function trackLinkedInConversion(eventName, userData = {}) {
         try {
             const liFatId = getLiFatId();
@@ -71,6 +92,7 @@
     // Export globally
     window.trackLinkedInConversion = trackLinkedInConversion;
     window.getLiFatId = getLiFatId;
+    window.initLinkedInInsightTag = initLinkedInInsightTag;
 
     // Run on load
     if (document.readyState === 'loading') {
