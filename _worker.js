@@ -30,7 +30,7 @@ export default {
         const url = new URL(request.url);
 
         // ── Handle CORS preflight ──────────────────────────────────────────
-        if (request.method === 'OPTIONS' && (url.pathname === '/api/chat' || url.pathname === '/api/lead' || url.pathname === '/api/linkedin-conversion' || url.pathname === '/api/linkedin-lead-webhook')) {
+        if (request.method === 'OPTIONS' && (url.pathname === '/api/chat' || url.pathname === '/api/lead' || url.pathname === '/api/intake-upload' || url.pathname === '/api/linkedin-conversion' || url.pathname === '/api/linkedin-lead-webhook')) {
             return new Response(null, { status: 204, headers: CORS_HEADERS });
         }
 
@@ -42,6 +42,11 @@ export default {
         // ── Handle Harry Lead Email Alert Proxy (via Resend) ───────────────
         if (request.method === 'POST' && url.pathname === '/api/lead') {
             return handleHarryLead(request, env);
+        }
+
+        // ── Handle Scanned Intake Document Upload ─────────────────────
+        if (request.method === 'POST' && url.pathname === '/api/intake-upload') {
+            return handleIntakeUpload(request, env);
         }
 
         // ── Handle LinkedIn Conversions API ────────────────────────────────

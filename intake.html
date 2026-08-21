@@ -352,6 +352,37 @@
                 <i class="fas fa-shield-alt" style="color: var(--logo-green); font-size: 14px;"></i>
                 <span><strong>HIPAA Compliant &amp; 256-Bit Encrypted Transmission</strong> | Client Data Protected</span>
             </div>
+            
+            <!-- Intake Mode Switcher & Download Hub -->
+            <div class="intake-hub-card" style="background: #ffffff; border: 1px solid rgba(74, 124, 89, 0.18); border-radius: 20px; padding: 24px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid #edf2ee; padding-bottom: 18px; margin-bottom: 18px;">
+                    <div style="flex: 1; min-width: 260px;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                            <i class="fas fa-file-signature" style="color: var(--logo-green); font-size: 20px;"></i>
+                            <h3 style="margin: 0; font-size: 16.5px; color: var(--black); font-weight: 700;">Participant Intake &amp; Enrollment Options</h3>
+                        </div>
+                        <p style="margin: 0; font-size: 13.5px; color: var(--gray-dark); line-height: 1.45;">
+                            Choose to complete the secure digital form online, or download the printable 4-page paper packet for in-person client interviews.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="pdf/SOP-2059-FORM-005-Participant-Intake-Application.pdf" download="SOP-2059-FORM-005-Participant-Intake-Application.pdf" target="_blank" style="background: #eef7f0; color: var(--logo-dark-green); border: 1px solid rgba(74, 124, 89, 0.35); padding: 10px 16px; border-radius: 10px; font-size: 13.5px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease;">
+                            <i class="fas fa-download"></i> Download Blank PDF (SOP-005)
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tab Navigation Buttons -->
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button type="button" id="tabBtnOnline" onclick="switchIntakeTab('online')" style="flex: 1; min-width: 200px; padding: 12px 18px; border-radius: 12px; border: 2px solid var(--logo-green); background: var(--logo-green); color: #ffffff; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease;">
+                        <i class="fas fa-laptop"></i> 1. Online Form Wizard
+                    </button>
+                    <button type="button" id="tabBtnUpload" onclick="switchIntakeTab('upload')" style="flex: 1; min-width: 200px; padding: 12px 18px; border-radius: 12px; border: 2px solid rgba(74, 124, 89, 0.2); background: #ffffff; color: var(--text-dark); font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease;">
+                        <i class="fas fa-cloud-upload-alt"></i> 2. Upload Completed Paper Form (Scan / Photo)
+                    </button>
+                </div>
+            </div>
+
             <div class="progress-wizard">
                 <div class="progress-bar-fill" id="progress-bar-fill"></div>
                 <div class="wizard-step active" id="step-node-1">
@@ -592,6 +623,91 @@
                     <div class="wizard-buttons">
                         <button type="button" class="btn-nav btn-prev" id="btnPrev" onclick="navigateStep(-1)" style="visibility: hidden;"><i class="fas fa-chevron-left"></i> Previous</button>
                         <button type="button" class="btn-nav btn-next" id="btnNext" onclick="navigateStep(1)">Next <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Upload Scanned Intake Form Card -->
+            <div class="form-card" id="uploadFormCard" style="display: none;">
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <div style="width: 60px; height: 60px; background: #eef7f0; color: var(--logo-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px;">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <h2 class="step-title" style="border: none; padding: 0; margin-bottom: 8px;">Upload Completed Intake Application</h2>
+                    <p class="step-desc" style="margin-bottom: 0;">Have a signed paper packet (SOP-2059-FORM-005) or scanned PDF? Upload it directly below for immediate review by placement coordinators.</p>
+                </div>
+
+                <form id="uploadIntakeForm" onsubmit="handleFileUploadSubmit(event)">
+                    <div class="form-grid-2">
+                        <div class="form-field">
+                            <label for="uploadReferrerName">Referring Coordinator / Case Manager Name *</label>
+                            <input type="text" id="uploadReferrerName" name="uploadReferrerName" required placeholder="Officer Jane Smith">
+                        </div>
+                        <div class="form-field">
+                            <label for="uploadAgencyName">Referring Agency / Hospital / Organization *</label>
+                            <input type="text" id="uploadAgencyName" name="uploadAgencyName" required placeholder="Tuscaloosa VA, Salvation Army, etc.">
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-field">
+                            <label for="uploadReferrerEmail">Coordinator Email Address *</label>
+                            <input type="email" id="uploadReferrerEmail" name="uploadReferrerEmail" required placeholder="worker@agency.org">
+                        </div>
+                        <div class="form-field">
+                            <label for="uploadReferrerPhone">Coordinator Phone Number *</label>
+                            <input type="tel" id="uploadReferrerPhone" name="uploadReferrerPhone" required placeholder="(555) 555-5557">
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-field">
+                            <label for="uploadClientName">Participant Full Name *</label>
+                            <input type="text" id="uploadClientName" name="uploadClientName" required placeholder="John Doe">
+                        </div>
+                        <div class="form-field">
+                            <label for="uploadClientDob">Participant Date of Birth *</label>
+                            <input type="date" id="uploadClientDob" name="uploadClientDob" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="uploadNotes">Care Logistics / Housing Placement Notes (Optional)</label>
+                        <textarea id="uploadNotes" name="uploadNotes" rows="3" placeholder="Add any urgency notes, voucher details (HUD-VASH), NEMT transport requirements, or placement timeline."></textarea>
+                    </div>
+
+                    <!-- File Dropzone -->
+                    <div class="form-field">
+                        <label>Completed Application Document (PDF, Scanned Images, or Photos) *</label>
+                        <div id="dropzoneContainer" style="border: 2px dashed rgba(74, 124, 89, 0.4); border-radius: 14px; background: #fafdfa; padding: 30px 20px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+                            <input type="file" id="intakeFileInput" name="intakeFile" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" required style="display: none;" onchange="handleFileSelected(this)">
+                            <div id="dropzonePrompt">
+                                <i class="fas fa-cloud-upload-alt" style="font-size: 40px; color: var(--logo-green); margin-bottom: 12px; display: block;"></i>
+                                <p style="font-weight: 600; color: var(--black); margin-bottom: 4px;">Click or Drag &amp; Drop Your Completed File Here</p>
+                                <span style="font-size: 13px; color: var(--gray-medium);">Supports PDF, PNG, JPG, or DOCX (Max 25 MB)</span>
+                            </div>
+                            <div id="fileSelectedDisplay" style="display: none; align-items: center; justify-content: center; gap: 12px; padding: 10px; background: #ffffff; border-radius: 8px; border: 1px solid rgba(74,124,89,0.2);">
+                                <i class="fas fa-file-check" style="color: var(--logo-green); font-size: 24px;"></i>
+                                <div style="text-align: left;">
+                                    <div id="fileNameText" style="font-weight: 600; font-size: 14px; color: var(--black);">document.pdf</div>
+                                    <div id="fileSizeText" style="font-size: 12px; color: var(--gray-medium);">1.2 MB</div>
+                                </div>
+                                <button type="button" onclick="clearSelectedFile(event)" style="background: none; border: none; color: #c0392b; cursor: pointer; margin-left: 15px; font-size: 14px;"><i class="fas fa-trash-alt"></i> Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #f8fcf9; border: 1px solid rgba(74,124,89,0.15); border-radius:12px; padding:16px; margin:20px 0;">
+                        <label class="checkbox-item" style="display: flex; align-items: flex-start; gap: 10px; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="uploadConsent" id="uploadConsent" required style="margin-top: 3px; cursor: pointer;">
+                            <span style="font-size: 13px; color: var(--text-dark); line-height: 1.4;">I certify that the attached document is an authentic participant referral with client authorization to coordinate housing placement. *</span>
+                        </label>
+                    </div>
+
+                    <div style="text-align: right; margin-top: 25px;">
+                        <button type="submit" id="btnSubmitUpload" class="btn-nav btn-next" style="display: inline-flex; width: auto; padding: 14px 32px; font-size: 15px;">
+                            Submit Completed Document <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+                        </button>
                     </div>
                 </form>
             </div>
