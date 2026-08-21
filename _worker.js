@@ -18,6 +18,13 @@ const CORS_HEADERS = {
     'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+const SECURITY_HEADERS = {
+    'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'SAMEORIGIN',
+    'Referrer-Policy': 'strict-origin-when-cross-origin'
+};
+
 export default {
     async fetch(request, env, ctx) {
         const url = new URL(request.url);
@@ -192,7 +199,7 @@ async function handleHarryChat(request, env) {
 function jsonResponse(data, status = 200) {
     return new Response(JSON.stringify(data), {
         status,
-        headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }
+        headers: { ...CORS_HEADERS, ...SECURITY_HEADERS, 'Content-Type': 'application/json' }
     });
 }
 

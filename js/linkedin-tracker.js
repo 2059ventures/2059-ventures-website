@@ -9,6 +9,14 @@
 (function () {
     'use strict';
 
+    // --- HIPAA SAFETY CHECK: Exclude intake/patient data pages ---
+    const currentPath = (window.location.pathname || '').toLowerCase();
+    if (currentPath.includes('intake') || currentPath.includes('referral') || currentPath.includes('patient')) {
+        console.info('[LinkedIn Tracker] Tracking disabled on intake/HIPAA sensitive routes.');
+        return;
+    }
+
+
     // ── 1. Capture & Persist LinkedIn Click ID (li_fat_id) ──────────────────
     function initLinkedInTracking() {
         try {

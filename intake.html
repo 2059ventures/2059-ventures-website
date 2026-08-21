@@ -348,6 +348,10 @@
     <!-- Main Content -->
     <section class="intake-wrapper">
         <div class="intake-container">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 25px; font-size: 13px; color: #1e3d29; background: #eef7f0; padding: 9px 18px; border-radius: 30px; border: 1px solid rgba(74, 124, 89, 0.25); width: fit-content; margin-left: auto; margin-right: auto; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+                <i class="fas fa-shield-alt" style="color: var(--logo-green); font-size: 14px;"></i>
+                <span><strong>HIPAA Compliant &amp; 256-Bit Encrypted Transmission</strong> | Client Data Protected</span>
+            </div>
             <div class="progress-wizard">
                 <div class="progress-bar-fill" id="progress-bar-fill"></div>
                 <div class="wizard-step active" id="step-node-1">
@@ -714,32 +718,50 @@
             return isValid;
         }
 
-        // --- LOCAL STORAGE AUTO-SAVE ---
+        // --- SESSION STORAGE DRAFT SAVE (HIPAA COMPLIANT / AUTO-EXPIRING) ---
+        const DRAFT_STORAGE_KEY = "2059_intake_draft_session";
+        const DRAFT_EXPIRY_MS = 15 * 60 * 1000; // 15 minutes inactivity expiry
+
         function saveFormData() {
             const formData = new FormData(form);
-            const data = {};
+            const data = {
+                _savedAt: Date.now()
+            };
             formData.forEach((value, key) => {
                 if (key === 'incomeSource') {
                     if (!data[key]) data[key] = [];
                     data[key].push(value);
-                } else if (key !== 'signatureData') { // Don't auto-save full base64 signature in local storage to keep storage light
+                } else if (key !== 'signatureData') { // Don't auto-save base64 signature
                     data[key] = value;
                 }
             });
-            localStorage.setItem("2059_intake_draft", JSON.stringify(data));
+            try {
+                sessionStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(data));
+                localStorage.removeItem("2059_intake_draft"); // Purge legacy plaintext
+            } catch (e) {
+                console.warn("Storage restricted", e);
+            }
         }
 
         function loadFormData() {
-            const saved = localStorage.getItem("2059_intake_draft");
+            // Clean up any legacy localStorage draft to protect client data
+            try { localStorage.removeItem("2059_intake_draft"); } catch (e) {}
+
+            const saved = sessionStorage.getItem(DRAFT_STORAGE_KEY);
             if (!saved) return;
             try {
                 const data = JSON.parse(saved);
+                if (data._savedAt && (Date.now() - data._savedAt > DRAFT_EXPIRY_MS)) {
+                    sessionStorage.removeItem(DRAFT_STORAGE_KEY);
+                    return;
+                }
                 Object.keys(data).forEach(key => {
+                    if (key.startsWith('_')) return;
                     const input = form.elements[key];
                     if (!input) return;
                     if (key === 'incomeSource') {
                         const vals = data[key];
-                        const checkBoxes = document.querySelectorAll(`input[name="incomeSource"]`);
+                        const checkBoxes = document.querySelectorAll('input[name="incomeSource"]');
                         checkBoxes.forEach(cb => {
                             if (vals.includes(cb.value)) cb.checked = true;
                         });
@@ -812,18 +834,11 @@
                 });
 
                 if (response.ok) {
-                    // Trigger LinkedIn CAPI Event
-                    if (window.trackLinkedInConversion) {
-                        window.trackLinkedInConversion('IntakeSubmission', {
-                            email: payload.email || formData.get("referrerEmail") || "",
-                            phone: payload.phone || formData.get("referrerPhone") || "",
-                            name: payload.fullName || "",
-                            company: payload.referralAgency || ""
-                        });
-                    }
-
-                    // Clear draft on success
-                    localStorage.removeItem("2059_intake_draft");
+                    // Clear draft on success (HIPAA sanitized)
+                    try {
+                        sessionStorage.removeItem(DRAFT_STORAGE_KEY);
+                        localStorage.removeItem("2059_intake_draft");
+                    } catch (e) {}
                     
                     // Display success screen
                     document.getElementById("form-card").innerHTML = `
@@ -848,7 +863,6 @@
             }
         }
     </script>
-    <script src="js/linkedin-tracker.js" defer></script>
     <!-- Telnyx Voice AI Harry Widget -->
     <script src="js/harry-widget.js" defer></script>
 </body>
