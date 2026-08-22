@@ -678,23 +678,27 @@
 
                     <!-- File Dropzone -->
                     <div class="form-field">
-                        <label>Completed Application Document (PDF, Scanned Images, or Photos) *</label>
-                        <div id="dropzoneContainer" style="border: 2px dashed rgba(74, 124, 89, 0.4); border-radius: 14px; background: #fafdfa; padding: 30px 20px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
-                            <input type="file" id="intakeFileInput" name="intakeFile" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" required style="display: none;" onchange="handleFileSelected(this)">
-                            <div id="dropzonePrompt">
-                                <i class="fas fa-cloud-upload-alt" style="font-size: 40px; color: var(--logo-green); margin-bottom: 12px; display: block;"></i>
-                                <p style="font-weight: 600; color: var(--black); margin-bottom: 4px;">Click or Drag &amp; Drop Your Completed File Here</p>
+                        <label for="intakeFileInput">Completed Application Document (PDF, Scanned Images, or Photos) *</label>
+                        <label for="intakeFileInput" id="dropzoneContainer" style="display: block; position: relative; border: 2px dashed rgba(74, 124, 89, 0.45); border-radius: 14px; background: #fafdfa; padding: 32px 20px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+                            <input type="file" id="intakeFileInput" name="intakeFile" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" required style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 10;" onchange="handleFileSelected(this)">
+                            
+                            <div id="dropzonePrompt" style="pointer-events: none;">
+                                <i class="fas fa-cloud-upload-alt" style="font-size: 44px; color: var(--logo-green); margin-bottom: 12px; display: block;"></i>
+                                <p style="font-weight: 700; color: var(--black); font-size: 15px; margin-bottom: 4px;">Click to Browse or Drag &amp; Drop Your File Here</p>
                                 <span style="font-size: 13px; color: var(--gray-medium);">Supports PDF, PNG, JPG, or DOCX (Max 25 MB)</span>
                             </div>
-                            <div id="fileSelectedDisplay" style="display: none; align-items: center; justify-content: center; gap: 12px; padding: 10px; background: #ffffff; border-radius: 8px; border: 1px solid rgba(74,124,89,0.2);">
-                                <i class="fas fa-file-check" style="color: var(--logo-green); font-size: 24px;"></i>
+                            
+                            <div id="fileSelectedDisplay" style="display: none; align-items: center; justify-content: center; gap: 12px; padding: 12px; background: #ffffff; border-radius: 10px; border: 1px solid rgba(74,124,89,0.3); position: relative; z-index: 20;">
+                                <i class="fas fa-file-pdf" style="color: var(--logo-green); font-size: 28px;"></i>
                                 <div style="text-align: left;">
                                     <div id="fileNameText" style="font-weight: 600; font-size: 14px; color: var(--black);">document.pdf</div>
                                     <div id="fileSizeText" style="font-size: 12px; color: var(--gray-medium);">1.2 MB</div>
                                 </div>
-                                <button type="button" onclick="clearSelectedFile(event)" style="background: none; border: none; color: #c0392b; cursor: pointer; margin-left: 15px; font-size: 14px;"><i class="fas fa-trash-alt"></i> Remove</button>
+                                <button type="button" onclick="clearSelectedFile(event)" style="background: #fee2e2; border: 1px solid #f87171; color: #b91c1c; border-radius: 6px; padding: 6px 12px; font-weight: 600; cursor: pointer; margin-left: 15px; font-size: 13px; display: inline-flex; align-items: center; gap: 5px;">
+                                    <i class="fas fa-trash-alt"></i> Remove
+                                </button>
                             </div>
-                        </div>
+                        </label>
                     </div>
 
                     <div style="background: #f8fcf9; border: 1px solid rgba(74,124,89,0.15); border-radius:12px; padding:16px; margin:20px 0;">
@@ -978,12 +982,9 @@
                 btnNext.innerHTML = "Submit Intake <i class='fas fa-check'></i>";
             }
         }
-    </script>
-    <!-- Telnyx Voice AI Harry Widget -->
-    <script src="js/harry-widget.js" defer>
 
-        // --- TAB SWITCHER LOGIC ---
-        function switchIntakeTab(mode) {
+        // --- GLOBAL TAB SWITCHER LOGIC ---
+        window.switchIntakeTab = function(mode) {
             const onlineCard = document.getElementById("form-card");
             const uploadCard = document.getElementById("uploadFormCard");
             const wizard = document.querySelector(".progress-wizard");
@@ -1023,42 +1024,13 @@
                 }
                 if (onlineCard) onlineCard.scrollIntoView({ behavior: 'smooth' });
             }
-        }
+        };
 
-        // --- FILE DRAG & DROP & UPLOAD LOGIC ---
+        // --- FILE SELECTION & DRAG-AND-DROP ---
         let selectedFileBase64 = null;
         let selectedFileMeta = null;
 
-        function initDropzone() {
-            const dropzone = document.getElementById("dropzoneContainer");
-            const fileInput = document.getElementById("intakeFileInput");
-
-            if (dropzone && fileInput) {
-                dropzone.addEventListener("click", () => fileInput.click());
-                dropzone.addEventListener("dragover", (e) => {
-                    e.preventDefault();
-                    dropzone.style.borderColor = "var(--logo-green)";
-                    dropzone.style.background = "#edf7ef";
-                });
-                dropzone.addEventListener("dragleave", () => {
-                    dropzone.style.borderColor = "rgba(74, 124, 89, 0.4)";
-                    dropzone.style.background = "#fafdfa";
-                });
-                dropzone.addEventListener("drop", (e) => {
-                    e.preventDefault();
-                    dropzone.style.borderColor = "rgba(74, 124, 89, 0.4)";
-                    dropzone.style.background = "#fafdfa";
-                    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-                        fileInput.files = e.dataTransfer.files;
-                        handleFileSelected(fileInput);
-                    }
-                });
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", initDropzone);
-
-        function handleFileSelected(input) {
+        window.handleFileSelected = function(input) {
             if (!input.files || !input.files[0]) return;
             const file = input.files[0];
 
@@ -1088,10 +1060,13 @@
                 };
             };
             reader.readAsDataURL(file);
-        }
+        };
 
-        function clearSelectedFile(event) {
-            if (event) event.stopPropagation();
+        window.clearSelectedFile = function(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
             const fileInput = document.getElementById("intakeFileInput");
             if (fileInput) fileInput.value = "";
             selectedFileBase64 = null;
@@ -1100,10 +1075,10 @@
             const displayElem = document.getElementById("fileSelectedDisplay");
             if (promptElem) promptElem.style.display = "block";
             if (displayElem) displayElem.style.display = "none";
-        }
+        };
 
-        // --- UPLOAD SUBMISSION HANDLER ---
-        async function handleFileUploadSubmit(event) {
+        // --- UPLOAD FORM SUBMIT HANDLER ---
+        window.handleFileUploadSubmit = async function(event) {
             event.preventDefault();
 
             if (!selectedFileBase64 || !selectedFileMeta) {
@@ -1145,7 +1120,7 @@
                             <div class="success-screen">
                                 <div class="success-icon"><i class="fas fa-check-circle"></i></div>
                                 <h2>Intake Document Uploaded Successfully!</h2>
-                                <p style="margin-bottom: 25px; color: var(--gray-dark);">
+                                <p style="margin-bottom: 25px; color: var(--gray-dark); line-height: 1.5;">
                                     Thank you. Your completed participant application packet has been securely encrypted and delivered to 20 59 Ventures placement staff. We will review and reach out promptly.
                                 </p>
                                 <a href="index.html" class="btn-primary" style="display: inline-block; padding: 12px 24px; text-decoration: none;">Return to Home</a>
@@ -1158,14 +1133,23 @@
                 }
             } catch (err) {
                 console.error("Upload error:", err);
-                alert("Error submitting document: " + err.message + ". You can also email the completed form to info@2059ventures.online");
+                alert("Error submitting document: " + err.message + ". You can also email the completed form directly to info@2059ventures.online");
                 if (btn) {
                     btn.disabled = false;
                     btn.innerHTML = "Submit Completed Document <i class='fas fa-paper-plane' style='margin-left: 8px;'></i>";
                 }
             }
-        }
+        };
 
+        // Check URL hash for direct tab switching (e.g. intake.html#upload)
+        document.addEventListener("DOMContentLoaded", () => {
+            if (window.location.hash === '#upload' || window.location.search.includes('tab=upload')) {
+                window.switchIntakeTab('upload');
+            }
+        });
     </script>
+
+    <!-- Telnyx Voice AI Harry Widget -->
+    <script src="js/harry-widget.js" defer></script>
 </body>
 </html>
