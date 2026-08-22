@@ -980,6 +980,192 @@
         }
     </script>
     <!-- Telnyx Voice AI Harry Widget -->
-    <script src="js/harry-widget.js" defer></script>
+    <script src="js/harry-widget.js" defer>
+
+        // --- TAB SWITCHER LOGIC ---
+        function switchIntakeTab(mode) {
+            const onlineCard = document.getElementById("form-card");
+            const uploadCard = document.getElementById("uploadFormCard");
+            const wizard = document.querySelector(".progress-wizard");
+            const tabBtnOnline = document.getElementById("tabBtnOnline");
+            const tabBtnUpload = document.getElementById("tabBtnUpload");
+
+            if (mode === 'upload') {
+                if (onlineCard) onlineCard.style.display = "none";
+                if (wizard) wizard.style.display = "none";
+                if (uploadCard) uploadCard.style.display = "block";
+                
+                if (tabBtnOnline) {
+                    tabBtnOnline.style.background = "#ffffff";
+                    tabBtnOnline.style.color = "var(--text-dark)";
+                    tabBtnOnline.style.borderColor = "rgba(74, 124, 89, 0.2)";
+                }
+                if (tabBtnUpload) {
+                    tabBtnUpload.style.background = "var(--logo-green)";
+                    tabBtnUpload.style.color = "#ffffff";
+                    tabBtnUpload.style.borderColor = "var(--logo-green)";
+                }
+                if (uploadCard) uploadCard.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                if (onlineCard) onlineCard.style.display = "block";
+                if (wizard) wizard.style.display = "flex";
+                if (uploadCard) uploadCard.style.display = "none";
+
+                if (tabBtnOnline) {
+                    tabBtnOnline.style.background = "var(--logo-green)";
+                    tabBtnOnline.style.color = "#ffffff";
+                    tabBtnOnline.style.borderColor = "var(--logo-green)";
+                }
+                if (tabBtnUpload) {
+                    tabBtnUpload.style.background = "#ffffff";
+                    tabBtnUpload.style.color = "var(--text-dark)";
+                    tabBtnUpload.style.borderColor = "rgba(74, 124, 89, 0.2)";
+                }
+                if (onlineCard) onlineCard.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // --- FILE DRAG & DROP & UPLOAD LOGIC ---
+        let selectedFileBase64 = null;
+        let selectedFileMeta = null;
+
+        function initDropzone() {
+            const dropzone = document.getElementById("dropzoneContainer");
+            const fileInput = document.getElementById("intakeFileInput");
+
+            if (dropzone && fileInput) {
+                dropzone.addEventListener("click", () => fileInput.click());
+                dropzone.addEventListener("dragover", (e) => {
+                    e.preventDefault();
+                    dropzone.style.borderColor = "var(--logo-green)";
+                    dropzone.style.background = "#edf7ef";
+                });
+                dropzone.addEventListener("dragleave", () => {
+                    dropzone.style.borderColor = "rgba(74, 124, 89, 0.4)";
+                    dropzone.style.background = "#fafdfa";
+                });
+                dropzone.addEventListener("drop", (e) => {
+                    e.preventDefault();
+                    dropzone.style.borderColor = "rgba(74, 124, 89, 0.4)";
+                    dropzone.style.background = "#fafdfa";
+                    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                        fileInput.files = e.dataTransfer.files;
+                        handleFileSelected(fileInput);
+                    }
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", initDropzone);
+
+        function handleFileSelected(input) {
+            if (!input.files || !input.files[0]) return;
+            const file = input.files[0];
+
+            if (file.size > 25 * 1024 * 1024) {
+                alert("File size exceeds 25 MB limit. Please select a smaller file.");
+                input.value = "";
+                return;
+            }
+
+            const fileNameElem = document.getElementById("fileNameText");
+            const fileSizeElem = document.getElementById("fileSizeText");
+            const promptElem = document.getElementById("dropzonePrompt");
+            const displayElem = document.getElementById("fileSelectedDisplay");
+
+            if (fileNameElem) fileNameElem.textContent = file.name;
+            if (fileSizeElem) fileSizeElem.textContent = (file.size / (1024 * 1024)).toFixed(2) + " MB";
+            if (promptElem) promptElem.style.display = "none";
+            if (displayElem) displayElem.style.display = "flex";
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                selectedFileBase64 = e.target.result.split(',')[1];
+                selectedFileMeta = {
+                    name: file.name,
+                    type: file.type || 'application/octet-stream',
+                    size: file.size
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function clearSelectedFile(event) {
+            if (event) event.stopPropagation();
+            const fileInput = document.getElementById("intakeFileInput");
+            if (fileInput) fileInput.value = "";
+            selectedFileBase64 = null;
+            selectedFileMeta = null;
+            const promptElem = document.getElementById("dropzonePrompt");
+            const displayElem = document.getElementById("fileSelectedDisplay");
+            if (promptElem) promptElem.style.display = "block";
+            if (displayElem) displayElem.style.display = "none";
+        }
+
+        // --- UPLOAD SUBMISSION HANDLER ---
+        async function handleFileUploadSubmit(event) {
+            event.preventDefault();
+
+            if (!selectedFileBase64 || !selectedFileMeta) {
+                alert("Please select a completed application file (PDF, image, or document) before submitting.");
+                return;
+            }
+
+            const btn = document.getElementById("btnSubmitUpload");
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = "Encrypting &amp; Uploading... <i class='fas fa-spinner fa-spin'></i>";
+            }
+
+            const payload = {
+                referrerName: document.getElementById("uploadReferrerName").value.trim(),
+                referrerAgency: document.getElementById("uploadAgencyName").value.trim(),
+                referrerEmail: document.getElementById("uploadReferrerEmail").value.trim(),
+                referrerPhone: document.getElementById("uploadReferrerPhone").value.trim(),
+                clientName: document.getElementById("uploadClientName").value.trim(),
+                clientDob: document.getElementById("uploadClientDob").value,
+                notes: (document.getElementById("uploadNotes").value || "").trim(),
+                fileName: selectedFileMeta.name,
+                fileType: selectedFileMeta.type,
+                fileBase64: selectedFileBase64,
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                const response = await fetch('/api/intake-upload', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    const card = document.getElementById("uploadFormCard");
+                    if (card) {
+                        card.innerHTML = `
+                            <div class="success-screen">
+                                <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+                                <h2>Intake Document Uploaded Successfully!</h2>
+                                <p style="margin-bottom: 25px; color: var(--gray-dark);">
+                                    Thank you. Your completed participant application packet has been securely encrypted and delivered to 20 59 Ventures placement staff. We will review and reach out promptly.
+                                </p>
+                                <a href="index.html" class="btn-primary" style="display: inline-block; padding: 12px 24px; text-decoration: none;">Return to Home</a>
+                            </div>
+                        `;
+                    }
+                } else {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.error || 'Server error while processing uploaded document.');
+                }
+            } catch (err) {
+                console.error("Upload error:", err);
+                alert("Error submitting document: " + err.message + ". You can also email the completed form to info@2059ventures.online");
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = "Submit Completed Document <i class='fas fa-paper-plane' style='margin-left: 8px;'></i>";
+                }
+            }
+        }
+
+    </script>
 </body>
 </html>

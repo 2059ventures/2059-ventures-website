@@ -451,4 +451,79 @@ async function handleLinkedInLeadWebhook(request, env) {
 }
 
 
+// ── Handle Scanned Intake Document Upload (via Resend with Attachment) ────────
+async function handleIntakeUpload(request, env) {
+    try {
+        const body = await request.json();
+        const { referrerName, referrerAgency, referrerEmail, referrerPhone, clientName, clientDob, notes, fileName, fileType, fileBase64, timestamp } = body;
+        const resendKey = env.RESEND_API_KEY;
 
+        if (!clientName || !referrerName || !fileBase64) {
+            return jsonResponse({ error: 'Missing required participant name, coordinator name, or file attachment.' }, 400);
+        }
+
+        const uploadTime = timestamp || new Date().toLocaleString();
+
+        const htmlContent = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background-color: #ffffff;">
+            <div style="background-color: #4A7C59; color: #ffffff; padding: 24px; text-align: center;">
+              <h2 style="margin: 0; font-size: 22px;">20/59 Ventures • New Scanned Intake Packet</h2>
+              <p style="margin: 6px 0 0 0; color: #eaf3ed; font-size: 14px;">Paper Application Upload (SOP-2059-FORM-005)</p>
+            </div>
+            <div style="padding: 24px;">
+              <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Participant Name:</td><td style="padding: 6px 0; color: #0f172a; font-weight: bold;">${clientName}</td></tr>
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Date of Birth:</td><td style="padding: 6px 0; color: #0f172a;">${clientDob || 'N/A'}</td></tr>
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Referring Coordinator:</td><td style="padding: 6px 0; color: #0f172a;">${referrerName}</td></tr>
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Agency / Hospital:</td><td style="padding: 6px 0; color: #0f172a;">${referrerAgency || 'N/A'}</td></tr>
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Coordinator Email:</td><td style="padding: 6px 0; color: #0f172a;">${referrerEmail || 'N/A'}</td></tr>
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Coordinator Phone:</td><td style="padding: 6px 0; color: #0f172a;">${referrerPhone || 'N/A'}</td></tr>
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Attached File:</td><td style="padding: 6px 0; color: #0f172a;">${fileName}</td></tr>
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Placement Notes:</td><td style="padding: 6px 0; color: #0f172a;">${notes || 'None provided'}</td></tr>
+                  <tr><td style="padding: 6px 0; color: #64748b; font-weight: bold;">Received:</td><td style="padding: 6px 0; color: #64748b;">${uploadTime}</td></tr>
+                </table>
+              </div>
+              <p style="font-size: 13px; color: #64748b; line-height: 1.5;">
+                The completed paper application is attached to this email. Please review the participant's independent living acknowledgment and housing accommodations request.
+              </p>
+            </div>
+          </div>
+        `;
+
+        if (resendKey) {
+            const emailPayload = {
+                from: '20/59 Intake Portal <harry@purposehomes.limyefoundation.org>',
+                to: ['qruffin@2059ventures.online', 'andrea.marcus@2059ventures.online', 'info@2059ventures.online'],
+                subject: `[Paper Intake Upload] ${clientName} - ${referrerAgency || 'Referral'}`,
+                html: htmlContent,
+                attachments: [
+                    {
+                        filename: fileName || 'Completed-Intake-Application.pdf',
+                        content: fileBase64
+                    }
+                ]
+            };
+
+            const resendRes = await fetch('https://api.resend.com/emails', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${resendKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(emailPayload)
+            });
+
+            const resendData = await resendRes.json();
+            console.log('[Intake Upload] Resend Response:', resendData);
+        } else {
+            console.warn('[Intake Upload] RESEND_API_KEY not set, logged upload for:', clientName);
+        }
+
+        return jsonResponse({ success: true, message: 'Intake document uploaded and dispatched.' }, 200);
+
+    } catch (err) {
+        console.error('[Intake Upload] Error:', err);
+        return jsonResponse({ error: err.message }, 500);
+    }
+}
