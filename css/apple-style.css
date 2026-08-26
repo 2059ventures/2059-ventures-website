@@ -683,8 +683,10 @@ body {
     padding: 40px;
     position: relative;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(74, 124, 89, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(74, 124, 89, 0.15);
+    display: flex;
+    flex-direction: column;
 }
 
 .housing-card:hover {
@@ -695,24 +697,29 @@ body {
 
 .housing-badge {
     position: absolute;
-    top: -12px;
+    top: -14px;
     left: 24px;
-    padding: 8px 16px;
+    padding: 8px 18px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .housing-badge.shared {
-    background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: var(--white);
 }
 
 .housing-badge.premium {
-    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    background: linear-gradient(135deg, #1e3d29 0%, #2e5d3d 100%);
     color: var(--white);
+    border: 1px solid rgba(255, 215, 0, 0.3);
 }
 
 .housing-title {

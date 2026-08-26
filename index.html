@@ -380,51 +380,63 @@
             
             <div class="housing-grid">
                 <div class="housing-card fade-in">
-                    <div class="housing-badge shared">Most Affordable</div>
+                    <div class="housing-badge shared"><i class="fas fa-tag"></i> Most Affordable</div>
                     <h3 class="housing-title">Shared Room Housing</h3>
-                    <p class="housing-price">Starting at $650/month</p>
-                    <div class="housing-features">
+                    <p class="housing-price" style="margin-bottom: 4px;">Starting at $650<span style="font-size: 16px; font-weight: 500; color: var(--gray-dark);">/month</span></p>
+                    <p style="font-size: 13px; color: var(--logo-dark-green); font-weight: 600; margin-bottom: 24px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fas fa-check-circle" style="color: var(--logo-green);"></i> Covered 100% by HUD-VASH &amp; Housing Vouchers
+                    </p>
+                    <div class="housing-features" style="flex: 1;">
                         <div class="feature-item">
                             <i class="fas fa-bed"></i>
-                            <span>Two beds per room with privacy curtains</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-utensils"></i>
-                            <span>Shared kitchen and common areas</span>
+                            <span>Fully furnished twin bed with privacy curtains</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-bolt"></i>
-                            <span>All utilities included</span>
+                            <span>All utilities, electricity &amp; high-speed Wi-Fi included</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-utensils"></i>
+                            <span>Shared modern kitchen, dining &amp; laundry facilities</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-users"></i>
-                            <span>Community support network</span>
+                            <span>Community support &amp; home meal delivery coordination</span>
                         </div>
                     </div>
+                    <button type="button" class="btn-primary full-width" onclick="openModal('housingModal'); if(document.getElementById('housing-preference')) document.getElementById('housing-preference').value='shared_room';" style="margin-top: auto; padding: 14px 20px; font-size: 15px; font-weight: 600; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        Apply for Shared Room <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
                 
                 <div class="housing-card fade-in">
-                    <div class="housing-badge premium">Premium Option</div>
+                    <div class="housing-badge premium"><i class="fas fa-star" style="color: #ffd700;"></i> Premium Option</div>
                     <h3 class="housing-title">Private Room Housing</h3>
-                    <p class="housing-price">Starting at $850/month</p>
-                    <div class="housing-features">
+                    <p class="housing-price" style="margin-bottom: 4px;">Starting at $850<span style="font-size: 16px; font-weight: 500; color: var(--gray-dark);">/month</span></p>
+                    <p style="font-size: 13px; color: var(--logo-dark-green); font-weight: 600; margin-bottom: 24px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fas fa-check-circle" style="color: var(--logo-green);"></i> Eligible for HUD-VASH &amp; Housing Assistance Vouchers
+                    </p>
+                    <div class="housing-features" style="flex: 1;">
                         <div class="feature-item">
                             <i class="fas fa-door-closed"></i>
-                            <span>Private bedroom with personal space</span>
+                            <span>Fully private, keyed bedroom &amp; personal closet</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-bolt"></i>
+                            <span>All utilities, electricity &amp; high-speed Wi-Fi included</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-couch"></i>
-                            <span>Shared common areas with residents</span>
+                            <span>Full access to shared living area, kitchen &amp; laundry</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-lock"></i>
-                            <span>Enhanced privacy and comfort</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-star"></i>
-                            <span>Priority maintenance and support</span>
+                            <span>Enhanced privacy, quiet comfort &amp; priority support</span>
                         </div>
                     </div>
+                    <button type="button" class="btn-primary full-width" onclick="openModal('housingModal'); if(document.getElementById('housing-preference')) document.getElementById('housing-preference').value='private_room';" style="margin-top: auto; padding: 14px 20px; font-size: 15px; font-weight: 600; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #1e3d29 0%, #2e5d3d 100%);">
+                        Request Private Room <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
             </div>
             
