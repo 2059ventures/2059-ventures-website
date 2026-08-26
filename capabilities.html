@@ -442,9 +442,11 @@
   </style>
 </head>
 <body>
+  <!-- Skip to main content for screen readers and keyboard users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- Navigation (Website Header Sync) -->
-  <nav class="nav">
+  <nav class="nav" aria-label="Main Navigation">
     <div class="nav-container">
       <div class="nav-logo">
         <img src="img/logo-shield.png" alt="20 59 Ventures Corp - Housing Referral Agency" class="logo-img">
@@ -461,9 +463,15 @@
         <a href="index.html#contact" class="nav-link">Contact</a>
         <a href="intake.html" class="nav-link" style="color: var(--logo-green); font-weight: 600;">Apply Now</a>
       </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </div>
   </nav>
 
+  <main id="main-content">
   <!-- Capabilities Statement Hero Section (Web Only) -->
   <section class="capabilities-hero">
     <div class="capabilities-hero-container">
@@ -683,6 +691,7 @@
 
     </div>
   </div>
+  </main>
 
   <!-- Footer (Website Footer Sync) -->
   <footer class="footer">

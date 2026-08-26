@@ -353,8 +353,11 @@
     </style>
 </head>
 <body>
+    <!-- Skip to main content for screen readers and keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav" aria-label="Main Navigation">
         <div class="nav-container">
             <div class="nav-logo">
                 <img src="img/logo-shield.png" alt="20 59 Ventures Corp - Housing Referral Agency" class="logo-img">
@@ -369,9 +372,15 @@
                 <a href="index.html#services" class="nav-link">Services</a>
                 <a href="index.html#contact" class="nav-link">Contact</a>
             </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </nav>
 
+    <main id="main-content">
     <!-- Main Content -->
     <section class="intake-wrapper">
         <div class="intake-container">
@@ -410,22 +419,25 @@
                 </div>
             </div>
 
-            <div class="progress-wizard">
+            <!-- Live status announcement for screen readers -->
+            <div id="intake-step-announcer" class="sr-only" aria-live="polite" aria-atomic="true">Step 1 of 4: Referring Agency Info</div>
+
+            <div class="progress-wizard" role="navigation" aria-label="Intake Application Steps">
                 <div class="progress-bar-fill" id="progress-bar-fill"></div>
-                <div class="wizard-step active" id="step-node-1">
-                    <div class="step-icon">1</div>
+                <div class="wizard-step active" id="step-node-1" aria-current="step" aria-label="Step 1: Agency Info">
+                    <div class="step-icon" aria-hidden="true">1</div>
                     <div class="step-label">Agency Info</div>
                 </div>
-                <div class="wizard-step" id="step-node-2">
-                    <div class="step-icon">2</div>
+                <div class="wizard-step" id="step-node-2" aria-label="Step 2: Client Info">
+                    <div class="step-icon" aria-hidden="true">2</div>
                     <div class="step-label">Client Info</div>
                 </div>
-                <div class="wizard-step" id="step-node-3">
-                    <div class="step-icon">3</div>
+                <div class="wizard-step" id="step-node-3" aria-label="Step 3: Housing Details">
+                    <div class="step-icon" aria-hidden="true">3</div>
                     <div class="step-label">Housing Details</div>
                 </div>
-                <div class="wizard-step" id="step-node-4">
-                    <div class="step-icon">4</div>
+                <div class="wizard-step" id="step-node-4" aria-label="Step 4: Certify & Submit">
+                    <div class="step-icon" aria-hidden="true">4</div>
                     <div class="step-label">Certify &amp; Submit</div>
                 </div>
             </div>
@@ -744,6 +756,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -792,9 +805,11 @@
 
             // Hide current step
             document.getElementById(`step-${currentStep}`).classList.remove("active");
-            document.getElementById(`step-node-${currentStep}`).classList.remove("active");
+            const prevNode = document.getElementById(`step-node-${currentStep}`);
+            prevNode.classList.remove("active");
+            prevNode.removeAttribute("aria-current");
             if (direction === 1) {
-                document.getElementById(`step-node-${currentStep}`).classList.add("completed");
+                prevNode.classList.add("completed");
             } else {
                 document.getElementById(`step-node-${currentStep - 1}`).classList.remove("completed");
             }
@@ -802,8 +817,18 @@
             currentStep += direction;
 
             // Show new step
-            document.getElementById(`step-${currentStep}`).classList.add("active");
-            document.getElementById(`step-node-${currentStep}`).classList.add("active");
+            const nextStepEl = document.getElementById(`step-${currentStep}`);
+            const nextNode = document.getElementById(`step-node-${currentStep}`);
+            nextStepEl.classList.add("active");
+            nextNode.classList.add("active");
+            nextNode.setAttribute("aria-current", "step");
+
+            // Update live region for screen readers
+            const stepTitles = ["Referring Agency Info", "Participant Demographics", "Housing & Placement Preferences", "Certify & Submit"];
+            const announcer = document.getElementById("intake-step-announcer");
+            if (announcer) {
+                announcer.textContent = `Step ${currentStep} of ${totalSteps}: ${stepTitles[currentStep - 1]}`;
+            }
 
             // Update buttons
             const btnPrev = document.getElementById("btnPrev");
@@ -819,7 +844,6 @@
                 btnNext.innerHTML = "Submit Intake <i class='fas fa-check'></i>";
                 btnNext.type = "submit";
                 btnNext.onclick = null; // Let the form submit natively
-                // Canvas might need resizing/setup when step becomes visible
                 resizeCanvas();
             } else {
                 btnNext.innerHTML = "Next <i class='fas fa-chevron-right'></i>";
@@ -831,8 +855,13 @@
             const fillPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
             document.getElementById("progress-bar-fill").style.width = `${fillPercent}%`;
             
-            // Scroll to form top
+            // Scroll to form top & shift focus for accessibility
             document.getElementById("form-card").scrollIntoView({ behavior: 'smooth' });
+            const stepTitle = nextStepEl.querySelector('.step-title');
+            if (stepTitle) {
+                stepTitle.setAttribute('tabindex', '-1');
+                stepTitle.focus();
+            }
         }
 
         function validateCurrentStep() {

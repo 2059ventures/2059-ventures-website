@@ -174,8 +174,11 @@
     </script>
 </head>
 <body>
+    <!-- Skip to main content for screen readers and keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav" aria-label="Main Navigation">
         <div class="nav-container">
             <div class="nav-logo">
                 <img src="img/logo-shield.png" alt="20 59 Ventures Corp - Housing Referral Agency" class="logo-img">
@@ -192,13 +195,15 @@
                 <a href="#contact" class="nav-link">Contact</a>
                 <a href="intake.html" class="nav-link" style="color: var(--logo-green); font-weight: 600;">Apply Now</a>
             </div>
-            <div class="nav-toggle" id="nav-toggle">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </nav>
+
+    <main id="main-content">
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -1156,6 +1161,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -1237,25 +1243,29 @@
 
     <!-- Modals -->
     <!-- Housing Request Modal -->
-    <div id="housingModal" class="modal">
+    <div id="housingModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="housingModalTitle">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('housingModal')">&times;</span>
-            <h2>Request a Place to Stay</h2>
+            <button type="button" class="close" onclick="closeModal('housingModal')" aria-label="Close Request a Place to Stay dialog">&times;</button>
+            <h2 id="housingModalTitle">Request a Place to Stay</h2>
             <form action="https://formspree.io/f/mzzaowjq" method="POST" class="modal-form">
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="housing-name" class="sr-only">Full Name</label>
                         <input type="text" id="housing-name" name="full_name" placeholder="Full Name" required>
                     </div>
                     <div class="form-group">
+                        <label for="housing-email" class="sr-only">Email Address</label>
                         <input type="email" id="housing-email" name="email" placeholder="Email" required>
                     </div>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="housing-phone" class="sr-only">Phone Number</label>
                         <input type="tel" id="housing-phone" name="phone" placeholder="Phone" required>
                     </div>
                     <div class="form-group">
+                        <label for="veteran-status" class="sr-only">Are you a veteran?</label>
                         <select id="veteran-status" name="veteran_status" required>
                             <option value="">Are you a veteran?</option>
                             <option value="yes">Yes</option>
@@ -1266,6 +1276,7 @@
                 
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="senior-status" class="sr-only">Are you a senior (55+)?</label>
                         <select id="senior-status" name="senior_status" required>
                             <option value="">Are you a senior (55+)?</option>
                             <option value="yes">Yes</option>
@@ -1273,6 +1284,7 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="hud-vash" class="sr-only">Do you have a HUD-VASH voucher?</label>
                         <select id="hud-vash" name="hud_vash_voucher">
                             <option value="">Do you have HUD-VASH voucher?</option>
                             <option value="yes">Yes</option>
@@ -1284,6 +1296,7 @@
                 
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="housing-preference" class="sr-only">Housing preference</label>
                         <select id="housing-preference" name="housing_preference" required>
                             <option value="">Housing preference</option>
                             <option value="shared_room">Shared Room (2 beds per room - affordable)</option>
@@ -1292,6 +1305,7 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="move-in-timeline" class="sr-only">Preferred move-in timeline</label>
                         <select id="move-in-timeline" name="move_in_timeline">
                             <option value="">Preferred move-in timeline</option>
                             <option value="immediate">Immediately</option>
@@ -1303,14 +1317,17 @@
                 </div>
                 
                 <div class="form-group">
+                    <label for="special-needs" class="sr-only">Special needs or accommodations (optional)</label>
                     <textarea id="special-needs" name="special_needs" rows="3" placeholder="Special needs or accommodations (optional)"></textarea>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="emergency-contact-name" class="sr-only">Emergency contact name (optional)</label>
                         <input type="text" id="emergency-contact-name" name="emergency_contact_name" placeholder="Emergency contact name (optional)">
                     </div>
                     <div class="form-group">
+                        <label for="emergency-contact-phone" class="sr-only">Emergency contact phone (optional)</label>
                         <input type="tel" id="emergency-contact-phone" name="emergency_contact_phone" placeholder="Emergency contact phone (optional)">
                     </div>
                 </div>
@@ -1332,25 +1349,29 @@
     </div>
 
     <!-- Quick Partner Modal -->
-    <div id="partnerModal" class="modal">
+    <div id="partnerModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="partnerModalTitle">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('partnerModal')">&times;</span>
-            <h2>Partner With Us</h2>
+            <button type="button" class="close" onclick="closeModal('partnerModal')" aria-label="Close Partner With Us dialog">&times;</button>
+            <h2 id="partnerModalTitle">Partner With Us</h2>
             <form action="https://formspree.io/f/mnnbwroz" method="POST" class="modal-form">
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="partner-name" class="sr-only">Your Name</label>
                         <input type="text" id="partner-name" name="name" placeholder="Name" required>
                     </div>
                     <div class="form-group">
+                        <label for="partner-email" class="sr-only">Your Email</label>
                         <input type="email" id="partner-email" name="email" placeholder="Email" required>
                     </div>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="partner-phone" class="sr-only">Your Phone Number</label>
                         <input type="tel" id="partner-phone" name="phone" placeholder="Phone" required>
                     </div>
                     <div class="form-group">
+                        <label for="interest-type" class="sr-only">I am interested in</label>
                         <select id="interest-type" name="interest_type" required>
                             <option value="">I am interested in</option>
                             <option value="client_referral">Refer a Veteran or Senior Client (Case Managers / VSOs)</option>
@@ -1378,35 +1399,41 @@
     </div>
 
     <!-- Landlord Partnership Modal -->
-    <div id="landlordModal" class="modal">
+    <div id="landlordModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="landlordModalTitle">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('landlordModal')">&times;</span>
-            <h2>Landlord Partnership Application</h2>
+            <button type="button" class="close" onclick="closeModal('landlordModal')" aria-label="Close Landlord Partnership Application dialog">&times;</button>
+            <h2 id="landlordModalTitle">Landlord Partnership Application</h2>
             <form action="https://formspree.io/f/xovnr5kg" method="POST" class="modal-form">
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="landlord-owner-name" class="sr-only">Property Owner Name</label>
                         <input type="text" id="landlord-owner-name" name="owner_name" placeholder="Property Owner Name" required>
                     </div>
                     <div class="form-group">
+                        <label for="landlord-email" class="sr-only">Email Address</label>
                         <input type="email" id="landlord-email" name="email" placeholder="Email" required>
                     </div>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="landlord-phone" class="sr-only">Phone Number</label>
                         <input type="tel" id="landlord-phone" name="phone" placeholder="Phone" required>
                     </div>
                     <div class="form-group">
+                        <label for="units-available" class="sr-only">Number of Units Available</label>
                         <input type="number" id="units-available" name="units_available" placeholder="Number of Units Available" min="1">
                     </div>
                 </div>
                 
                 <div class="form-group">
+                    <label for="landlord-property-address" class="sr-only">Property Address</label>
                     <input type="text" id="landlord-property-address" name="property_address" placeholder="Property Address" required>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="landlord-property-type" class="sr-only">Property Type</label>
                         <select id="landlord-property-type" name="property_type" required>
                             <option value="">Select Property Type</option>
                             <option value="single_family">Single Family Home</option>
@@ -1416,6 +1443,7 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="tenant-preference" class="sr-only">Preferred Tenant Type</label>
                         <select id="tenant-preference" name="tenant_preference">
                             <option value="">Preferred Tenant Type</option>
                             <option value="veterans">Veterans</option>
@@ -1427,10 +1455,12 @@
                 </div>
                 
                 <div class="form-group">
+                    <label for="management-needs" class="sr-only">Placement or housing needs (optional)</label>
                     <textarea id="management-needs" name="management_needs" rows="3" placeholder="Placement or housing needs (optional)"></textarea>
                 </div>
                 
                 <div class="form-group">
+                    <label for="additional-services" class="sr-only">Additional services needed (optional)</label>
                     <textarea id="additional-services" name="additional_services" rows="3" placeholder="Additional services needed (optional)"></textarea>
                 </div>
                 

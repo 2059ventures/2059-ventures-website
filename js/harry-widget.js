@@ -54,58 +54,58 @@
 
         // Render Floating Launcher Button
         const launcherHtml = `
-            <div id="harry-widget-launcher" title="Talk or Chat with Harry - 20/59 Ventures AI Assistant">
-                <div class="harry-launcher-avatar">
+            <button type="button" id="harry-widget-launcher" title="Talk or Chat with Harry - 20/59 Ventures AI Assistant" aria-label="Open Harry AI Assistant" aria-expanded="false" aria-controls="harry-widget-modal">
+                <div class="harry-launcher-avatar" aria-hidden="true">
                     <i class="fa-solid fa-comments"></i>
                 </div>
                 <div class="harry-launcher-text">
                     <span class="harry-launcher-title">Ask Harry AI</span>
                     <span class="harry-launcher-sub">20/59 Ventures Coordinator</span>
                 </div>
-            </div>
+            </button>
         `;
         document.body.insertAdjacentHTML('beforeend', launcherHtml);
 
         // Render Dual-Mode Voice & Text Modal
         const modalHtml = `
-            <div id="harry-widget-modal">
+            <div id="harry-widget-modal" role="dialog" aria-modal="true" aria-labelledby="harry-dialog-title" aria-hidden="true">
                 <!-- Header -->
                 <div class="harry-modal-header">
                     <div class="harry-header-info">
                         <div class="harry-avatar-wrapper">
-                            <div class="harry-avatar">
+                            <div class="harry-avatar" aria-hidden="true">
                                 <i class="fa-solid fa-user-astronaut"></i>
                             </div>
-                            <div id="harry-status-dot" class="harry-status-dot online"></div>
+                            <div id="harry-status-dot" class="harry-status-dot online" aria-hidden="true"></div>
                         </div>
                         <div class="harry-header-details">
-                            <span class="harry-name">Harry</span>
+                            <span id="harry-dialog-title" class="harry-name">Harry</span>
                             <span class="harry-role">Inbound Housing Coordinator</span>
                         </div>
                     </div>
-                    <button id="harry-close-btn" class="harry-close-btn" title="Close">
-                        <i class="fa-solid fa-xmark"></i>
+                    <button id="harry-close-btn" class="harry-close-btn" title="Close" aria-label="Close Harry AI Assistant">
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                     </button>
                 </div>
 
                 <!-- Mode Selector Tabs -->
-                <div class="harry-mode-bar">
-                    <button id="harry-tab-text" class="harry-mode-tab active">
-                        <i class="fa-solid fa-comment-dots"></i> Text Chat
+                <div class="harry-mode-bar" role="tablist" aria-label="Communication Mode">
+                    <button id="harry-tab-text" class="harry-mode-tab active" role="tab" aria-selected="true">
+                        <i class="fa-solid fa-comment-dots" aria-hidden="true"></i> Text Chat
                     </button>
-                    <button id="harry-tab-voice" class="harry-mode-tab">
-                        <i class="fa-solid fa-microphone"></i> Voice Call
+                    <button id="harry-tab-voice" class="harry-mode-tab" role="tab" aria-selected="false">
+                        <i class="fa-solid fa-microphone" aria-hidden="true"></i> Voice Call
                     </button>
                 </div>
 
                 <!-- Canvas Visualizer (Voice Mode Only) -->
                 <div id="harry-visualizer-section" class="harry-visualizer-container" style="display:none;">
-                    <canvas id="harry-audio-canvas"></canvas>
+                    <canvas id="harry-audio-canvas" aria-label="Voice audio visualizer"></canvas>
                     <span id="harry-visualizer-status" class="harry-visualizer-status">Click Start to Call Harry</span>
                 </div>
 
                 <!-- Transcript / Chat Area -->
-                <div id="harry-transcript-container" class="harry-transcript-area">
+                <div id="harry-transcript-container" class="harry-transcript-area" role="log" aria-live="polite" aria-label="Harry AI conversation transcript">
                     <div class="harry-chat-msg assistant">
                         <div class="harry-chat-sender">Harry</div>
                         Hello! I'm Harry, the Inbound Coordinator for 20/59 Ventures. How can I assist you today with veteran or senior housing, case worker referrals, or property partnerships?
@@ -114,47 +114,47 @@
 
                 <!-- Text Chat Input Bar (Text Mode) -->
                 <div id="harry-chat-input-bar" class="harry-input-bar">
-                    <input type="text" id="harry-text-input" class="harry-text-input" placeholder="Type your message to Harry here..." autocomplete="off">
-                    <button id="harry-send-text-btn" class="harry-send-btn" title="Send Message">
-                        <i class="fa-solid fa-paper-plane"></i>
+                    <input type="text" id="harry-text-input" class="harry-text-input" placeholder="Type your message to Harry here..." aria-label="Type message to Harry AI" autocomplete="off">
+                    <button id="harry-send-text-btn" class="harry-send-btn" title="Send Message" aria-label="Send message to Harry">
+                        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
                     </button>
                 </div>
 
                 <!-- Lead Capture Drawer (Expandable) -->
                 <div id="harry-lead-drawer" class="harry-lead-drawer">
                     <div class="harry-lead-title">
-                        <span><i class="fa-solid fa-id-card"></i> Lead / Message Info</span>
-                        <button id="harry-close-drawer-btn" style="background:none;border:none;cursor:pointer;color:#86868B;"><i class="fa-solid fa-chevron-down"></i></button>
+                        <span><i class="fa-solid fa-id-card" aria-hidden="true"></i> Lead / Message Info</span>
+                        <button id="harry-close-drawer-btn" style="background:none;border:none;cursor:pointer;color:#86868B;" aria-label="Close lead form"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
                     </div>
-                    <input type="text" id="harry-lead-name" class="harry-lead-input" placeholder="Full Name">
-                    <input type="tel" id="harry-lead-phone" class="harry-lead-input" placeholder="Phone Number">
-                    <input type="email" id="harry-lead-email" class="harry-lead-input" placeholder="Email Address">
-                    <select id="harry-lead-type" class="harry-lead-input" style="background:#fff;color:#1d1d1f;padding:8px;border-radius:6px;border:1px solid #ccc;margin-bottom:6px;">
+                    <input type="text" id="harry-lead-name" class="harry-lead-input" placeholder="Full Name" aria-label="Full Name">
+                    <input type="tel" id="harry-lead-phone" class="harry-lead-input" placeholder="Phone Number" aria-label="Phone Number">
+                    <input type="email" id="harry-lead-email" class="harry-lead-input" placeholder="Email Address" aria-label="Email Address">
+                    <select id="harry-lead-type" class="harry-lead-input" aria-label="Lead or Inquiry Type" style="background:#fff;color:#1d1d1f;padding:8px;border-radius:6px;border:1px solid #ccc;margin-bottom:6px;">
                         <option value="Private Pay / Direct Housing">Private Pay / Direct Housing</option>
                         <option value="Agency / Case Worker Referral">Agency / Case Worker Referral</option>
                         <option value="Property Partner / Landlord">Property Partner / Landlord</option>
                         <option value="General Inquiry">General Inquiry</option>
                     </select>
-                    <input type="text" id="harry-lead-inquiry" class="harry-lead-input" placeholder="Housing / Placement Details">
+                    <input type="text" id="harry-lead-inquiry" class="harry-lead-input" placeholder="Housing / Placement Details" aria-label="Housing or Placement Details">
                     <button id="harry-submit-lead-btn" class="harry-lead-submit">Submit Details to Team</button>
                 </div>
 
                 <!-- Toolbar Control Actions -->
                 <div class="harry-control-bar">
-                    <button id="harry-start-btn" class="harry-btn start-call-btn" style="display:none;">
-                        <i class="fa-solid fa-phone"></i> Start Voice Call
+                    <button id="harry-start-btn" class="harry-btn start-call-btn" style="display:none;" aria-label="Start Voice Call">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Start Voice Call
                     </button>
-                    <button id="harry-mic-btn" class="harry-btn mic-btn" style="display:none;" title="Mute/Unmute Mic">
-                        <i class="fa-solid fa-microphone"></i> Mic On
+                    <button id="harry-mic-btn" class="harry-btn mic-btn" style="display:none;" title="Mute/Unmute Mic" aria-label="Mute or Unmute Microphone">
+                        <i class="fa-solid fa-microphone" aria-hidden="true"></i> Mic On
                     </button>
-                    <button id="harry-bargein-btn" class="harry-btn bargein-btn" style="display:none;" title="Barge-in / Stop Harry">
-                        <i class="fa-solid fa-hand"></i> Stop / Barge-in
+                    <button id="harry-bargein-btn" class="harry-btn bargein-btn" style="display:none;" title="Barge-in / Stop Harry" aria-label="Stop Harry Speaking">
+                        <i class="fa-solid fa-hand" aria-hidden="true"></i> Stop / Barge-in
                     </button>
-                    <button id="harry-lead-btn" class="harry-btn" title="Quick Contact / Lead Form">
-                        <i class="fa-solid fa-user-plus"></i> Lead Form
+                    <button id="harry-lead-btn" class="harry-btn" title="Quick Contact / Lead Form" aria-label="Open Quick Contact Form">
+                        <i class="fa-solid fa-user-plus" aria-hidden="true"></i> Lead Form
                     </button>
-                    <button id="harry-agent-btn" class="harry-btn agent-btn" title="Transfer to Live Desk Phone">
-                        <i class="fa-solid fa-headset"></i> Desk Phone
+                    <button id="harry-agent-btn" class="harry-btn agent-btn" title="Transfer to Live Desk Phone" aria-label="Call live desk phone">
+                        <i class="fa-solid fa-headset" aria-hidden="true"></i> Desk Phone
                     </button>
                 </div>
             </div>
@@ -184,14 +184,40 @@
         document.getElementById('harry-submit-lead-btn').addEventListener('click', submitLeadForm);
         document.getElementById('harry-agent-btn').addEventListener('click', connectToDeskPhone);
 
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('harry-widget-modal');
+                if (modal && modal.classList.contains('harry-active')) {
+                    toggleModal();
+                }
+            }
+        });
+
         initCanvasVisualizer();
-        // Note: WebSocket connection is only established on voice call start.
-        // Text chat always uses the HTTP proxy (apiChatUrl) to avoid auth errors.
     }
 
     function toggleModal() {
         const modal = document.getElementById('harry-widget-modal');
+        const launcher = document.getElementById('harry-widget-launcher');
+        if (!modal) return;
+
+        const isOpening = !modal.classList.contains('harry-active');
         modal.classList.toggle('harry-active');
+        
+        if (launcher) {
+            launcher.setAttribute('aria-expanded', isOpening ? 'true' : 'false');
+        }
+        modal.setAttribute('aria-hidden', isOpening ? 'false' : 'true');
+
+        if (isOpening) {
+            setTimeout(() => {
+                const input = document.getElementById('harry-text-input');
+                if (input && currentMode === 'text') input.focus();
+            }, 200);
+        } else {
+            if (launcher) launcher.focus();
+        }
     }
 
     function toggleLeadDrawer() {

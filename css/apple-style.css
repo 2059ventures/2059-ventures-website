@@ -12,7 +12,7 @@
     --white: #FFFFFF;
     --black: #1D1D1F;
     --gray-light: #F5F5F7;
-    --gray-medium: #86868B;
+    --gray-medium: #636366;
     --gray-dark: #515154;
     
     /* Apple glassmorphism and transparency */
@@ -140,6 +140,9 @@ body {
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
+    background: none;
+    border: none;
+    padding: 6px;
 }
 
 .nav-toggle .bar {
@@ -1848,5 +1851,74 @@ body {
     .footer-logo .logo-img {
         height: 35px;
         margin-right: 8px;
+    }
+}
+
+/* ==========================================================================
+   Accessibility & ADA / WCAG 2.1 AA Utilities
+   ========================================================================== */
+
+/* High-contrast focus indicators for keyboard navigation */
+:focus-visible {
+    outline: 2px solid var(--logo-green);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--logo-green);
+    outline-offset: 2px;
+}
+
+/* Skip to main content link */
+.skip-link {
+    position: absolute;
+    top: -120px;
+    left: 16px;
+    background: var(--logo-dark-green);
+    color: #ffffff !important;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0 0 8px 8px;
+    z-index: 99999;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    transition: top 0.2s ease-in-out;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+    top: 0;
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* Screen reader only utility class */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Respect user preferences for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }

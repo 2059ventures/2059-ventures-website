@@ -301,8 +301,11 @@
     </style>
 </head>
 <body>
+    <!-- Skip to main content for screen readers and keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav" aria-label="Main Navigation">
         <div class="nav-container">
             <div class="nav-logo">
                 <img src="img/logo-shield.png" alt="20 59 Ventures Corp - Housing Referral Agency" class="logo-img">
@@ -319,14 +322,15 @@
                 <a href="index.html#contact" class="nav-link">Contact</a>
                 <a href="intake.html" class="nav-link" style="color: var(--logo-green); font-weight: 600;">Apply Now</a>
             </div>
-            <div class="nav-toggle" id="nav-toggle">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </nav>
 
+    <main id="main-content">
     <!-- Hero Section -->
     <section class="compliance-hero">
         <div class="compliance-hero-container">
@@ -458,6 +462,25 @@
                         <p>Referring hospital discharge planners, VA HUD-VASH coordinators, and municipal partners may request an executed Business Associate Agreement (BAA) directly from our compliance team.</p>
                     </div>
                 </div>
+
+                <!-- Digital Accessibility & ADA Statement Card -->
+                <div class="compliance-card" id="accessibility-statement">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: rgba(74, 124, 89, 0.15); color: var(--logo-green);">
+                            <i class="fas fa-universal-access"></i>
+                        </div>
+                        <h2>ADA Title III &amp; Digital Accessibility Statement</h2>
+                    </div>
+                    <div class="compliance-text">
+                        <p>20 59 Ventures Corp is committed to ensuring digital accessibility for people with disabilities, veterans, and seniors. We continually improve the user experience for everyone and apply the relevant accessibility standards under <strong>WCAG 2.1 &amp; 2.2 Level AA</strong> and the <strong>Americans with Disabilities Act (ADA) Title III</strong>.</p>
+                        <ul style="margin: 15px 0 15px 20px; color: var(--gray-dark); font-size: 15px; line-height: 1.6;">
+                            <li><strong>Keyboard Navigation &amp; Focus Indicators:</strong> Full site functionality, form workflows, and modal dialogues are operable using a standard keyboard with visible focus indicators.</li>
+                            <li><strong>Screen Reader Compatibility:</strong> Standardized semantic HTML5 landmarks, explicit form labels, ARIA live regions, and alternative text on informative media ensure assistive technology compatibility.</li>
+                            <li><strong>Multi-Modal Intake:</strong> In addition to our web wizard, printable offline PDF forms and alternative electronic signature options are provided for all participants.</li>
+                            <li><strong>Accessibility Feedback &amp; Assistance:</strong> If you experience any difficulty accessing content or require accommodations, contact our accessibility coordinator at <a href="mailto:info@2059ventures.online" style="color: var(--logo-green); text-decoration: underline;">info@2059ventures.online</a> or call <a href="tel:18889192059" style="color: var(--logo-green); text-decoration: underline;">1-888-919-2059</a>.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!-- Side Column: Corporate Profile -->
@@ -522,6 +545,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
