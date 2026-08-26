@@ -22,7 +22,8 @@ const SECURITY_HEADERS = {
     'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
     'X-Content-Type-Options': 'nosniff',
     'X-Frame-Options': 'SAMEORIGIN',
-    'Referrer-Policy': 'strict-origin-when-cross-origin'
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Permissions-Policy': 'camera=(), microphone=(), geolocation=()'
 };
 
 export default {
@@ -59,21 +60,27 @@ export default {
             return handleLinkedInLeadWebhook(request, env);
         }
 
-        // ── Serve static assets (with cache-busting for HTML, CSS, JS) ──────
+        // ── Serve static assets (with security headers & cache-busting for HTML, CSS, JS) ──────
         const assetResponse = await env.ASSETS.fetch(request);
         const path = url.pathname.toLowerCase();
+        const newHeaders = new Headers(assetResponse.headers);
+
+        // Apply strict security headers
+        for (const [headerKey, headerVal] of Object.entries(SECURITY_HEADERS)) {
+            newHeaders.set(headerKey, headerVal);
+        }
+
         if (path === '/' || path.endsWith('.html') || path.endsWith('.css') || path.endsWith('.js') || path.includes('harry-widget')) {
-            const newHeaders = new Headers(assetResponse.headers);
             newHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
             newHeaders.set('Pragma', 'no-cache');
             newHeaders.set('Expires', '0');
-            return new Response(assetResponse.body, {
-                status: assetResponse.status,
-                statusText: assetResponse.statusText,
-                headers: newHeaders
-            });
         }
-        return assetResponse;
+
+        return new Response(assetResponse.body, {
+            status: assetResponse.status,
+            statusText: assetResponse.statusText,
+            headers: newHeaders
+        });
     }
 };
 

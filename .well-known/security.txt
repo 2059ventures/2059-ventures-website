@@ -1,0 +1,9 @@
+# 20 59 Ventures Corp - Vulnerability Disclosure Policy (RFC 9116)
+Contact: mailto:info@2059ventures.online
+Contact: tel:+1-888-919-2059
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://2059ventures.online/.well-known/security.txt
+Policy: https://2059ventures.online/compliance.html#data-governance
+Acknowledgments: https://2059ventures.online/compliance.html
+Hiring: https://2059ventures.online/about.html
