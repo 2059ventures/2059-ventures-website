@@ -193,7 +193,7 @@
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#contracting" class="nav-link">Government</a>
                 <a href="#contact" class="nav-link">Contact</a>
-                <a href="intake.html" class="nav-link" style="color: var(--logo-green); font-weight: 600;">Apply Now</a>
+                <a href="intake.html" class="nav-link" style="color: var(--brand-gold); font-weight: 700;">Apply Now</a>
             </div>
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="bar"></span>
@@ -208,12 +208,21 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-container fade-in">
+            <!-- Floating Credential Pills (Curved Bubbles) -->
+            <div class="hero-floating-pills">
+                <div class="hero-pill-bubble"><i class="fas fa-star" style="color: #C9A84C;"></i> <span>BBB A+ Rated</span></div>
+                <div class="hero-pill-bubble"><span style="font-size: 13px;">🇺🇸</span> <span>VOSB Certified</span></div>
+                <div class="hero-pill-bubble"><i class="fas fa-shield-halved" style="color: #6fcf97;"></i> <span>WOSB Certified</span></div>
+            </div>
+
             <div class="hero-eyebrow">Government &amp; Agency Housing Partners</div>
-            <h1 class="hero-headline">Reliable housing partnerships.<br>Streamlined placement.</h1>
+            <h1 class="hero-headline">Reliable housing <span class="text-gold-glow">partnerships.</span><br>Streamlined placement.</h1>
             <p class="hero-subheadline">We connect veterans and seniors with stable, fully-managed housing—acting as a direct extension of your support agency. No credit checks required.</p>
             <div class="hero-cta" style="display: flex; flex-direction: column; gap: 12px; margin-top: 25px; align-items: center; justify-content: center;">
                 <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
-                    <a href="intake.html" class="btn-primary" style="display: inline-block; text-align: center; text-decoration: none; line-height: 1;">Submit Client Referral</a>
+                    <a href="intake.html" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; text-align: center; text-decoration: none;">
+                        Submit Client Referral <i class="fas fa-arrow-right" style="color: var(--brand-gold);"></i>
+                    </a>
                     <button class="btn-secondary" onclick="openModal('partnerModal')">Agency Partnerships</button>
                 </div>
                 <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
@@ -229,11 +238,15 @@
             <!-- Trust & Credibility Bar -->
             <div class="hero-trust-bar">
                 <div class="trust-item">
-                    <i class="fas fa-award"></i> BBB Rating A+ <span class="trust-subtext">(Better Business Bureau)</span>
+                    <i class="fas fa-star" style="color: #C9A84C;"></i> BBB Rating A+ <span class="trust-subtext">(Better Business Bureau)</span>
                 </div>
                 <span class="trust-divider">|</span>
                 <div class="trust-item">
-                    <i class="fas fa-shield-alt"></i> SAM.gov Active Entity <span class="trust-subtext">(CAGE: 22DH9)</span>
+                    <i class="fas fa-shield-alt" style="color: #C9A84C;"></i> SAM.gov Active Entity <span class="trust-subtext">(CAGE: 22DH9)</span>
+                </div>
+                <span class="trust-divider">|</span>
+                <div class="trust-item">
+                    <i class="fas fa-home" style="color: #C9A84C;"></i> HUD-VASH Vouchers Accepted
                 </div>
             </div>
             
@@ -383,28 +396,28 @@
                     <div class="housing-badge shared"><i class="fas fa-tag"></i> Most Affordable</div>
                     <h3 class="housing-title">Shared Room Housing</h3>
                     <p class="housing-price" style="margin-bottom: 2px;">$650<span style="font-size: 16px; font-weight: 500; color: var(--gray-dark);">/month</span></p>
-                    <p style="font-size: 13px; color: var(--logo-dark-green); font-weight: 600; margin-bottom: 24px; display: flex; align-items: center; gap: 6px;">
-                        <i class="fas fa-check-circle" style="color: var(--logo-green);"></i> (Covered 100% by HUD-VASH / Vouchers)
+                    <p style="font-size: 13.5px; color: var(--brand-navy); font-weight: 600; margin-bottom: 24px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fas fa-check-circle" style="color: var(--brand-gold);"></i> (Covered 100% by HUD-VASH / Vouchers)
                     </p>
                     <div class="housing-features" style="flex: 1;">
                         <div class="feature-item">
-                            <i class="fas fa-bed"></i>
+                            <i class="fas fa-bed" style="color: var(--brand-gold);"></i>
                             <span>Fully furnished with privacy screens</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-bolt"></i>
+                            <i class="fas fa-bolt" style="color: var(--brand-gold);"></i>
                             <span>All utilities &amp; high-speed Wi-Fi</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-utensils"></i>
+                            <i class="fas fa-utensils" style="color: var(--brand-gold);"></i>
                             <span>Shared kitchen, laundry &amp; living</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-users"></i>
+                            <i class="fas fa-users" style="color: var(--brand-gold);"></i>
                             <span>Community support &amp; meal access</span>
                         </div>
                     </div>
-                    <button type="button" class="btn-primary full-width" onclick="openModal('housingModal'); if(document.getElementById('housing-preference')) document.getElementById('housing-preference').value='shared_room';" style="margin-top: auto; padding: 14px 20px; font-size: 15px; font-weight: 600; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <button type="button" class="btn-primary full-width" onclick="openModal('housingModal'); if(document.getElementById('housing-preference')) document.getElementById('housing-preference').value='shared_room';" style="margin-top: auto; padding: 14px 20px; font-size: 15px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #C9A84C 0%, #DFCA7A 100%); color: #1D1D1F; border: none; box-shadow: 0 6px 20px rgba(201, 168, 76, 0.35);">
                         Apply for Shared Room <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -413,28 +426,28 @@
                     <div class="housing-badge premium"><i class="fas fa-star" style="color: #ffd700;"></i> Popular / Private</div>
                     <h3 class="housing-title">Private Room Housing</h3>
                     <p class="housing-price" style="margin-bottom: 2px;">$850<span style="font-size: 16px; font-weight: 500; color: var(--gray-dark);">/month</span></p>
-                    <p style="font-size: 13px; color: var(--logo-dark-green); font-weight: 600; margin-bottom: 24px; display: flex; align-items: center; gap: 6px;">
-                        <i class="fas fa-check-circle" style="color: var(--logo-green);"></i> (Covered 100% by HUD-VASH / Vouchers)
+                    <p style="font-size: 13.5px; color: var(--brand-navy); font-weight: 600; margin-bottom: 24px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fas fa-check-circle" style="color: var(--brand-gold);"></i> (Covered 100% by HUD-VASH / Vouchers)
                     </p>
                     <div class="housing-features" style="flex: 1;">
                         <div class="feature-item">
-                            <i class="fas fa-door-closed"></i>
+                            <i class="fas fa-door-closed" style="color: var(--brand-blue);"></i>
                             <span>Private keyed bedroom &amp; closet</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-bolt"></i>
+                            <i class="fas fa-bolt" style="color: var(--brand-blue);"></i>
                             <span>All utilities &amp; high-speed Wi-Fi</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-couch"></i>
+                            <i class="fas fa-couch" style="color: var(--brand-blue);"></i>
                             <span>Shared kitchen, laundry &amp; living</span>
                         </div>
                         <div class="feature-item">
-                            <i class="fas fa-lock"></i>
+                            <i class="fas fa-lock" style="color: var(--brand-blue);"></i>
                             <span>Enhanced privacy &amp; quiet setting</span>
                         </div>
                     </div>
-                    <button type="button" class="btn-primary full-width" onclick="openModal('housingModal'); if(document.getElementById('housing-preference')) document.getElementById('housing-preference').value='private_room';" style="margin-top: auto; padding: 14px 20px; font-size: 15px; font-weight: 600; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #1e3d29 0%, #2e5d3d 100%);">
+                    <button type="button" class="btn-primary full-width" onclick="openModal('housingModal'); if(document.getElementById('housing-preference')) document.getElementById('housing-preference').value='private_room';" style="margin-top: auto; padding: 14px 20px; font-size: 15px; font-weight: 700; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #0F2D4A 0%, #1B3A6B 100%); color: #ffffff; border: 1px solid rgba(201, 168, 76, 0.4); box-shadow: 0 6px 20px rgba(15, 45, 74, 0.35);">
                         Request Private Room <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>

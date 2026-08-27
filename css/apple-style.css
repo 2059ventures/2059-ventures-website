@@ -2,12 +2,21 @@
 /* Updated with softer green color palette from actual logo */
 
 :root {
-    /* Apple-inspired color palette with your brand colors */
-    --logo-green: #4A7C59;           /* Softer green from actual logo */
-    --logo-cream: #F8F6F0;          /* Warm cream from logo */
-    --logo-dark-green: #3A5F47;     /* Darker version for hovers */
-    --logo-light-green: #6B9A78;    /* Lighter version for accents */
+    /* Emerald Dusk + Gold & Navy Palette */
+    --logo-green: #245e43;           /* Rich Emerald Green */
+    --logo-cream: #F8F6F0;          /* Warm cream */
+    --logo-dark-green: #173e2c;     /* Deep Forest Emerald */
+    --logo-light-green: #3d8b66;    /* Bright Emerald Accent */
     
+    /* Navy & Gold brand tokens */
+    --brand-navy: #0F2D4A;          /* Deep Navy-Teal */
+    --brand-navy-dark: #0A1E32;     /* Midnight Navy */
+    --brand-gold: #C9A84C;          /* Warm Lustrous Gold */
+    --brand-gold-light: #DFCA7A;    /* Light Gold Shimmer */
+    --brand-gold-glow: rgba(201, 168, 76, 0.45);
+    --brand-blue: #1B3A6B;          /* Classic Authority Blue */
+    --brand-blue-glow: rgba(27, 58, 107, 0.35);
+
     /* Apple-style neutrals */
     --white: #FFFFFF;
     --black: #1D1D1F;
@@ -15,9 +24,11 @@
     --gray-medium: #636366;
     --gray-dark: #515154;
     
-    /* Apple glassmorphism and transparency */
-    --glass-bg: rgba(255, 255, 255, 0.25);
-    --glass-border: rgba(255, 255, 255, 0.18);
+    /* Glassmorphism system */
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-bg-hover: rgba(255, 255, 255, 0.18);
+    --glass-border: rgba(255, 255, 255, 0.22);
+    --glass-border-gold: rgba(201, 168, 76, 0.4);
     --backdrop-blur: blur(20px);
 }
 
@@ -35,7 +46,7 @@ body {
     font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     line-height: 1.6;
     color: var(--black);
-    background: var(--white);
+    background: var(--logo-cream);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -46,10 +57,10 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(248, 246, 240, 0.8);
+    background: rgba(248, 246, 240, 0.88);
     backdrop-filter: var(--backdrop-blur);
     -webkit-backdrop-filter: var(--backdrop-blur);
-    border-bottom: 1px solid rgba(74, 124, 89, 0.1);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.22);
     z-index: 1000;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -77,7 +88,7 @@ body {
     margin-right: 15px;
     border-radius: 8px;
     transition: transform 0.3s ease;
-    box-shadow: 0 4px 12px rgba(74, 124, 89, 0.2);
+    box-shadow: 0 4px 12px rgba(15, 45, 74, 0.15);
 }
 
 .logo-img:hover {
@@ -87,14 +98,14 @@ body {
 .logo-text {
     font-size: 18px;
     font-weight: 700;
-    color: var(--logo-green);
+    color: var(--brand-navy);
     letter-spacing: -0.02em;
 }
 
 .logo-subtitle {
     font-size: 12px;
-    font-weight: 500;
-    color: var(--gray-dark);
+    font-weight: 600;
+    color: var(--brand-gold);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -116,7 +127,7 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--logo-green);
+    color: var(--brand-navy);
     transform: translateY(-1px);
 }
 
@@ -127,7 +138,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--logo-green), var(--logo-light-green));
+    background: linear-gradient(90deg, var(--brand-gold), var(--brand-gold-light));
     transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -148,21 +159,22 @@ body {
 .nav-toggle .bar {
     width: 25px;
     height: 3px;
-    background: var(--logo-green);
+    background: var(--brand-navy);
     border-radius: 2px;
     transition: all 0.3s ease;
 }
 
-/* Hero Section */
+/* Hero Section — Emerald Dusk Aurora with V-Slope Chevron */
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--logo-cream) 0%, rgba(248, 246, 240, 0.8) 50%, var(--white) 100%);
-    padding: 100px 24px 60px;
+    background: radial-gradient(circle at 50% 25%, #1b4934 0%, #133927 45%, #0d2540 100%);
+    padding: 110px 24px 110px;
     position: relative;
     overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 48px), 50% 100%, 0 calc(100% - 48px));
 }
 
 .hero::before {
@@ -173,47 +185,92 @@ body {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 20% 30%, rgba(74, 124, 89, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(107, 154, 120, 0.08) 0%, transparent 50%);
+        radial-gradient(circle at 15% 20%, rgba(201, 168, 76, 0.14) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(27, 90, 150, 0.2) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(201, 168, 76, 0.06) 0%, transparent 50%);
     pointer-events: none;
 }
 
+/* Floating Glass Credential Pills (Hybrid 1 curved style) */
+.hero-floating-pills {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeInUp 0.9s ease 0.1s forwards;
+}
+
+.hero-pill-bubble {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 9999px;
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.hero-pill-bubble:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.22);
+    border-color: var(--brand-gold);
+    box-shadow: 0 6px 22px rgba(201, 168, 76, 0.3);
+}
+
 .hero-container {
-    max-width: 800px;
+    max-width: 860px;
     text-align: center;
     position: relative;
     z-index: 1;
 }
 
 .hero-eyebrow {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--logo-green);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--brand-gold);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     margin-bottom: 16px;
     opacity: 0;
     animation: fadeInUp 1s ease 0.2s forwards;
 }
 
 .hero-headline {
-    font-size: clamp(48px, 8vw, 72px);
+    font-size: clamp(48px, 7.5vw, 70px);
     font-weight: 700;
-    color: var(--black);
-    line-height: 1.1;
+    color: #ffffff;
+    line-height: 1.12;
     margin-bottom: 24px;
     letter-spacing: -0.02em;
     opacity: 0;
     animation: fadeInUp 1s ease 0.4s forwards;
 }
 
+.hero-headline .text-gold-glow {
+    background: linear-gradient(135deg, #DFCA7A 0%, #C9A84C 50%, #FAF0CD 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(201, 168, 76, 0.4);
+}
+
 .hero-subheadline {
     font-size: 22px;
     font-weight: 400;
-    color: var(--gray-dark);
-    line-height: 1.5;
-    margin-bottom: 40px;
-    max-width: 600px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.55;
+    margin-bottom: 36px;
+    max-width: 680px;
     margin-left: auto;
     margin-right: auto;
     opacity: 0;
@@ -222,30 +279,30 @@ body {
 
 .hero-cta {
     display: flex;
-    gap: 20px;
+    gap: 16px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     opacity: 0;
     animation: fadeInUp 1s ease 0.8s forwards;
 }
 
-/* Hero Trust Bar */
+/* Hero Trust Bar — Glassmorphic Capsule */
 .hero-trust-bar {
     display: inline-flex;
     gap: 18px;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 24px;
-    margin-bottom: 24px;
-    background: rgba(255, 255, 255, 0.65);
+    margin-top: 16px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(74, 124, 89, 0.16);
-    padding: 10px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    padding: 11px 26px;
     border-radius: 50px;
-    box-shadow: 0 4px 20px rgba(74, 124, 89, 0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.25);
     opacity: 0;
     animation: fadeInUp 1s ease 0.9s forwards;
 }
@@ -254,61 +311,61 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--black, #1D1D1F);
-    font-size: 13.5px;
+    color: #ffffff;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: -0.01em;
 }
 
 .hero-trust-bar .trust-item i {
-    color: var(--logo-green, #4A7C59);
+    color: var(--brand-gold);
     font-size: 15px;
 }
 
 .hero-trust-bar .trust-subtext {
     font-weight: 400;
-    color: var(--gray-dark, #515154);
+    color: rgba(255, 255, 255, 0.75);
     font-size: 12.5px;
 }
 
 .hero-trust-bar .trust-divider {
-    color: rgba(74, 124, 89, 0.25);
+    color: rgba(255, 255, 255, 0.3);
     font-weight: 300;
     font-size: 13px;
 }
 
 /* Partnership Callout */
 .partnership-callout {
-    background: var(--glass-bg);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: var(--backdrop-blur);
     -webkit-backdrop-filter: var(--backdrop-blur);
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
-    padding: 24px;
+    padding: 20px 24px;
     display: flex;
     align-items: center;
     gap: 16px;
-    max-width: 500px;
+    max-width: 520px;
     margin: 0 auto;
-    box-shadow: 0 8px 32px rgba(74, 124, 89, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     opacity: 0;
     animation: fadeInUp 1s ease 1s forwards;
 }
 
 .partnership-callout i {
     font-size: 24px;
-    color: var(--logo-green);
+    color: var(--brand-gold);
 }
 
 .partnership-callout strong {
-    color: var(--logo-green);
+    color: #ffffff;
     font-weight: 600;
     display: block;
     margin-bottom: 4px;
 }
 
 .partnership-callout p {
-    color: var(--gray-dark);
+    color: rgba(255, 255, 255, 0.82);
     font-size: 14px;
     margin: 0;
 }
@@ -333,12 +390,40 @@ body {
 .btn-primary {
     background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
     color: var(--white);
-    box-shadow: 0 8px 32px rgba(74, 124, 89, 0.3);
+    box-shadow: 0 8px 32px rgba(36, 94, 67, 0.3);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(74, 124, 89, 0.4);
+    box-shadow: 0 12px 40px rgba(36, 94, 67, 0.4);
+}
+
+/* Hero specific button styling */
+.hero .btn-primary {
+    background: linear-gradient(135deg, #0F2D4A 0%, #1B3A6B 100%);
+    color: #ffffff;
+    border: 2px solid var(--brand-gold);
+    box-shadow: 0 6px 24px rgba(201, 168, 76, 0.35);
+}
+
+.hero .btn-primary:hover {
+    background: linear-gradient(135deg, #1B3A6B 0%, #244b8a 100%);
+    box-shadow: 0 8px 32px rgba(201, 168, 76, 0.5);
+    border-color: #ffffff;
+}
+
+.hero .btn-secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.hero .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.28);
+    border-color: var(--brand-gold);
+    color: var(--brand-gold-light);
 }
 
 .btn-secondary {
@@ -367,8 +452,11 @@ body {
 
 /* Features Section */
 .features {
-    padding: 100px 24px;
-    background: var(--white);
+    padding: 60px 24px 100px;
+    margin-top: 0;
+    background: var(--logo-cream);
+    position: relative;
+    z-index: 2;
 }
 
 .features-container {
@@ -636,37 +724,39 @@ body {
 
 /* HUD-VASH Banner */
 .hud-vash-banner {
-    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
-    border-radius: 20px;
-    padding: 24px;
+    background: linear-gradient(135deg, #133927 0%, #1c4b35 100%);
+    border-left: 5px solid var(--brand-gold);
+    border-radius: 18px;
+    padding: 24px 28px;
     margin: 40px 0 60px;
-    box-shadow: 0 8px 32px rgba(74, 124, 89, 0.3);
+    box-shadow: 0 10px 32px rgba(15, 45, 74, 0.16);
 }
 
 .banner-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 18px;
     text-align: left;
 }
 
 .hud-vash-banner i {
-    font-size: 24px;
-    color: var(--white);
+    font-size: 26px;
+    color: var(--brand-gold);
 }
 
 .hud-vash-banner strong {
     color: var(--white);
     font-weight: 700;
-    font-size: 18px;
+    font-size: 19px;
     display: block;
     margin-bottom: 4px;
 }
 
 .hud-vash-banner p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 14px;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 14.5px;
+    line-height: 1.5;
     margin: 0;
 }
 
@@ -683,16 +773,31 @@ body {
     padding: 40px;
     position: relative;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(74, 124, 89, 0.15);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(15, 45, 74, 0.12);
     display: flex;
     flex-direction: column;
 }
 
+.housing-card:nth-child(1) {
+    border-top: 4px solid var(--brand-gold);
+}
+
+.housing-card:nth-child(2) {
+    border-top: 4px solid var(--brand-navy);
+}
+
 .housing-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 60px rgba(74, 124, 89, 0.2);
-    border-color: var(--logo-green);
+    box-shadow: 0 24px 64px rgba(15, 45, 74, 0.18);
+}
+
+.housing-card:nth-child(1):hover {
+    border-color: var(--brand-gold);
+}
+
+.housing-card:nth-child(2):hover {
+    border-color: var(--brand-navy);
 }
 
 .housing-badge {
@@ -705,21 +810,23 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
     display: inline-flex;
     align-items: center;
     gap: 6px;
 }
 
 .housing-badge.shared {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: var(--white);
+    background: linear-gradient(135deg, #DFCA7A 0%, #C9A84C 100%);
+    color: #1D1D1F;
+    box-shadow: 0 4px 14px rgba(201, 168, 76, 0.35);
 }
 
 .housing-badge.premium {
-    background: linear-gradient(135deg, #1e3d29 0%, #2e5d3d 100%);
+    background: linear-gradient(135deg, #0F2D4A 0%, #1B3A6B 100%);
     color: var(--white);
-    border: 1px solid rgba(255, 215, 0, 0.3);
+    border: 1px solid rgba(201, 168, 76, 0.5);
+    box-shadow: 0 4px 14px rgba(15, 45, 74, 0.35);
 }
 
 .housing-title {
@@ -731,9 +838,9 @@ body {
 }
 
 .housing-price {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
-    color: var(--logo-green);
+    color: var(--brand-navy);
     margin-bottom: 24px;
 }
 
