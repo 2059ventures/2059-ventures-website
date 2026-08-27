@@ -156,10 +156,10 @@
     /* 8.5" x 11" Clean Paper Layout */
     .capabilities-sheet {
       width: 8.5in;
-      min-height: 11in;
+      height: auto;
       background: #ffffff;
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      border-radius: 4px;
+      border-radius: 6px;
       padding: 38px 42px 34px;
       display: flex;
       flex-direction: column;
@@ -187,12 +187,12 @@
     }
 
     .sheet-logo {
-      height: 62px;
+      height: 64px;
       width: auto;
     }
 
     .sheet-brand-text h2 {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 800;
       color: #256041;
       line-height: 1.1;
@@ -200,7 +200,7 @@
     }
 
     .sheet-brand-text p {
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 600;
       color: #4b5563;
       text-transform: uppercase;
@@ -212,89 +212,93 @@
     }
 
     .sheet-title h3 {
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 20px;
+      font-weight: 800;
       color: #d97706;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     .sheet-title p {
-      font-size: 11px;
+      font-size: 12px;
       color: #4b5563;
     }
 
     .sheet-body {
       display: flex;
-      gap: 28px;
-      flex: 1;
+      gap: 26px;
+      align-items: flex-start;
     }
 
     /* Sidebar Identifiers */
     .sheet-sidebar {
-      width: 205px;
+      width: 220px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       flex-shrink: 0;
     }
 
     .sidebar-card {
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      padding: 0;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 13px 15px;
     }
 
     .sidebar-card h4 {
-      font-size: 10.5px;
+      font-size: 12.5px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: #1e4d35;
-      border-bottom: 1.5px solid #1e4d35;
-      padding-bottom: 3px;
-      margin-bottom: 6px;
+      border-bottom: 2px solid #1e4d35;
+      padding-bottom: 4px;
+      margin-bottom: 8px;
       font-weight: 800;
     }
 
     .sidebar-list {
       list-style: none;
-      font-size: 10.5px;
+      font-size: 11.5px;
     }
 
     .sidebar-list li {
-      margin-bottom: 4px;
-      line-height: 1.25;
+      margin-bottom: 5px;
+      line-height: 1.3;
     }
 
     .sidebar-list li strong {
       color: #1b4730;
       display: block;
+      font-size: 11.5px;
+      font-weight: 800;
     }
 
     .naics-block {
-      font-size: 10px;
-      line-height: 1.25;
-      margin-bottom: 4px;
+      font-size: 11.5px;
+      line-height: 1.3;
+      margin-bottom: 5px;
     }
 
     .naics-block strong {
       color: #256041;
       display: inline-block;
-      width: 48px;
+      font-weight: 700;
+      width: 54px;
     }
 
     .sheet-contact-item {
       display: flex;
-      gap: 6px;
-      font-size: 9.5px;
-      margin-bottom: 6px;
-      line-height: 1.25;
+      gap: 7px;
+      font-size: 11.5px;
+      margin-bottom: 7px;
+      line-height: 1.3;
     }
 
     .sheet-contact-item i {
       color: #256041;
       margin-top: 2px;
+      font-size: 11.5px;
     }
 
     /* Main Panel Content */
@@ -305,47 +309,47 @@
     }
 
     .sheet-overview {
-      font-size: 12px;
-      line-height: 1.5;
+      font-size: 15px;
+      line-height: 1.55;
       text-align: justify;
       color: #111827;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .sheet-section h4 {
-      font-size: 12.5px;
+      font-size: 14px;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: #8c9ba5;
+      color: #9ca3af;
       background: transparent;
       padding: 0;
-      margin-top: 10px;
-      margin-bottom: 8px;
+      margin-top: 18px;
+      margin-bottom: 12px;
       font-weight: 700;
     }
 
     .sheet-comp-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 16px;
     }
 
     .sheet-comp-card {
-      border-left: 2.5px solid #d97706;
-      padding-left: 8px;
+      border-left: 3.5px solid #d97706;
+      padding-left: 10px;
     }
 
     .sheet-comp-card h5 {
-      font-size: 11.5px;
+      font-size: 13.5px;
       font-weight: 700;
       color: #1e4d35;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
     .sheet-comp-card p {
-      font-size: 10px;
+      font-size: 12px;
       color: #4b5563;
-      line-height: 1.3;
+      line-height: 1.4;
     }
 
     .sheet-bullets {
@@ -354,50 +358,50 @@
     }
 
     .sheet-bullets li {
-      font-size: 11px;
-      margin-bottom: 5px;
+      font-size: 13px;
+      margin-bottom: 8px;
       position: relative;
-      padding-left: 14px;
-      line-height: 1.3;
+      padding-left: 16px;
+      line-height: 1.45;
     }
 
     .sheet-bullets li::before {
       content: "\2022";
       color: #d97706;
       font-weight: bold;
-      font-size: 14px;
+      font-size: 16px;
       display: inline-block;
       width: 10px;
-      margin-left: -14px;
+      margin-left: -16px;
       position: absolute;
-      left: 14px;
+      left: 16px;
       top: -2px;
     }
 
     .sheet-perf-card {
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
 
     .sheet-perf-card h5 {
-      font-size: 11px;
+      font-size: 13.5px;
       font-weight: 700;
       color: #111827;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
     .sheet-perf-card p {
-      font-size: 10.5px;
+      font-size: 12.5px;
       color: #4b5563;
-      line-height: 1.3;
+      line-height: 1.45;
     }
 
     .sheet-footer {
       border-top: 1px solid #d1d5db;
-      padding-top: 10px;
-      margin-top: auto;
+      padding-top: 12px;
+      margin-top: 24px;
       display: flex;
       justify-content: space-between;
-      font-size: 9px;
+      font-size: 10px;
       color: #4b5563;
       font-weight: 500;
       flex-shrink: 0;
@@ -426,7 +430,7 @@
 
       .capabilities-sheet {
         width: 8.5in !important;
-        height: 11in !important;
+        height: auto !important;
         padding: 38px 42px 34px !important;
         box-shadow: none !important;
         border-radius: 0 !important;
@@ -574,12 +578,12 @@
 
           <div class="sidebar-card">
             <h4>Compliance &amp; Standards</h4>
-            <ul class="sidebar-list" style="font-size: 8.5px; line-height: 1.35;">
-              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:3px;"></i> FAR 52.204-24/25 (NDAA 889)</li>
-              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:3px;"></i> Anti-Kickback (41 U.S.C. 87)</li>
-              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:3px;"></i> Fair Housing (FHA / Title VIII)</li>
-              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:3px;"></i> HIPAA &amp; 256-Bit Encrypted</li>
-              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:3px;"></i> ADA &amp; Section 508 WCAG AA</li>
+            <ul class="sidebar-list" style="font-size: 10px; line-height: 1.35;">
+              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> FAR 52.204-24/25 (NDAA 889)</li>
+              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> Anti-Kickback (41 U.S.C. 87)</li>
+              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> Fair Housing (FHA / Title VIII)</li>
+              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> HIPAA &amp; 256-Bit Encrypted</li>
+              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> ADA &amp; Section 508 WCAG AA</li>
             </ul>
           </div>
 
@@ -617,7 +621,7 @@
                 Dothan, AL 36303
               </div>
             </div>
-            <div style="font-size: 8.5px; font-weight: 700; color: #256041; margin-top: 4px; border-top: 1px dashed #cbd5e1; padding-top: 4px; line-height: 1.2;">
+            <div style="font-size: 9.5px; font-weight: 700; color: #256041; margin-top: 5px; border-top: 1px dashed #cbd5e1; padding-top: 5px; line-height: 1.25;">
               Serving Statewide | Tuscaloosa, Dothan &amp; Montgomery Regional Hubs
             </div>
           </div>
@@ -677,17 +681,17 @@
           </div>
 
           <!-- QR CODE CALL TO ACTION -->
-          <div style="margin-top: 10px; border: 1.5px solid #e5e7eb; border-radius: 6px; padding: 10px 14px; display: flex; align-items: center; gap: 14px; background: #f9fafb;">
+          <div style="margin-top: 22px; border: 1.5px solid #e5e7eb; border-radius: 8px; padding: 16px 20px; display: flex; align-items: center; gap: 18px; background: #ffffff;">
             <img
-              src="https://api.qrserver.com/v1/create-qr-code/?size=72x72&color=256041&bgcolor=f9fafb&data=https://www.2059ventures.online/intake.html"
+              src="https://api.qrserver.com/v1/create-qr-code/?size=88x88&color=256041&bgcolor=ffffff&data=https://www.2059ventures.online/intake.html"
               alt="QR Code - Submit a Client Referral"
-              width="72" height="72"
+              width="88" height="88"
               style="flex-shrink: 0; border-radius: 4px;"
             >
             <div>
-              <div style="font-size: 10.5px; font-weight: 700; color: #256041; margin-bottom: 2px;">Ready to Refer a Client?</div>
-              <div style="font-size: 9.5px; color: #4b5563; line-height: 1.25; margin-bottom: 3px;">Scan to access our secure Agency Referral Portal. Submit client information, request housing, transport, or meal assistance, and track placement in real time.</div>
-              <div style="font-size: 9px; font-weight: 600; color: #256041;">2059ventures.online/intake</div>
+              <div style="font-size: 14.5px; font-weight: 800; color: #256041; margin-bottom: 4px;">Ready to Refer a Client?</div>
+              <div style="font-size: 12px; color: #4b5563; line-height: 1.4; margin-bottom: 5px;">Scan to access our secure Agency Referral Portal. Submit client information, request housing, transport, or meal assistance, and track placement in real time.</div>
+              <div style="font-size: 12px; font-weight: 700; color: #256041;">2059ventures.online/intake</div>
             </div>
           </div>
 
