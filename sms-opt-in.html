@@ -100,7 +100,8 @@
             <p class="section-subheadline" style="font-size: 18px; color: var(--gray-medium); margin-bottom: 40px; max-width: 100%;">Manage your communication preferences with 20 59 Ventures Corp.</p>
             
             <div class="contact-form-wrapper" style="background: var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.05); padding: 40px; border-radius: 24px; border: 1px solid rgba(74, 124, 89, 0.1);">
-                <form action="https://formspree.io/f/meolndzb" method="POST" class="contact-form" style="width: 100%;">
+                <form action="/api/contact" method="POST" class="contact-form" style="width: 100%;">
+                <input type="hidden" name="form_type" value="SMS Communications Opt-In">
                     <div class="form-group" style="text-align: left; margin-bottom: 25px;">
                         <label for="phone" style="display: block; font-size: 14px; font-weight: 600; color: var(--black); margin-bottom: 8px;">Phone Number</label>
                         <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required style="width: 100%; padding: 14px 20px; border: 1px solid rgba(74, 124, 89, 0.2); border-radius: 10px; font-size: 16px; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='var(--logo-green)'" onblur="this.style.borderColor='rgba(74, 124, 89, 0.2)'">
@@ -196,5 +197,51 @@
         </div>
     </footer>
     <script src="js/apple-style.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form.contact-form');
+        if (!form) return;
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = form.querySelector('button[type="submit"]');
+            const orig = btn ? btn.innerHTML : 'Submit';
+            if (btn) { btn.disabled = true; btn.innerHTML = 'Submitting...'; }
+
+            const oldAlert = form.querySelector('.form-alert-box');
+            if (oldAlert) oldAlert.remove();
+
+            const payload = {};
+            new FormData(form).forEach((v, k) => payload[k] = v);
+
+            try {
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json().catch(() => ({}));
+                if (res.ok && (data.success || data.status === 'Success')) {
+                    const alert = document.createElement('div');
+                    alert.className = 'form-alert-box';
+                    alert.style.cssText = 'background: #ecfdf5; border: 1px solid #10b981; color: #065f46; padding: 14px; border-radius: 8px; margin: 15px 0; text-align: center; font-weight: 600;';
+                    alert.innerHTML = '✓ SMS preferences recorded and email confirmed.';
+                    form.appendChild(alert);
+                    form.reset();
+                    if (btn) btn.innerHTML = 'Opt-In Confirmed';
+                } else {
+                    throw new Error(data.error || 'Failed');
+                }
+            } catch (err) {
+                const alert = document.createElement('div');
+                alert.className = 'form-alert-box';
+                alert.style.cssText = 'background: #fef2f2; border: 1px solid #ef4444; color: #991b1b; padding: 14px; border-radius: 8px; margin: 15px 0; text-align: center;';
+                alert.innerHTML = 'Submission failed. Please call (888) 919-2059.';
+                form.appendChild(alert);
+                if (btn) { btn.disabled = false; btn.innerHTML = orig; }
+            }
+        });
+    });
+    </script>
 </body>
 </html>

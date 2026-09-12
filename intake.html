@@ -790,9 +790,10 @@
         const form = document.getElementById("intakeForm");
 
         // Auto-detect backend API based on environment
-        const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+        // Route directly to native Worker API on 2059ventures.online, or local Flask dev server
+        const API_BASE = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
             ? "http://localhost:5000"
-            : "https://housing-platform-a2btefckcwf9apcd.centralus-01.azurewebsites.net";
+            : "";
 
         document.addEventListener("DOMContentLoaded", () => {
             // Set today's date on date inputs

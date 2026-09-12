@@ -1138,7 +1138,8 @@
                 
                 <div class="contact-form-wrapper">
                     <h3 class="form-title">Send us a message</h3>
-                    <form action="https://formspree.io/f/meolndzb" method="POST" class="contact-form">
+                    <form action="/api/contact" method="POST" class="contact-form" id="main-contact-form">
+                        <input type="hidden" name="form_type" value="General Contact Inquiry">
                         <div class="form-row">
                             <div class="form-group">
                                 <input type="text" id="contact-name" name="name" placeholder="Name" required>
@@ -1273,7 +1274,8 @@
         <div class="modal-content">
             <button type="button" class="close" onclick="closeModal('housingModal')" aria-label="Close Request a Place to Stay dialog">&times;</button>
             <h2 id="housingModalTitle">Request a Place to Stay</h2>
-            <form action="https://formspree.io/f/mzzaowjq" method="POST" class="modal-form">
+            <form action="/api/contact" method="POST" class="modal-form" id="housing-modal-form">
+                <input type="hidden" name="form_type" value="Housing Placement Application">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="housing-name" class="sr-only">Full Name</label>
@@ -1379,7 +1381,8 @@
         <div class="modal-content">
             <button type="button" class="close" onclick="closeModal('partnerModal')" aria-label="Close Partner With Us dialog">&times;</button>
             <h2 id="partnerModalTitle">Partner With Us</h2>
-            <form action="https://formspree.io/f/mnnbwroz" method="POST" class="modal-form">
+            <form action="/api/contact" method="POST" class="modal-form" id="partner-modal-form">
+                <input type="hidden" name="form_type" value="Agency / Community Partner Inquiry">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="partner-name" class="sr-only">Your Name</label>
@@ -1429,7 +1432,8 @@
         <div class="modal-content">
             <button type="button" class="close" onclick="closeModal('landlordModal')" aria-label="Close Landlord Partnership Application dialog">&times;</button>
             <h2 id="landlordModalTitle">Landlord Partnership Application</h2>
-            <form action="https://formspree.io/f/xovnr5kg" method="POST" class="modal-form">
+            <form action="/api/contact" method="POST" class="modal-form" id="landlord-modal-form">
+                <input type="hidden" name="form_type" value="Property Owner / Landlord Partner Inquiry">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="landlord-owner-name" class="sr-only">Property Owner Name</label>
@@ -1547,5 +1551,106 @@
     <script src="js/linkedin-tracker.js" defer></script>
     <!-- Telnyx Voice AI Harry Widget -->
     <script src="js/harry-widget.js" defer></script>
+
+    <!-- Direct Telnyx Email API Form Submission Handler -->
+    <script>
+    (function() {
+        function attachFormHandler(form) {
+            if (!form || form.getAttribute('data-telnyx-attached')) return;
+            form.setAttribute('data-telnyx-attached', 'true');
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+                const originalBtnText = submitBtn ? (submitBtn.innerHTML || submitBtn.value) : 'Submit';
+                
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    if (submitBtn.tagName === 'BUTTON') {
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    } else {
+                        submitBtn.value = 'Sending...';
+                    }
+                }
+
+                // Remove any existing alerts
+                const oldAlert = form.querySelector('.telnyx-form-alert');
+                if (oldAlert) oldAlert.remove();
+
+                const formData = new FormData(form);
+                const payload = {};
+                formData.forEach((value, key) => {
+                    payload[key] = value;
+                });
+
+                try {
+                    const response = await fetch('/api/contact', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json().catch(() => ({}));
+
+                    if (response.ok && (result.success || result.status === 'Success')) {
+                        const successMsg = document.createElement('div');
+                        successMsg.className = 'telnyx-form-alert';
+                        successMsg.style.cssText = 'background: #ecfdf5; border: 1px solid #10b981; color: #065f46; padding: 16px; border-radius: 8px; margin: 16px 0; text-align: center; font-weight: 600; font-size: 14px;';
+                        successMsg.innerHTML = '<i class="fas fa-check-circle" style="color: #10b981; margin-right: 8px; font-size: 16px;"></i>Thank you! Your information has been received. Our team has been notified and will contact you shortly.';
+                        
+                        form.appendChild(successMsg);
+                        form.reset();
+
+                        if (submitBtn) {
+                            if (submitBtn.tagName === 'BUTTON') {
+                                submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent Successfully';
+                            } else {
+                                submitBtn.value = 'Sent Successfully';
+                            }
+                        }
+
+                        // If inside a modal, close smoothly after 2.5s
+                        const modal = form.closest('.modal');
+                        if (modal) {
+                            setTimeout(() => {
+                                modal.classList.remove('active');
+                                modal.style.display = 'none';
+                                successMsg.remove();
+                                if (submitBtn) {
+                                    submitBtn.disabled = false;
+                                    if (submitBtn.tagName === 'BUTTON') submitBtn.innerHTML = originalBtnText;
+                                    else submitBtn.value = originalBtnText;
+                                }
+                            }, 2500);
+                        }
+                    } else {
+                        throw new Error(result.error || result.message || 'Submission failed');
+                    }
+                } catch (err) {
+                    console.error('[Form Submission Error]', err);
+                    const errorMsg = document.createElement('div');
+                    errorMsg.className = 'telnyx-form-alert';
+                    errorMsg.style.cssText = 'background: #fef2f2; border: 1px solid #ef4444; color: #991b1b; padding: 14px; border-radius: 8px; margin: 16px 0; text-align: center; font-size: 13px; font-weight: 500;';
+                    errorMsg.innerHTML = '<i class="fas fa-exclamation-circle" style="color: #ef4444; margin-right: 6px;"></i>Unable to send online right now. Please call us directly at <strong>(888) 919-2059</strong>.';
+                    form.appendChild(errorMsg);
+
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        if (submitBtn.tagName === 'BUTTON') submitBtn.innerHTML = originalBtnText;
+                        else submitBtn.value = originalBtnText;
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('form.contact-form, form.modal-form').forEach(attachFormHandler);
+        });
+    })();
+    </script>
 </body>
 </html>
