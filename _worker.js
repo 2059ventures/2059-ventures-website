@@ -49,7 +49,8 @@ export default {
             const apiRoutes = [
                 '/api/chat', '/api/lead', '/api/contact',
                 '/api/intake-upload', '/api/public/intake', '/api/intake',
-                '/api/linkedin-conversion', '/api/linkedin-lead-webhook'
+                '/api/linkedin-conversion', '/api/linkedin-lead-webhook',
+                '/api/telnyx/webhook', '/api/sms'
             ];
             if (apiRoutes.includes(url.pathname)) {
                 return new Response(null, { status: 204, headers: CORS_HEADERS });
@@ -89,6 +90,16 @@ export default {
         // ── Handle LinkedIn Lead Webhook ───────────────────────────────────
         if (url.pathname === '/api/linkedin-lead-webhook') {
             return handleLinkedInLeadWebhook(request, env);
+        }
+
+        // ── Handle Telnyx Inbound Webhook (SMS/MMS) ───────────────────────────
+        if (request.method === 'POST' && url.pathname === '/api/telnyx/webhook') {
+            return handleTelnyxWebhook(request, env);
+        }
+
+        // ── Handle Outbound SMS/MMS API Dispatch ──────────────────────────────
+        if (request.method === 'POST' && url.pathname === '/api/sms') {
+            return handleSmsDispatch(request, env);
         }
 
         // ── Serve static assets (with security headers & cache-busting) ────
@@ -644,134 +655,495 @@ TCPA & SMS CONSENT AUDIT:
     }
 }
 
-// ─── Resilient Odoo CRM & Chatter Synchronization ──────────────────────────────
-async function syncToOdoo({ name, email, phone, formType, data, clientIp, clientTimestamp, transactionalConsent, marketingConsent, env }) {
+// ─────────────────────────────────────────────────────────────────────────────
+// Resilient Odoo 18 JSON-RPC & Chatter Synchronization Suite
+// Company ID: 4 (20 59 Ventures Corp) | Team ID: 1
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Executes an arbitrary method on an Odoo model via JSON-RPC with timeout protection
+ */
+async function callOdooRpc(env, service, method, args, timeoutMs = 5000) {
     const odooUrl = env.ODOO_URL || 'https://odoo.iamalgo.com';
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+        const res = await fetch(`${odooUrl}/jsonrpc`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            signal: controller.signal,
+            body: JSON.stringify({
+                jsonrpc: '2.0',
+                method: 'call',
+                params: { service, method, args },
+                id: Math.floor(Math.random() * 1000000)
+            })
+        });
+        clearTimeout(timer);
+        if (!res.ok) {
+            throw new Error(`Odoo HTTP error ${res.status}`);
+        }
+        const data = await res.json();
+        if (data.error) {
+            throw new Error(data.error.data?.message || data.error.message || 'Odoo RPC exception');
+        }
+        return data.result;
+    } catch (err) {
+        clearTimeout(timer);
+        throw err;
+    }
+}
+
+/**
+ * Authenticates against Odoo database
+ */
+async function getOdooAuth(env) {
     const odooDb = env.ODOO_DB || 'IAM_Main';
     const odooUser = env.ODOO_USER || 'Qruffin@iamalgo.com';
     const odooPass = env.ODOO_PASS || 'admin_master_password';
-    const companyId = 4; // 20 59 Ventures Corp
+    const uid = await callOdooRpc(env, 'common', 'authenticate', [odooDb, odooUser, odooPass, {}]);
+    if (!uid) {
+        throw new Error(`Authentication failed for user ${odooUser} on db ${odooDb}`);
+    }
+    return { uid, odooDb, odooPass };
+}
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
-
+/**
+ * Finds existing customer contact in res.partner by phone or email,
+ * or creates a new customer profile under Company ID 4 (20 59 Ventures Corp).
+ */
+async function findOrCreateOdooPartner(env, { name, email, phone, companyName }) {
     try {
-        // 1. Authenticate with Odoo via JSON-RPC
-        const authPayload = {
-            jsonrpc: '2.0',
-            method: 'call',
-            params: {
-                service: 'common',
-                method: 'authenticate',
-                args: [odooDb, odooUser, odooPass, {}]
-            },
-            id: 1
-        };
+        const { uid, odooDb, odooPass } = await getOdooAuth(env);
 
-        const authRes = await fetch(`${odooUrl}/jsonrpc`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(authPayload),
-            signal: controller.signal
-        });
-
-        if (!authRes.ok) return false;
-        const authData = await authRes.json();
-        const uid = authData?.result;
-        if (!uid) return false;
-
-        // 2. Format lead description & compliance log
-        const leadDescription = `Website Inquiry from 2059ventures.online\n\nForm: ${formType}\nContact: ${name}\nEmail: ${email || 'None'}\nPhone: ${phone || 'None'}\n\nSubmission Data:\n${JSON.stringify(data, null, 2)}\n\nTCPA & Opt-In Compliance Audit:\n- Transactional Consent: ${transactionalConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}\n- Marketing Consent: ${marketingConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}\n- Timestamp: ${clientTimestamp}\n- IP Signature: ${clientIp}`;
-
-        const leadValues = {
-            name: `[${formType}] ${name}`,
-            contact_name: name,
-            email_from: email || false,
-            phone: phone || false,
-            company_id: companyId,
-            description: leadDescription,
-            type: 'opportunity'
-        };
-
-        const createPayload = {
-            jsonrpc: '2.0',
-            method: 'call',
-            params: {
-                service: 'object',
-                method: 'execute_kw',
-                args: [odooDb, uid, odooPass, 'crm.lead', 'create', [leadValues]]
-            },
-            id: 2
-        };
-
-        const createRes = await fetch(`${odooUrl}/jsonrpc`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(createPayload),
-            signal: controller.signal
-        });
-
-        const createData = await createRes.json();
-        const leadId = createData?.result;
-
-        // 3. Post full submission & TCPA compliance audit to Odoo Chatter
-        if (leadId) {
-            const chatterHtml = `
-                <div style="font-family: sans-serif; font-size: 13px; line-height: 1.5;">
-                    <p style="margin: 0 0 8px 0;"><strong>Web-to-CRM Lead Submission (2059ventures.online)</strong></p>
-                    <ul style="margin: 0 0 10px 0; padding-left: 20px;">
-                        <li><strong>Form:</strong> ${formType}</li>
-                        <li><strong>Contact:</strong> ${name}</li>
-                        <li><strong>Email:</strong> ${email || 'N/A'}</li>
-                        <li><strong>Phone:</strong> ${phone || 'N/A'}</li>
-                    </ul>
-                    <div style="background: #f1f5f9; border-left: 3px solid #10b981; padding: 10px; margin-top: 10px; font-size: 12px;">
-                        <strong>TCPA Compliance Record:</strong><br>
-                        &bull; Transactional SMS Consent: <b>${transactionalConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}</b><br>
-                        &bull; Marketing SMS Consent: <b>${marketingConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}</b><br>
-                        &bull; Client IP Signature: ${clientIp}<br>
-                        &bull; Timestamp: ${clientTimestamp}
-                    </div>
-                </div>
-            `;
-
-            const chatterPayload = {
-                jsonrpc: '2.0',
-                method: 'call',
-                params: {
-                    service: 'object',
-                    method: 'execute_kw',
-                    args: [
-                        odooDb,
-                        uid,
-                        odooPass,
-                        'crm.lead',
-                        'message_post',
-                        [leadId],
-                        {
-                            body: chatterHtml,
-                            subject: `TCPA Compliance Record - ${formType}`,
-                            message_type: 'comment',
-                            subtype_xmlid: 'mail.mt_comment'
-                        }
-                    ]
-                },
-                id: 3
-            };
-
-            await fetch(`${odooUrl}/jsonrpc`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(chatterPayload),
-                signal: controller.signal
-            }).catch(e => console.warn('[Odoo Chatter Post Error]', e.message));
+        // Normalize phone to search last 10 digits
+        const cleanDigits = phone ? phone.replace(/[^0-9]/g, '').slice(-10) : '';
+        const domain = [['company_id', 'in', [4, false]]];
+        if (cleanDigits && email) {
+            domain.push('|', ['phone', 'ilike', cleanDigits], ['email', '=ilike', email.trim()]);
+        } else if (cleanDigits) {
+            domain.push(['phone', 'ilike', cleanDigits]);
+        } else if (email) {
+            domain.push(['email', '=ilike', email.trim()]);
         }
 
-        return true;
+        if (domain.length > 1) {
+            const existing = await callOdooRpc(env, 'object', 'execute_kw', [
+                odooDb, uid, odooPass, 'res.partner', 'search_read',
+                [domain],
+                { fields: ['id', 'name', 'phone', 'email'], limit: 1 }
+            ]);
+            if (existing && existing.length > 0) {
+                console.log(`[Odoo Contact] Matched existing partner #${existing[0].id} (${existing[0].name})`);
+                return existing[0].id;
+            }
+        }
+
+        // Create new contact under Company 4 (20 59 Ventures Corp)
+        const partnerName = name || companyName || (phone ? `Contact (${phone})` : 'New 20 59 Ventures Contact');
+        const partnerId = await callOdooRpc(env, 'object', 'execute_kw', [
+            odooDb, uid, odooPass, 'res.partner', 'create',
+            [{
+                name: partnerName,
+                is_company: !!companyName && !name,
+                company_id: 4, // 20 59 Ventures Corp
+                phone: phone || false,
+                email: email || false,
+                comment: 'Created automatically via 20 59 Ventures Telephony / Telnyx AI integration'
+            }]
+        ]);
+        console.log(`[Odoo Contact] Created new res.partner #${partnerId} for ${partnerName}`);
+        return partnerId;
     } catch (err) {
+        console.warn('[Odoo findOrCreateOdooPartner]', err.message);
         return false;
-    } finally {
-        clearTimeout(timeoutId);
+    }
+}
+
+/**
+ * Posts a formatted internal note directly into Chatter of any Odoo record (res.partner, crm.lead).
+ * Falls back to direct mail.message creation if record-level message_post is restricted.
+ */
+async function postToOdooChatter(env, { model, resId, body, subject = '20 59 Ventures Activity Log' }) {
+    if (!resId) return { success: false, error: 'No resId provided' };
+
+    try {
+        const { uid, odooDb, odooPass } = await getOdooAuth(env);
+
+        try {
+            // Attempt 1: Standard message_post on record
+            const messageId = await callOdooRpc(env, 'object', 'execute_kw', [
+                odooDb, uid, odooPass, model, 'message_post',
+                [[resId]],
+                {
+                    body: body,
+                    subject: subject,
+                    message_type: 'comment',
+                    subtype_xmlid: 'mail.mt_note'
+                }
+            ]);
+            console.log(`[Odoo Chatter] message_post logged note #${messageId} to ${model} #${resId}`);
+            return { success: true, messageId };
+        } catch (postErr) {
+            console.warn(`[Odoo Chatter] message_post fallback to mail.message create:`, postErr.message);
+            // Attempt 2: Direct mail.message creation
+            const messageId = await callOdooRpc(env, 'object', 'execute_kw', [
+                odooDb, uid, odooPass, 'mail.message', 'create',
+                [{
+                    model: model,
+                    res_id: resId,
+                    body: body,
+                    subject: subject,
+                    message_type: 'comment'
+                }]
+            ]);
+            console.log(`[Odoo Chatter] Created fallback mail.message #${messageId} on ${model} #${resId}`);
+            return { success: true, messageId };
+        }
+    } catch (err) {
+        console.warn(`[Odoo Chatter Exception] Failed to post to ${model} #${resId}:`, err.message);
+        return { success: false, error: err.message };
+    }
+}
+
+/**
+ * Syncs Lead or Opportunity directly to Odoo CRM and posts rich Chatter notes to both
+ * the Customer Profile (res.partner) and the Opportunity (crm.lead).
+ * Targets Company ID: 4 (20 59 Ventures Corp) and Team ID: 1.
+ */
+async function syncToOdooLead(env, { name, partnerName, contactName, email, phone, description, expectedRevenue = 0, chatterNote }) {
+    try {
+        const { uid, odooDb, odooPass } = await getOdooAuth(env);
+        const companyId = 4;
+        const teamId = parseInt(env.ODOO_TEAM_ID || '1', 10);
+
+        // 1. Locate or create customer contact profile (res.partner)
+        const partnerId = await findOrCreateOdooPartner(env, {
+            name: contactName || name,
+            email,
+            phone,
+            companyName: partnerName
+        });
+
+        // 2. Create crm.lead in Odoo under Company 4 and Team 1
+        const leadId = await callOdooRpc(env, 'object', 'execute_kw', [
+            odooDb, uid, odooPass, 'crm.lead', 'create',
+            [{
+                name: name,
+                partner_id: partnerId || false,
+                partner_name: partnerName || false,
+                contact_name: contactName || false,
+                email_from: email || false,
+                phone: phone || false,
+                company_id: companyId,
+                team_id: teamId,
+                description: description || '',
+                type: 'opportunity',
+                expected_revenue: expectedRevenue ? parseFloat(expectedRevenue) : 0.0
+            }]
+        ]);
+
+        console.log(`[Odoo Sync] Created crm.lead #${leadId} under Company ${companyId} (Partner: #${partnerId || 'none'})`);
+
+        // 3. Post to crm.lead Chatter
+        if (leadId && chatterNote) {
+            await postToOdooChatter(env, {
+                model: 'crm.lead',
+                resId: leadId,
+                body: chatterNote,
+                subject: 'Inbound Request & Conversation History'
+            });
+        }
+
+        // 4. Post to res.partner Chatter
+        if (partnerId && chatterNote) {
+            await postToOdooChatter(env, {
+                model: 'res.partner',
+                resId: partnerId,
+                body: chatterNote,
+                subject: 'Customer Request & Telephony Record'
+            });
+        }
+
+        return { success: true, leadId, partnerId };
+    } catch (err) {
+        console.warn('[Odoo Sync Warning] Odoo sync error:', err.message);
+        return { success: false, error: err.message };
+    }
+}
+
+/**
+ * Standard Web-to-CRM Lead & TCPA Opt-In Sync
+ */
+async function syncToOdoo({ name, email, phone, formType, data, clientIp, clientTimestamp, transactionalConsent, marketingConsent, env }) {
+    try {
+        const leadDescription = `Website Inquiry from 2059ventures.online\n\nForm: ${formType}\nContact: ${name}\nEmail: ${email || 'None'}\nPhone: ${phone || 'None'}\n\nSubmission Data:\n${JSON.stringify(data, null, 2)}\n\nTCPA & Opt-In Compliance Audit:\n- Transactional Consent: ${transactionalConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}\n- Marketing Consent: ${marketingConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}\n- Timestamp: ${clientTimestamp}\n- IP Signature: ${clientIp}`;
+
+        const chatterHtml = `
+            <div style="font-family: sans-serif; font-size: 13px; line-height: 1.5;">
+                <p style="margin: 0 0 8px 0;"><strong>Web-to-CRM Lead Submission (2059ventures.online)</strong></p>
+                <ul style="margin: 0 0 10px 0; padding-left: 20px;">
+                    <li><strong>Form:</strong> ${formType}</li>
+                    <li><strong>Contact:</strong> ${name}</li>
+                    <li><strong>Email:</strong> ${email || 'N/A'}</li>
+                    <li><strong>Phone:</strong> ${phone || 'N/A'}</li>
+                </ul>
+                <div style="background: #f1f5f9; border-left: 3px solid #256041; padding: 10px; margin-top: 10px; font-size: 12px;">
+                    <strong>TCPA Compliance Record:</strong><br>
+                    &bull; Transactional SMS Consent: <b>${transactionalConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}</b><br>
+                    &bull; Marketing SMS Consent: <b>${marketingConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}</b><br>
+                    &bull; Client IP Signature: ${clientIp}<br>
+                    &bull; Timestamp: ${clientTimestamp}
+                </div>
+            </div>
+        `;
+
+        const result = await syncToOdooLead(env, {
+            name: `[${formType}] ${name}`,
+            contactName: name,
+            email: email || false,
+            phone: phone || false,
+            description: leadDescription,
+            chatterNote: chatterHtml
+        });
+
+        return result.success;
+    } catch (err) {
+        console.warn('[Odoo syncToOdoo Exception]', err.message);
+        return false;
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Telnyx SMS & MMS Telephony Engine
+// Bidirectional Outbound Tracking & Inbound Webhook Processing
+// Toll-Free Outbound: +18889192059 | Profile ID: 40019b37-3f98-4fd3-9476-2554b33f3b6f
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Sends transactional SMS/MMS via Telnyx Messaging API and automatically logs
+ * outbound messages and attached media thumbnails into Odoo Chatter.
+ * Accepts: { to, text, mediaUrls = [], partnerId = null, leadId = null }
+ */
+async function sendTelnyxSms(env, { to, text, mediaUrls = [], partnerId = null, leadId = null }) {
+    const apiKey = env.TELNYX_API_KEY;
+    if (!apiKey || !to || !text) return { success: false, error: 'Missing required parameters (apiKey, to, or text)' };
+
+    try {
+        let cleanPhone = to.replace(/[^0-9+]/g, '');
+        if (!cleanPhone.startsWith('+')) {
+            cleanPhone = '+1' + cleanPhone.replace(/^1/, '');
+        }
+
+        const fromNumber = env.TELNYX_FROM_NUMBER || '+18889192059';
+        const profileId = env.TELNYX_MESSAGING_PROFILE_ID || '40019b37-3f98-4fd3-9476-2554b33f3b6f';
+
+        const payload = {
+            from: fromNumber,
+            to: cleanPhone,
+            text: text,
+            messaging_profile_id: profileId
+        };
+
+        if (Array.isArray(mediaUrls) && mediaUrls.length > 0) {
+            payload.media_urls = mediaUrls;
+        }
+
+        const res = await fetch('https://api.telnyx.com/v2/messages', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        const messageId = data?.data?.id || 'queued';
+        const mediaList = Array.isArray(mediaUrls) ? mediaUrls : [];
+
+        // Log outbound SMS/MMS to Odoo Chatter (res.partner & crm.lead)
+        try {
+            const targetPartnerId = partnerId || await findOrCreateOdooPartner(env, { phone: cleanPhone });
+
+            const outboundNote = `
+<div style="font-family: Arial, sans-serif; padding: 4px;">
+    <h4 style="color: #256041; margin: 0 0 6px 0;">📤 Telnyx Outbound ${mediaList.length > 0 ? 'MMS / SMS' : 'SMS'} Sent</h4>
+    <p style="font-size: 12px; margin: 0 0 6px 0;"><strong>To:</strong> <a href="tel:${cleanPhone}">${cleanPhone}</a> | <strong>From:</strong> ${fromNumber} (20 59 Ventures Toll-Free)</p>
+    <div style="background: #f0fdf4; padding: 10px 14px; border-left: 3px solid #256041; font-size: 13px; color: #0f172a; line-height: 1.5; white-space: pre-wrap;">${text}</div>
+    ${mediaList.length > 0 ? `
+    <div style="margin-top: 8px;">
+        <strong style="font-size: 12px; color: #256041;">📎 Attached MMS Media:</strong>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px;">
+            ${mediaList.map(url => `<a href="${url}" target="_blank"><img src="${url}" style="max-width: 180px; max-height: 180px; border-radius: 4px; border: 1px solid #cbd5e1;" /></a>`).join('')}
+        </div>
+    </div>` : ''}
+    <p style="font-size: 11px; color: #94a3b8; margin: 6px 0 0 0;">Telnyx Message ID: ${messageId}</p>
+</div>`;
+
+            if (targetPartnerId) {
+                await postToOdooChatter(env, {
+                    model: 'res.partner',
+                    resId: targetPartnerId,
+                    body: outboundNote,
+                    subject: `Outbound ${mediaList.length > 0 ? 'MMS' : 'SMS'}`
+                });
+            }
+
+            if (leadId) {
+                await postToOdooChatter(env, {
+                    model: 'crm.lead',
+                    resId: leadId,
+                    body: outboundNote,
+                    subject: `Outbound ${mediaList.length > 0 ? 'MMS' : 'SMS'}`
+                });
+            }
+        } catch (odooErr) {
+            console.warn('[Odoo Outbound SMS Chatter Error]', odooErr.message);
+        }
+
+        return { success: res.ok, messageId, data };
+    } catch (err) {
+        console.warn('[Telnyx SMS Exception]', err.message);
+        return { success: false, error: err.message };
+    }
+}
+
+/**
+ * Handles incoming Telnyx Telephony & Messaging Webhooks
+ * Endpoint: POST /api/telnyx/webhook
+ */
+async function handleTelnyxWebhook(request, env) {
+    try {
+        const body = await request.json();
+        const eventType = body?.data?.event_type || body?.event_type;
+        const payload = body?.data?.payload || body?.payload;
+
+        console.log(`[Telnyx Webhook] Received event: ${eventType} (ID: ${payload?.id})`);
+
+        // -------------------------------------------------------------
+        // 1. INBOUND SMS & MMS EVENTS (message.received)
+        // -------------------------------------------------------------
+        if (eventType === 'message.received') {
+            const fromNumber = payload?.from?.phone_number || payload?.from || 'Unknown';
+            const toNumber = payload?.to?.[0]?.phone_number || payload?.to || '+18889192059';
+            const messageText = payload?.text || '';
+            const messageId = payload?.id || '';
+            const mediaList = Array.isArray(payload?.media) ? payload.media : [];
+
+            // Rich HTML card for Odoo Chatter & Team Email Alert
+            const smsChatterNote = `
+<div style="font-family: Arial, sans-serif; padding: 4px;">
+    <h4 style="color: #256041; margin: 0 0 6px 0;">📥 Telnyx Inbound ${mediaList.length > 0 ? 'MMS / SMS' : 'SMS'} Received</h4>
+    <p style="font-size: 12px; margin: 0 0 6px 0;"><strong>From:</strong> <a href="tel:${fromNumber}">${fromNumber}</a> | <strong>To:</strong> ${toNumber}</p>
+    ${messageText ? `<div style="background: #f8fafc; padding: 10px 14px; border-left: 3px solid #256041; font-size: 13px; color: #1e293b; line-height: 1.5; white-space: pre-wrap;">${messageText}</div>` : ''}
+    ${mediaList.length > 0 ? `
+    <div style="margin-top: 10px; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 10px 14px; border-radius: 6px;">
+        <strong style="color: #166534; font-size: 12px;">📎 Attached MMS Media / Documents (${mediaList.length}):</strong>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+            ${mediaList.map(m => {
+                const isImage = (m.content_type || '').startsWith('image/');
+                return `
+                <div style="display: inline-block; text-align: center;">
+                    <a href="${m.url}" target="_blank" style="text-decoration: none; display: inline-block;">
+                        ${isImage ? `<img src="${m.url}" style="max-width: 220px; max-height: 220px; border-radius: 6px; border: 1px solid #cbd5e1; display: block;" />` : `<div style="padding: 12px 16px; background: #ffffff; border-radius: 6px; font-size: 12px; color: #0f172a; border: 1px solid #cbd5e1;">📄 Download Document (${m.content_type || 'File'})</div>`}
+                    </a>
+                    <div style="font-size: 10px; color: #64748b; margin-top: 2px;">${m.content_type || ''} ${m.size ? `(${Math.round(m.size / 1024)} KB)` : ''}</div>
+                </div>`;
+            }).join('')}
+        </div>
+    </div>` : ''}
+    <p style="font-size: 11px; color: #94a3b8; margin: 8px 0 0 0;">Telnyx Message ID: ${messageId}</p>
+</div>`;
+
+            // Step A: Forward to Team Email Alert
+            try {
+                await sendTelnyxEmail(env, {
+                    to: DEFAULT_EMAIL_RECIPIENTS,
+                    subject: `[INBOUND ${mediaList.length > 0 ? 'MMS' : 'SMS'}] From ${fromNumber} to ${toNumber}`,
+                    text: `Inbound ${mediaList.length > 0 ? 'MMS' : 'SMS'} from ${fromNumber}:\n\n${messageText}\n\nMedia URLs:\n${mediaList.map(m => m.url).join('\n')}\n\nTelnyx Message ID: ${messageId}`,
+                    html: smsChatterNote,
+                    replyTo: 'support@2059ventures.online',
+                    fromName: '20/59 SMS Dispatch'
+                });
+            } catch (emailErr) {
+                console.warn('[Telnyx Webhook Email Alert Error]', emailErr.message);
+            }
+
+            // Step B: Find or create customer contact (res.partner) under Company 4 (20 59 Ventures Corp)
+            const partnerId = await findOrCreateOdooPartner(env, {
+                phone: fromNumber,
+                name: `SMS Contact (${fromNumber})`
+            });
+
+            // Step C: Post directly to customer contact Chatter (res.partner)
+            if (partnerId) {
+                await postToOdooChatter(env, {
+                    model: 'res.partner',
+                    resId: partnerId,
+                    body: smsChatterNote,
+                    subject: `Inbound ${mediaList.length > 0 ? 'MMS' : 'SMS'} Received`
+                });
+            }
+
+            // Step D: Create/Update Opportunity under crm.lead under Company 4 and Team 1
+            const leadResult = await syncToOdooLead(env, {
+                name: `SMS/MMS from ${fromNumber}`,
+                partnerName: false,
+                contactName: `SMS Contact (${fromNumber})`,
+                email: false,
+                phone: fromNumber,
+                description: `Inbound ${mediaList.length > 0 ? 'MMS' : 'SMS'} received via Telnyx (+1-888-919-2059):\n\n${messageText}\n\nMedia URLs: ${mediaList.map(m => m.url).join(', ') || 'None'}\nMessage ID: ${messageId}`,
+                expectedRevenue: 0,
+                chatterNote: smsChatterNote
+            });
+
+            return jsonResponse({
+                status: 'sms_logged',
+                partnerId: partnerId || null,
+                leadId: leadResult?.leadId || null,
+                messageId: messageId
+            }, 200);
+        }
+
+        // -------------------------------------------------------------
+        // 2. OUTBOUND SENT / FINALIZED CALLBACKS
+        // -------------------------------------------------------------
+        if (eventType === 'message.sent' || eventType === 'message.finalized') {
+            console.log(`[Telnyx Webhook] Status callback ${eventType}: ${payload?.id}`);
+            return jsonResponse({
+                status: 'message_acknowledged',
+                event: eventType,
+                messageId: payload?.id
+            }, 200);
+        }
+
+        return jsonResponse({ status: 'received', event: eventType }, 200);
+    } catch (err) {
+        console.error('[Telnyx Webhook Error]', err);
+        return jsonResponse({ error: err.message }, 500);
+    }
+}
+
+/**
+ * Handles Outbound SMS API requests from front-end or internal systems
+ * Endpoint: POST /api/sms
+ */
+async function handleSmsDispatch(request, env) {
+    try {
+        const body = await request.json();
+        const { to, text, mediaUrls = [], partnerId = null, leadId = null } = body;
+
+        if (!to || !text) {
+            return jsonResponse({ error: 'Recipient "to" and message "text" are required.' }, 400);
+        }
+
+        const result = await sendTelnyxSms(env, { to, text, mediaUrls, partnerId, leadId });
+        return jsonResponse(result, result.success ? 200 : 500);
+    } catch (err) {
+        console.error('[handleSmsDispatch Error]', err);
+        return jsonResponse({ error: err.message }, 500);
     }
 }
 
