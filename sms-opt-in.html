@@ -101,9 +101,21 @@
             
             <div class="contact-form-wrapper" style="background: var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.05); padding: 40px; border-radius: 24px; border: 1px solid rgba(74, 124, 89, 0.1);">
                 <form action="/api/contact" method="POST" class="contact-form" style="width: 100%;">
-                <input type="hidden" name="form_type" value="SMS Communications Opt-In">
+                    <input type="hidden" name="form_type" value="SMS Communications Opt-In">
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                        <div class="form-group" style="text-align: left; margin-bottom: 0;">
+                            <label for="name" style="display: block; font-size: 14px; font-weight: 600; color: var(--black); margin-bottom: 8px;">Full Name *</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required style="width: 100%; padding: 14px 20px; border: 1px solid rgba(74, 124, 89, 0.2); border-radius: 10px; font-size: 16px; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='var(--logo-green)'" onblur="this.style.borderColor='rgba(74, 124, 89, 0.2)'">
+                        </div>
+                        <div class="form-group" style="text-align: left; margin-bottom: 0;">
+                            <label for="email" style="display: block; font-size: 14px; font-weight: 600; color: var(--black); margin-bottom: 8px;">Email Address *</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required style="width: 100%; padding: 14px 20px; border: 1px solid rgba(74, 124, 89, 0.2); border-radius: 10px; font-size: 16px; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='var(--logo-green)'" onblur="this.style.borderColor='rgba(74, 124, 89, 0.2)'">
+                        </div>
+                    </div>
+
                     <div class="form-group" style="text-align: left; margin-bottom: 25px;">
-                        <label for="phone" style="display: block; font-size: 14px; font-weight: 600; color: var(--black); margin-bottom: 8px;">Phone Number</label>
+                        <label for="phone" style="display: block; font-size: 14px; font-weight: 600; color: var(--black); margin-bottom: 8px;">Mobile Phone Number *</label>
                         <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required style="width: 100%; padding: 14px 20px; border: 1px solid rgba(74, 124, 89, 0.2); border-radius: 10px; font-size: 16px; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='var(--logo-green)'" onblur="this.style.borderColor='rgba(74, 124, 89, 0.2)'">
                     </div>
 
@@ -111,14 +123,14 @@
                         <div class="consent-row">
                             <input type="checkbox" id="transactional_consent" name="transactional_consent" class="consent-checkbox">
                             <label for="transactional_consent" class="consent-label">
-                                By checking this box, you consent to receive transactional text messages for account notifications, housing referral alerts, and placement updates from 20 59 Ventures Corp. Reply STOP to opt out, HELP for help. Standard message and data rates may apply. Message frequency varies. View our <a href="terms-of-service.html">Terms</a> and <a href="privacy-policy.html">Privacy Policy</a>.
+                                By checking this box and submitting this form, you consent to receive transactional text messages for account notifications, housing referral alerts, and placement updates from 20 59 Ventures Corp. Reply STOP to opt out, HELP for help. Standard message and data rates may apply. Message frequency varies. View our <a href="terms-of-service.html">Terms</a> and <a href="privacy-policy.html">Privacy Policy</a>.
                             </label>
                         </div>
 
                         <div class="consent-row">
-                            <input type="checkbox" id="informational_consent" name="informational_consent" class="consent-checkbox">
-                            <label for="informational_consent" class="consent-label">
-                                By checking this box, you consent to receive informational and general support text messages from 20 59 Ventures Corp. Reply STOP to opt out, HELP for help. Standard message and data rates may apply. Message frequency varies. View our <a href="terms-of-service.html">Terms</a> and <a href="privacy-policy.html">Privacy Policy</a>.
+                            <input type="checkbox" id="marketing_consent" name="marketing_consent" class="consent-checkbox">
+                            <label for="marketing_consent" class="consent-label">
+                                By checking this box and submitting this form, you consent to receive text messages for outreach, updates, and marketing from 20 59 Ventures Corp. Reply STOP to opt out, HELP for help. Standard message and data rates may apply. Message frequency varies. View our <a href="terms-of-service.html">Terms</a> and <a href="privacy-policy.html">Privacy Policy</a>.
                             </label>
                         </div>
                     </div>
@@ -126,7 +138,7 @@
                     <button type="submit" class="btn-primary full-width" style="padding: 16px; border-radius: 12px; font-size: 16px;">Update Preferences</button>
                     
                     <p style="font-size: 12px; color: var(--gray-medium); margin-top: 20px; line-height: 1.4;">
-                        SMS consent is separate from email or phone consent. Checkboxes are optional and unchecked by default. You can opt out at any time by replying STOP to any text message.
+                        SMS consent is separate from email or phone consent. Checkboxes are optional and unchecked by default. You can opt out at any time by replying STOP to any text message. View our <a href="phone-sms-mms-disclosure.html" style="color: var(--logo-green); text-decoration: underline;">Phone, SMS &amp; MMS Disclosure</a>.
                     </p>
                 </form>
             </div>
@@ -211,8 +223,14 @@
             const oldAlert = form.querySelector('.form-alert-box');
             if (oldAlert) oldAlert.remove();
 
+            const formData = new FormData(form);
             const payload = {};
-            new FormData(form).forEach((v, k) => payload[k] = v);
+            formData.forEach((v, k) => payload[k] = v);
+            payload.transactional_consent = form.querySelector('#transactional_consent') ? form.querySelector('#transactional_consent').checked : false;
+            payload.marketing_consent = form.querySelector('#marketing_consent') ? form.querySelector('#marketing_consent').checked : false;
+            payload.sms_consent_transactional = payload.transactional_consent;
+            payload.sms_consent_informational = payload.transactional_consent;
+            payload.client_timestamp = new Date().toISOString();
 
             try {
                 const res = await fetch('/api/contact', {

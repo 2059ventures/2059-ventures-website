@@ -398,7 +398,7 @@ ${transcript}` : ''}
     }
 }
 
-// ── Handle Website Contact & Modal Forms (via Telnyx Email API) ─────────────
+// ─── Handle Website Contact & Modal Forms (via Telnyx Email API + Odoo CRM) ────────
 async function handleContactForm(request, env, ctx) {
     try {
         let data = {};
@@ -422,6 +422,20 @@ async function handleContactForm(request, env, ctx) {
         const email = data.email || '';
         const phone = data.phone || data.cell || '';
         const formType = data.form_type || data.inquiry_type || data.interest_type || 'Website Inquiry';
+
+        const clientIp = request.headers.get('cf-connecting-ip') || 'Direct';
+        const clientCountry = request.headers.get('cf-ipcountry') || 'US';
+        const clientTimestamp = data.client_timestamp || new Date().toISOString();
+        const timestampFormatted = new Date().toUTCString();
+
+        const transactionalConsent = Boolean(
+            data.transactional_consent === true || data.transactional_consent === 'true' || data.transactional_consent === 'on' ||
+            data.sms_consent_transactional === true || data.sms_consent_transactional === 'true' || data.sms_consent_transactional === 'on'
+        );
+        const marketingConsent = Boolean(
+            data.marketing_consent === true || data.marketing_consent === 'true' || data.marketing_consent === 'on' ||
+            data.sms_consent_informational === true || data.sms_consent_informational === 'true' || data.sms_consent_informational === 'on'
+        );
 
         // Friendly label mapping for all potential fields
         const fieldLabels = {
@@ -451,6 +465,8 @@ async function handleContactForm(request, env, ctx) {
             management_needs: 'Management Needs',
             additional_services: 'Additional Services',
             fair_housing_compliance: 'Fair Housing Compliance Acknowledged',
+            transactional_consent: 'SMS Consent (Transactional / Account)',
+            marketing_consent: 'SMS Consent (Marketing / Outreach)',
             sms_consent_transactional: 'SMS Consent (Transactional/Reminders)',
             sms_consent_informational: 'SMS Consent (Informational/Outreach)',
             message: 'Message / Notes'
@@ -461,22 +477,24 @@ async function handleContactForm(request, env, ctx) {
         let plainTextFields = '';
 
         for (const [key, value] of Object.entries(data)) {
-            if (value !== undefined && value !== null && value !== '') {
+            if (value !== undefined && value !== null && value !== '' && !['client_timestamp', 'source_url'].includes(key)) {
                 const label = fieldLabels[key] || key.replace(/_/g, ' ');
                 let displayVal = value;
                 if (value === 'on' || value === true || value === 'true') {
                     displayVal = 'Yes (Opted In / Agreed)';
                 }
                 tableRows += `<tr><td style="padding: 6px 10px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-weight: 600; width: 38%;">${label}:</td><td style="padding: 6px 10px; border-bottom: 1px solid #e2e8f0; color: #0f172a; font-weight: 500;">${displayVal}</td></tr>`;
-                plainTextFields += `${label}: ${displayVal}\n`;
+                plainTextFields += `${label}: ${displayVal}
+`;
             }
         }
 
         const htmlContent = `
           <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background-color: #ffffff; color: #1e293b;">
-            <div style="background-color: #0d1b2a; color: #ffffff; padding: 24px; text-align: center; border-bottom: 3px solid #f39c12;">
-              <h2 style="margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.01em;">20/59 Ventures • New ${formType}</h2>
-              <p style="margin: 6px 0 0 0; color: #94a3b8; font-size: 13px;">Captured on 2059ventures.online at ${new Date().toLocaleString()}</p>
+            <div style="background-color: #0d1b2a; color: #ffffff; padding: 24px; text-align: center; border-bottom: 3px solid #10b981;">
+              <span style="background: #10b981; color: #ffffff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.5px;">New Web Lead</span>
+              <h2 style="margin: 10px 0 0 0; font-size: 20px; font-weight: 800; letter-spacing: -0.01em;">20/59 Ventures &bull; ${formType}</h2>
+              <p style="margin: 6px 0 0 0; color: #94a3b8; font-size: 13px;">Origin: 2059ventures.online &bull; Geo: ${clientCountry} (${clientIp}) &bull; ${timestampFormatted}</p>
             </div>
             
             <div style="padding: 24px;">
@@ -485,10 +503,20 @@ async function handleContactForm(request, env, ctx) {
                   ${tableRows}
                 </table>
               </div>
+
+              <!-- TCPA & Opt-In Compliance Audit Box -->
+              <div style="background: #0f172a; border: 1px dashed #38bdf8; border-radius: 8px; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: #cbd5e1; line-height: 1.6;">
+                <strong style="color: #38bdf8; text-transform: uppercase; letter-spacing: 0.5px;">TCPA &amp; Opt-In Compliance Audit:</strong><br>
+                &bull; <strong>Transactional SMS Consent:</strong> <span style="color: ${transactionalConsent ? '#4ade80' : '#f87171'}; font-weight: 700;">${transactionalConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}</span><br>
+                &bull; <strong>Marketing SMS Consent:</strong> <span style="color: ${marketingConsent ? '#4ade80' : '#f87171'}; font-weight: 700;">${marketingConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}</span><br>
+                &bull; <strong>Timestamp:</strong> ${timestampFormatted} (${clientTimestamp})<br>
+                &bull; <strong>Client IP Signature:</strong> ${clientIp} (${clientCountry})<br>
+                &bull; <strong>Source URL:</strong> ${data.source_url || 'https://2059ventures.online'}
+              </div>
             </div>
 
             <div style="background-color: #f1f5f9; padding: 12px 24px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0;">
-              20/59 Ventures Operational Platform &bull; support@2059ventures.online
+              20/59 Ventures Operational Platform &bull; support@2059ventures.online &bull; Delivered via Telnyx Email API
             </div>
           </div>
         `;
@@ -496,11 +524,19 @@ async function handleContactForm(request, env, ctx) {
         const plainText = `
 20/59 VENTURES - NEW ${formType.toUpperCase()}
 ==============================================
-Received: ${new Date().toLocaleString()}
+Received: ${timestampFormatted}
+IP: ${clientIp} (${clientCountry})
 
 ${plainTextFields}
+
+TCPA & SMS CONSENT AUDIT:
+- Transactional Consent: ${transactionalConsent ? 'YES' : 'NO'}
+- Marketing Consent: ${marketingConsent ? 'YES' : 'NO'}
+- Timestamp: ${clientTimestamp}
+- IP Signature: ${clientIp}
         `.trim();
 
+        // 1. Send Team Alert Email via Telnyx
         const emailResult = await sendTelnyxEmail(env, {
             subject: `[Website Inquiry] ${formType} - ${name}`,
             text: plainText,
@@ -509,6 +545,85 @@ ${plainTextFields}
             fromName: '20/59 Contact Portal'
         });
 
+        // 2. Send Customer Confirmation Email (Auto-Receipt)
+        if (email && email.includes('@')) {
+            const clientConfirmationHtml = `
+              <div style="font-family: Arial, sans-serif; max-width: 580px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; color: #1e293b;">
+                <div style="background: #0d1b2a; color: #ffffff; padding: 28px; text-align: center; border-bottom: 3px solid #10b981;">
+                  <h1 style="margin: 0; font-size: 22px; font-weight: 800; letter-spacing: 0.5px;">20/59 VENTURES CORP</h1>
+                  <p style="margin: 6px 0 0 0; color: #94a3b8; font-size: 13px;">Housing Referral &amp; Community Placement Services</p>
+                </div>
+                <div style="padding: 28px;">
+                  <h2 style="font-size: 18px; color: #0d1b2a; margin: 0 0 12px 0;">Thank you for contacting us, ${name}.</h2>
+                  <p style="font-size: 14px; color: #475569; line-height: 1.6; margin: 0 0 16px 0;">
+                    We have received your submission regarding <strong>${formType}</strong>. Our care coordinators and placement specialists have received your inquiry.
+                  </p>
+                  
+                  <div style="background: #f8fafc; border-left: 4px solid #10b981; border-radius: 6px; padding: 14px 16px; margin: 20px 0; font-size: 13px; color: #334155;">
+                    <strong>Inquiry Summary:</strong><br>
+                    &bull; <strong>Inquiry Type:</strong> ${formType}<br>
+                    ${phone ? `&bull; <strong>Phone:</strong> ${phone}<br>` : ''}
+                    &bull; <strong>Submitted:</strong> ${timestampFormatted}
+                  </div>
+
+                  <p style="font-size: 14px; color: #475569; line-height: 1.6; margin: 0 0 20px 0;">
+                    If you are a case manager or have an immediate placement need, please contact our direct intake line below.
+                  </p>
+
+                  <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 13px; color: #64748b; line-height: 1.8;">
+                    <strong style="color: #0d1b2a;">20 59 Ventures Corp.</strong><br>
+                    Toll Free: 1-888-919-2059 | Direct: 205-534-8492<br>
+                    Email: <a href="mailto:support@2059ventures.online" style="color: #10b981; text-decoration: none;">support@2059ventures.online</a><br>
+                    Website: <a href="https://2059ventures.online" style="color: #10b981; text-decoration: none;">2059ventures.online</a>
+                  </div>
+                </div>
+              </div>
+            `;
+
+            const confirmationPromise = sendTelnyxEmail(env, {
+                to: [{ email: email, name: name }],
+                subject: `Thank you for contacting 20 59 Ventures - ${formType}`,
+                text: `Hello ${name},\n\nThank you for contacting 20 59 Ventures Corp regarding ${formType}. We have received your inquiry and our team will follow up with you shortly.\n\nBest regards,\n20 59 Ventures Corp.\nToll Free: 1-888-919-2059\nhttps://2059ventures.online`,
+                html: clientConfirmationHtml,
+                replyTo: 'support@2059ventures.online',
+                fromName: '20 59 Ventures Corp'
+            });
+
+            if (ctx && typeof ctx.waitUntil === 'function') {
+                ctx.waitUntil(confirmationPromise);
+            }
+        }
+
+        // 3. Resilient Odoo Lead & Chatter Compliance Sync
+        if (ctx && typeof ctx.waitUntil === 'function') {
+            ctx.waitUntil(syncToOdoo({
+                name,
+                email,
+                phone,
+                formType,
+                data,
+                clientIp,
+                clientTimestamp,
+                transactionalConsent,
+                marketingConsent,
+                env
+            }));
+        } else {
+            syncToOdoo({
+                name,
+                email,
+                phone,
+                formType,
+                data,
+                clientIp,
+                clientTimestamp,
+                transactionalConsent,
+                marketingConsent,
+                env
+            }).catch(e => console.warn('[Odoo Background Sync Warning]', e));
+        }
+
+        // 4. LinkedIn Conversion Tracking
         if (ctx && typeof ctx.waitUntil === 'function') {
             ctx.waitUntil(sendLinkedInConversionEvent({
                 email, phone, name,
@@ -526,6 +641,137 @@ ${plainTextFields}
     } catch (err) {
         console.error('[Contact Form Error]', err);
         return jsonResponse({ error: err.message }, 500);
+    }
+}
+
+// ─── Resilient Odoo CRM & Chatter Synchronization ──────────────────────────────
+async function syncToOdoo({ name, email, phone, formType, data, clientIp, clientTimestamp, transactionalConsent, marketingConsent, env }) {
+    const odooUrl = env.ODOO_URL || 'https://odoo.iamalgo.com';
+    const odooDb = env.ODOO_DB || 'IAM_Main';
+    const odooUser = env.ODOO_USER || 'Qruffin@iamalgo.com';
+    const odooPass = env.ODOO_PASS || 'admin_master_password';
+    const companyId = 4; // 20 59 Ventures Corp
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+    try {
+        // 1. Authenticate with Odoo via JSON-RPC
+        const authPayload = {
+            jsonrpc: '2.0',
+            method: 'call',
+            params: {
+                service: 'common',
+                method: 'authenticate',
+                args: [odooDb, odooUser, odooPass, {}]
+            },
+            id: 1
+        };
+
+        const authRes = await fetch(`${odooUrl}/jsonrpc`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(authPayload),
+            signal: controller.signal
+        });
+
+        if (!authRes.ok) return false;
+        const authData = await authRes.json();
+        const uid = authData?.result;
+        if (!uid) return false;
+
+        // 2. Format lead description & compliance log
+        const leadDescription = `Website Inquiry from 2059ventures.online\n\nForm: ${formType}\nContact: ${name}\nEmail: ${email || 'None'}\nPhone: ${phone || 'None'}\n\nSubmission Data:\n${JSON.stringify(data, null, 2)}\n\nTCPA & Opt-In Compliance Audit:\n- Transactional Consent: ${transactionalConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}\n- Marketing Consent: ${marketingConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}\n- Timestamp: ${clientTimestamp}\n- IP Signature: ${clientIp}`;
+
+        const leadValues = {
+            name: `[${formType}] ${name}`,
+            contact_name: name,
+            email_from: email || false,
+            phone: phone || false,
+            company_id: companyId,
+            description: leadDescription,
+            type: 'opportunity'
+        };
+
+        const createPayload = {
+            jsonrpc: '2.0',
+            method: 'call',
+            params: {
+                service: 'object',
+                method: 'execute_kw',
+                args: [odooDb, uid, odooPass, 'crm.lead', 'create', [leadValues]]
+            },
+            id: 2
+        };
+
+        const createRes = await fetch(`${odooUrl}/jsonrpc`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(createPayload),
+            signal: controller.signal
+        });
+
+        const createData = await createRes.json();
+        const leadId = createData?.result;
+
+        // 3. Post full submission & TCPA compliance audit to Odoo Chatter
+        if (leadId) {
+            const chatterHtml = `
+                <div style="font-family: sans-serif; font-size: 13px; line-height: 1.5;">
+                    <p style="margin: 0 0 8px 0;"><strong>Web-to-CRM Lead Submission (2059ventures.online)</strong></p>
+                    <ul style="margin: 0 0 10px 0; padding-left: 20px;">
+                        <li><strong>Form:</strong> ${formType}</li>
+                        <li><strong>Contact:</strong> ${name}</li>
+                        <li><strong>Email:</strong> ${email || 'N/A'}</li>
+                        <li><strong>Phone:</strong> ${phone || 'N/A'}</li>
+                    </ul>
+                    <div style="background: #f1f5f9; border-left: 3px solid #10b981; padding: 10px; margin-top: 10px; font-size: 12px;">
+                        <strong>TCPA Compliance Record:</strong><br>
+                        &bull; Transactional SMS Consent: <b>${transactionalConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}</b><br>
+                        &bull; Marketing SMS Consent: <b>${marketingConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}</b><br>
+                        &bull; Client IP Signature: ${clientIp}<br>
+                        &bull; Timestamp: ${clientTimestamp}
+                    </div>
+                </div>
+            `;
+
+            const chatterPayload = {
+                jsonrpc: '2.0',
+                method: 'call',
+                params: {
+                    service: 'object',
+                    method: 'execute_kw',
+                    args: [
+                        odooDb,
+                        uid,
+                        odooPass,
+                        'crm.lead',
+                        'message_post',
+                        [leadId],
+                        {
+                            body: chatterHtml,
+                            subject: `TCPA Compliance Record - ${formType}`,
+                            message_type: 'comment',
+                            subtype_xmlid: 'mail.mt_comment'
+                        }
+                    ]
+                },
+                id: 3
+            };
+
+            await fetch(`${odooUrl}/jsonrpc`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(chatterPayload),
+                signal: controller.signal
+            }).catch(e => console.warn('[Odoo Chatter Post Error]', e.message));
+        }
+
+        return true;
+    } catch (err) {
+        return false;
+    } finally {
+        clearTimeout(timeoutId);
     }
 }
 
@@ -636,6 +882,22 @@ Signed: ${signatureData || 'Certified'} on ${signatureDate || 'N/A'}
             replyTo: body.email || (referralContact && referralContact.includes('@') ? referralContact.match(/[\w.-]+@[\w.-]+/)?.[0] : undefined),
             fromName: '20/59 Intake Portal'
         });
+
+        // Forward to Odoo CRM in background with TCPA & Intake details
+        if (ctx && typeof ctx.waitUntil === 'function') {
+            ctx.waitUntil(syncToOdoo({
+                name: fullName,
+                email: body.email || '',
+                phone: phone,
+                formType: 'Housing Intake Application',
+                data: body,
+                clientIp: request.headers.get('cf-connecting-ip') || 'Direct',
+                clientTimestamp: new Date().toISOString(),
+                transactionalConsent: true,
+                marketingConsent: false,
+                env
+            }));
+        }
 
         // 2. Forward to Azure Housing Platform in background
         if (ctx && typeof ctx.waitUntil === 'function') {

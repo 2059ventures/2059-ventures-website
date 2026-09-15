@@ -407,41 +407,225 @@
       flex-shrink: 0;
     }
 
-    /* ── PRINT-SPECIFIC CSS RULES ───────────────────────── */
+    /* ── PRINT-SPECIFIC CSS RULES (STRICT 1-PAGE 8.5" x 11" FIT) ───────────────────────── */
+    @page {
+      size: 8.5in 11in;
+      margin: 0;
+    }
+
     @media print {
-      /* Hide regular website layouts */
+      /* Hide all website navigation, hero banner, footer, and Harry AI widget */
       .nav,
       .capabilities-hero,
       .footer,
-      .footer-bottom {
+      .footer-bottom,
+      .skip-link,
+      #harry-widget-container,
+      .harry-launcher,
+      .harry-chat-window {
         display: none !important;
+        visibility: hidden !important;
       }
 
-      body {
-        background: #ffffff !important;
-        padding: 0 !important;
+      html, body {
+        width: 8.5in !important;
+        height: 11in !important;
+        max-height: 11in !important;
+        overflow: hidden !important;
         margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
 
       .sheet-wrapper {
         padding: 0 !important;
+        margin: 0 !important;
         background: #ffffff !important;
+        width: 8.5in !important;
+        height: 11in !important;
       }
 
       .capabilities-sheet {
         width: 8.5in !important;
-        height: auto !important;
-        padding: 38px 42px 34px !important;
+        height: 11in !important;
+        max-height: 11in !important;
+        padding: 26px 32px 20px !important;
         box-shadow: none !important;
+        border: none !important;
         border-radius: 0 !important;
         margin: 0 !important;
-        page-break-inside: avoid;
-        page-break-after: avoid;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        page-break-inside: avoid !important;
+        page-break-after: avoid !important;
+        page-break-before: avoid !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
       }
 
-      @page {
-        size: 8.5in 11in portrait;
-        margin: 0;
+      .sheet-header {
+        padding-bottom: 8px !important;
+        margin-bottom: 10px !important;
+      }
+
+      .sheet-logo {
+        height: 50px !important;
+      }
+
+      .sheet-brand-text h2 {
+        font-size: 19px !important;
+      }
+
+      .sheet-brand-text p {
+        font-size: 10px !important;
+      }
+
+      .sheet-title h3 {
+        font-size: 16px !important;
+      }
+
+      .sheet-title p {
+        font-size: 10px !important;
+      }
+
+      .sheet-body {
+        gap: 20px !important;
+        flex: 1 !important;
+        min-height: 0 !important;
+      }
+
+      .sheet-sidebar {
+        width: 190px !important;
+        gap: 8px !important;
+      }
+
+      .sidebar-card {
+        padding: 7px 9px !important;
+        border-radius: 6px !important;
+      }
+
+      .sidebar-card h4 {
+        font-size: 9.5px !important;
+        margin-bottom: 3px !important;
+        padding-bottom: 2px !important;
+      }
+
+      .sidebar-list {
+        font-size: 9px !important;
+      }
+
+      .sidebar-list li {
+        margin-bottom: 2.5px !important;
+        line-height: 1.2 !important;
+      }
+
+      .sidebar-list li strong {
+        font-size: 9px !important;
+      }
+
+      .naics-block {
+        font-size: 8.5px !important;
+        line-height: 1.2 !important;
+        margin-bottom: 2.5px !important;
+      }
+
+      .naics-block strong {
+        width: 44px !important;
+      }
+
+      .sheet-contact-item {
+        font-size: 8.5px !important;
+        margin-bottom: 3.5px !important;
+        line-height: 1.2 !important;
+        gap: 5px !important;
+      }
+
+      .sheet-overview {
+        font-size: 11px !important;
+        line-height: 1.35 !important;
+        margin-bottom: 8px !important;
+      }
+
+      .sheet-section h4 {
+        font-size: 11px !important;
+        margin-top: 8px !important;
+        margin-bottom: 5px !important;
+      }
+
+      .sheet-comp-grid {
+        gap: 8px !important;
+      }
+
+      .sheet-comp-card {
+        border-left: 2.5px solid #d97706 !important;
+        padding-left: 6px !important;
+      }
+
+      .sheet-comp-card h5 {
+        font-size: 10.5px !important;
+        margin-bottom: 2px !important;
+      }
+
+      .sheet-comp-card p {
+        font-size: 9px !important;
+        line-height: 1.2 !important;
+      }
+
+      .sheet-bullets li {
+        font-size: 10px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 3.5px !important;
+        padding-left: 12px !important;
+      }
+
+      .sheet-perf-card {
+        margin-bottom: 5px !important;
+      }
+
+      .sheet-perf-card h5 {
+        font-size: 10.5px !important;
+        margin-bottom: 2px !important;
+      }
+
+      .sheet-perf-card p {
+        font-size: 9.5px !important;
+        line-height: 1.25 !important;
+      }
+
+      .sheet-qr-box {
+        margin-top: auto !important;
+        padding: 8px 12px !important;
+        gap: 12px !important;
+      }
+
+      .sheet-qr-img {
+        width: 68px !important;
+        height: 68px !important;
+      }
+
+      .sheet-qr-title {
+        font-size: 11.5px !important;
+        margin-bottom: 2px !important;
+      }
+
+      .sheet-qr-desc {
+        font-size: 9.5px !important;
+        line-height: 1.25 !important;
+        margin-bottom: 2px !important;
+      }
+
+      .sheet-qr-link {
+        font-size: 9.5px !important;
+      }
+
+      .sheet-footer {
+        border-top: 1px solid #d1d5db !important;
+        padding-top: 6px !important;
+        margin-top: 6px !important;
+        font-size: 8px !important;
       }
     }
   </style>
@@ -681,17 +865,18 @@
           </div>
 
           <!-- QR CODE CALL TO ACTION -->
-          <div style="margin-top: 22px; border: 1.5px solid #e5e7eb; border-radius: 8px; padding: 16px 20px; display: flex; align-items: center; gap: 18px; background: #ffffff;">
+          <div class="sheet-qr-box" style="margin-top: 22px; border: 1.5px solid #e5e7eb; border-radius: 8px; padding: 16px 20px; display: flex; align-items: center; gap: 18px; background: #ffffff;">
             <img
+              class="sheet-qr-img"
               src="https://api.qrserver.com/v1/create-qr-code/?size=88x88&color=256041&bgcolor=ffffff&data=https://www.2059ventures.online/intake.html"
               alt="QR Code - Submit a Client Referral"
               width="88" height="88"
               style="flex-shrink: 0; border-radius: 4px;"
             >
             <div>
-              <div style="font-size: 14.5px; font-weight: 800; color: #256041; margin-bottom: 4px;">Ready to Refer a Client?</div>
-              <div style="font-size: 12px; color: #4b5563; line-height: 1.4; margin-bottom: 5px;">Scan to access our secure Agency Referral Portal. Submit client information, request housing, transport, or meal assistance, and track placement in real time.</div>
-              <div style="font-size: 12px; font-weight: 700; color: #256041;">2059ventures.online/intake</div>
+              <div class="sheet-qr-title" style="font-size: 14.5px; font-weight: 800; color: #256041; margin-bottom: 4px;">Ready to Refer a Client?</div>
+              <div class="sheet-qr-desc" style="font-size: 12px; color: #4b5563; line-height: 1.4; margin-bottom: 5px;">Scan to access our secure Agency Referral Portal. Submit client information, request housing, transport, or meal assistance, and track placement in real time.</div>
+              <div class="sheet-qr-link" style="font-size: 12px; font-weight: 700; color: #256041;">2059ventures.online/intake</div>
             </div>
           </div>
 
