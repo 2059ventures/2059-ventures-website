@@ -69,6 +69,7 @@
   * `[SOP-2059-TECH-002]` Agency Outreach & Caseworker Partnership Pipeline
   * `[SOP-2059-TECH-003]` Harry AI Intake Dispatch & Human Oversight Protocols
   * `[SOP-2059-TECH-004]` Data Protection, Consent & Communications Security
+  * `[SOP-2059-TECH-005]` Digital Intake Architecture & Multi-Layer Anti-Spam / Phishing Standards
 * **MODULE 04: FINANCIAL MANAGEMENT, RATES & BILLING**
   * `[SOP-2059-FIN-001]` Room Rate Determination & Calculator Methodology
   * `[SOP-2059-FIN-002]` Voucher Processing, Direct Billing & Copay Collections
@@ -275,6 +276,28 @@
 * **TCPA & 10DLC Compliance:** Affirmative un-checked web opt-in required for SMS communications; automated STOP/HELP keyword support.
 * **Security Controls:** Multi-Factor Authentication (MFA) mandatory on Mercury Bank, Odoo Admin, Cloudflare, and SAM.gov.
 * **PII Protection:** Zero unencrypted client IDs or SSNs stored on personal mobile photo rolls or local desktop caches.
+
+---
+
+### [SOP-2059-TECH-005] Digital Intake Architecture & Multi-Layer Anti-Spam / Phishing Standards
+1. **Purpose & Scope:** Mandates the standardized security engineering requirements for all public web forms, contact endpoints, and automated intake portals across 20/59 Ventures Corp. and any future subsidiary divisions (e.g., NEMT, Meal Logistics, Foundation Outreach).
+2. **The Phishing Exploit Threat:** Public contact forms connected to high-reputation business email services (e.g., Telnyx Email API, SendGrid, Amazon SES) are prime targets for automated botnets. Attackers inject deceptive cryptocurrency, sweepstakes, or phishing links (e.g., via `telegra.ph`, `t.me`, or link shorteners) into form fields. Because the notification email originates from the verified corporate domain (`support@2059ventures.online`), it achieves 100% inbox delivery, risks corporate sender domain reputation, and triggers automated replies.
+3. **Mandatory 4-Layer Defense-in-Depth Specification for All Future Websites:**
+   * **Layer 1: Zero-Friction Honeypot Field (Frontend)**
+     * Every HTML `<form>` submitting to an email or lead-generation API must include an invisible input field (e.g., `name="b_website_url"` or `name="company_website"`).
+     * The input must be hidden strictly off-screen using inline CSS (`position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;`), marked with `tabindex="-1"`, `autocomplete="off"`, and `aria-hidden="true"`.
+     * Legitimate users and screen readers never interact with it; automated scrapers populate every discovered input.
+   * **Layer 2: Server-Side Honeypot Trap & Silent Discard (Backend)**
+     * The backend handler (Cloudflare Worker, Pages Function, or Express/Node API) must evaluate honeypot keys prior to any processing.
+     * If the honeypot contains data, the server must **immediately abort** downstream calls (skip Telnyx Email API, skip customer auto-receipts, skip Odoo CRM leads).
+     * The endpoint must return an HTTP 200 `{ success: true }` simulated confirmation to prevent bot adaptation.
+   * **Layer 3: Suspicious Domain & Phishing Keyword Content Scanner (Backend)**
+     * In initial contact inquiries, prospective tenants and agency caseworkers do not require raw outbound hyperlinks.
+     * The backend handler must scan free-text fields (`message`, `notes`, `name`) using regex to drop known spam/phishing services (`telegra.ph`, `t.me/`, `bit.ly`, `tinyurl.com`, `cutt.ly`, `is.gd`, `rb.gy`, `sweepstakes`, `lottery`, `crypto.*profit`, `casino`, and raw `https?://` links).
+     * Filtered requests are dropped silently with a 200 simulated success.
+   * **Layer 4: Network & Edge Security (Cloudflare WAF)**
+     * All corporate web assets must route through Cloudflare with Bot Fight Mode active.
+     * Form submission endpoints (`/api/contact`, `/api/lead`, `/api/intake`) should challenge or block high-risk datacenter/hosting ASNs when targeting public forms.
 
 ---
 
