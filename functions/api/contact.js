@@ -21,6 +21,60 @@ export async function onRequestOptions() {
     });
 }
 
+// ─── Anti-Bot & Spam Shield Validator ──────────────────────────────────────
+function isSpamSubmission(data, clientIp = 'Direct') {
+    // 1. Honeypot check: automated bots populate hidden input fields
+    const honeypotKeys = ['b_website_url', 'company_website', 'form_honeypot', 'website_hp', 'middle_name'];
+    for (const key of honeypotKeys) {
+        if (data[key] && String(data[key]).trim().length > 0) {
+            console.warn(`[Spam Shield] Bot trapped by honeypot field (${key}) from IP: ${clientIp}`);
+            return { isSpam: true, reason: 'honeypot_triggered' };
+        }
+    }
+
+    // 2. High-risk link and phishing pattern check across free-text and name fields
+    const textToCheck = [
+        data.message,
+        data.management_needs,
+        data.additional_services,
+        data.housing_need_summary,
+        data.special_needs,
+        data.name,
+        data.full_name,
+        data.owner_name
+    ].filter(Boolean).join(' ').toLowerCase();
+
+    // Known scam platforms, sweepstakes, deceptive links & raw URL injection
+    const spamPatterns = [
+        /telegra\.ph/i,
+        /t\.me\//i,
+        /bit\.ly/i,
+        /tinyurl\.com/i,
+        /cutt\.ly/i,
+        /is\.gd/i,
+        /rb\.gy/i,
+        /wa\.me\//i,
+        /chat\.whatsapp\.com/i,
+        /whatsapp\.com\//i,
+        /lamborghini/i,
+        /sweepstakes/i,
+        /lottery/i,
+        /crypto.*profit/i,
+        /casino/i,
+        /viagra|cialis/i,
+        /https?:\/\//i // Genuine initial inquiries and applications should not contain outbound hyperlinks
+    ];
+
+    for (const pattern of spamPatterns) {
+        if (pattern.test(textToCheck)) {
+            console.warn(`[Spam Shield] Spam pattern triggered (${pattern}) from IP: ${clientIp}`);
+            return { isSpam: true, reason: 'spam_pattern_matched' };
+        }
+    }
+
+    return { isSpam: false };
+}
+
 export async function onRequestPost(context) {
     const { request, env, waitUntil } = context;
     const apiKey = env.TELNYX_API_KEY || DEFAULT_TELNYX_API_KEY;
@@ -52,6 +106,23 @@ export async function onRequestPost(context) {
         const clientCountry = request.headers.get('cf-ipcountry') || 'US';
         const clientTimestamp = data.client_timestamp || new Date().toISOString();
         const timestampFormatted = new Date().toUTCString();
+
+        // ── Anti-Spam & Honeypot Shield Check ──
+        const spamCheck = isSpamSubmission(data, clientIp);
+        if (spamCheck.isSpam) {
+            console.warn(`[Spam Shield Dropped] Submission dropped (${spamCheck.reason}) from IP: ${clientIp} (${clientCountry})`);
+            return new Response(JSON.stringify({
+                success: true,
+                message: 'Thank you for reaching out. We have received your inquiry and will be in touch shortly!',
+                shielded: true
+            }), {
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                }
+            });
+        }
 
         const transactionalConsent = Boolean(
             data.transactional_consent === true || data.transactional_consent === 'true' || data.transactional_consent === 'on' ||

@@ -101,6 +101,11 @@
             
             <div class="contact-form-wrapper" style="background: var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.05); padding: 40px; border-radius: 24px; border: 1px solid rgba(74, 124, 89, 0.1);">
                 <form action="/api/contact" method="POST" class="contact-form" style="width: 100%;">
+                    <!-- Security Honeypot: Do not fill -->
+                    <div style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                        <label for="b_website_url">Leave this field blank</label>
+                        <input type="text" id="b_website_url" name="b_website_url" tabindex="-1" autocomplete="off" value="">
+                    </div>
                     <input type="hidden" name="form_type" value="SMS Communications Opt-In">
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
