@@ -279,25 +279,38 @@
 
 ---
 
-### [SOP-2059-TECH-005] Digital Intake Architecture & Multi-Layer Anti-Spam / Phishing Standards
-1. **Purpose & Scope:** Mandates the standardized security engineering requirements for all public web forms, contact endpoints, and automated intake portals across 20/59 Ventures Corp. and any future subsidiary divisions (e.g., NEMT, Meal Logistics, Foundation Outreach).
-2. **The Phishing Exploit Threat:** Public contact forms connected to high-reputation business email services (e.g., Telnyx Email API, SendGrid, Amazon SES) are prime targets for automated botnets. Attackers inject deceptive cryptocurrency, sweepstakes, or phishing links (e.g., via `telegra.ph`, `t.me`, or link shorteners) into form fields. Because the notification email originates from the verified corporate domain (`support@2059ventures.online`), it achieves 100% inbox delivery, risks corporate sender domain reputation, and triggers automated replies.
-3. **Mandatory 4-Layer Defense-in-Depth Specification for All Future Websites:**
-   * **Layer 1: Zero-Friction Honeypot Field (Frontend)**
-     * Every HTML `<form>` submitting to an email or lead-generation API must include an invisible input field (e.g., `name="b_website_url"` or `name="company_website"`).
-     * The input must be hidden strictly off-screen using inline CSS (`position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;`), marked with `tabindex="-1"`, `autocomplete="off"`, and `aria-hidden="true"`.
-     * Legitimate users and screen readers never interact with it; automated scrapers populate every discovered input.
-   * **Layer 2: Server-Side Honeypot Trap & Silent Discard (Backend)**
-     * The backend handler (Cloudflare Worker, Pages Function, or Express/Node API) must evaluate honeypot keys prior to any processing.
-     * If the honeypot contains data, the server must **immediately abort** downstream calls (skip Telnyx Email API, skip customer auto-receipts, skip Odoo CRM leads).
-     * The endpoint must return an HTTP 200 `{ success: true }` simulated confirmation to prevent bot adaptation.
-   * **Layer 3: Suspicious Domain & Phishing Keyword Content Scanner (Backend)**
-     * In initial contact inquiries, prospective tenants and agency caseworkers do not require raw outbound hyperlinks.
-     * The backend handler must scan free-text fields (`message`, `notes`, `name`) using regex to drop known spam/phishing services (`telegra.ph`, `t.me/`, `bit.ly`, `tinyurl.com`, `cutt.ly`, `is.gd`, `rb.gy`, `sweepstakes`, `lottery`, `crypto.*profit`, `casino`, and raw `https?://` links).
-     * Filtered requests are dropped silently with a 200 simulated success.
-   * **Layer 4: Network & Edge Security (Cloudflare WAF)**
-     * All corporate web assets must route through Cloudflare with Bot Fight Mode active.
-     * Form submission endpoints (`/api/contact`, `/api/lead`, `/api/intake`) should challenge or block high-risk datacenter/hosting ASNs when targeting public forms.
+### [SOP-2059-TECH-005] Digital Intake Architecture & Multi-Layer Anti-Spam / Anti-Bot Security Standards
+1. **Purpose & Scope:** Mandates the standardized security engineering requirements for all public web forms, contact endpoints, and automated intake portals across 20/59 Ventures Corp. and any current or future subsidiary divisions (e.g., Housing Intake, NEMT Mobility, Meal Logistics, Foundation Outreach).
+2. **The Threat Landscape (Botnets, Phishing & Lead Flooding):** Public contact and intake forms connected to transactional email pipelines (Telnyx Email REST API) and CRM databases (Odoo Community) are frequent targets for automated crawler botnets and foreign proxies. Attackers inject deceptive cryptocurrency links, sweepstakes, phishing URLs, or automated price-scraping probes (often in foreign languages or from overseas hosting VPS nodes). Left unmitigated, these attacks:
+   * Pollute CRM pipeline opportunities with junk records and fake lead data.
+   * Trigger excessive transactional email API costs and pollute staff inboxes.
+   * Risk corporate domain sender reputation if auto-replies bounce to spoofed or invalid mailboxes.
+   * Risk TCPA and audit compliance metrics by spoofing fake consent records.
+3. **Mandatory 6-Layer Defense-in-Depth Specification for All Corporate Applications:**
+   * **Layer 1: Edge IP & Hosting Subnet Blacklist (Cloudflare Worker)**
+     * The Cloudflare Edge Worker (`_worker.js`) intercepts all inbound traffic at the edge before application execution.
+     * Requests originating from known malicious scraper IPs or non-residential VPS/proxy hosting subnets (e.g., `80.94.95.202` and `80.94.95.0/24`) are immediately terminated with an `HTTP 403 Access Denied`.
+   * **Layer 2: Edge Geo-Fencing & Silent Discard (Cloudflare Worker)**
+     * Since 20/59 Ventures Corp. exclusively serves veterans and seniors across domestic Alabama regional hubs, intake and contact APIs (`/api/contact`, `/api/public/intake`, `/api/intake`, `/api/lead`, `/api/intake-upload`) strictly enforce domestic origin (`US`, `CA`, `PR`, `VI`, `GU`, `MP`, `AS`).
+     * Submissions originating from international country signatures (`cf-ipcountry`) are automatically intercepted at the edge and dropped with a simulated `HTTP 200 { success: true, shielded: true }` response so bots do not retry or rotate IPs.
+   * **Layer 3: North American Numbering Plan (NANP) Phone Sanitization (Backend)**
+     * All lead-generation and intake endpoints must validate incoming phone numbers against the 10-digit North American Numbering Plan (10 digits starting with 2–9, or 11 digits starting with +1).
+     * Foreign or spoofed 11-digit numbers (such as Russian/European mobile prefixes like `89...` or arbitrary digit sequences) are immediately flagged and dropped as spam.
+   * **Layer 4: Zero-Friction Frontend Honeypot Fields**
+     * Every HTML `<form>` across all public pages (`index.html`, `intake.html`, modal forms) must incorporate an invisible honeypot field (`b_website_url` or `company_website`).
+     * The field is hidden off-screen with CSS (`position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;`), `tabindex="-1"`, `autocomplete="off"`, and `aria-hidden="true"`.
+     * Legitimate users and assistive screen readers ignore this field; automated form scrapers automatically populate all detected inputs and trigger instant backend drops.
+   * **Layer 5: Intelligent Probe, Foreign Script & Phishing Content Scanner**
+     * The backend scanner evaluates free-text fields (`message`, `notes`, `name`, `management_needs`) using regex patterns:
+       * Drops raw outbound hyperlinks (`https?://`, `bit.ly`, `tinyurl.com`, `telegra.ph`, `t.me/`, etc.).
+       * Drops common foreign bot scraping probes (e.g., Italian/European pricing solicitations like "ciao", "volevo sapere", "il tuo prezzo").
+       * Drops foreign alphabet injections (Cyrillic `\u0400-\u04FF`, Chinese `\u4E00-\u9FA5`) incompatible with domestic case manager workflows.
+   * **Layer 6: Downstream Service Shielding & Zero Data Pollution**
+     * When any shield condition triggers, the system must **immediately abort** all downstream operations:
+       * **Skip Telnyx Email API:** Zero notification emails dispatched to company inboxes or leadership.
+       * **Skip Client Auto-Confirmations:** Zero automated replies sent to unverified or spoofed addresses.
+       * **Skip Odoo CRM Sync:** Zero opportunity leads or chatter logs created in Odoo CRM.
+       * **Deceptive Response:** Return an HTTP 200 `{ success: true, message: '...', shielded: true }` so threat actors cannot reverse-engineer filter criteria.
 
 ---
 
