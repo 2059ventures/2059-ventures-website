@@ -22,13 +22,26 @@ export async function onRequestOptions() {
 }
 
 // ─── Anti-Bot & Spam Shield Validator ──────────────────────────────────────
-function isSpamSubmission(data, clientIp = 'Direct') {
+function isSpamSubmission(data, clientIp = 'Direct', clientCountry = 'US') {
     // 1. Honeypot check: automated bots populate hidden input fields
     const honeypotKeys = ['b_website_url', 'company_website', 'form_honeypot', 'website_hp', 'middle_name'];
     for (const key of honeypotKeys) {
         if (data[key] && String(data[key]).trim().length > 0) {
             console.warn(`[Spam Shield] Bot trapped by honeypot field (${key}) from IP: ${clientIp}`);
             return { isSpam: true, reason: 'honeypot_triggered' };
+        }
+    }
+
+    // 2. Phone number validation (NANP standard for US/Canada)
+    const phoneRaw = String(data.phone || data.cell || data.emergency_contact_phone || data.referralContact || '').trim();
+    if (phoneRaw) {
+        const digits = phoneRaw.replace(/\D/g, '');
+        // Must be 10 digits (starting with 2-9) or 11 digits starting with 1 (followed by 2-9)
+        const isStandard10 = digits.length === 10 && /^[2-9]\d{9}$/.test(digits);
+        const isStandard11 = digits.length === 11 && /^1[2-9]\d{9}$/.test(digits);
+        if (!isStandard10 && !isStandard11) {
+            console.warn(`[Spam Shield] Invalid non-US phone format rejected (${phoneRaw}) from IP: ${clientIp}`);
+            return { isSpam: true, reason: 'invalid_phone_format' };
         }
     }
 
@@ -62,6 +75,11 @@ function isSpamSubmission(data, clientIp = 'Direct') {
         /crypto.*profit/i,
         /casino/i,
         /viagra|cialis/i,
+        /ciao.*prezzo/i,
+        /volevo sapere/i,
+        /il tuo prezzo/i,
+        /[\u0400-\u04FF]/,
+        /[\u4e00-\u9fa5]/,
         /https?:\/\//i // Genuine initial inquiries and applications should not contain outbound hyperlinks
     ];
 
@@ -78,6 +96,31 @@ function isSpamSubmission(data, clientIp = 'Direct') {
 export async function onRequestPost(context) {
     const { request, env, waitUntil } = context;
     const apiKey = env.TELNYX_API_KEY || DEFAULT_TELNYX_API_KEY;
+
+    const clientIp = request.headers.get('cf-connecting-ip') || 'Direct';
+    const clientCountry = (request.headers.get('cf-ipcountry') || 'US').toUpperCase();
+
+    // ── Edge IP / Subnet Blacklist ──
+    const BLOCKED_IPS = ['80.94.95.202'];
+    const BLOCKED_SUBNETS = ['80.94.95.'];
+    if (BLOCKED_IPS.includes(clientIp) || BLOCKED_SUBNETS.some(sub => clientIp.startsWith(sub))) {
+        console.warn(`[Edge IP Block] Dropped request from blacklisted IP: ${clientIp} (${clientCountry})`);
+        return new Response('Access Denied', { status: 403, headers: { 'Content-Type': 'text/plain' } });
+    }
+
+    // ── Edge Geo-Fence for Inquiries (US Only) ──
+    const ALLOWED_COUNTRIES = ['US', 'CA', 'PR', 'VI', 'GU', 'MP', 'AS'];
+    if (!ALLOWED_COUNTRIES.includes(clientCountry)) {
+        console.warn(`[Edge Geo-Fence] Blocked non-US lead submission from ${clientCountry} (IP: ${clientIp})`);
+        return new Response(JSON.stringify({
+            success: true,
+            message: 'Thank you for reaching out. We have received your inquiry and will be in touch shortly!',
+            shielded: true
+        }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+    }
 
     try {
         let data = {};
@@ -108,7 +151,7 @@ export async function onRequestPost(context) {
         const timestampFormatted = new Date().toUTCString();
 
         // ── Anti-Spam & Honeypot Shield Check ──
-        const spamCheck = isSpamSubmission(data, clientIp);
+        const spamCheck = isSpamSubmission(data, clientIp, clientCountry);
         if (spamCheck.isSpam) {
             console.warn(`[Spam Shield Dropped] Submission dropped (${spamCheck.reason}) from IP: ${clientIp} (${clientCountry})`);
             return new Response(JSON.stringify({
