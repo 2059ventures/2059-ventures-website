@@ -43,6 +43,17 @@ const DEFAULT_EMAIL_RECIPIENTS = [
 export default {
     async fetch(request, env, ctx) {
         const url = new URL(request.url);
+                const hostname = url.hostname.toLowerCase();
+        
+                // ── 301 Canonical Redirect to 2059ventures.com (Option A) ─────────────
+                if (hostname === '2059ventures.online' || hostname === 'www.2059ventures.online' || hostname === 'www.2059ventures.com') {
+                    if (request.method !== 'GET' && request.method !== 'HEAD' && url.pathname.startsWith('/api/')) {
+                        // Allow API POST/PUT to proceed without dropping payload
+                    } else {
+                        const destination = 'https://2059ventures.com' + url.pathname + url.search;
+                        return Response.redirect(destination, 301);
+                    }
+                }
 
         // ── Handle CORS preflight ──────────────────────────────────────────
         if (request.method === 'OPTIONS') {

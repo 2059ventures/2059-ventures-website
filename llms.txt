@@ -3,9 +3,9 @@
 > 20 59 Ventures Corp is an Alabama-based, CMS-registered Multi-Specialty Provider (NPI: 1932035060), VOSB (Veteran-Owned Small Business), and WOSB (Woman-Owned Small Business) offering integrated Housing Referral, Non-Emergency Medical Transportation (NEMT), and Home Meal Coordination services across Tuscaloosa, Dothan, and Montgomery regional hubs.
 
 ## Core Capabilities & Services
-- [Client Placement & Housing Navigation](https://2059ventures.online/capabilities.html): Specialized housing referral and placement for HUD-VASH, veterans, seniors, and Medicaid waiver clients (SAM.gov Active).
-- [Non-Emergency Medical Transportation (NEMT)](https://2059ventures.online/index.html#services): Specialized van transport and transportation brokerage to ensure clients reach clinical appointments and VA medical centers.
-- [Nutritional & Home Meal Coordination](https://2059ventures.online/index.html#services): Home-delivered meal pipelines to maintain long-term independent living stability.
+- [Client Placement & Housing Navigation](https://2059ventures.com/capabilities.html): Specialized housing referral and placement for HUD-VASH, veterans, seniors, and Medicaid waiver clients (SAM.gov Active).
+- [Non-Emergency Medical Transportation (NEMT)](https://2059ventures.com/index.html#services): Specialized van transport and transportation brokerage to ensure clients reach clinical appointments and VA medical centers.
+- [Nutritional & Home Meal Coordination](https://2059ventures.com/index.html#services): Home-delivered meal pipelines to maintain long-term independent living stability.
 
 ## Key Identifiers & Verification
 - **Legal Entity**: 20 59 Ventures Corp.
@@ -18,11 +18,11 @@
 - **Classifications**: Veteran-Owned Small Business (VOSB), Woman-Owned Small Business (WOSB), Small Business
 
 ## Detailed Documentation
-- [Full LLM Context & Business Profile](https://2059ventures.online/llms-full.txt): Deep overview of capabilities, compliance, NPI credentials, and contact procedures.
-- [Government Capabilities Statement](https://2059ventures.online/capabilities.html): Official vendor statement for government case managers and contracting officers.
-- [Compliance & Licensing](https://2059ventures.online/compliance.html): Official state formation, E-Verify, and healthcare logistics compliance details.
+- [Full LLM Context & Business Profile](https://2059ventures.com/llms-full.txt): Deep overview of capabilities, compliance, NPI credentials, and contact procedures.
+- [Government Capabilities Statement](https://2059ventures.com/capabilities.html): Official vendor statement for government case managers and contracting officers.
+- [Compliance & Licensing](https://2059ventures.com/compliance.html): Official state formation, E-Verify, and healthcare logistics compliance details.
 
 ## Contact Information
-- Website: https://2059ventures.online
+- Website: https://2059ventures.com
 - General Email: info@2059ventures.online
 - Direct Line: 1-888-919-2059

@@ -7,12 +7,16 @@
     "enabled": true
   },
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": true
   },
   "workers_dev": true,
   "routes": [
     { "pattern": "2059ventures.online/*", "zone_name": "2059ventures.online" },
-    { "pattern": "www.2059ventures.online/*", "zone_name": "2059ventures.online" }
+    { "pattern": "www.2059ventures.online/*", "zone_name": "2059ventures.online" },
+    { "pattern": "2059ventures.com", "custom_domain": true },
+    { "pattern": "www.2059ventures.com", "custom_domain": true }
   ],
   "compatibility_flags": [
     "nodejs_compat"
