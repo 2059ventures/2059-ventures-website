@@ -525,3 +525,15 @@
         border-radius: 0;
     }
 }
+
+/* Print Mode Suppression - Never show Harry on Print / Save to PDF */
+@media print {
+    #harry-widget-launcher,
+    #harry-widget-modal,
+    [id*="harry"],
+    [class*="harry"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+}

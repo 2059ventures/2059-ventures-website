@@ -475,9 +475,13 @@
       .footer,
       .footer-bottom,
       .skip-link,
+      #harry-widget-launcher,
+      #harry-widget-modal,
       #harry-widget-container,
       .harry-launcher,
-      .harry-chat-window {
+      .harry-chat-window,
+      [id*="harry"],
+      [class*="harry"] {
         display: none !important;
         visibility: hidden !important;
       }
@@ -777,34 +781,30 @@
         <div class="sheet-sidebar">
           
           <div class="sidebar-card">
-            <h4>Company Codes</h4>
-            <ul class="sidebar-list">
-              <li>
-                <strong>NPI Number</strong>
-                1932035060
-              </li>
-              <li>
-                <strong>Taxonomy</strong>
-                193200000X (Multi-Spec)
-              </li>
-              <li>
-                <strong>Unique Entity ID (UEI)</strong>
-                GVR2NTGR4HU3
-              </li>
-              <li>
-                <strong>CAGE Code</strong>
-                22DH9
-              </li>
-              <li>
-                <strong>SAM.gov Status</strong>
-                Active Entity
-              </li>
-              <li>
-                <strong>Payment Acceptance</strong>
-                Government Purchase Cards (GPC / Credit Card) Accepted
-              </li>
-            </ul>
-          </div>
+              <h4>Federal Identifiers</h4>
+              <ul class="sidebar-list">
+                <li>
+                  <strong>CAGE Code</strong>
+                  22DH9
+                </li>
+                <li>
+                  <strong>Unique Entity ID (UEI)</strong>
+                  GVR2NTGR4HU3
+                </li>
+                <li>
+                  <strong>SAM.gov Status</strong>
+                  Active Registration
+                </li>
+                <li>
+                  <strong>Procurement Scope</strong>
+                  Micro-Purchases, Simplified Acquisition, GPC &amp; Prime Contracts
+                </li>
+                <li>
+                  <strong>Payment Acceptance</strong>
+                  Government Purchase Cards (GPC / Credit Card) Accepted
+                </li>
+              </ul>
+            </div>
 
                       <div class="sidebar-card">
               <h4>NAICS Codes</h4>
@@ -848,24 +848,25 @@
             </div>
 
           <div class="sidebar-card">
-            <h4>Classifications</h4>
-            <ul class="sidebar-list">
-              <li><i class="fas fa-certificate" style="color:#256041; margin-right:4px;"></i> Veteran-Owned (VOSB)</li>
-              <li><i class="fas fa-certificate" style="color:#256041; margin-right:4px;"></i> Woman-Owned (WOSB)</li>
-              <li><i class="fas fa-certificate" style="color:#256041; margin-right:4px;"></i> Small Business</li>
-            </ul>
-          </div>
+              <h4>Classifications</h4>
+              <ul class="sidebar-list">
+                <li><i class="fas fa-certificate" style="color:#256041; margin-right:4px;"></i> Veteran-Owned (VOSB)</li>
+                <li><i class="fas fa-certificate" style="color:#256041; margin-right:4px;"></i> Econ. Disadvantaged WOSB (EDWOSB)</li>
+                <li><i class="fas fa-certificate" style="color:#256041; margin-right:4px;"></i> Woman-Owned (WOSB)</li>
+                <li><i class="fas fa-certificate" style="color:#256041; margin-right:4px;"></i> Small Disadvantaged Business</li>
+              </ul>
+            </div>
 
           <div class="sidebar-card">
-            <h4>Compliance &amp; Standards</h4>
-            <ul class="sidebar-list" style="font-size: 10px; line-height: 1.35;">
-              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> FAR 52.204-24/25 (NDAA 889)</li>
-              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> Anti-Kickback (41 U.S.C. 87)</li>
-              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> Fair Housing (FHA / Title VIII)</li>
-              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> HIPAA &amp; 256-Bit Encrypted</li>
-              <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> ADA &amp; Section 508 WCAG AA</li>
-            </ul>
-          </div>
+              <h4>Compliance &amp; Standards</h4>
+              <ul class="sidebar-list" style="font-size: 10px; line-height: 1.35;">
+                <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> FAR 52.204-24/25 (NDAA 889 Compliant)</li>
+                <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> TAA-Compliant Sourcing Available</li>
+                <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> Authorized North American Supply Chain</li>
+                <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> FAR Part 13 Micro-Purchase Ready</li>
+                <li><i class="fas fa-check-circle" style="color:#256041; margin-right:4px;"></i> Section 508 Ergonomic Compatibility</li>
+              </ul>
+            </div>
 
           <div class="sidebar-card">
             <h4>Key Contacts</h4>
@@ -987,14 +988,14 @@
             <img
               class="sheet-qr-img"
               src="https://api.qrserver.com/v1/create-qr-code/?size=88x88&color=256041&bgcolor=ffffff&data=https://2059ventures.com/it-capabilities.html"
-              alt="QR Code - Submit a Client Referral"
+              alt="QR Code - Submit an IT RFQ"
               width="88" height="88"
               style="flex-shrink: 0; border-radius: 4px;"
             >
             <div>
-              <div class="sheet-qr-title" style="font-size: 14.5px; font-weight: 800; color: #256041; margin-bottom: 4px;">Ready to Refer a Client?</div>
-              <div class="sheet-qr-desc" style="font-size: 12px; color: #4b5563; line-height: 1.4; margin-bottom: 5px;">Scan to access our secure Agency Referral Portal. Submit client information, request housing, transport, or meal assistance, and track placement in real time.</div>
-              <div class="sheet-qr-link" style="font-size: 12px; font-weight: 700; color: #256041;">2059ventures.com/intake</div>
+              <div class="sheet-qr-title" style="font-size: 14.5px; font-weight: 800; color: #256041; margin-bottom: 4px;">Ready for IT Solutions &amp; Procurement?</div>
+              <div class="sheet-qr-desc" style="font-size: 12px; color: #4b5563; line-height: 1.4; margin-bottom: 5px;">Scan to submit an RFQ, request an immediate GPC quote, or verify our active SAM.gov registration under CAGE: 22DH9.</div>
+              <div class="sheet-qr-link" style="font-size: 12px; font-weight: 700; color: #256041;">2059ventures.com/it-capabilities.html</div>
             </div>
           </div>
 
@@ -1004,8 +1005,8 @@
 
       <!-- FOOTER -->
       <div class="sheet-footer">
-        <span>20 59 Ventures Corp &bull; NPI: 1932035060 &bull; UEI: GVR2NTGR4HU3 &bull; SAM.gov Registered &bull; GPC Accepted</span>
-        <span>Confidential Government Referral Document</span>
+        <span>20 59 Ventures Corp &bull; CAGE: 22DH9 &bull; UEI: GVR2NTGR4HU3 &bull; VOSB &bull; EDWOSB &bull; WOSB &bull; GPC Accepted</span>
+        <span>Official Public-Sector IT Capability Statement</span>
       </div>
 
     </div>
