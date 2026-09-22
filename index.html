@@ -77,7 +77,7 @@
         "addressCountry": "US"
       },
       "telephone": ["+18889192059", "+12055348492"],
-      "email": "info@2059ventures.online",
+      "email": "info@2059ventures.com",
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+18889192059",
@@ -121,7 +121,7 @@
       "image": "https://2059ventures.com/img/logo-shield.png",
       "url": "https://2059ventures.com",
       "telephone": "+18889192059",
-      "email": "info@2059ventures.online",
+      "email": "info@2059ventures.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "212 W Troy St",
@@ -825,57 +825,144 @@
         <div class="contracting-container">
             <div style="text-align: center; margin-bottom: 50px;">
                 <div style="color: var(--logo-green); text-transform: uppercase; font-size: 13px; font-weight: 600; letter-spacing: 1px; margin-bottom: 10px;">B2G Contracting</div>
-                <h2 class="section-headline" style="margin-bottom: 0;">Federal &amp; Municipal Partnerships</h2>
-                <p class="section-subheadline" style="max-width: 700px; margin: 15px auto 0; font-size: 17px; color: var(--gray-dark); line-height: 1.6;">Authorized housing contractor serving federal agencies, VA programs, and regional housing authorities.</p>
+                <h2 class="section-headline" style="margin-bottom: 0;">Federal &amp; Public Sector Contracting</h2>
+                  <p class="section-subheadline" style="max-width: 780px; margin: 15px auto 0; font-size: 17px; color: var(--gray-dark); line-height: 1.6;">Authorized prime contractor delivering integrated supportive care services and enterprise IT &amp; technical workstation infrastructure to federal agencies, VA programs, and commercial operations.</p>
             </div>
 
             <div class="contracting-grid">
-                <!-- Capabilities & Credentials Panel -->
-                <div class="contracting-panel fade-in">
-                    <h3 style="font-size: 22px; font-weight: 600; color: var(--text-dark); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; margin-top: 0;">
-                        <i class="fas fa-file-contract" style="color: var(--logo-green);"></i> Capabilities Statement
-                    </h3>
-                    <p style="font-size: 15px; color: var(--gray-dark); line-height: 1.6; margin-bottom: 25px;">
-                        20 59 Ventures Corp provides integrated housing, NEMT mobility, and meal support services across Alabama, with active regional service hubs in Tuscaloosa, Dothan, and Montgomery. We act as a dedicated administrative extension for case managers under CMS and federal contracting guidelines.
-                    </p>
+                <!-- Capabilities & Credentials Panel with Dual-Track Switcher -->
+                  <div class="contracting-panel fade-in">
+                      <!-- Segmented Dual-Track Switcher -->
+                      <div style="display: flex; background: #e5e7eb; padding: 4px; border-radius: 10px; margin-bottom: 24px; gap: 4px;">
+                          <button type="button" id="tab-btn-housing" onclick="switchContractingTab('housing')" style="flex: 1; padding: 10px 14px; border: none; border-radius: 7px; font-size: 13.5px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; background: #ffffff; color: var(--text-dark); box-shadow: 0 2px 5px rgba(0,0,0,0.08);">
+                              <i class="fas fa-home" style="color: var(--logo-green); margin-right: 6px;"></i> Supportive Housing &amp; Care
+                          </button>
+                          <button type="button" id="tab-btn-it" onclick="switchContractingTab('it')" style="flex: 1; padding: 10px 14px; border: none; border-radius: 7px; font-size: 13.5px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; background: transparent; color: var(--text-muted);">
+                              <i class="fas fa-desktop" style="color: #256041; margin-right: 6px;"></i> IT &amp; Technical Workstations
+                          </button>
+                      </div>
 
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px;">
-                        <div class="credential-box">
-                            <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">NPI Number</div>
-                            <div style="font-size: 15px; font-weight: 700; color: var(--text-dark); letter-spacing: 0.5px;">1932035060</div>
-                            <div style="font-size: 11px; color: var(--logo-green); font-weight: 500; margin-top: 2px;">Multi-Specialty Group</div>
-                        </div>
-                        <div class="credential-box">
-                            <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Unique Entity ID (UEI)</div>
-                            <div style="font-size: 15px; font-weight: 700; color: var(--text-dark); letter-spacing: 0.5px;">GVR2NTGR4HU3</div>
-                        </div>
-                        <div class="credential-box">
-                            <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Primary NAICS Codes</div>
-                            <div style="font-size: 14px; font-weight: 700; color: var(--text-dark);">624220 | 485991 | 624210</div>
-                            <div style="font-size: 11px; color: var(--logo-green); font-weight: 500; margin-top: 2px;">Housing &bull; NEMT &bull; Meals</div>
-                        </div>
-                        <div class="credential-box">
-                            <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Classifications</div>
-                            <div style="font-size: 14px; font-weight: 700; color: var(--text-dark);">VOSB &amp; WOSB</div>
-                            <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Veteran &amp; Woman-Owned</div>
-                        </div>
-                    </div>
+                      <!-- TAB 1: Housing & Care Capabilities -->
+                      <div id="panel-housing-content">
+                          <h3 style="font-size: 20px; font-weight: 600; color: var(--text-dark); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; margin-top: 0;">
+                              <i class="fas fa-file-contract" style="color: var(--logo-green);"></i> Community Housing Capabilities
+                          </h3>
+                          <p style="font-size: 15px; color: var(--gray-dark); line-height: 1.6; margin-bottom: 22px;">
+                              20 59 Ventures Corp provides integrated housing, NEMT mobility, and meal support services across Alabama, with active regional service hubs in Tuscaloosa, Dothan, and Montgomery. We act as a dedicated administrative extension for case managers under CMS and federal contracting guidelines.
+                          </p>
 
-                    <div style="background: rgba(37, 96, 65, 0.06); border-left: 3px solid #256041; padding: 10px 14px; border-radius: 4px; font-size: 12px; color: #1b4730; font-weight: 600; margin-bottom: 25px;">
-                        <i class="fas fa-map-marker-alt" style="margin-right: 6px; color: #256041;"></i> Serving Statewide | Tuscaloosa, Dothan &amp; Montgomery Regional Hubs
-                    </div>
+                          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 24px;">
+                              <div class="credential-box">
+                                  <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">NPI Number</div>
+                                  <div style="font-size: 15px; font-weight: 700; color: var(--text-dark); letter-spacing: 0.5px;">1932035060</div>
+                                  <div style="font-size: 11px; color: var(--logo-green); font-weight: 500; margin-top: 2px;">Multi-Specialty Group</div>
+                              </div>
+                              <div class="credential-box">
+                                  <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Unique Entity ID (UEI)</div>
+                                  <div style="font-size: 15px; font-weight: 700; color: var(--text-dark); letter-spacing: 0.5px;">GVR2NTGR4HU3</div>
+                              </div>
+                              <div class="credential-box">
+                                  <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Primary NAICS Codes</div>
+                                  <div style="font-size: 14px; font-weight: 700; color: var(--text-dark);">624220 | 485991 | 624210</div>
+                                  <div style="font-size: 11px; color: var(--logo-green); font-weight: 500; margin-top: 2px;">Housing &bull; NEMT &bull; Meals</div>
+                              </div>
+                              <div class="credential-box">
+                                  <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Classifications</div>
+                                  <div style="font-size: 14px; font-weight: 700; color: var(--text-dark);">VOSB, EDWOSB &amp; WOSB</div>
+                                  <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Veteran, EDWOSB &amp; Woman-Owned</div>
+                              </div>
+                          </div>
 
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                        <a href="capabilities.html" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 14.5px; line-height: 1;">
-                            <i class="fas fa-eye"></i> View Capabilities Page
-                        </a>
-                        <a href="capabilities.html" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border: 1px solid #d1d5db; color: var(--text-dark); background: #ffffff; font-size: 14.5px; line-height: 1; margin: 0;" onclick="window.open('capabilities.html', '_blank'); return false;">
-                            <i class="fas fa-file-pdf" style="color: #ef4444;"></i> Download PDF Statement
-                        </a>
-                    </div>
-                </div>
+                          <div style="background: rgba(37, 96, 65, 0.06); border-left: 3px solid #256041; padding: 10px 14px; border-radius: 4px; font-size: 12px; color: #1b4730; font-weight: 600; margin-bottom: 24px;">
+                              <i class="fas fa-map-marker-alt" style="margin-right: 6px; color: #256041;"></i> Serving Statewide | Tuscaloosa, Dothan &amp; Montgomery Regional Hubs
+                          </div>
 
-                <!-- SAM.gov Live API Status Card -->
+                          <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                              <a href="capabilities.html" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 14.5px; line-height: 1;">
+                                  <i class="fas fa-eye"></i> View Housing Statement
+                              </a>
+                              <a href="capabilities.html" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border: 1px solid #d1d5db; color: var(--text-dark); background: #ffffff; font-size: 14.5px; line-height: 1; margin: 0;" onclick="window.open('capabilities.html', '_blank'); return false;">
+                                  <i class="fas fa-file-pdf" style="color: #ef4444;"></i> Download PDF Statement
+                              </a>
+                          </div>
+                      </div>
+
+                      <!-- TAB 2: IT & Technical Workstations Capabilities -->
+                      <div id="panel-it-content" style="display: none;">
+                          <h3 style="font-size: 20px; font-weight: 600; color: var(--text-dark); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; margin-top: 0;">
+                              <i class="fas fa-desktop" style="color: var(--logo-green);"></i> IT &amp; Workstation Capabilities
+                          </h3>
+                          <p style="font-size: 15px; color: var(--gray-dark); line-height: 1.6; margin-bottom: 22px;">
+                              20 59 Ventures Corp provides commercial IT hardware fulfillment, systems integration, and technical workstation solutions for federal facilities, healthcare clinics, and operations centers. We support simplified acquisitions, enterprise hardware refreshes, and volume deployments, with immediate Government Purchase Card (GPC) acceptance.
+                          </p>
+
+                          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 24px;">
+                              <div class="credential-box">
+                                  <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">CAGE Code</div>
+                                  <div style="font-size: 15px; font-weight: 700; color: var(--text-dark); letter-spacing: 0.5px;">22DH9</div>
+                                  <div style="font-size: 11px; color: var(--logo-green); font-weight: 500; margin-top: 2px;">Verified Federal Contractor</div>
+                              </div>
+                              <div class="credential-box">
+                                  <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Unique Entity ID (UEI)</div>
+                                  <div style="font-size: 15px; font-weight: 700; color: var(--text-dark); letter-spacing: 0.5px;">GVR2NTGR4HU3</div>
+                              </div>
+                              <div class="credential-box">
+                                  <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Primary IT NAICS Codes</div>
+                                  <div style="font-size: 14px; font-weight: 700; color: var(--text-dark);">423430 | 541519 | 423210</div>
+                                  <div style="font-size: 11px; color: var(--logo-green); font-weight: 500; margin-top: 2px;">Hardware &bull; ITVAR &bull; Furniture</div>
+                              </div>
+                              <div class="credential-box">
+                                  <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;">Classifications</div>
+                                  <div style="font-size: 14px; font-weight: 700; color: var(--text-dark);">VOSB, EDWOSB &amp; WOSB</div>
+                                  <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Veteran, EDWOSB &amp; Woman-Owned</div>
+                              </div>
+                          </div>
+
+                          <div style="background: rgba(37, 96, 65, 0.06); border-left: 3px solid #256041; padding: 10px 14px; border-radius: 4px; font-size: 12px; color: #1b4730; font-weight: 600; margin-bottom: 24px;">
+                              <i class="fas fa-cubes" style="margin-right: 6px; color: #256041;"></i> Turnkey Workstation Bundles | Microsoft &bull; Google &bull; Samsung &bull; Logitech &bull; Ergotron &bull; Jabra
+                          </div>
+
+                          <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                              <a href="it-capabilities.html" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 14.5px; line-height: 1;">
+                                  <i class="fas fa-eye"></i> View IT Capabilities
+                              </a>
+                              <a href="it-capabilities.html" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border: 1px solid #d1d5db; color: var(--text-dark); background: #ffffff; font-size: 14.5px; line-height: 1; margin: 0;" onclick="window.open('it-capabilities.html', '_blank'); return false;">
+                                  <i class="fas fa-file-pdf" style="color: #ef4444;"></i> Download IT Statement
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+
+                  <script>
+                      function switchContractingTab(tab) {
+                          const btnHousing = document.getElementById('tab-btn-housing');
+                          const btnIt = document.getElementById('tab-btn-it');
+                          const contentHousing = document.getElementById('panel-housing-content');
+                          const contentIt = document.getElementById('panel-it-content');
+
+                          if (tab === 'it') {
+                              contentHousing.style.display = 'none';
+                              contentIt.style.display = 'block';
+                              btnIt.style.background = '#ffffff';
+                              btnIt.style.color = 'var(--text-dark)';
+                              btnIt.style.boxShadow = '0 2px 5px rgba(0,0,0,0.08)';
+                              btnHousing.style.background = 'transparent';
+                              btnHousing.style.color = 'var(--text-muted)';
+                              btnHousing.style.boxShadow = 'none';
+                          } else {
+                              contentHousing.style.display = 'block';
+                              contentIt.style.display = 'none';
+                              btnHousing.style.background = '#ffffff';
+                              btnHousing.style.color = 'var(--text-dark)';
+                              btnHousing.style.boxShadow = '0 2px 5px rgba(0,0,0,0.08)';
+                              btnIt.style.background = 'transparent';
+                              btnIt.style.color = 'var(--text-muted)';
+                              btnIt.style.boxShadow = 'none';
+                          }
+                      }
+                  </script>
+                  
+                  <!-- SAM.gov Live API Status Card -->
                 <div class="sam-status-card fade-in">
                     <h3 style="font-size: 20px; font-weight: 600; color: var(--text-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; margin-top: 0;">
                         <i class="fas fa-shield-alt" style="color: #256041;"></i> SAM.gov Registry
@@ -1035,7 +1122,7 @@
                             <img src="img/logo-shield.png" alt="20/59 Ventures Logo" style="width: 56px; height: 56px; border-radius: 12px; object-fit: cover; border: 1px solid #cbd5e1;">
                             <div>
                                 <h3 style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin: 0;">20 59 Ventures Corp</h3>
-                                <p style="font-size: 0.85rem; color: #64748b; margin: 2px 0 0 0;">Housing Referral Agency • VOSB &amp; WOSB • BBB A+</p>
+                                <p style="font-size: 0.85rem; color: #64748b; margin: 2px 0 0 0;">Housing Referral Agency • VOSB, EDWOSB &amp; WOSB • BBB A+</p>
                                 <span style="font-size: 0.75rem; color: #0077b5; font-weight: 600;">Dothan, AL • Public Sector Housing</span>
                             </div>
                         </div>
@@ -1165,8 +1252,8 @@
                         </div>
                         <div class="contact-details">
                             <h4>Email</h4>
-                            <p><a href="mailto:info@2059ventures.online">info@2059ventures.online</a></p>
-                            <p><a href="mailto:andrea.marcus@2059ventures.online">andrea.marcus@2059ventures.online</a>
+                            <p><a href="mailto:info@2059ventures.com">info@2059ventures.com</a></p>
+                            <p><a href="mailto:andrea.marcus@2059ventures.com">andrea.marcus@2059ventures.com</a>
                         <div class="secure-fax-card dark-theme compact-theme" style="margin-top: 14px;">
                             <div class="secure-fax-header">
                                 <div class="secure-fax-label">
@@ -1283,7 +1370,8 @@
                         <h4>Company</h4>
                         <a href="about.html">About Us</a>
                         <a href="#contact">Contact</a>
-                        <a href="capabilities.html" target="_blank">Capabilities Statement</a>
+                        <a href="capabilities.html" target="_blank">Housing Capabilities</a>
+                        <a href="it-capabilities.html" target="_blank">IT &amp; Workstations</a>
                         <a href="https://limyefoundation.org" target="_blank">Limyè Foundation</a>
                     </div>
 
@@ -1302,8 +1390,8 @@
                         <h4>Contact</h4>
                         <a href="tel:1-888-919-2059">1-888-919-2059</a>
                         <a href="tel:205-534-8492">205-534-8492</a>
-                        <a href="mailto:info@2059ventures.online">info@2059ventures.online</a>
-                        <a href="mailto:andrea.marcus@2059ventures.online">andrea.marcus@2059ventures.online</a>
+                        <a href="mailto:info@2059ventures.com">info@2059ventures.com</a>
+                        <a href="mailto:andrea.marcus@2059ventures.com">andrea.marcus@2059ventures.com</a>
                         <a href="https://www.linkedin.com/company/136653897/" target="_blank" rel="noopener noreferrer" style="color: #0a66c2; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;"><i class="fab fa-linkedin"></i> 20/59 Ventures LinkedIn</a>
                         <a href="https://www.linkedin.com/in/andrea-marcus-a32644423/" target="_blank" rel="noopener noreferrer" style="color: #0a66c2; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;"><i class="fab fa-linkedin"></i> Andrea Marcus LinkedIn</a>
                         <a href="https://www.facebook.com/profile.php?id=61579449473728" target="_blank" rel="noopener noreferrer" style="color: #1877f2; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;"><i class="fab fa-facebook"></i> 20/59 Ventures Facebook</a>
@@ -1317,7 +1405,7 @@
                         212 W Troy St, Dothan, AL 36303<br>
                         <a href="tel:+18889192059" style="color: var(--text-muted);">1-888-919-2059</a> (Toll-Free)<br>
                         <a href="tel:+12055348492" style="color: var(--text-muted);">205-534-8492</a> (Local)<br>
-                        <a href="mailto:info@2059ventures.online" style="color: var(--text-muted);">info@2059ventures.online</a><br>
+                        <a href="mailto:info@2059ventures.com" style="color: var(--text-muted);">info@2059ventures.com</a><br>
                         <span style="font-size: 11px;">UEI: GVR2NTGR4HU3 &nbsp;|&nbsp; CAGE: 22DH9</span>
                     </address>
                 </div>
