@@ -2036,3 +2036,230 @@ textarea:focus-visible {
         scroll-behavior: auto !important;
     }
 }
+
+/* ==========================================================================
+   Secure Spam-Shielded Fax Display Component (Anti-Scraping / Agency Casework)
+   ========================================================================== */
+.secure-fax-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #ffffff;
+    border: 1px solid rgba(36, 94, 67, 0.2);
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s ease;
+    max-width: 100%;
+    margin-top: 6px;
+}
+
+.secure-fax-card:hover {
+    border-color: var(--logo-green);
+    box-shadow: 0 6px 20px rgba(36, 94, 67, 0.12);
+}
+
+.secure-fax-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.secure-fax-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.35;
+}
+
+.secure-fax-label i {
+    color: var(--logo-green);
+    font-size: 14px;
+}
+
+.secure-fax-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #ecfdf5;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #065f46;
+    padding: 3px 9px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.secure-fax-badge i {
+    color: #10b981;
+    font-size: 10px;
+}
+
+.secure-fax-body {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 2px;
+    flex-wrap: wrap;
+}
+
+.secure-fax-reveal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--logo-green) 0%, var(--logo-light-green) 100%);
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(36, 94, 67, 0.25);
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.secure-fax-reveal-btn:hover {
+    background: linear-gradient(135deg, var(--logo-dark-green) 0%, var(--logo-green) 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(36, 94, 67, 0.35);
+}
+
+.secure-fax-reveal-btn:active {
+    transform: translateY(0);
+}
+
+.secure-fax-revealed {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.secure-fax-number {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 15.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--black);
+}
+
+.secure-fax-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    padding: 5px 11px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.secure-fax-copy-btn:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+    color: #0f172a;
+}
+
+.secure-fax-copy-btn.copied {
+    border-color: #10b981;
+    background: #ecfdf5;
+}
+
+.secure-fax-subtext {
+    font-size: 11.5px;
+    color: var(--gray-medium);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Footer & Dark Theme Mode */
+.secure-fax-card.dark-theme,
+.footer .secure-fax-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.secure-fax-card.dark-theme:hover,
+.footer .secure-fax-card:hover {
+    border-color: var(--logo-light-green);
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.secure-fax-card.dark-theme .secure-fax-label,
+.footer .secure-fax-card .secure-fax-label {
+    color: var(--white);
+}
+
+.secure-fax-card.dark-theme .secure-fax-label i,
+.footer .secure-fax-card .secure-fax-label i {
+    color: var(--logo-light-green);
+}
+
+.secure-fax-card.dark-theme .secure-fax-badge,
+.footer .secure-fax-card .secure-fax-badge {
+    background: rgba(16, 185, 129, 0.18);
+    border-color: rgba(16, 185, 129, 0.45);
+    color: #34d399;
+}
+
+.secure-fax-card.dark-theme .secure-fax-number,
+.footer .secure-fax-card .secure-fax-number {
+    color: var(--white);
+}
+
+.secure-fax-card.dark-theme .secure-fax-copy-btn,
+.footer .secure-fax-card .secure-fax-copy-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.22);
+    color: #e2e8f0;
+}
+
+.secure-fax-card.dark-theme .secure-fax-copy-btn:hover,
+.footer .secure-fax-card .secure-fax-copy-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+}
+
+.secure-fax-card.dark-theme .secure-fax-copy-btn.copied,
+.footer .secure-fax-card .secure-fax-copy-btn.copied {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.25);
+}
+
+.secure-fax-card.dark-theme .secure-fax-subtext,
+.footer .secure-fax-card .secure-fax-subtext {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* Compact theme for narrow columns */
+.secure-fax-card.compact-theme {
+    padding: 12px 14px;
+    gap: 8px;
+}
+
+.secure-fax-card.compact-theme .secure-fax-label {
+    font-size: 12px;
+}
+
+.secure-fax-card.compact-theme .secure-fax-number {
+    font-size: 14.5px;
+}
+
+.secure-fax-card.compact-theme .secure-fax-subtext {
+    font-size: 11px;
+}

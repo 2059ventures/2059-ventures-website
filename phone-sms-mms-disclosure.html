@@ -175,6 +175,32 @@
                         <a href="mailto:info@2059ventures.online">info@2059ventures.online</a>
                         <a href="mailto:andrea.marcus@2059ventures.online">andrea.marcus@2059ventures.online</a>
                         <p>212 W Troy St, Dothan, AL 36303</p>
+                        <div class="secure-fax-card dark-theme compact-theme" style="margin-top: 14px;">
+                            <div class="secure-fax-header">
+                                <div class="secure-fax-label">
+                                    <i class="fas fa-file-contract" aria-hidden="true"></i>
+                                    <span>Official Inbound Fax (T.38 / PDF)</span>
+                                </div>
+                                <span class="secure-fax-badge">
+                                    <i class="fas fa-shield-alt" aria-hidden="true"></i> Spam Shielded
+                                </span>
+                            </div>
+                            <div class="secure-fax-body">
+                                <button type="button" class="secure-fax-reveal-btn" aria-label="Click to reveal toll-free inbound fax number">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                    <span>Click to View Fax</span>
+                                </button>
+                                <div class="secure-fax-revealed" style="display: none;" aria-hidden="true">
+                                    <span class="secure-fax-number" aria-label="Toll-free inbound fax number"></span>
+                                    <button type="button" class="secure-fax-copy-btn" aria-label="Copy fax number to clipboard" title="Copy to clipboard">
+                                        <i class="far fa-copy" aria-hidden="true"></i>
+                                        <span>Copy</span>
+                                    </button>
+                                </div>
+                                <span class="sr-only secure-fax-sr-status" aria-live="polite"></span>
+                            </div>
+                            <p class="secure-fax-subtext">Official Agency Records &amp; Casework Inbound Fax</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -193,5 +219,7 @@
         </div>
     </footer>
     <script src="js/apple-style.js"></script>
+    <!-- Secure Inbound Fax System -->
+    <script src="js/secure-fax.js" defer></script>
 </body>
 </html>

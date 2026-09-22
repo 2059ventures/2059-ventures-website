@@ -301,6 +301,61 @@
       font-size: 11.5px;
     }
 
+    .sheet-contact-fax .secure-fax-reveal-btn {
+      background: linear-gradient(135deg, #256041 0%, #3d8b66 100%);
+      color: #ffffff;
+      border: none;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 2px;
+      transition: all 0.2s;
+    }
+
+    .sheet-contact-fax .secure-fax-reveal-btn:hover {
+      background: #1b4730;
+    }
+
+    .sheet-contact-fax .secure-fax-revealed {
+      display: none;
+      align-items: center;
+      gap: 5px;
+      margin-top: 2px;
+    }
+
+    .sheet-contact-fax .secure-fax-number {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: 0.02em;
+    }
+
+    .sheet-contact-fax .secure-fax-copy-btn {
+      padding: 1px 5px;
+      font-size: 9px;
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #374151;
+    }
+
+    .sheet-contact-fax .secure-fax-copy-btn.copied {
+      background: #ecfdf5;
+      border-color: #10b981;
+      color: #065f46;
+    }
+
+    .sheet-contact-fax .print-fax-text {
+      display: none;
+    }
+
     /* Main Panel Content */
     .sheet-main {
       flex: 1;
@@ -499,48 +554,61 @@
 
       .sheet-sidebar {
         width: 190px !important;
-        gap: 8px !important;
+        gap: 6.5px !important;
       }
 
       .sidebar-card {
-        padding: 7px 9px !important;
-        border-radius: 6px !important;
+        padding: 6px 8px !important;
+        border-radius: 5px !important;
       }
 
       .sidebar-card h4 {
-        font-size: 9.5px !important;
-        margin-bottom: 3px !important;
-        padding-bottom: 2px !important;
+        font-size: 9px !important;
+        margin-bottom: 2px !important;
+        padding-bottom: 1.5px !important;
       }
 
       .sidebar-list {
-        font-size: 9px !important;
+        font-size: 8.5px !important;
       }
 
       .sidebar-list li {
-        margin-bottom: 2.5px !important;
-        line-height: 1.2 !important;
+        margin-bottom: 2px !important;
+        line-height: 1.18 !important;
       }
 
       .sidebar-list li strong {
-        font-size: 9px !important;
+        font-size: 8.5px !important;
       }
 
       .naics-block {
-        font-size: 8.5px !important;
-        line-height: 1.2 !important;
-        margin-bottom: 2.5px !important;
+        font-size: 8px !important;
+        line-height: 1.15 !important;
+        margin-bottom: 2px !important;
       }
 
       .naics-block strong {
-        width: 44px !important;
+        width: 42px !important;
       }
 
       .sheet-contact-item {
-        font-size: 8.5px !important;
-        margin-bottom: 3.5px !important;
-        line-height: 1.2 !important;
-        gap: 5px !important;
+        font-size: 8px !important;
+        margin-bottom: 2px !important;
+        line-height: 1.18 !important;
+        gap: 4px !important;
+      }
+
+      .sheet-contact-fax .secure-fax-reveal-btn,
+      .sheet-contact-fax .secure-fax-revealed {
+        display: none !important;
+      }
+
+      .sheet-contact-fax .print-fax-text {
+        display: inline !important;
+        font-size: 8px !important;
+        font-weight: 700 !important;
+        font-family: monospace !important;
+        color: #111827 !important;
       }
 
       .sheet-overview {
@@ -780,6 +848,28 @@
                 205-534-8492
               </div>
             </div>
+            <div class="sheet-contact-item sheet-contact-fax">
+              <i class="fas fa-fax" aria-hidden="true"></i>
+              <div style="flex: 1;">
+                <span style="font-weight: 700; color: #1e4d35; font-size: 10px;">Inbound Fax</span>
+                <span class="secure-fax-badge" style="font-size: 8px; padding: 1px 4px; margin-left: 2px; vertical-align: middle;">
+                  <i class="fas fa-shield-alt" style="font-size: 7px;"></i> Spam Shielded
+                </span>
+                <div class="secure-fax-inline">
+                  <button type="button" class="secure-fax-reveal-btn" aria-label="Click to reveal toll-free inbound fax number">
+                    <i class="fas fa-eye" style="font-size: 8px;"></i> <span>Click to View Fax</span>
+                  </button>
+                  <div class="secure-fax-revealed" style="display: none;">
+                    <span class="secure-fax-number" aria-label="Toll-free inbound fax number"></span>
+                    <button type="button" class="secure-fax-copy-btn" aria-label="Copy fax number" title="Copy">
+                      <i class="far fa-copy"></i>
+                    </button>
+                  </div>
+                  <span class="sr-only secure-fax-sr-status" aria-live="polite"></span>
+                </div>
+                <span class="print-fax-text"></span>
+              </div>
+            </div>
             <div class="sheet-contact-item">
               <i class="fas fa-envelope"></i>
               <div>
@@ -897,6 +987,34 @@
   <!-- Footer (Website Footer Sync) -->
   <footer class="footer">
     <div class="footer-container">
+            <div style="display: flex; justify-content: center; margin-bottom: 24px;">
+        <div class="secure-fax-card dark-theme" style="max-width: 580px; width: 100%;">
+            <div class="secure-fax-header">
+                <div class="secure-fax-label">
+                    <i class="fas fa-file-contract" aria-hidden="true"></i>
+                    <span>Official Agency Records &amp; Casework Inbound Fax (T.38 / PDF)</span>
+                </div>
+                <span class="secure-fax-badge">
+                    <i class="fas fa-shield-alt" aria-hidden="true"></i> Spam Shielded
+                </span>
+            </div>
+            <div class="secure-fax-body">
+                <button type="button" class="secure-fax-reveal-btn" aria-label="Click to reveal toll-free inbound fax number">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    <span>Click to View Fax</span>
+                </button>
+                <div class="secure-fax-revealed" style="display: none;" aria-hidden="true">
+                    <span class="secure-fax-number" aria-label="Toll-free inbound fax number"></span>
+                    <button type="button" class="secure-fax-copy-btn" aria-label="Copy fax number to clipboard" title="Copy to clipboard">
+                        <i class="far fa-copy" aria-hidden="true"></i>
+                        <span>Copy</span>
+                    </button>
+                </div>
+                <span class="sr-only secure-fax-sr-status" aria-live="polite"></span>
+            </div>
+            <p class="secure-fax-subtext">Direct electronic PDF delivery for 20/59 Ventures agency forms &amp; casework records.</p>
+        </div>
+      </div>
       <div class="footer-bottom">
         <p>&copy; 2024 20 59 Ventures Corp. All rights reserved. &nbsp;|&nbsp; <i class="fas fa-home" style="color: var(--logo-green);"></i> Equal Housing Opportunity &nbsp;|&nbsp; UEI: GVR2NTGR4HU3 &nbsp;|&nbsp; <a href="compliance.html#accessibility-statement" style="color: var(--logo-green); text-decoration: underline;">Accessibility Statement</a> &nbsp;|&nbsp; GPC Accepted</p>
         <p>Technology-Driven Housing Solutions for Veterans and Seniors &bull; Committed to Fair Housing for All</p>
@@ -907,5 +1025,7 @@
   <script src="js/linkedin-tracker.js" defer></script>
   <!-- Telnyx Voice AI Harry Widget -->
   <script src="js/harry-widget.js" defer></script>
+  <!-- Secure Inbound Fax System -->
+  <script src="js/secure-fax.js" defer></script>
 </body>
 </html>
