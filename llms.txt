@@ -4,6 +4,7 @@
 
 ## Core Capabilities & Services
 - [Client Placement & Housing Navigation](https://2059ventures.com/capabilities.html): Specialized housing referral and placement for HUD-VASH, veterans, seniors, and Medicaid waiver clients (SAM.gov Active).
+- [IT Infrastructure & Workstations Capabilities](https://2059ventures.com/it-capabilities.html): Public-sector IT hardware fulfillment, systems integration, and workstation bundles featuring TD SYNNEX, StarTech.com, and Ergotron (NAICS 423430, 541519, 423210).
 - [Non-Emergency Medical Transportation (NEMT)](https://2059ventures.com/index.html#services): Specialized van transport and transportation brokerage to ensure clients reach clinical appointments and VA medical centers.
 - [Nutritional & Home Meal Coordination](https://2059ventures.com/index.html#services): Home-delivered meal pipelines to maintain long-term independent living stability.
 
