@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- PostHog Analytics -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_ndoeoQFKxKYLfQSGQprJwvS6pGFF7w8bsw7uVyT6BkYf', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only'
+    });
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government RFQ &amp; Micro-Purchase Portal | IT &amp; Workstations | 20 59 Ventures Corp</title>
+  <meta name="description" content="Submit official government RFQs, SOWs, and Micro-Purchase solicitations to 20 59 Ventures Corp. CAGE: 22DH9 | UEI: GVR2NTGR4HU3. VOSB, EDWOSB &amp; WOSB. Rapid GPC fulfillment for TD SYNNEX, StarTech.com, and Ergotron.">
+  <link rel="canonical" href="https://2059ventures.com/rfq.html">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="20 59 Ventures Corp">
+  <meta property="og:title" content="Government RFQ &amp; Micro-Purchase Portal | 20 59 Ventures Corp">
+  <meta property="og:description" content="Fast-track public-sector IT quotes, SOW uploads, and Micro-Purchase fulfillment. CAGE: 22DH9, UEI: GVR2NTGR4HU3. VOSB &amp; EDWOSB certified.">
+  <meta property="og:url" content="https://2059ventures.com/rfq.html">
+  <meta property="og:image" content="https://2059ventures.com/img/logo-shield.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/apple-style.css">
+  <link rel="stylesheet" href="css/harry-widget.css">
+
+  <style>
+    :root {
+      --gov-green: #256041;
+      --gov-dark: #1b4730;
+      --gov-gold: #d97706;
+      --gov-gold-hover: #b45309;
+      --card-border: #e5e7eb;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #111827;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* Hero Section */
+    .rfq-hero {
+      background: linear-gradient(135deg, #1b4730 0%, #256041 55%, #15803d 100%);
+      color: #ffffff;
+      padding: 95px 20px 50px;
+      text-align: center;
+    }
+
+    .rfq-hero-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .rfq-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #fef08a;
+      margin-bottom: 16px;
+    }
+
+    .rfq-hero h1 {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .rfq-hero p {
+      font-size: 16.5px;
+      line-height: 1.55;
+      opacity: 0.95;
+      max-width: 760px;
+      margin: 0 auto 20px;
+    }
+
+    .rfq-credentials-strip {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .rfq-cred-pill {
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    /* Main Content Layout */
+    .rfq-content-wrapper {
+      max-width: 1180px;
+      margin: -30px auto 60px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 30px;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (max-width: 960px) {
+      .rfq-content-wrapper {
+        grid-template-columns: 1fr;
+        margin-top: 20px;
+      }
+    }
+
+    /* Form Container */
+    .rfq-form-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
+      padding: 36px 38px;
+    }
+
+    @media (max-width: 600px) {
+      .rfq-form-card {
+        padding: 24px 20px;
+      }
+    }
+
+    .form-step-title {
+      font-size: 15.5px;
+      font-weight: 800;
+      color: var(--gov-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--gov-green);
+      padding-bottom: 8px;
+      margin-top: 28px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-step-title:first-of-type {
+      margin-top: 0;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+
+    .form-group label span.req {
+      color: #dc2626;
+      font-weight: bold;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 7px;
+      background: #ffffff;
+      color: #1e293b;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--gov-green);
+      box-shadow: 0 0 0 3px rgba(37, 96, 65, 0.15);
+    }
+
+    /* Tag / Pill Checkboxes */
+    .pill-checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .pill-checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+
+    .pill-checkbox-label input[type="checkbox"] {
+      cursor: pointer;
+      accent-color: var(--gov-green);
+    }
+
+    .pill-checkbox-label:hover {
+      background: #e2e8f0;
+      border-color: #94a3b8;
+    }
+
+    .pill-checkbox-label.checked {
+      background: #ecfdf5;
+      border-color: #059669;
+      color: #065f46;
+    }
+
+    /* File Dropzone */
+    .file-dropzone {
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .file-dropzone:hover {
+      border-color: var(--gov-green);
+      background: #f0fdf4;
+    }
+
+    .file-dropzone i {
+      font-size: 32px;
+      color: var(--gov-green);
+      margin-bottom: 8px;
+    }
+
+    .file-dropzone-text {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 4px;
+    }
+
+    .file-dropzone-subtext {
+      font-size: 11.5px;
+      color: #64748b;
+    }
+
+    .file-preview-pill {
+      display: none;
+      margin-top: 10px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      color: #065f46;
+      font-weight: 600;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Submit Button */
+    .btn-submit-rfq {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: var(--gov-green);
+      color: #ffffff;
+      padding: 15px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(37, 96, 65, 0.3);
+      margin-top: 24px;
+    }
+
+    .btn-submit-rfq:hover {
+      background: var(--gov-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(37, 96, 65, 0.4);
+    }
+
+    .btn-submit-rfq:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Gov Domain Badge */
+    .gov-domain-badge {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #15803d;
+      margin-top: 4px;
+    }
+
+    /* Sidebar Cards */
+    .rfq-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar-widget {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 22px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .sidebar-widget h3 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--gov-dark);
+      margin-top: 0;
+      margin-bottom: 14px;
+      border-bottom: 2px solid var(--gov-green);
+      padding-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .fast-facts-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .fast-facts-list li {
+      margin-bottom: 10px;
+      line-height: 1.4;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed #f1f5f9;
+      padding-bottom: 6px;
+    }
+
+    .fast-facts-list li strong {
+      color: #1e293b;
+    }
+
+    .fast-facts-list li span {
+      color: #64748b;
+      font-size: 12.5px;
+    }
+
+    /* Success Card */
+    .success-container {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .success-icon {
+      font-size: 56px;
+      color: #16a34a;
+      margin-bottom: 18px;
+    }
+
+    .success-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #1e4d35;
+      margin-bottom: 12px;
+    }
+
+    .success-ref-box {
+      display: inline-block;
+      background: #f1f5f9;
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 22px;
+      font-family: ui-monospace, monospace;
+      font-size: 16px;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 16px 0 24px;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-rfq-form" class="skip-link">Skip to RFQ Form</a>
+
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Main Navigation">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
+          <img src="img/logo-shield.png" alt="20 59 Ventures Corp" class="logo-img">
+          <div>
+            <div class="logo-text">20 59 VENTURES CORP</div>
+            <div class="logo-subtitle">Federal Contracting &amp; IT Solutions</div>
+          </div>
+        </a>
+      </div>
+      <div class="nav-links">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="it-capabilities.html" class="nav-link">IT Capabilities</a>
+        <a href="capabilities.html" class="nav-link">Housing Capabilities</a>
+        <a href="compliance.html" class="nav-link">Compliance</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+        <a href="rfq.html" class="nav-link" style="color: var(--brand-gold); font-weight: 700;">Submit RFQ</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Banner -->
+    <section class="rfq-hero">
+      <div class="rfq-hero-container">
+        <div class="rfq-badge">
+          <i class="fas fa-file-contract"></i> Public-Sector Procurement &amp; Micro-Purchase Portal
+        </div>
+        <h1>Government RFQ &amp; Micro-Purchase Intake</h1>
+        <p>
+          Fast-track quote requests, simplified acquisitions (FAR Part 13), and micro-purchase fulfillment for federal contracting officers, specialists, and Government Purchase Card (GPC) cardholders.
+        </p>
+
+        <div class="rfq-credentials-strip">
+          <span class="rfq-cred-pill"><i class="fas fa-shield-alt" style="color: #fef08a; margin-right: 5px;"></i> CAGE: <strong>22DH9</strong></span>
+          <span class="rfq-cred-pill">UEI: <strong>GVR2NTGR4HU3</strong></span>
+          <span class="rfq-cred-pill"><i class="fas fa-certificate" style="color: #fef08a; margin-right: 5px;"></i> VOSB &bull; EDWOSB &bull; WOSB</span>
+          <span class="rfq-cred-pill"><i class="fas fa-credit-card" style="color: #fef08a; margin-right: 5px;"></i> GPC / P-Card Accepted</span>
+          <span class="rfq-cred-pill"><i class="fas fa-cubes" style="color: #fef08a; margin-right: 5px;"></i> TD SYNNEX &bull; StarTech &bull; Ergotron</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="rfq-content-wrapper">
+      
+      <!-- RFQ Form Card -->
+      <div class="rfq-form-card" id="main-rfq-form">
+        
+        <form id="rfqSubmissionForm" novalidate>
+          <!-- Hidden Honeypots for Anti-Spam (Never visible to humans) -->
+          <div style="display: none !important; opacity: 0; position: absolute; left: -9999px;">
+            <input type="text" name="rfq_token_hp" tabindex="-1" autocomplete="off">
+            <input type="text" name="business_website_hp" tabindex="-1" autocomplete="off">
+            <input type="text" name="middle_name" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="form_loaded_at" id="form_loaded_at">
+          </div>
+
+          <!-- Section 1: Agency & Solicitation Details -->
+          <div class="form-step-title">
+            <i class="fas fa-landmark"></i> 1. Solicitation &amp; Agency Details
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="agency">Federal Agency / Bureau / Facility <span class="req">*</span></label>
+              <input type="text" id="agency" name="agency" class="form-control" placeholder="e.g. VA VISN 7 / CAVHCS, DoD DLA, GSA, USAF" required>
+            </div>
+            <div class="form-group">
+              <label for="solicitation_number">Solicitation / Notice / RFQ # (Optional)</label>
+              <input type="text" id="solicitation_number" name="solicitation_number" class="form-control" placeholder="e.g. 36C247-24-Q-XXXX or 'GPC Micro-Purchase'">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="procurement_type">Procurement Method / Threshold <span class="req">*</span></label>
+              <select id="procurement_type" name="procurement_type" class="form-control" required>
+                <option value="Micro-Purchase (<$10k GPC / P-Card)" selected>Micro-Purchase (&lt;$10,000 GPC / P-Card)</option>
+                <option value="Simplified Acquisition (FAR Part 13)">Simplified Acquisition (FAR Part 13)</option>
+                <option value="Formal RFQ / RFP / Sealed Bid">Formal RFQ / RFP / Sealed Bid</option>
+                <option value="Sources Sought / RFI Market Research">Sources Sought / RFI Market Research</option>
+                <option value="BPA / Multi-Year Contract Vehicle">BPA / Multi-Year Contract Vehicle</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="due_date">Quote Response Deadline / Delivery Need <span class="req">*</span></label>
+              <input type="text" id="due_date" name="due_date" class="form-control" placeholder="e.g. Today / ASAP, MM/DD/YYYY, or 48 Hours" required>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="budget_range">Estimated Volume / Budget Tier</label>
+              <select id="budget_range" name="budget_range" class="form-control">
+                <option value="Under $10,000 (Micro-Purchase)">Under $10,000 (Micro-Purchase)</option>
+                <option value="$10,000 - $50,000">$10,000 - $50,000</option>
+                <option value="$50,000 - $250,000 (SAT Threshold)">$50,000 - $250,000 (SAT Threshold)</option>
+                <option value="$250,000+ Major Acquisition">$250,000+ Major Acquisition</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="delivery_location">Delivery Destination / Base / ZIP</label>
+              <input type="text" id="delivery_location" name="delivery_location" class="form-control" placeholder="e.g. Montgomery, AL 36109 (or CONUS)">
+            </div>
+          </div>
+
+          <!-- Section 2: Contracting Officer / Submitter Contact -->
+          <div class="form-step-title">
+            <i class="fas fa-id-badge"></i> 2. Submitter &amp; Contracting Officer Credentials
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="contact_name">Full Name <span class="req">*</span></label>
+              <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="First &amp; Last Name" required>
+            </div>
+            <div class="form-group">
+              <label for="contact_title">Title / Role</label>
+              <input type="text" id="contact_title" name="contact_title" class="form-control" placeholder="e.g. Contracting Officer, Contract Specialist, GPC Holder">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="email">Official Government Email <span class="req">*</span></label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="name@agency.gov or .mil" required>
+              <div id="govDomainBadge" class="gov-domain-badge">
+                <i class="fas fa-check-circle"></i> Verified Government Domain (.gov / .mil) &mdash; Fast-Track Desk Activated
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Direct Phone / Extension <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" class="form-control" placeholder="e.g. 205-555-0199" required>
+            </div>
+          </div>
+
+          <!-- Section 3: Hardware Scope & Specifications -->
+          <div class="form-step-title">
+            <i class="fas fa-desktop"></i> 3. Hardware Requirements &amp; Scope
+          </div>
+
+          <div class="form-group">
+            <label>Product Categories Needed:</label>
+            <div class="pill-checkbox-group">
+              <label class="pill-checkbox-label">
+                <input type="checkbox" name="categories" value="Workstations & Desking"> Workstations &amp; Desking
+              </label>
+              <label class="pill-checkbox-label">
+                <input type="checkbox" name="categories" value="Ergonomic Mounts & Monitor Arms"> Ergonomic Mounts &amp; Arms
+              </label>
+              <label class="pill-checkbox-label">
+                <input type="checkbox" name="categories" value="Docks, Cables & Connectivity"> Docks &amp; Connectivity
+              </label>
+              <label class="pill-checkbox-label">
+                <input type="checkbox" name="categories" value="Clinical & Mobile Carts"> Clinical &amp; Mobile Carts
+              </label>
+              <label class="pill-checkbox-label">
+                <input type="checkbox" name="categories" value="Server Racks, PDUs & Infrastructure"> Server Racks &amp; PDUs
+              </label>
+              <label class="pill-checkbox-label">
+                <input type="checkbox" name="categories" value="Peripherals & Accessories"> Peripherals &amp; Audio
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Preferred Manufacturers / Ecosystem:</label>
+            <div class="pill-checkbox-group">
+              <label class="pill-checkbox-label checked">
+                <input type="checkbox" name="target_brands" value="TD SYNNEX" checked> TD SYNNEX
+              </label>
+              <label class="pill-checkbox-label checked">
+                <input type="checkbox" name="target_brands" value="StarTech.com" checked> StarTech.com
+              </label>
+              <label class="pill-checkbox-label checked">
+                <input type="checkbox" name="target_brands" value="Ergotron" checked> Ergotron
+              </label>
+              <label class="pill-checkbox-label">
+                <input type="checkbox" name="target_brands" value="Microsoft"> Microsoft
+              </label>
+              <label class="pill-checkbox-label">
+                <input type="checkbox" name="target_brands" value="Samsung"> Samsung
+              </label>
+              <label class="pill-checkbox-label">
+                <input type="checkbox" name="target_brands" value="Logitech"> Logitech
+              </label>
+              <label class="pill-checkbox-label">
+                <input type="checkbox" name="target_brands" value="Jabra"> Jabra
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="line_items">Itemized Bill of Materials (BOM) / Part Numbers / SOW Summary:</label>
+            <textarea id="line_items" name="line_items" rows="4" class="form-control" placeholder="Paste line items, OEM part numbers, quantities, or technical requirements here. Example:&#10;- 20x StarTech TB3CDK2DP Dual 4K Thunderbolt Dock&#10;- 20x Ergotron 45-241-026 LX Desk Monitor Arm&#10;- Or type: 'See attached SOW PDF'"></textarea>
+          </div>
+
+          <!-- File Upload Zone -->
+          <div class="form-group">
+            <label>Attach SOW, RFQ Document, or Parts Spreadsheet (PDF, Word, Excel, CSV up to 10MB):</label>
+            <div class="file-dropzone" id="fileDropzone">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <div class="file-dropzone-text">Click to browse or drag &amp; drop solicitation file</div>
+              <div class="file-dropzone-subtext">PDF, DOCX, XLSX, CSV, TXT accepted</div>
+              <input type="file" id="fileInput" style="display: none;" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt">
+            </div>
+            <div class="file-preview-pill" id="filePreview">
+              <span id="fileNameDisplay"><i class="fas fa-file-pdf" style="margin-right: 6px;"></i> Document</span>
+              <button type="button" id="removeFileBtn" style="background: none; border: none; color: #dc2626; cursor: pointer; font-weight: bold;">✕</button>
+            </div>
+          </div>
+
+          <!-- Section 4: Socioeconomic & Compliance Preferences -->
+          <div class="form-step-title">
+            <i class="fas fa-award"></i> 4. Socioeconomic Set-Aside &amp; Compliance Target
+          </div>
+
+          <div class="form-group">
+            <label>Target Socioeconomic Set-Aside:</label>
+            <div class="pill-checkbox-group">
+              <label class="pill-checkbox-label checked">
+                <input type="checkbox" name="set_aside_preference" value="VOSB (Veteran-Owned Small Business)" checked> VOSB (Veteran-Owned)
+              </label>
+              <label class="pill-checkbox-label checked">
+                <input type="checkbox" name="set_aside_preference" value="EDWOSB / WOSB (Women-Owned)" checked> EDWOSB / WOSB
+              </label>
+              <label class="pill-checkbox-label checked">
+                <input type="checkbox" name="set_aside_preference" value="Small Business Set-Aside" checked> Small Business
+              </label>
+              <label class="pill-checkbox-label">
+                <input type="checkbox" name="set_aside_preference" value="Open Commercial"> Open Commercial
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Compliance Requirements:</label>
+            <div class="pill-checkbox-group">
+              <label class="pill-checkbox-label checked">
+                <input type="checkbox" name="compliance_needs" value="TAA Compliant Sourcing" checked> TAA Compliant
+              </label>
+              <label class="pill-checkbox-label checked">
+                <input type="checkbox" name="compliance_needs" value="FAR 52.204-24/25 (NDAA 889)" checked> NDAA 889 Compliant
+              </label>
+              <label class="pill-checkbox-label">
+                <input type="checkbox" name="compliance_needs" value="Section 508 Accessibility"> Section 508 Ergonomics
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="special_instructions">Additional Invoicing, CLIN, or Delivery Notes (Optional):</label>
+            <input type="text" id="special_instructions" name="special_instructions" class="form-control" placeholder="e.g. WAWF invoicing required, dock delivery only, GPC payment link requested">
+          </div>
+
+          <button type="submit" class="btn-submit-rfq" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> Submit RFQ &amp; Request Fast-Track Quote
+          </button>
+
+          <p style="text-align: center; font-size: 12px; color: #64748b; margin-top: 14px;">
+            <i class="fas fa-lock" style="color: var(--gov-green);"></i> Secure transmission. Directly synched to 20 59 Ventures Federal Contracting Team &amp; Odoo CRM.
+          </p>
+        </form>
+
+        <!-- Success Screen -->
+        <div class="success-container" id="successScreen">
+          <i class="fas fa-check-circle success-icon"></i>
+          <div class="success-title">Solicitation Received Successfully</div>
+          <p style="font-size: 15px; color: #4b5563; max-width: 600px; margin: 0 auto 15px; line-height: 1.5;">
+            Thank you for submitting your procurement requirements to 20 59 Ventures Corp. Our federal contracting desk has received your solicitation and dispatched it to our fulfillment coordinators.
+          </p>
+          <div class="success-ref-box" id="displayRefNumber">
+            RFQ-2059-XXXXXX
+          </div>
+          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; max-width: 580px; margin: 0 auto 24px; text-align: left; font-size: 13.5px; color: #166534; line-height: 1.5;">
+            <strong>What happens next:</strong>
+            <ul style="margin: 8px 0 0; padding-left: 20px;">
+              <li><strong>Micro-Purchases (&lt;$10k):</strong> Verified GPC/P-Card quotes are dispatched within 2 to 4 business hours.</li>
+              <li><strong>Simplified Acquisitions:</strong> Formal itemized CLIN quotes with TAA certifications delivered prior to your deadline.</li>
+              <li><strong>Need Emergency Assistance?</strong> Contact our contracting desk directly at <strong>1-888-919-2059</strong> or via inbound fax at <strong>1-888-885-2059</strong>.</li>
+            </ul>
+          </div>
+          <a href="it-capabilities.html" class="btn-submit-rfq" style="max-width: 320px; margin: 0 auto; text-decoration: none;">
+            <i class="fas fa-file-alt"></i> Return to Capabilities Statement
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Quick Reference Sidebar -->
+      <aside class="rfq-sidebar">
+        
+        <!-- Fast Facts Widget -->
+        <div class="sidebar-widget">
+          <h3>Federal Fast Facts</h3>
+          <ul class="fast-facts-list">
+            <li><span>CAGE Code:</span> <strong>22DH9</strong></li>
+            <li><span>Unique Entity ID:</span> <strong>GVR2NTGR4HU3</strong></li>
+            <li><span>Status:</span> <strong>Active in SAM.gov</strong></li>
+            <li><span>Socioeconomic:</span> <strong>VOSB &bull; EDWOSB &bull; WOSB</strong></li>
+            <li><span>Primary IT NAICS:</span> <strong>423430 &bull; 541519</strong></li>
+            <li><span>Furniture NAICS:</span> <strong>423210</strong></li>
+            <li><span>Primary PSCs:</span> <strong>7E20 &bull; 7D20 &bull; 7195</strong></li>
+            <li><span>Payment:</span> <strong>GPC / P-Card Accepted</strong></li>
+          </ul>
+
+          <div style="margin-top: 18px; border-top: 1px solid #e2e8f0; padding-top: 14px;">
+            <a href="it-capabilities.html" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 6px; padding: 10px; font-size: 13px; font-weight: 700; color: #1e4d35; text-decoration: none; transition: background 0.15s;">
+              <i class="fas fa-file-pdf" style="color: #dc2626;"></i> View 1-Page IT Statement
+            </a>
+          </div>
+        </div>
+
+        <!-- Authorized Supply Chain Widget -->
+        <div class="sidebar-widget">
+          <h3>Authorized Supply Chain</h3>
+          <p style="font-size: 12.5px; color: #475569; line-height: 1.45; margin-bottom: 12px;">
+            We partner with premier global distributors and Tier-1 manufacturers to fulfill government orders with authentic, manufacturer-warranted, TAA-compliant products:
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; font-weight: 600; color: #1e293b;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fas fa-check" style="color: var(--gov-green);"></i> <strong>TD SYNNEX</strong> (Tier-1 Aggregator)
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fas fa-check" style="color: var(--gov-green);"></i> <strong>StarTech.com</strong> (Docks &amp; Cables)
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fas fa-check" style="color: var(--gov-green);"></i> <strong>Ergotron</strong> (Mounts &amp; Clinical Carts)
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fas fa-check" style="color: var(--gov-green);"></i> <strong>Microsoft, Samsung, Logitech</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Procurement Officer Hotline & Fax -->
+        <div class="sidebar-widget" style="background: #f0fdf4; border-color: #bbf7d0;">
+          <h3 style="color: #166534; border-bottom-color: #16a34a;">Direct Procurement Desk</h3>
+          <p style="font-size: 12px; color: #15803d; line-height: 1.4; margin-bottom: 12px;">
+            For urgent fiscal deadlines or purchase card transactions, contact our contracting team directly:
+          </p>
+          <div style="font-size: 13px; margin-bottom: 10px;">
+            <div style="font-weight: 700; color: #166534;">Toll-Free Hotline:</div>
+            <a href="tel:18889192059" style="color: #111827; font-weight: 700; text-decoration: none;">1-888-919-2059</a>
+          </div>
+          <div style="font-size: 13px; margin-bottom: 10px;">
+            <div style="font-weight: 700; color: #166534;">Direct Contracting Desk:</div>
+            <a href="tel:2055348492" style="color: #111827; font-weight: 700; text-decoration: none;">205-534-8492</a>
+          </div>
+          <div style="font-size: 13px;">
+            <div style="font-weight: 700; color: #166534;">Official Inbound Fax:</div>
+            <span style="font-family: monospace; font-weight: 700; color: #111827;">1-888-885-2059</span>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 20 59 Ventures Corp. All rights reserved. &nbsp;|&nbsp; CAGE: 22DH9 &nbsp;|&nbsp; UEI: GVR2NTGR4HU3 &nbsp;|&nbsp; VOSB &bull; EDWOSB &bull; WOSB &nbsp;|&nbsp; GPC Accepted</p>
+        <p>Public-Sector IT Fulfillment &bull; Commercial Systems Integration &bull; Technical Workstation Solutions</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/linkedin-tracker.js" defer></script>
+  <script src="js/harry-widget.js" defer></script>
+
+  <!-- Interactive Form Controller -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Record load timestamp for bot mitigation
+      document.getElementById('form_loaded_at').value = Date.now().toString();
+
+      // 2. Verified Gov Domain Detection
+      const emailInput = document.getElementById('email');
+      const govBadge = document.getElementById('govDomainBadge');
+
+      emailInput.addEventListener('input', () => {
+        const val = emailInput.value.trim().toLowerCase();
+        const isGov = val.endsWith('.gov') || val.endsWith('.mil') || val.endsWith('.fed.us') || val.includes('.state.') || val.endsWith('.us') || val.includes('.va.gov');
+        if (isGov) {
+          govBadge.style.display = 'flex';
+        } else {
+          govBadge.style.display = 'none';
+        }
+      });
+
+      // 3. Interactive Checkbox Pills
+      document.querySelectorAll('.pill-checkbox-label input[type="checkbox"]').forEach(box => {
+        box.addEventListener('change', () => {
+          if (box.checked) {
+            box.parentElement.classList.add('checked');
+          } else {
+            box.parentElement.classList.remove('checked');
+          }
+        });
+      });
+
+      // 4. File Dropzone & Base64 Encoder
+      const dropzone = document.getElementById('fileDropzone');
+      const fileInput = document.getElementById('fileInput');
+      const filePreview = document.getElementById('filePreview');
+      const fileNameDisplay = document.getElementById('fileNameDisplay');
+      const removeFileBtn = document.getElementById('removeFileBtn');
+
+      let uploadedFileObj = null;
+
+      dropzone.addEventListener('click', () => fileInput.click());
+      
+      dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropzone.style.borderColor = 'var(--gov-green)';
+        dropzone.style.background = '#f0fdf4';
+      });
+
+      dropzone.addEventListener('dragleave', () => {
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+      });
+
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.style.borderColor = '#cbd5e1';
+        dropzone.style.background = '#f8fafc';
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+          handleFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files && fileInput.files.length > 0) {
+          handleFile(fileInput.files[0]);
+        }
+      });
+
+      removeFileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        uploadedFileObj = null;
+        fileInput.value = '';
+        filePreview.style.display = 'none';
+        dropzone.style.display = 'block';
+      });
+
+      function handleFile(file) {
+        if (file.size > 10 * 1024 * 1024) {
+          alert('File exceeds the 10MB limit. Please upload a smaller file or paste details directly.');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64Data = reader.result.split(',')[1];
+          uploadedFileObj = {
+            name: file.name,
+            type: file.type || 'application/octet-stream',
+            size: file.size,
+            data: base64Data
+          };
+
+          fileNameDisplay.innerHTML = `<i class="fas fa-file-check" style="color: #059669; margin-right: 6px;"></i> ${file.name} (${Math.round(file.size / 1024)} KB)`;
+          dropzone.style.display = 'none';
+          filePreview.style.display = 'flex';
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // 5. Form Submission
+      const form = document.getElementById('rfqSubmissionForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const successScreen = document.getElementById('successScreen');
+      const displayRefNumber = document.getElementById('displayRefNumber');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Validation
+        const agency = document.getElementById('agency').value.trim();
+        const contactName = document.getElementById('contact_name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const dueDate = document.getElementById('due_date').value.trim();
+
+        if (!agency || !contactName || !email || !phone || !dueDate) {
+          alert('Please fill out all required fields highlighted with an asterisk (*).');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Processing &amp; Registering Solicitation...';
+
+        // Gather categories
+        const categories = [];
+        document.querySelectorAll('input[name="categories"]:checked').forEach(c => categories.push(c.value));
+
+        // Gather target brands
+        const target_brands = [];
+        document.querySelectorAll('input[name="target_brands"]:checked').forEach(b => target_brands.push(b.value));
+
+        // Gather set-aside
+        const set_aside_preference = [];
+        document.querySelectorAll('input[name="set_aside_preference"]:checked').forEach(s => set_aside_preference.push(s.value));
+
+        // Gather compliance
+        const compliance_needs = [];
+        document.querySelectorAll('input[name="compliance_needs"]:checked').forEach(m => compliance_needs.push(m.value));
+
+        const payload = {
+          agency,
+          solicitation_number: document.getElementById('solicitation_number').value.trim() || 'Micro-Purchase / Direct Quote',
+          procurement_type: document.getElementById('procurement_type').value,
+          due_date: dueDate,
+          budget_range: document.getElementById('budget_range').value,
+          delivery_location: document.getElementById('delivery_location').value.trim() || 'Not specified',
+          contact_name: contactName,
+          contact_title: document.getElementById('contact_title').value.trim() || 'Contracting Officer',
+          email,
+          phone,
+          categories,
+          target_brands,
+          line_items: document.getElementById('line_items').value.trim(),
+          special_instructions: document.getElementById('special_instructions').value.trim(),
+          set_aside_preference,
+          compliance_needs,
+          rfq_token_hp: document.querySelector('input[name="rfq_token_hp"]').value,
+          business_website_hp: document.querySelector('input[name="business_website_hp"]').value,
+          middle_name: document.querySelector('input[name="middle_name"]').value,
+          form_loaded_at: document.getElementById('form_loaded_at').value,
+          attachment_name: uploadedFileObj ? uploadedFileObj.name : '',
+          attachment_data: uploadedFileObj ? uploadedFileObj.data : '',
+          attachment_type: uploadedFileObj ? uploadedFileObj.type : ''
+        };
+
+        try {
+          const res = await fetch('/api/rfq', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          const result = await res.json();
+          if (res.ok && result.success) {
+            displayRefNumber.textContent = result.referenceNumber || 'RFQ-2059-RECORDED';
+            form.style.display = 'none';
+            successScreen.style.display = 'block';
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+
+            if (window.posthog) {
+              posthog.capture('rfq_submitted', {
+                agency,
+                procurement_type: payload.procurement_type,
+                is_gov: result.isGovVerified,
+                budget_range: payload.budget_range
+              });
+            }
+          } else {
+            alert(result.error || 'There was an issue processing your RFQ. Please call us directly at 1-888-919-2059.');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit RFQ &amp; Request Fast-Track Quote';
+          }
+        } catch (err) {
+          console.error(err);
+          alert('Network connection error. You may submit your RFQ directly to support@2059ventures.com or call 1-888-919-2059.');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit RFQ &amp; Request Fast-Track Quote';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

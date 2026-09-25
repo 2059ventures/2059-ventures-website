@@ -55,6 +55,7 @@
 
 ### 5. IT Hardware Fulfillment & Technical Workstation Solutions
 - Commercial IT hardware fulfillment and systems integration for federal agencies, VA medical centers, and enterprise operations centers ([IT Capabilities Statement](https://2059ventures.com/it-capabilities.html)).
+- **Government RFQ Portal**: Direct 60-second submission portal for Contracting Officers and GPC buyers ([Submit RFQ / SOW](https://2059ventures.com/rfq.html)) with automated Odoo CRM lead generation, SOW file attachments, and instant SMS alerts.
 - **Distribution & Hardware Ecosystem**: Direct wholesale distribution through **TD SYNNEX**, paired with authorized integration for **StarTech.com** (connectivity, docks, KVMs, server racks) and **Ergotron** (ergonomic monitor arms, sit-stand workstations, StyleView clinical carts), alongside Microsoft, Samsung, and Logitech.
 - **NAICS Codes**: 423430 (Computer & Peripheral Wholesalers - Primary Resale), 541519 (Other Computer Related Services / ITVAR), 423210 (Office & Technical Furniture Wholesalers), 541512 (Computer Systems Design Services).
 - **PSC Codes**: 7E20, 7D20, 7A20, DE10, 7110, 7195, 6110.

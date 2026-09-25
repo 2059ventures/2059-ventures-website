@@ -36,6 +36,14 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Government RFQ & Micro-Purchase Portal -->
+  <url>
+    <loc>https://2059ventures.com/rfq.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Intake / Apply Now -->
   <url>
     <loc>https://2059ventures.com/intake.html</loc>
