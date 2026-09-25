@@ -193,6 +193,7 @@
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#contracting" class="nav-link">Government</a>
                 <a href="#contact" class="nav-link">Contact</a>
+                <a href="rfq.html" class="nav-link" style="color: #256041; font-weight: 700;"><i class="fas fa-file-contract" style="margin-right: 4px;"></i>Submit RFQ</a>
                 <a href="intake.html" class="nav-link" style="color: var(--brand-gold); font-weight: 700;">Apply Now</a>
             </div>
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -832,6 +833,23 @@
             <div class="contracting-grid">
                 <!-- Capabilities & Credentials Panel with Dual-Track Switcher -->
                   <div class="contracting-panel fade-in">
+                      
+                      <!-- Rapid RFQ & Micro-Purchase Alert Banner -->
+                      <div style="background: linear-gradient(135deg, rgba(37, 96, 65, 0.08) 0%, rgba(37, 96, 65, 0.03) 100%); border: 1.5px solid rgba(37, 96, 65, 0.35); border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                          <div style="display: flex; align-items: center; gap: 12px;">
+                              <div style="width: 38px; height: 38px; border-radius: 8px; background: #256041; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;">
+                                  <i class="fas fa-file-invoice-dollar"></i>
+                              </div>
+                              <div>
+                                  <div style="font-size: 11px; text-transform: uppercase; color: #256041; font-weight: 800; letter-spacing: 0.5px;">Public Sector &amp; Agency Buyers</div>
+                                  <div style="font-size: 14px; font-weight: 700; color: var(--text-dark);">Submitting an RFQ, SOW, or GPC Micro-Purchase?</div>
+                              </div>
+                          </div>
+                          <a href="rfq.html" style="background: #256041; color: #ffffff; font-weight: 700; font-size: 13.5px; padding: 8px 16px; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 7px; box-shadow: 0 2px 6px rgba(37, 96, 65, 0.25); transition: background 0.2s ease;">
+                              <i class="fas fa-file-contract"></i> Submit Government RFQ &rarr;
+                          </a>
+                      </div>
+
                       <!-- Segmented Dual-Track Switcher -->
                       <div style="display: flex; background: #e5e7eb; padding: 4px; border-radius: 10px; margin-bottom: 24px; gap: 4px;">
                           <button type="button" id="tab-btn-housing" onclick="switchContractingTab('housing')" style="flex: 1; padding: 10px 14px; border: none; border-radius: 7px; font-size: 13.5px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; background: #ffffff; color: var(--text-dark); box-shadow: 0 2px 5px rgba(0,0,0,0.08);">

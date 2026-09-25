@@ -1,3 +1,4 @@
+import { onRequestPost as handleRfqPost, onRequestOptions as handleRfqOptions } from './functions/api/rfq.js';
 /**
  * _worker.js — Cloudflare Workers Assets Entry Point
  *
@@ -34,10 +35,10 @@ const SECURITY_HEADERS = {
 };
 
 const DEFAULT_EMAIL_RECIPIENTS = [
-    { email: 'support@2059ventures.online', name: '20/59 Support' },
-    { email: 'qruffin@2059ventures.online', name: 'Quincy Ruffin' },
-    { email: 'info@2059ventures.online', name: '20/59 Info' },
-    { email: 'andrea.marcus@2059ventures.online', name: 'Andrea Marcus' }
+    { email: 'support@2059ventures.com', name: '20/59 Support' },
+    { email: 'qruffin@2059ventures.com', name: 'Quincy Ruffin' },
+    { email: 'info@2059ventures.com', name: '20/59 Info' },
+    { email: 'andrea.marcus@2059ventures.com', name: 'Andrea Marcus' }
 ];
 
 export default {
@@ -61,7 +62,7 @@ export default {
                 '/api/chat', '/api/lead', '/api/contact',
                 '/api/intake-upload', '/api/public/intake', '/api/intake',
                 '/api/linkedin-conversion', '/api/linkedin-lead-webhook',
-                '/api/telnyx/webhook', '/api/sms'
+                '/api/telnyx/webhook', '/api/sms', '/api/rfq'
             ];
             if (apiRoutes.includes(url.pathname)) {
                 return new Response(null, { status: 204, headers: CORS_HEADERS });
@@ -80,7 +81,7 @@ export default {
         }
 
         // ── Edge Geo-Fence for Lead & Intake Submission Endpoints ───────────
-        const INTAKE_PATHS = ['/api/contact', '/api/public/intake', '/api/intake', '/api/lead', '/api/intake-upload'];
+        const INTAKE_PATHS = ['/api/contact', '/api/public/intake', '/api/intake', '/api/lead', '/api/intake-upload', '/api/rfq'];
         const ALLOWED_COUNTRIES = ['US', 'CA', 'PR', 'VI', 'GU', 'MP', 'AS'];
         if (request.method === 'POST' && INTAKE_PATHS.includes(url.pathname)) {
             if (!ALLOWED_COUNTRIES.includes(clientCountry)) {
@@ -138,6 +139,16 @@ export default {
             return handleSmsDispatch(request, env);
         }
 
+        // ── Handle Government RFQ & Micro-Purchase Submission (via Odoo CRM, Telnyx Email, SMS) ──
+        if (url.pathname === '/api/rfq') {
+            if (request.method === 'OPTIONS') {
+                return handleRfqOptions();
+            }
+            if (request.method === 'POST') {
+                return handleRfqPost({ request, env, waitUntil: (p) => ctx.waitUntil(p) });
+            }
+        }
+
         // ── Serve static assets (with security headers & cache-busting) ────
         const assetResponse = await env.ASSETS.fetch(request);
         const path = url.pathname.toLowerCase();
@@ -188,7 +199,7 @@ async function sendTelnyxEmail(env, { to, subject, text, html, attachments, repl
 
     const payload = {
         from: {
-            email: 'support@2059ventures.online',
+            email: 'support@2059ventures.com',
             name: fromName
         },
         to: recipients,
@@ -395,7 +406,7 @@ async function handleHarryLead(request, env, ctx) {
               ` : ''}
             </div>
             <div style="background-color: #f1f5f9; padding: 14px 24px; text-align: center; font-size: 12px; color: #64748b;">
-              20/59 Ventures Housing Program &bull; support@2059ventures.online
+              20/59 Ventures Housing Program &bull; support@2059ventures.com
             </div>
           </div>
         `;
@@ -647,7 +658,7 @@ async function handleContactForm(request, env, ctx) {
             </div>
 
             <div style="background-color: #f1f5f9; padding: 12px 24px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0;">
-              20/59 Ventures Operational Platform &bull; support@2059ventures.online &bull; Delivered via Telnyx Email API
+              20/59 Ventures Operational Platform &bull; support@2059ventures.com &bull; Delivered via Telnyx Email API
             </div>
           </div>
         `;
@@ -704,7 +715,7 @@ TCPA & SMS CONSENT AUDIT:
                   <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 13px; color: #64748b; line-height: 1.8;">
                     <strong style="color: #0d1b2a;">20 59 Ventures Corp.</strong><br>
                     Toll Free: 1-888-919-2059 | Direct: 205-534-8492<br>
-                    Email: <a href="mailto:support@2059ventures.online" style="color: #10b981; text-decoration: none;">support@2059ventures.online</a><br>
+                    Email: <a href="mailto:support@2059ventures.com" style="color: #10b981; text-decoration: none;">support@2059ventures.com</a><br>
                     Website: <a href="https://2059ventures.online" style="color: #10b981; text-decoration: none;">2059ventures.online</a>
                   </div>
                 </div>
@@ -716,7 +727,7 @@ TCPA & SMS CONSENT AUDIT:
                 subject: `Thank you for contacting 20 59 Ventures - ${formType}`,
                 text: `Hello ${name},\n\nThank you for contacting 20 59 Ventures Corp regarding ${formType}. We have received your inquiry and our team will follow up with you shortly.\n\nBest regards,\n20 59 Ventures Corp.\nToll Free: 1-888-919-2059\nhttps://2059ventures.online`,
                 html: clientConfirmationHtml,
-                replyTo: 'support@2059ventures.online',
+                replyTo: 'support@2059ventures.com',
                 fromName: '20 59 Ventures Corp'
             });
 
@@ -1184,7 +1195,7 @@ async function handleTelnyxWebhook(request, env) {
                     subject: `[INBOUND ${mediaList.length > 0 ? 'MMS' : 'SMS'}] From ${fromNumber} to ${toNumber}`,
                     text: `Inbound ${mediaList.length > 0 ? 'MMS' : 'SMS'} from ${fromNumber}:\n\n${messageText}\n\nMedia URLs:\n${mediaList.map(m => m.url).join('\n')}\n\nTelnyx Message ID: ${messageId}`,
                     html: smsChatterNote,
-                    replyTo: 'support@2059ventures.online',
+                    replyTo: 'support@2059ventures.com',
                     fromName: '20/59 SMS Dispatch'
                 });
             } catch (emailErr) {
@@ -1353,7 +1364,7 @@ async function handlePublicIntake(request, env, ctx) {
             </div>
             
             <div style="background-color: #f1f5f9; padding: 14px 24px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0;">
-              20/59 Ventures Housing Placement Team &bull; support@2059ventures.online
+              20/59 Ventures Housing Placement Team &bull; support@2059ventures.com
             </div>
           </div>
         `;
@@ -1469,7 +1480,7 @@ async function handleIntakeUpload(request, env, ctx) {
               </p>
             </div>
             <div style="background-color: #f1f5f9; padding: 12px 24px; text-align: center; font-size: 12px; color: #64748b;">
-              20/59 Ventures Operations &bull; support@2059ventures.online
+              20/59 Ventures Operations &bull; support@2059ventures.com
             </div>
           </div>
         `;
