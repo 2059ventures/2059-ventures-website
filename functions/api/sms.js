@@ -15,14 +15,15 @@ function jsonResponse(data, status = 200) {
 }
 
 async function callOdooRpc(env, service, method, args, timeoutMs = 5000) {
-    const odooUrl = env.ODOO_URL || 'https://odoo.iamalgo.com';
+    let odooUrl = env.ODOO_URL || 'https://odoohub.iamalgo.com';
+    if (odooUrl.includes('odoo.iamalgo.com') && !odooUrl.includes('odoohub')) odooUrl = 'https://odoohub.iamalgo.com';
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
 
     try {
         const res = await fetch(`${odooUrl}/jsonrpc`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-SMS/1.0' },
             signal: controller.signal,
             body: JSON.stringify({
                 jsonrpc: '2.0',

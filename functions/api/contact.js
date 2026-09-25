@@ -404,7 +404,8 @@ TCPA & SMS CONSENT AUDIT:
 
 // Resilient Odoo JSON-RPC sync function
 async function syncToOdoo({ name, email, phone, formType, data, clientIp, clientTimestamp, transactionalConsent, marketingConsent, env }) {
-    const odooUrl = env.ODOO_URL || 'https://odoo.iamalgo.com';
+    let odooUrl = env.ODOO_URL || 'https://odoohub.iamalgo.com';
+    if (odooUrl.includes('odoo.iamalgo.com') && !odooUrl.includes('odoohub')) odooUrl = 'https://odoohub.iamalgo.com';
     const odooDb = env.ODOO_DB || 'IAM_Main';
     const odooUser = env.ODOO_USER || 'Qruffin@iamalgo.com';
     const odooPass = env.ODOO_PASS || 'admin_master_password';
@@ -428,7 +429,7 @@ async function syncToOdoo({ name, email, phone, formType, data, clientIp, client
 
         const authRes = await fetch(`${odooUrl}/jsonrpc`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-Contact-Intake/1.0' },
             body: JSON.stringify(authPayload),
             signal: controller.signal
         });
@@ -447,6 +448,7 @@ async function syncToOdoo({ name, email, phone, formType, data, clientIp, client
             email_from: email || false,
             phone: phone || false,
             company_id: companyId,
+            team_id: 7, // 20/59 Property & Supportive Housing
             description: leadDescription,
             type: 'opportunity'
         };
@@ -464,7 +466,7 @@ async function syncToOdoo({ name, email, phone, formType, data, clientIp, client
 
         const createRes = await fetch(`${odooUrl}/jsonrpc`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-Contact-Intake/1.0' },
             body: JSON.stringify(createPayload),
             signal: controller.signal
         });
@@ -519,7 +521,7 @@ async function syncToOdoo({ name, email, phone, formType, data, clientIp, client
 
             await fetch(`${odooUrl}/jsonrpc`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-Contact-Intake/1.0' },
                 body: JSON.stringify(chatterPayload),
                 signal: controller.signal
             }).catch(e => console.warn('[Odoo Chatter Post Error]', e.message));

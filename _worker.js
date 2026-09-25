@@ -795,14 +795,15 @@ TCPA & SMS CONSENT AUDIT:
  * Executes an arbitrary method on an Odoo model via JSON-RPC with timeout protection
  */
 async function callOdooRpc(env, service, method, args, timeoutMs = 5000) {
-    const odooUrl = env.ODOO_URL || 'https://odoo.iamalgo.com';
+    let odooUrl = env.ODOO_URL || 'https://odoohub.iamalgo.com';
+    if (odooUrl.includes('odoo.iamalgo.com') && !odooUrl.includes('odoohub')) odooUrl = 'https://odoohub.iamalgo.com';
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
 
     try {
         const res = await fetch(`${odooUrl}/jsonrpc`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-Web-Intake/1.0' },
             signal: controller.signal,
             body: JSON.stringify({
                 jsonrpc: '2.0',
@@ -947,7 +948,8 @@ async function syncToOdooLead(env, { name, partnerName, contactName, email, phon
     try {
         const { uid, odooDb, odooPass } = await getOdooAuth(env);
         const companyId = 4;
-        const teamId = parseInt(env.ODOO_TEAM_ID || '1', 10);
+        const isGov = (name || '').toLowerCase().includes('rfq') || (name || '').toLowerCase().includes('gov') || (description || '').toLowerCase().includes('rfq');
+        const teamId = parseInt(env.ODOO_TEAM_ID || (isGov ? '8' : '7'), 10);
 
         // 1. Locate or create customer contact profile (res.partner)
         const partnerId = await findOrCreateOdooPartner(env, {
@@ -1421,7 +1423,7 @@ Signed: ${signatureData || 'Certified'} on ${signatureDate || 'N/A'}
                 try {
                     const azureRes = await fetch('https://housing-platform-a2btefckcwf9apcd.centralus-01.azurewebsites.net/api/public/intake', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-Web-Intake/1.0' },
                         body: JSON.stringify(body)
                     });
                     console.log('[Intake Proxy] Azure responded with status:', azureRes.status);

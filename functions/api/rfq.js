@@ -494,7 +494,8 @@ async function sendUrgentSmsAlert(env, smsText) {
 
 // ── Sync to Odoo CRM (res.partner, crm.lead, mail.activity, ir.attachment) ───────
 async function syncToOdooCrm(env, data) {
-    const odooUrl = env.ODOO_URL || 'https://odoo.iamalgo.com';
+    let odooUrl = env.ODOO_URL || 'https://odoohub.iamalgo.com';
+    if (odooUrl.includes('odoo.iamalgo.com') && !odooUrl.includes('odoohub')) odooUrl = 'https://odoohub.iamalgo.com';
     const odooDb = env.ODOO_DB || 'IAM_Main';
     const odooUser = env.ODOO_USER || 'Qruffin@iamalgo.com';
     const odooPass = env.ODOO_PASS || 'admin_master_password';
@@ -507,7 +508,7 @@ async function syncToOdooCrm(env, data) {
         // 1. Authenticate with Odoo
         const authRes = await fetch(`${odooUrl}/jsonrpc`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-GovCon-RFQ/1.0' },
             body: JSON.stringify({
                 jsonrpc: '2.0',
                 method: 'call',
@@ -531,7 +532,7 @@ async function syncToOdooCrm(env, data) {
         if (data.email) {
             const searchRes = await fetch(`${odooUrl}/jsonrpc`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-GovCon-RFQ/1.0' },
                 body: JSON.stringify({
                     jsonrpc: '2.0',
                     method: 'call',
@@ -570,7 +571,7 @@ async function syncToOdooCrm(env, data) {
 
             const createPartnerRes = await fetch(`${odooUrl}/jsonrpc`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-GovCon-RFQ/1.0' },
                 body: JSON.stringify({
                     jsonrpc: '2.0',
                     method: 'call',
@@ -635,6 +636,7 @@ AUDIT METADATA:
             email_from: data.email,
             phone: data.phone || false,
             company_id: companyId,
+            team_id: 8, // 20/59 GovCon & IT Solutions
             description: leadDescription,
             expected_revenue: expectedRev,
             priority: '3', // High / Urgent
@@ -643,7 +645,7 @@ AUDIT METADATA:
 
         const createLeadRes = await fetch(`${odooUrl}/jsonrpc`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-GovCon-RFQ/1.0' },
             body: JSON.stringify({
                 jsonrpc: '2.0',
                 method: 'call',
@@ -682,7 +684,7 @@ AUDIT METADATA:
             // Post Chatter Message
             await fetch(`${odooUrl}/jsonrpc`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-GovCon-RFQ/1.0' },
                 body: JSON.stringify({
                     jsonrpc: '2.0',
                     method: 'call',
@@ -710,7 +712,7 @@ AUDIT METADATA:
                 try {
                     await fetch(`${odooUrl}/jsonrpc`, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-GovCon-RFQ/1.0' },
                         body: JSON.stringify({
                             jsonrpc: '2.0',
                             method: 'call',
@@ -747,7 +749,7 @@ AUDIT METADATA:
 
                 await fetch(`${odooUrl}/jsonrpc`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) 2059-GovCon-RFQ/1.0' },
                     body: JSON.stringify({
                         jsonrpc: '2.0',
                         method: 'call',
