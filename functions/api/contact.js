@@ -4,10 +4,10 @@
 const DEFAULT_TELNYX_API_KEY = '';
 
 const DEFAULT_EMAIL_RECIPIENTS = [
-    { email: 'support@2059ventures.online', name: '20/59 Support' },
-    { email: 'qruffin@2059ventures.online', name: 'Quincy Ruffin' },
-    { email: 'info@2059ventures.online', name: '20/59 Info' },
-    { email: 'andrea.marcus@2059ventures.online', name: 'Andrea Marcus' }
+    { email: 'support@2059ventures.com', name: '20/59 Support' },
+    { email: 'qruffin@2059ventures.com', name: 'Quincy Ruffin' },
+    { email: 'info@2059ventures.com', name: '20/59 Info' },
+    { email: 'andrea.marcus@2059ventures.com', name: 'Andrea Marcus' }
 ];
 
 export async function onRequestOptions() {
@@ -231,7 +231,7 @@ export async function onRequestPost(context) {
             <div style="background-color: #0d1b2a; color: #ffffff; padding: 24px; text-align: center; border-bottom: 3px solid #10b981;">
               <span style="background: #10b981; color: #ffffff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.5px;">New Web Lead</span>
               <h2 style="margin: 10px 0 0 0; font-size: 20px; font-weight: 800; letter-spacing: -0.01em;">20/59 Ventures &bull; ${formType}</h2>
-              <p style="margin: 6px 0 0 0; color: #94a3b8; font-size: 13px;">Origin: 2059ventures.online &bull; Geo: ${clientCountry} (${clientIp}) &bull; ${timestampFormatted}</p>
+              <p style="margin: 6px 0 0 0; color: #94a3b8; font-size: 13px;">Origin: 2059ventures.com &bull; Geo: ${clientCountry} (${clientIp}) &bull; ${timestampFormatted}</p>
             </div>
             
             <div style="padding: 24px;">
@@ -248,12 +248,12 @@ export async function onRequestPost(context) {
                 &bull; <strong>Marketing SMS Consent:</strong> <span style="color: ${marketingConsent ? '#4ade80' : '#f87171'}; font-weight: 700;">${marketingConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}</span><br>
                 &bull; <strong>Timestamp:</strong> ${timestampFormatted} (${clientTimestamp})<br>
                 &bull; <strong>Client IP Signature:</strong> ${clientIp} (${clientCountry})<br>
-                &bull; <strong>Source URL:</strong> ${data.source_url || 'https://2059ventures.online'}
+                &bull; <strong>Source URL:</strong> ${data.source_url || 'https://2059ventures.com'}
               </div>
             </div>
 
             <div style="background-color: #f1f5f9; padding: 12px 24px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0;">
-              20/59 Ventures Operational Platform &bull; support@2059ventures.online &bull; Delivered via Telnyx Email API
+              20/59 Ventures Operational Platform &bull; support@2059ventures.com &bull; Delivered via Telnyx Email API
             </div>
           </div>
         `;
@@ -276,7 +276,7 @@ TCPA & SMS CONSENT AUDIT:
         // Send alert via Telnyx
         const teamPayload = {
             from: {
-                email: 'support@2059ventures.online',
+                email: 'support@2059ventures.com',
                 name: '20/59 Contact Portal'
             },
             to: DEFAULT_EMAIL_RECIPIENTS,
@@ -330,8 +330,8 @@ TCPA & SMS CONSENT AUDIT:
                   <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 13px; color: #64748b; line-height: 1.8;">
                     <strong style="color: #0d1b2a;">20 59 Ventures Corp.</strong><br>
                     Toll Free: 1-888-919-2059 | Direct: 205-534-8492<br>
-                    Email: <a href="mailto:support@2059ventures.online" style="color: #10b981; text-decoration: none;">support@2059ventures.online</a><br>
-                    Website: <a href="https://2059ventures.online" style="color: #10b981; text-decoration: none;">2059ventures.online</a>
+                    Email: <a href="mailto:support@2059ventures.com" style="color: #10b981; text-decoration: none;">support@2059ventures.com</a><br>
+                    Website: <a href="https://2059ventures.com" style="color: #10b981; text-decoration: none;">2059ventures.com</a>
                   </div>
                 </div>
               </div>
@@ -339,14 +339,14 @@ TCPA & SMS CONSENT AUDIT:
 
             const clientPayload = {
                 from: {
-                    email: 'support@2059ventures.online',
+                    email: 'support@2059ventures.com',
                     name: '20 59 Ventures Corp'
                 },
                 to: [{ email: email, name: name }],
                 subject: `Thank you for contacting 20 59 Ventures - ${formType}`,
-                text_body: `Hello ${name},\n\nThank you for contacting 20 59 Ventures Corp regarding ${formType}. We have received your inquiry and our team will follow up with you shortly.\n\nBest regards,\n20 59 Ventures Corp.\nToll Free: 1-888-919-2059\nhttps://2059ventures.online`,
+                text_body: `Hello ${name},\n\nThank you for contacting 20 59 Ventures Corp regarding ${formType}. We have received your inquiry and our team will follow up with you shortly.\n\nBest regards,\n20 59 Ventures Corp.\nToll Free: 1-888-919-2059\nhttps://2059ventures.com`,
                 html_body: clientConfirmationHtml,
-                reply_to: 'support@2059ventures.online'
+                reply_to: 'support@2059ventures.com'
             };
 
             const clientPromise = fetch('https://api.telnyx.com/v2/email_messages', {
@@ -439,7 +439,7 @@ async function syncToOdoo({ name, email, phone, formType, data, clientIp, client
         if (!uid) return false;
 
         // 2. Format detailed lead description and compliance log
-        const leadDescription = `Website Inquiry from 2059ventures.online\n\nForm: ${formType}\nContact: ${name}\nEmail: ${email || 'None'}\nPhone: ${phone || 'None'}\n\nSubmission Data:\n${JSON.stringify(data, null, 2)}\n\nTCPA & Opt-In Compliance Audit:\n- Transactional Consent: ${transactionalConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}\n- Marketing Consent: ${marketingConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}\n- Timestamp: ${clientTimestamp}\n- IP Signature: ${clientIp}`;
+        const leadDescription = `Website Inquiry from 2059ventures.com\n\nForm: ${formType}\nContact: ${name}\nEmail: ${email || 'None'}\nPhone: ${phone || 'None'}\n\nSubmission Data:\n${JSON.stringify(data, null, 2)}\n\nTCPA & Opt-In Compliance Audit:\n- Transactional Consent: ${transactionalConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}\n- Marketing Consent: ${marketingConsent ? 'YES (Affirmative Opt-in Checked)' : 'NO'}\n- Timestamp: ${clientTimestamp}\n- IP Signature: ${clientIp}`;
 
         const leadValues = {
             name: `[${formType}] ${name}`,
@@ -476,7 +476,7 @@ async function syncToOdoo({ name, email, phone, formType, data, clientIp, client
         if (leadId) {
             const chatterHtml = `
                 <div style="font-family: sans-serif; font-size: 13px; line-height: 1.5;">
-                    <p style="margin: 0 0 8px 0;"><strong>Web-to-CRM Lead Submission (2059ventures.online)</strong></p>
+                    <p style="margin: 0 0 8px 0;"><strong>Web-to-CRM Lead Submission (2059ventures.com)</strong></p>
                     <ul style="margin: 0 0 10px 0; padding-left: 20px;">
                         <li><strong>Form:</strong> ${formType}</li>
                         <li><strong>Contact:</strong> ${name}</li>

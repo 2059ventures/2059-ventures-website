@@ -8,10 +8,10 @@ const CORS_HEADERS = {
 };
 
 const DEFAULT_EMAIL_RECIPIENTS = [
-    { email: 'support@2059ventures.online', name: '20/59 Support' },
-    { email: 'qruffin@2059ventures.online', name: 'Quincy Ruffin' },
-    { email: 'info@2059ventures.online', name: '20/59 Info' },
-    { email: 'andrea.marcus@2059ventures.online', name: 'Andrea Marcus' }
+    { email: 'support@2059ventures.com', name: '20/59 Support' },
+    { email: 'qruffin@2059ventures.com', name: 'Quincy Ruffin' },
+    { email: 'info@2059ventures.com', name: '20/59 Info' },
+    { email: 'andrea.marcus@2059ventures.com', name: 'Andrea Marcus' }
 ];
 
 function jsonResponse(data, status = 200) {
@@ -199,7 +199,7 @@ async function sendTelnyxEmail(env, { to, subject, text, html, replyTo, fromName
 
     const payload = {
         from: {
-            email: 'support@2059ventures.online',
+            email: 'support@2059ventures.com',
             name: fromName
         },
         to: recipients,
@@ -280,7 +280,7 @@ export async function onRequestPost(context) {
                     subject: `[INBOUND ${mediaList.length > 0 ? 'MMS' : 'SMS'}] From ${fromNumber} to ${toNumber}`,
                     text: `Inbound ${mediaList.length > 0 ? 'MMS' : 'SMS'} from ${fromNumber}:\n\n${messageText}\n\nMedia URLs:\n${mediaList.map(m => m.url).join('\n')}\n\nTelnyx Message ID: ${messageId}`,
                     html: smsChatterNote,
-                    replyTo: 'support@2059ventures.online',
+                    replyTo: 'support@2059ventures.com',
                     fromName: '20/59 SMS Dispatch'
                 });
             } catch (e) {}

@@ -5,10 +5,10 @@
 const DEFAULT_TELNYX_API_KEY = '';
 
 const DEFAULT_EMAIL_RECIPIENTS = [
-    { email: 'support@2059ventures.online', name: '20/59 Support' },
-    { email: 'qruffin@2059ventures.online', name: 'Quincy Ruffin' },
-    { email: 'info@2059ventures.online', name: '20/59 Info' },
-    { email: 'andrea.marcus@2059ventures.online', name: 'Andrea Marcus' }
+    { email: 'support@2059ventures.com', name: '20/59 Support' },
+    { email: 'qruffin@2059ventures.com', name: 'Quincy Ruffin' },
+    { email: 'info@2059ventures.com', name: '20/59 Info' },
+    { email: 'andrea.marcus@2059ventures.com', name: 'Andrea Marcus' }
 ];
 
 const DEFAULT_ALERT_PHONES = [
@@ -182,6 +182,33 @@ export async function onRequestPost(context) {
             attachment_type
         });
 
+        // 2b. Dispatch Professional Auto-Reply Acknowledgment to Submitter / Officer
+        const autoReplyPromise = sendSubmitterAutoReply(env, {
+            rfqRefNumber,
+            agency,
+            solicitation_number,
+            procurement_type,
+            due_date,
+            budget_range,
+            contact_name,
+            contact_title,
+            email,
+            phone,
+            delivery_location,
+            categories,
+            target_brands,
+            line_items,
+            special_instructions,
+            set_aside_preference,
+            compliance_needs,
+            attachment_name
+        });
+        if (typeof waitUntil === 'function') {
+            waitUntil(autoReplyPromise);
+        } else {
+            autoReplyPromise.catch(e => console.warn('[Auto-Reply Dispatch Error]', e.message));
+        }
+
         // 3. Dispatch Instant Mobile SMS Notification via Telnyx SMS API
         const smsText = `🚨 URGENT GOV RFQ: ${agency} ${solicitation_number !== 'Unassigned' ? '#' + solicitation_number : ''} from ${contact_name} (${contact_title}). Type: ${procurement_type}. Due: ${due_date}. Check Odoo CRM & Email immediately!`;
         
@@ -250,7 +277,7 @@ async function sendPriorityEmailAlert(env, data) {
     const apiKey = env.TELNYX_API_KEY || DEFAULT_TELNYX_API_KEY;
     if (!apiKey) return { success: false, reason: 'missing_telnyx_key' };
 
-    const fromEmail = env.TELNYX_FROM_EMAIL || 'support@2059ventures.online';
+    const fromEmail = env.TELNYX_FROM_EMAIL || 'support@2059ventures.com';
     const fromName = '20/59 Ventures Federal Procurement Desk';
 
     const brandList = Array.isArray(data.target_brands) && data.target_brands.length > 0
@@ -756,5 +783,148 @@ AUDIT METADATA:
         clearTimeout(timeoutId);
         console.warn('[Odoo RFQ Sync Exception]', odooErr.message);
         return false;
+    }
+}
+
+// ── Send Professional Acknowledgment Auto-Reply to Submitter / Officer ─────────────
+async function sendSubmitterAutoReply(env, data) {
+    const apiKey = env.TELNYX_API_KEY || DEFAULT_TELNYX_API_KEY;
+    if (!apiKey || !data.email) return;
+
+    const fromEmail = env.TELNYX_FROM_EMAIL || 'support@2059ventures.com';
+    const fromName = '20 59 Ventures Corp — Federal Contracting Desk';
+    const replyTo = 'support@2059ventures.com';
+
+    const brandList = Array.isArray(data.target_brands) && data.target_brands.length > 0
+        ? data.target_brands.join(', ')
+        : 'TD SYNNEX, StarTech.com, Ergotron & Tier-1 OEMs';
+
+    const subject = `RFQ Receipt & Acknowledgment: ${data.solicitation_number !== 'Unassigned' && data.solicitation_number !== 'Micro-Purchase / Direct Quote' ? data.solicitation_number : 'Procurement Inquiry'} [Ref: ${data.rfqRefNumber}] — 20 59 Ventures Corp`;
+
+    const html = `
+    <!DOCTYPE html>
+    <html>
+    <head><meta charset="utf-8"></head>
+    <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 20px; color: #1e293b;">
+      <div style="max-width: 650px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #1b4730 0%, #256041 100%); padding: 26px 32px; color: #ffffff;">
+          <div style="font-size: 11.5px; font-weight: 800; color: #fef08a; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 5px;">
+            Official Procurement Acknowledgment
+          </div>
+          <h1 style="margin: 0; font-size: 21px; font-weight: 800; letter-spacing: -0.01em;">
+            20 59 VENTURES CORP
+          </h1>
+          <div style="margin-top: 8px; font-size: 12.5px; opacity: 0.95; line-height: 1.4;">
+            CAGE: <strong>22DH9</strong> &bull; UEI: <strong>GVR2NTGR4HU3</strong> &bull; VOSB &bull; EDWOSB &bull; WOSB &bull; GPC Accepted
+          </div>
+        </div>
+
+        <div style="padding: 28px 32px;">
+          <p style="font-size: 15px; font-weight: 600; color: #111827; margin-top: 0;">
+            Dear ${data.contact_name}${data.contact_title ? ' (' + data.contact_title + ')' : ''},
+          </p>
+          <p style="font-size: 14px; line-height: 1.6; color: #334155;">
+            Thank you for contacting <strong>20 59 Ventures Corp</strong>. This notice confirms that your solicitation and quote request for <strong>${data.agency}</strong> has been officially logged in our procurement system under Reference Number:
+          </p>
+
+          <div style="text-align: center; margin: 20px 0;">
+            <div style="display: inline-block; background: #f0fdf4; border: 1.5px dashed #22c55e; border-radius: 6px; padding: 10px 24px; font-family: ui-monospace, monospace; font-size: 16px; font-weight: 800; color: #15803d; letter-spacing: 0.5px;">
+              ${data.rfqRefNumber}
+            </div>
+          </div>
+
+          <!-- Turnaround Commitment Box -->
+          <div style="background: #f8fafc; border-left: 4px solid #256041; padding: 14px 18px; border-radius: 4px; margin-bottom: 22px;">
+            <div style="font-size: 13.5px; font-weight: 700; color: #1b4730; margin-bottom: 6px;">
+              Fulfillment &amp; Turnaround Standards:
+            </div>
+            <ul style="margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.5; color: #334155;">
+              <li><strong>Micro-Purchases (&lt;$10,000 / GPC):</strong> Itemized pricing and payment links dispatched within <strong>2 to 4 business hours</strong>.</li>
+              <li><strong>Simplified Acquisitions (FAR Part 13):</strong> Full formal proposals with TAA compliance certifications and socioeconomic representation packages delivered prior to your requested deadline of <strong>${data.due_date}</strong>.</li>
+              <li><strong>Supply Chain Guarantee:</strong> Sourced exclusively through authorized North American wholesale distribution (including <strong>TD SYNNEX</strong>, <strong>StarTech.com</strong>, and <strong>Ergotron</strong>) with full commercial manufacturer warranties.</li>
+            </ul>
+          </div>
+
+          <!-- Summary Table -->
+          <h3 style="font-size: 13px; text-transform: uppercase; color: #1b4730; border-bottom: 1.5px solid #256041; padding-bottom: 4px; margin-bottom: 10px; letter-spacing: 0.5px;">
+            Submission Summary for Contract Records
+          </h3>
+          <table style="width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 22px;">
+            <tr>
+              <td style="padding: 5px 0; color: #64748b; width: 38%;">Agency / Facility:</td>
+              <td style="padding: 5px 0; font-weight: 700; color: #0f172a;">${data.agency}</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0; color: #64748b;">Solicitation / Reference:</td>
+              <td style="padding: 5px 0; font-weight: 700; color: #0f172a;">${data.solicitation_number}</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0; color: #64748b;">Procurement Type:</td>
+              <td style="padding: 5px 0; font-weight: 600; color: #d97706;">${data.procurement_type}</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0; color: #64748b;">Response Needed By:</td>
+              <td style="padding: 5px 0; font-weight: 700; color: #0f172a;">${data.due_date}</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0; color: #64748b;">Target Ecosystem:</td>
+              <td style="padding: 5px 0; font-weight: 600; color: #0f172a;">${brandList}</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0; color: #64748b;">Uploaded Document:</td>
+              <td style="padding: 5px 0; color: #15803d; font-weight: 600;">${data.attachment_name ? data.attachment_name : 'None attached'}</td>
+            </tr>
+          </table>
+
+          <!-- Direct Escalation Contacts -->
+          <div style="background: #f1f5f9; border-radius: 6px; padding: 14px 18px; margin-bottom: 24px; font-size: 12.5px; line-height: 1.5; color: #334155;">
+            <strong>Immediate Contracting Assistance:</strong><br>
+            If you have an urgent fiscal deadline or require same-day purchase card processing, please reach our federal desk directly:
+            <div style="margin-top: 8px;">
+              &bull; <strong>Toll-Free Procurement Desk:</strong> 1-888-919-2059<br>
+              &bull; <strong>Direct Contracting Line:</strong> 205-534-8492<br>
+              &bull; <strong>Inbound Agency Fax (T.38):</strong> 1-888-885-2059<br>
+              &bull; <strong>Direct Email:</strong> <a href="mailto:support@2059ventures.com" style="color: #256041; text-decoration: underline;">support@2059ventures.com</a>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-bottom: 10px;">
+            <a href="https://2059ventures.com/it-capabilities.html" style="display: inline-block; background: #256041; color: #ffffff; text-decoration: none; padding: 9px 20px; border-radius: 6px; font-weight: 700; font-size: 13px;">
+              View Official Capabilities Statement (PDF)
+            </a>
+          </div>
+
+          <p style="font-size: 13px; color: #64748b; line-height: 1.5; margin-top: 24px; margin-bottom: 0; border-top: 1px solid #e2e8f0; padding-top: 16px;">
+            Sincerely,<br>
+            <strong>Federal Contracting &amp; Simplified Acquisitions Desk</strong><br>
+            20 59 Ventures Corp &bull; 212 W Troy St, Dothan, AL 36303<br>
+            SAM.gov CAGE: 22DH9 &bull; UEI: GVR2NTGR4HU3 &bull; Primary NAICS: 423430 &bull; 541519
+          </p>
+
+        </div>
+      </div>
+    </body>
+    </html>
+    `;
+
+    try {
+        await fetch('https://api.telnyx.com/v2/emails', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+                from: { email: fromEmail, name: fromName },
+                to: [{ email: data.email, name: data.contact_name }],
+                reply_to: replyTo,
+                subject: subject,
+                html: html
+            })
+        });
+    } catch (e) {
+        console.warn('[Submitter Auto-Reply Error]', e.message);
     }
 }
