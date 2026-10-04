@@ -2263,3 +2263,365 @@ textarea:focus-visible {
 .secure-fax-card.compact-theme .secure-fax-subtext {
     font-size: 11px;
 }
+
+/* ===== Option 1: Dual-Division + Procurement (2026-10-04) ===== */
+/* Longer dual-mission subtitle stays on one line on desktop, wraps cleanly on mobile */
+.logo-subtitle {
+    font-size: 11px;
+    line-height: 1.35;
+    max-width: 340px;
+}
+
+/* Navbar CTAs: high-visibility RFQ button + clean secondary link */
+.nav-link.nav-cta-primary {
+    background: linear-gradient(135deg, #1b4730 0%, #256041 100%);
+    color: #ffffff !important;
+    font-weight: 700;
+    border: 2px solid var(--brand-gold);
+    border-radius: 30px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 16px rgba(27, 71, 48, 0.35);
+    white-space: nowrap;
+}
+.nav-link.nav-cta-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(201, 168, 76, 0.45);
+    color: var(--brand-gold-light) !important;
+}
+.nav-link.nav-cta-secondary {
+    color: var(--logo-green);
+    font-weight: 700;
+    border: 1.5px solid rgba(36, 94, 67, 0.4);
+    border-radius: 30px;
+    padding: 10px 20px;
+    white-space: nowrap;
+}
+.nav-link.nav-cta-secondary:hover {
+    background: rgba(36, 94, 67, 0.08);
+    color: var(--logo-dark-green);
+}
+
+/* Hero dual-division 2-card showcase */
+.dual-division {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 860px;
+    margin: 22px auto 0;
+    text-align: left;
+    opacity: 0;
+    animation: fadeInUp 1s ease 1.1s forwards;
+}
+.division-card {
+    display: block;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 18px;
+    padding: 22px 22px 18px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+.division-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--brand-gold);
+}
+.division-card.division-housing::before {
+    background: var(--logo-light-green);
+}
+.division-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--brand-gold);
+    background: rgba(255, 255, 255, 0.13);
+}
+.division-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-gold-light);
+    margin-bottom: 8px;
+}
+.division-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 8px;
+    line-height: 1.3;
+}
+.division-title i {
+    color: var(--brand-gold);
+    margin-right: 6px;
+}
+.division-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 0 0 12px;
+}
+.division-link {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--brand-gold-light);
+}
+.division-link i {
+    margin-left: 4px;
+    font-size: 12px;
+}
+
+/* Procurement / Vendor Fit section */
+.procurement-section {
+    background: linear-gradient(180deg, #0d2540 0%, #133927 60%, #1b4730 100%);
+    padding: 80px 0;
+    scroll-margin-top: 80px;
+}
+.procurement-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+.procurement-eyebrow {
+    color: var(--brand-gold-light);
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+.procurement-section .section-headline {
+    color: #ffffff;
+}
+.procurement-sub {
+    max-width: 780px;
+    margin: 15px auto 0;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.6;
+}
+.procurement-card {
+    background: #ffffff;
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
+}
+.proc-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+.proc-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f4f8f5;
+    border: 1.5px solid rgba(37, 96, 65, 0.3);
+    border-radius: 50px;
+    padding: 10px 18px;
+    font-size: 14px;
+    color: #1b4730;
+}
+.proc-pill i {
+    color: #256041;
+}
+.proc-pill-live {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.4);
+}
+.proc-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+.proc-block {
+    margin-bottom: 24px;
+}
+.proc-grid-2 .proc-block {
+    margin-bottom: 0;
+}
+.proc-h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1b4730;
+    margin: 0 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.proc-h3 i {
+    color: #256041;
+}
+.proc-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.proc-badge {
+    background: linear-gradient(135deg, #1b4730 0%, #256041 100%);
+    color: #ffffff;
+    border: 1.5px solid var(--brand-gold);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.proc-badge small {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--brand-gold-light);
+}
+.proc-checks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.proc-checks li {
+    font-size: 14.5px;
+    color: var(--text-dark, #1D1D1F);
+    background: #f4f8f5;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+.proc-checks li i {
+    color: #16a34a;
+    margin-right: 6px;
+}
+.proc-ecosystem {
+    background: rgba(37, 96, 65, 0.06);
+    border-left: 3px solid #256041;
+    padding: 14px 18px;
+    border-radius: 4px;
+}
+.proc-eco-line {
+    font-size: 14.5px;
+    color: var(--text-dark, #1D1D1F);
+    margin: 0 0 6px;
+}
+.proc-naics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+.proc-naics-code {
+    font-size: 17px;
+    font-weight: 800;
+    color: #1b4730;
+    letter-spacing: 0.5px;
+}
+.proc-naics-label {
+    font-size: 12.5px;
+    color: var(--gray-dark, #515154);
+    margin-top: 4px;
+    line-height: 1.45;
+}
+.proc-vehicles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+.proc-vehicle {
+    background: #fafafa;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+}
+.proc-vehicle strong {
+    display: block;
+    font-size: 14px;
+    color: #1b4730;
+    margin-bottom: 4px;
+}
+.proc-vehicle span {
+    font-size: 13px;
+    color: var(--gray-dark, #515154);
+}
+.proc-ctas {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+}
+.proc-ctas .btn-primary,
+.proc-ctas .btn-secondary {
+    font-size: 14.5px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    margin: 0;
+}
+.proc-cta-main {
+    background: linear-gradient(135deg, #1b4730 0%, #256041 100%);
+}
+.proc-cta-dark {
+    background: linear-gradient(135deg, #0F2D4A 0%, #1B3A6B 100%) !important;
+    border: 2px solid var(--brand-gold);
+}
+.proc-ctas-secondary {
+    margin-top: 16px;
+    align-items: center;
+    gap: 10px;
+}
+.proc-mini-link {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #256041;
+    text-decoration: none;
+}
+.proc-mini-link:hover {
+    text-decoration: underline;
+}
+.proc-mini-dot {
+    color: #9ca3af;
+}
+.proc-note {
+    font-size: 12px;
+    color: var(--gray-medium, #636366);
+    font-style: italic;
+    margin: 14px 0 0;
+}
+
+@media (max-width: 991px) {
+    .proc-naics-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .proc-vehicles {
+        grid-template-columns: 1fr;
+    }
+    .proc-grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .dual-division {
+        grid-template-columns: 1fr;
+    }
+    .procurement-card {
+        padding: 24px;
+    }
+    .proc-ctas .btn-primary,
+    .proc-ctas .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+    .logo-subtitle {
+        max-width: 220px;
+    }
+}
