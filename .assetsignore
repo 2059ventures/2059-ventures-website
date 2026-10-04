@@ -13,6 +13,7 @@ functions/
 # Exclude non-web source files
 *.odt
 scratch/
+archive/
 node_modules/
 
 # Exclude source documents
