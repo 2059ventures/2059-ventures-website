@@ -141,11 +141,14 @@
   * **Legal Entity:** 20 59 Ventures Corp. (State of Alabama Incorporation)
   * **National Provider Identifier (NPI):** 1932035060 (Taxonomy: `193200000X` Multi-Specialty Group)
   * **SAM.gov Unique Entity ID (UEI):** `GVR2NTGR4HU3` | **CAGE Code:** `22DH9` (Active Entity)
-  * **Socioeconomic Status:** Veteran-Owned Small Business (VOSB) & Woman-Owned Small Business (WOSB)
+  * **Socioeconomic Status:** Veteran-Owned Small Business (VOSB), Economically Disadvantaged Women-Owned Small Business (EDWOSB) & Woman-Owned Small Business (WOSB)
   * **UCP Certification:** Approved Alabama UCP (App ID: 112124)
+  * **Defense Data Access:** JCP Certified (Joint Certification Program) — authorized to receive unclassified military critical technical data and export-controlled technical data
+  * **Export Control Compliance:** Certification Statement of Export Control Compliance signed by appointed Data Custodian on file (ITAR / EAR compliant handling)
   * **Employment Verification:** E-Verify Enrolled Participant (Right to Work Compliant)
   * **Accreditation:** Better Business Bureau (BBB) Accredited (Rating: A+)
   * **Payment Acceptance:** Government Purchase Cards (GPC / Credit Card) Accepted
+  * **Authorized Supply Chain:** Wholesale distribution via TD SYNNEX & D&H; authorized resale & integration: StarTech.com, Ergotron, Microsoft, Samsung, Logitech, Jabra
 * **Registered NAICS Codes:**
   * **624220 (Primary):** Community Housing Services (Temporary, emergency, and supportive housing)
   * **485991:** Special Needs Transportation & Non-Emergency Medical Transit (NEMT)
@@ -165,6 +168,10 @@
 3. **Alabama Residential Landlord-Tenant Act Standards:**
    * Compliance with Alabama habitability standards (operable HVAC, potable hot/cold water, structural integrity, smoke/CO detectors).
    * Operating under programmatic supportive housing agreements and covenants.
+4. **Federal Contracting, JCP & Export Control Compliance (IT Division):**
+   * **JCP Handling:** Export-controlled / military critical technical data is released only to authorized U.S. persons with documented need-to-know under the Data Custodian's control; any change of fact or intention requires prior written approval.
+   * **Supply Chain Integrity:** Federal IT fulfillment sourced exclusively through authorized distribution (TD SYNNEX, D&H) and certified OEM channels (StarTech.com, Ergotron, Jabra, Microsoft, Samsung, Logitech) with full manufacturer warranties and TAA-compliant sourcing where required.
+   * **NDAA Section 889:** No covered telecommunications / video surveillance equipment from prohibited entities is procured, used, or incorporated (FAR 52.204-24/25).
 
 ---
 
@@ -427,6 +434,8 @@
 ### [SOP-2059-APP-002] Preferred Vendor & Service Provider Directory Template
 * **Pre-qualification Requirements:** IRS Form W-9, $1,000,000 General Liability Certificate of Insurance naming 20 59 Ventures Corp., verified trade licensure.
 * **Service Categories:** Licensed HVAC, Master Plumbing, Licensed Electrician, Locksmith/Keypads, Turnover Cleaners, Lawn Maintenance, Pest Control, Emergency Board-Up.
+* **Federal IT Supply Chain:** TD SYNNEX & D&H (authorized wholesale distribution); StarTech.com, Ergotron, Jabra, Microsoft, Samsung, Logitech (authorized resale & integration).
+* **Annual Verification (with Q3 VOSB/WOSB check):** Confirm active JCP certification and review Export Control Compliance statement / Data Custodian designation.
 * **Utility Providers Directory:** Complete utility provider contact numbers for Tuscaloosa, Dothan, and Montgomery hubs.
 
 ---
