@@ -22,7 +22,37 @@
 
     // State Variables
     let currentMode = 'text'; // 'text' (default, free/low cost) or 'voice'
-    let currentConversationId = localStorage.getItem('harry_conv_id') || null;
+    // Transcript retention: stored conversation IDs expire after 90 days so
+    // Telnyx-side transcripts are not resumed indefinitely. See clearChatHistory.
+    const CONV_TTL_MS = 90 * 24 * 60 * 60 * 1000;
+    let currentConversationId = loadStoredConversationId();
+    function loadStoredConversationId() {
+        try {
+            const raw = localStorage.getItem('harry_conv_id');
+            if (!raw) return null;
+            try {
+                const parsed = JSON.parse(raw);
+                if (parsed && typeof parsed === 'object' && parsed.id) {
+                    if (parsed.savedAt && (Date.now() - parsed.savedAt > CONV_TTL_MS)) {
+                        localStorage.removeItem('harry_conv_id');
+                        return null;
+                    }
+                    return parsed.id;
+                }
+            } catch (e) { /* legacy plain-string ID below */ }
+            // Legacy format (plain ID, no timestamp): keep for this session,
+            // then re-save with a timestamp on next turn so TTL applies.
+            return raw;
+        } catch (e) {
+            return null;
+        }
+    }
+    function storeConversationId(id) {
+        currentConversationId = id;
+        try {
+            localStorage.setItem('harry_conv_id', JSON.stringify({ id: id, savedAt: Date.now() }));
+        } catch (e) {}
+    }
     let ws = null;
     let audioCtx = null;
     let micStream = null;
@@ -156,6 +186,9 @@
                     <button id="harry-agent-btn" class="harry-btn agent-btn" title="Transfer to Live Desk Phone" aria-label="Call live desk phone">
                         <i class="fa-solid fa-headset" aria-hidden="true"></i> Desk Phone
                     </button>
+                    <button id="harry-clear-btn" class="harry-btn" title="Delete this chat transcript" aria-label="Clear chat history and delete transcript">
+                        <i class="fa-solid fa-trash-can" aria-hidden="true"></i> Clear Chat
+                    </button>
                 </div>
             </div>
         `;
@@ -183,6 +216,7 @@
         document.getElementById('harry-close-drawer-btn').addEventListener('click', toggleLeadDrawer);
         document.getElementById('harry-submit-lead-btn').addEventListener('click', submitLeadForm);
         document.getElementById('harry-agent-btn').addEventListener('click', connectToDeskPhone);
+        document.getElementById('harry-clear-btn').addEventListener('click', clearChatHistory);
 
         // Close on Escape key
         document.addEventListener('keydown', (e) => {
@@ -411,8 +445,7 @@
             if (res.ok) {
                 const data = await res.json();
                 if (data.conversationId) {
-                    currentConversationId = data.conversationId;
-                    localStorage.setItem('harry_conv_id', data.conversationId);
+                    storeConversationId(data.conversationId);
                 }
                 const replyText = data.content || data.reply || "Thank you for your message!";
                 // Replace the temporary '...' with Harry's response
@@ -435,6 +468,46 @@
         }
     }
 
+
+    // =========================================================================
+    // Transcript retention: visitor-initiated deletion (privacy §6)
+    // Deletes the Telnyx-side conversation, then wipes local transcript + ID.
+    // Local wipe always runs, even if the server call fails.
+    // =========================================================================
+    async function clearChatHistory() {
+        const doomedId = currentConversationId;
+        currentConversationId = null;
+        try {
+            localStorage.removeItem('harry_conv_id');
+        } catch (e) {}
+        currentAssistantBubble = null;
+        currentAssistantText = '';
+
+        if (doomedId) {
+            try {
+                await fetch(CONFIG.apiChatUrl, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ conversationId: doomedId })
+                });
+            } catch (err) {
+                console.warn('Transcript server-delete failed (local copy still wiped):', err);
+            }
+        }
+
+        const container = document.getElementById('harry-transcript-container');
+        if (container) {
+            container.innerHTML =
+                '<div class="harry-chat-msg assistant">' +
+                '<div class="harry-chat-sender">Harry</div>' +
+                'Hello! I\'m Harry, the Inbound Coordinator for 20/59 Ventures. ' +
+                'How can I assist you today with veteran or senior housing, case worker referrals, or property partnerships? ' +
+                'Text chat works fully without voice — deaf and hard-of-hearing welcome.' +
+                '</div>';
+            appendSystemNotice('Chat history cleared and transcript deleted.');
+        }
+        updateStatus('Ready', 'online');
+    }
 
     // =========================================================================
     // 2. Audio Recording & WebSocket Voice Engine

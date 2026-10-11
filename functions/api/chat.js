@@ -1,7 +1,18 @@
 /**
  * Cloudflare Pages Function: /api/chat
- * Securely proxies Harry AI Chat requests to the Telnyx Assistant API
+ * Securely proxies Harry AI Chat requests to the Telnyx Assistant API.
+ * POST   — chat turn (creates a conversation when needed)
+ * DELETE — transcript retention: deletes a Harry web conversation by ID
  */
+
+const CONV_ID_RE = /^[A-Za-z0-9_-]{8,128}$/;
+
+function webChatMetadata() {
+    return {
+        source: 'harry-web',
+        created_at: new Date().toISOString()
+    };
+}
 
 export async function onRequestPost(context) {
     const { request, env } = context;
@@ -36,7 +47,10 @@ export async function onRequestPost(context) {
                     'Authorization': `Bearer ${apiKey}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: `Harry Web Chat - ${new Date().toISOString()}` })
+                body: JSON.stringify({
+                    name: `Harry Web Chat - ${new Date().toISOString()}`,
+                    metadata: webChatMetadata()
+                })
             });
 
             if (convRes.ok) {
@@ -66,7 +80,10 @@ export async function onRequestPost(context) {
                     'Authorization': `Bearer ${apiKey}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: `Harry Web Chat - ${new Date().toISOString()}` })
+                body: JSON.stringify({
+                    name: `Harry Web Chat - ${new Date().toISOString()}`,
+                    metadata: webChatMetadata()
+                })
             });
 
             if (newConvRes.ok) {
@@ -127,8 +144,48 @@ export async function onRequestOptions() {
         status: 204,
         headers: {
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Methods': 'POST, DELETE, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
         }
     });
+}
+
+export async function onRequestDelete(context) {
+    const { request, env } = context;
+    const corsHeaders = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+    };
+    const done = (data, status = 200) => new Response(JSON.stringify(data), {
+        status,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+    });
+
+    let conversationId = '';
+    try {
+        const body = await request.json();
+        conversationId = String(body.conversationId || body.conversation_id || '');
+    } catch (e) { /* empty/invalid body */ }
+    if (!conversationId) {
+        try { conversationId = new URL(request.url).searchParams.get('conversationId') || ''; } catch (e) {}
+    }
+    if (!CONV_ID_RE.test(conversationId)) {
+        return done({ error: 'Valid conversationId is required' }, 400);
+    }
+    if (!env.TELNYX_API_KEY) {
+        return done({ error: 'Chat service not configured' }, 500);
+    }
+
+    const delRes = await fetch(`https://api.telnyx.com/v2/ai/conversations/${encodeURIComponent(conversationId)}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${env.TELNYX_API_KEY}` }
+    });
+    if (delRes.ok || delRes.status === 404) {
+        // 404 = already gone on Telnyx side; treat as deleted for the visitor.
+        return done({ deleted: true, conversationId });
+    }
+    const errText = await delRes.text();
+    console.error('Telnyx Delete Error:', delRes.status, errText);
+    return done({ error: `Telnyx Error ${delRes.status}` }, 502);
 }

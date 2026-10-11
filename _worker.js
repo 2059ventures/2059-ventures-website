@@ -7,6 +7,7 @@ import { onRequestPost as handleRfqPost, onRequestOptions as handleRfqOptions } 
  *
  * Routes handled:
  *   POST /api/chat             — Harry AI chat proxy (uses TELNYX_API_KEY secret)
+ *   DELETE /api/chat           — Harry transcript deletion (retention)
  *   POST /api/lead             — Harry AI lead alerts (via Telnyx Email REST API)
  *   POST /api/contact          — Website Contact & Modal Forms (via Telnyx Email REST API)
  *   POST /api/public/intake    — Participant Intake Applications (via Telnyx Email REST API + Azure sync)
@@ -97,6 +98,11 @@ export default {
         // ── Handle Harry AI Chat Proxy ─────────────────────────────────────
         if (request.method === 'POST' && url.pathname === '/api/chat') {
             return handleHarryChat(request, env);
+        }
+
+        // ── Handle Harry Transcript Deletion (retention) ─────────────────
+        if (request.method === 'DELETE' && url.pathname === '/api/chat') {
+            return handleHarryChatDelete(request, env);
         }
 
         // ── Handle Harry Lead Email Alert (via Telnyx Email API) ───────────
@@ -277,7 +283,10 @@ async function handleHarryChat(request, env) {
                     'Authorization': `Bearer ${apiKey}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: `Harry Web Chat - ${new Date().toISOString()}` })
+                body: JSON.stringify({
+                    name: `Harry Web Chat - ${new Date().toISOString()}`,
+                    metadata: { source: 'harry-web', created_at: new Date().toISOString() }
+                })
             });
 
             if (convRes.ok) {
@@ -318,7 +327,10 @@ async function handleHarryChat(request, env) {
                     'Authorization': `Bearer ${apiKey}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: `Harry Web Chat - ${new Date().toISOString()}` })
+                body: JSON.stringify({
+                    name: `Harry Web Chat - ${new Date().toISOString()}`,
+                    metadata: { source: 'harry-web', created_at: new Date().toISOString() }
+                })
             });
 
             if (newConvRes.ok) {
@@ -368,6 +380,36 @@ async function handleHarryChat(request, env) {
             content: 'An error occurred. Please try again or reach out via the Lead Form.'
         }, 200);
     }
+}
+
+// ── Delete Harry Web Conversation (transcript retention) ──────────────────
+async function handleHarryChatDelete(request, env) {
+    let conversationId = '';
+    try {
+        const body = await request.json();
+        conversationId = String(body.conversationId || body.conversation_id || '');
+    } catch (e) { /* empty/invalid body */ }
+    if (!conversationId) {
+        try { conversationId = new URL(request.url).searchParams.get('conversationId') || ''; } catch (e) {}
+    }
+    if (!/^[A-Za-z0-9_-]{8,128}$/.test(conversationId)) {
+        return jsonResponse({ error: 'Valid conversationId is required' }, 400);
+    }
+    if (!env.TELNYX_API_KEY) {
+        console.error('[Harry] TELNYX_API_KEY not set in Worker environment');
+        return jsonResponse({ error: 'Chat service not configured' }, 500);
+    }
+    const delRes = await fetch(`https://api.telnyx.com/v2/ai/conversations/${encodeURIComponent(conversationId)}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${env.TELNYX_API_KEY}` }
+    });
+    if (delRes.ok || delRes.status === 404) {
+        console.log('[Harry] Deleted conversation:', conversationId);
+        return jsonResponse({ deleted: true, conversationId });
+    }
+    const errText = await delRes.text();
+    console.error('[Harry] Telnyx delete error:', delRes.status, errText);
+    return jsonResponse({ error: `Telnyx Error ${delRes.status}` }, 502);
 }
 
 // ── Handle Harry Lead Email Alert (via Telnyx Email API) ────────────────────
