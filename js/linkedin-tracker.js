@@ -9,11 +9,21 @@
 (function () {
     'use strict';
 
+    // --- CONSENT GATE: ad tracking requires marketing opt-in ---
+    // Tracks only after the visitor accepts marketing cookies in the banner.
+    function hasMarketingConsent() {
+        try {
+            return !!JSON.parse(localStorage.getItem('consent-v1') || '{}').marketing;
+        } catch (e) {
+            return false;
+        }
+    }
+
     // --- HIPAA SAFETY CHECK: Exclude intake/patient data pages ---
     const currentPath = (window.location.pathname || '').toLowerCase();
-    if (currentPath.includes('intake') || currentPath.includes('referral') || currentPath.includes('patient')) {
+    const isHipaaRoute = currentPath.includes('intake') || currentPath.includes('referral') || currentPath.includes('patient');
+    if (isHipaaRoute) {
         console.info('[LinkedIn Tracker] Tracking disabled on intake/HIPAA sensitive routes.');
-        return;
     }
 
 
@@ -68,6 +78,9 @@
 
     // ── 4. Dispatch Conversion to Cloudflare Worker CAPI ───────────────────
     async function trackLinkedInConversion(eventName, userData = {}) {
+        if (isHipaaRoute || !hasMarketingConsent()) {
+            return { skipped: 'no-marketing-consent' };
+        }
         try {
             const liFatId = getLiFatId();
             const payload = {
@@ -102,10 +115,21 @@
     window.getLiFatId = getLiFatId;
     window.initLinkedInInsightTag = initLinkedInInsightTag;
 
-    // Run on load
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initLinkedInTracking);
-    } else {
+    // Run on load — only with marketing consent and never on HIPAA routes
+    function maybeStart() {
+        if (isHipaaRoute) return;
+        if (!hasMarketingConsent()) {
+            console.info('[LinkedIn Tracker] Paused until marketing consent is granted.');
+            return;
+        }
         initLinkedInTracking();
+    }
+    document.addEventListener('consent-updated', function (e) {
+        if (!isHipaaRoute && e.detail && e.detail.marketing) maybeStart();
+    });
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', maybeStart);
+    } else {
+        maybeStart();
     }
 })();

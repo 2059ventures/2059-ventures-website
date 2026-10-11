@@ -2152,6 +2152,59 @@ html.a11y-underline-links a { text-decoration: underline !important; text-underl
 }
 
 /* ==========================================================================
+   Cookie Consent Banner (items: cookie policy / consent banner)
+   ========================================================================== */
+.consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5000;
+    background: rgba(17, 24, 39, 0.98);
+    color: #f9fafb;
+    border-top: 3px solid var(--logo-green);
+    box-shadow: 0 -8px 40px rgba(0,0,0,0.35);
+}
+.consent-banner[hidden] { display: none; }
+.consent-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 16px 24px 18px;
+}
+.consent-text { font-size: 13.5px; line-height: 1.6; margin: 0 0 12px; }
+.consent-text a { color: #ffd700; text-decoration: underline; }
+.consent-choices {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+.consent-choices[hidden] { display: none; }
+.consent-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.consent-toggle input { width: 18px; height: 18px; accent-color: #4A7C59; }
+.consent-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.consent-btn {
+    border: 1.5px solid #4A7C59;
+    background: #fff;
+    color: #1e3d29;
+    border-radius: 10px;
+    padding: 9px 16px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.consent-btn.consent-accept { background: #4A7C59; color: #fff; }
+.consent-btn:focus-visible { outline: 3px solid #ffd700; outline-offset: 2px; }
+.consent-btn[hidden] { display: none; }
+
+/* ==========================================================================
    Secure Spam-Shielded Fax Display Component (Anti-Scraping / Agency Casework)
    ========================================================================== */
 .secure-fax-card {

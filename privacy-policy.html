@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Consent defaults (must precede all trackers) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',functionality_storage:'granted',security_storage:'granted'});
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQSWS8P97K"></script>
     <script>
@@ -12,11 +18,15 @@
 
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
+      window.__loadClarity = function(){
+        if (window.__clarityLoaded) return; window.__clarityLoaded = true;
+        (function(c,l,a,r,i,t,y){
           c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
           t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
           y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       })(window, document, "clarity", "script", "y83tiofj1u");
+      };
+      try { if (JSON.parse(localStorage.getItem('consent-v1') || '{}').analytics) { window.__loadClarity(); } } catch (e) {}
     </script>
 
     <!-- PostHog Analytics -->
@@ -24,7 +34,8 @@
       !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
       posthog.init('phc_ndoeoQFKxKYLfQSGQprJwvS6pGFF7w8bsw7uVyT6BkYf', {
         api_host: 'https://us.i.posthog.com',
-        person_profiles: 'identified_only'
+        person_profiles: 'identified_only',
+        opt_out_capturing_by_default: true
       });
     </script>
 
@@ -32,9 +43,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - 20 59 Ventures Corp</title>
     <meta name="description" content="Privacy Policy for 20 59 Ventures Corp. Learn how we collect, use, and protect your information.">
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/apple-style.css">
+    <script src="js/consent.js" defer></script>
 </head>
 <body>
     <!-- Skip to main content for screen readers and keyboard users -->
@@ -83,7 +95,7 @@
                 <p style="margin-bottom: 20px;">We will not share your opt-in to an SMS campaign with any third party for purposes unrelated to providing you with the services of that campaign. We may share your Personal Data, including your SMS opt-in or consent status, with third parties that help us provide our messaging services, including but not limited to platform providers, phone companies, and any other vendors who assist us in the delivery of text messages. Under no circumstances will we share SMS consent or phone numbers with third parties for their own marketing purposes.</p>
 
                 <h3 style="color: var(--black); font-size: 20px; margin-top: 30px; margin-bottom: 15px;">3. Information Collection</h3>
-                <p style="margin-bottom: 20px;">We collect information you provide directly to us when you fill out our forms, request housing placement, apply as a landlord partner, or get in touch. This information may include your name, email address, phone number, veteran status, senior status, and other details related to your housing needs or property.</p>
+                <p style="margin-bottom: 20px;">We collect information you provide directly to us when you fill out our forms, request housing placement, apply as a landlord partner, or get in touch. This information may include your name, email address, phone number, veteran status, senior status, and other details related to your housing needs or property. We collect only what is needed to evaluate and coordinate your request — if a field is optional, it is labeled as such. Analytics tools on public pages never receive intake form contents.</p>
 
                 <h3 style="color: var(--black); font-size: 20px; margin-top: 30px; margin-bottom: 15px;">4. SMS Communications</h3>
                 <p style="margin-bottom: 10px;">If you opt-in to receive SMS from us:</p>
@@ -97,7 +109,22 @@
                 <h3 style="color: var(--black); font-size: 20px; margin-top: 30px; margin-bottom: 15px;">5. Security</h3>
                 <p style="margin-bottom: 20px;">We implement reasonable security measures to safeguard your information. However, no electronic transmission is 100% secure. We recommend that you do not send sensitive personal credentials (like social security numbers) over standard text messages.</p>
 
-                <h3 style="color: var(--black); font-size: 20px; margin-top: 30px; margin-bottom: 15px;">6. Contact Us</h3>
+                <h3 style="color: var(--black); font-size: 20px; margin-top: 30px; margin-bottom: 15px;">6. Your Privacy Rights (Access, Correction, Deletion)</h3>
+                <p style="margin-bottom: 10px;">You may request a copy of the personal information we hold about you, ask us to correct it, or ask us to delete it. To make a request:</p>
+                <ul style="margin-bottom: 20px; padding-left: 20px;">
+                    <li style="margin-bottom: 8px;">Email <a href="mailto:info@2059ventures.online?subject=Privacy%20Request%20-%20Access%20or%20Deletion" style="color: var(--logo-green); text-decoration: underline;">info@2059ventures.online</a> with the subject line "Privacy Request" and tell us whether you want access, correction, or deletion, plus the name, phone number, or email you used with us.</li>
+                    <li style="margin-bottom: 8px;">We verify identity before acting (for example, by confirming contact details already on file) and respond within 30 days.</li>
+                    <li style="margin-bottom: 8px;">Deletion covers our website records, chat transcripts, analytics profiles we control, and requests to our service providers (messaging, CRM). Records we must keep by law (e.g. federal retention mandates, fair-housing documentation) are retained only as long as required and then securely deleted.</li>
+                    <li style="margin-bottom: 8px;">Unsubmitted intake drafts are automatically purged after 90 days.</li>
+                </ul>
+
+                <h3 style="color: var(--black); font-size: 20px; margin-top: 30px; margin-bottom: 15px;">7. Children's Privacy</h3>
+                <p style="margin-bottom: 20px;">Our services are for adults aged 18 and older, including veterans, seniors, case managers, and property partners. We do not knowingly collect personal information from children under 13. If you believe a child has provided us information, contact us at <a href="mailto:info@2059ventures.online" style="color: var(--logo-green); text-decoration: underline;">info@2059ventures.online</a> and we will delete it promptly.</p>
+
+                <h3 style="color: var(--black); font-size: 20px; margin-top: 30px; margin-bottom: 15px;">8. Email Communications</h3>
+                <p style="margin-bottom: 20px;">We send email only in response to your inquiries and casework (transactional and support messages) — we operate no bulk marketing-email program. If that ever changes, every marketing email will identify us, tell you why you received it, and include a one-click unsubscribe link plus a postal address, and opt-out requests will be honored within 10 business days.</p>
+
+                <h3 style="color: var(--black); font-size: 20px; margin-top: 30px; margin-bottom: 15px;">9. Contact Us</h3>
                 <p style="margin-bottom: 20px;">If you have any questions or concerns about this Privacy Policy, please contact us at:<br>
                 <strong>20 59 Ventures Corp</strong><br>
                 212 W Troy St, Dothan, AL 36303<br>
@@ -139,6 +166,7 @@
                         <h4>Legal & SMS</h4>
                         <a href="phone-sms-mms-disclosure.html">SMS Disclosure</a>
                         <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="cookie-policy.html">Cookie Policy</a>
                         <a href="terms-of-service.html">Terms of Service</a>
                         <a href="sms-opt-in.html">SMS Opt-In</a>
                         <a href="help-sms.html">SMS Help</a>
@@ -185,7 +213,7 @@
             
             <div class="footer-bottom">
                 <p>&copy; 2024 20 59 Ventures Corp. All rights reserved. &nbsp;|&nbsp; <i class="fas fa-home" style="color: var(--logo-green);"></i> Equal Housing Opportunity</p>
-                <p style="font-size: 11px; margin-top: 6px; color: var(--gray-medium); opacity: 0.85;">
+                <p style="font-size: 11px; margin-top: 6px; color: var(--gray-medium)5;">
                     We participate in E-Verify. View the E-Verify Notice (
                     <a href="https://www.e-verify.gov/sites/default/files/everify/posters/EVerifyParticipationPoster.pdf" target="_blank" style="color: var(--logo-green); text-decoration: underline;">English</a> / 
                     <a href="https://www.e-verify.gov/sites/default/files/everify/posters/EVerifyParticipationPosterES.pdf" target="_blank" style="color: var(--logo-green); text-decoration: underline;">Español</a>) 
