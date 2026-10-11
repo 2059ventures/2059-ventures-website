@@ -1555,9 +1555,17 @@ body {
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    outline: none;
     border-color: var(--logo-green);
-    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
+    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.28);
+}
+
+/* Preserve a visible outline for keyboards / high-contrast modes.
+   :focus-visible below re-adds the outline; do not set outline:none here. */
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+    outline: 2px solid var(--logo-green);
+    outline-offset: 2px;
 }
 
 .form-group textarea {
@@ -1975,9 +1983,10 @@ body {
    Accessibility & ADA / WCAG 2.1 AA Utilities
    ========================================================================== */
 
-/* High-contrast focus indicators for keyboard navigation */
+/* High-contrast focus indicators for keyboard navigation.
+   3px meets WCAG 2.4.11 Focus Appearance; offset keeps it visible on filled inputs. */
 :focus-visible {
-    outline: 2px solid var(--logo-green);
+    outline: 3px solid var(--logo-green);
     outline-offset: 3px;
     border-radius: 4px;
 }
@@ -1987,8 +1996,19 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-    outline: 2px solid var(--logo-green);
+    outline: 3px solid var(--logo-green);
     outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+    :focus-visible,
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+        outline: 3px solid Highlight;
+    }
 }
 
 /* Skip to main content link */
@@ -2038,6 +2058,97 @@ textarea:focus-visible {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+}
+
+/* User-enabled reduced motion (toolbar toggle + OS setting) */
+html.a11y-reduce-motion *,
+html.a11y-reduce-motion *::before,
+html.a11y-reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+}
+
+/* User text-size preferences (toolbar) */
+html.a11y-text-112 { font-size: 112.5%; }
+html.a11y-text-125 { font-size: 125%; }
+
+/* User high-contrast + link-underline preferences */
+html.a11y-high-contrast body {
+    background: #000 !important;
+    color: #fff !important;
+}
+html.a11y-high-contrast a { color: #ffd700 !important; text-decoration: underline !important; }
+html.a11y-high-contrast .nav,
+html.a11y-high-contrast .footer { background: #000 !important; color: #fff !important; }
+html.a11y-underline-links a { text-decoration: underline !important; text-underline-offset: 3px; }
+
+/* ==========================================================================
+   Accessibility Toolbar (blind / low-vision / senior users)
+   ========================================================================== */
+.a11y-toolbar-launcher {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 4000;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1e3d29;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+}
+.a11y-toolbar-launcher:hover { background: #2a5238; }
+.a11y-toolbar-launcher:focus-visible {
+    outline: 3px solid #ffd700;
+    outline-offset: 3px;
+}
+.a11y-toolbar-panel {
+    position: fixed;
+    bottom: 76px;
+    left: 24px;
+    z-index: 4001;
+    width: min(320px, calc(100vw - 48px));
+    background: #fff;
+    color: #111827;
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+    padding: 16px;
+}
+.a11y-toolbar-panel h2 { font-size: 15px; margin: 0 0 8px; }
+.a11y-toolbar-panel p { font-size: 13px; margin: 0 0 12px; color: #475569; }
+.a11y-toolbar-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.a11y-toolbar-btn {
+    flex: 1 1 auto;
+    border: 1.5px solid #4A7C59;
+    background: #fff;
+    color: #1e3d29;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.a11y-toolbar-btn[aria-pressed="true"] { background: #1e3d29; color: #fff; }
+.a11y-toolbar-btn:focus-visible { outline: 3px solid #4A7C59; outline-offset: 2px; }
+.a11y-toolbar-close {
+    width: 100%;
+    margin-top: 4px;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 /* ==========================================================================

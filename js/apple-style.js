@@ -768,40 +768,130 @@ function handleFormSuccess(form) {
 
 // Enhanced accessibility
 function initAccessibility() {
-    // Skip to main content link with Apple styling
-    const skipLink = document.createElement('a');
-    skipLink.href = '#main';
-    skipLink.textContent = 'Skip to main content';
-    skipLink.style.cssText = `
-        position: absolute;
-        top: -50px;
-        left: 20px;
-        background: #4A7C59;
-        color: white;
-        padding: 12px 20px;
-        text-decoration: none;
-        border-radius: 8px;
-        z-index: 3000;
-        font-weight: 500;
-        transition: top 0.3s ease;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    `;
-    
-    skipLink.addEventListener('focus', function() {
-        this.style.top = '20px';
+    // Pages already ship a static skip-link in HTML. Do NOT inject a duplicate.
+    // Only repair target focusability so keyboard + screen-reader jump works.
+    var targets = document.querySelectorAll('#main-content, #main-rfq-form, main');
+    targets.forEach(function (t) {
+        if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1');
     });
-    
-    skipLink.addEventListener('blur', function() {
-        this.style.top = '-50px';
+    document.querySelectorAll('a.skip-link').forEach(function (link) {
+        link.addEventListener('click', function () {
+            var id = link.getAttribute('href');
+            if (!id || id.charAt(0) !== '#') return;
+            var target = document.querySelector(id);
+            if (target) {
+                if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+                target.focus({ preventScroll: false });
+            }
+        });
     });
-    
-    document.body.insertBefore(skipLink, document.body.firstChild);
-    
-    // Add main id to hero section
-    const hero = document.querySelector('.hero');
-    if (hero && !hero.id) {
-        hero.setAttribute('id', 'main');
+    initA11yToolbar();
+}
+
+// Accessibility toolbar: text size, high contrast, underline links, reduce motion.
+// Guarded so apple-style.js + harry-widget.js can both ship it without double-init.
+function initA11yToolbar() {
+    if (window.__a11yToolbarInit) return;
+    window.__a11yToolbarInit = true;
+
+    var KEY = 'a11y-prefs-v1';
+    var prefs = { text: '100', contrast: false, underline: false, motion: false };
+    try {
+        var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+        prefs = Object.assign(prefs, saved);
+    } catch (e) {}
+
+    function apply() {
+        var root = document.documentElement;
+        root.classList.toggle('a11y-text-112', prefs.text === '112');
+        root.classList.toggle('a11y-text-125', prefs.text === '125');
+        root.classList.toggle('a11y-high-contrast', !!prefs.contrast);
+        root.classList.toggle('a11y-underline-links', !!prefs.underline);
+        root.classList.toggle('a11y-reduce-motion', !!prefs.motion);
+        try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch (e) {}
+        syncButtons();
     }
+
+    var launcher = document.createElement('button');
+    launcher.type = 'button';
+    launcher.className = 'a11y-toolbar-launcher';
+    launcher.setAttribute('aria-expanded', 'false');
+    launcher.setAttribute('aria-controls', 'a11y-toolbar-panel');
+    launcher.innerHTML = '<span aria-hidden="true">♿</span> Accessibility';
+
+    var panel = document.createElement('div');
+    panel.className = 'a11y-toolbar-panel';
+    panel.id = 'a11y-toolbar-panel';
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-label', 'Accessibility options');
+    panel.hidden = true;
+    panel.innerHTML =
+        '<h2>Accessibility options</h2>' +
+        '<p>Text, contrast, and motion. Saved on this device.</p>' +
+        '<div class="a11y-toolbar-row" role="group" aria-label="Text size">' +
+        '<button type="button" class="a11y-toolbar-btn" data-text="100">A</button>' +
+        '<button type="button" class="a11y-toolbar-btn" data-text="112">A+</button>' +
+        '<button type="button" class="a11y-toolbar-btn" data-text="125">A++</button>' +
+        '</div>' +
+        '<div class="a11y-toolbar-row">' +
+        '<button type="button" class="a11y-toolbar-btn" data-toggle="contrast" aria-pressed="false">High contrast</button>' +
+        '<button type="button" class="a11y-toolbar-btn" data-toggle="underline" aria-pressed="false">Underline links</button>' +
+        '</div>' +
+        '<div class="a11y-toolbar-row">' +
+        '<button type="button" class="a11y-toolbar-btn" data-toggle="motion" aria-pressed="false">Reduce motion</button>' +
+        '<button type="button" class="a11y-toolbar-btn" data-reset="true">Reset</button>' +
+        '</div>' +
+        '<button type="button" class="a11y-toolbar-close">Close</button>';
+
+    function syncButtons() {
+        panel.querySelectorAll('[data-text]').forEach(function (b) {
+            var on = b.getAttribute('data-text') === prefs.text;
+            b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        panel.querySelectorAll('[data-toggle]').forEach(function (b) {
+            var k = b.getAttribute('data-toggle');
+            b.setAttribute('aria-pressed', prefs[k] ? 'true' : 'false');
+        });
+    }
+
+    function setOpen(open) {
+        panel.hidden = !open;
+        launcher.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+            var first = panel.querySelector('.a11y-toolbar-btn');
+            if (first) first.focus();
+        } else {
+            launcher.focus();
+        }
+    }
+
+    launcher.addEventListener('click', function () { setOpen(panel.hidden); });
+    panel.querySelector('.a11y-toolbar-close').addEventListener('click', function () { setOpen(false); });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !panel.hidden) setOpen(false);
+    });
+    panel.addEventListener('click', function (e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        if (btn.hasAttribute('data-text')) prefs.text = btn.getAttribute('data-text');
+        else if (btn.hasAttribute('data-toggle')) {
+            var k = btn.getAttribute('data-toggle');
+            prefs[k] = !prefs[k];
+        }
+        else if (btn.hasAttribute('data-reset')) prefs = { text: '100', contrast: false, underline: false, motion: false };
+        apply();
+    });
+
+    // Honor OS-level reduce-motion on first visit (unless user already saved a pref).
+    try {
+        if (!localStorage.getItem(KEY) && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            prefs.motion = true;
+        }
+    } catch (e) {}
+
+    document.body.appendChild(launcher);
+    document.body.appendChild(panel);
+    apply();
 }
 
 // Performance optimization: Debounce scroll events

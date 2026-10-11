@@ -108,7 +108,7 @@
                 <div id="harry-transcript-container" class="harry-transcript-area" role="log" aria-live="polite" aria-label="Harry AI conversation transcript">
                     <div class="harry-chat-msg assistant">
                         <div class="harry-chat-sender">Harry</div>
-                        Hello! I'm Harry, the Inbound Coordinator for 20/59 Ventures. How can I assist you today with veteran or senior housing, case worker referrals, or property partnerships?
+                        Hello! I'm Harry, the Inbound Coordinator for 20/59 Ventures. How can I assist you today with veteran or senior housing, case worker referrals, or property partnerships? Text chat works fully without voice — deaf and hard-of-hearing welcome.
                     </div>
                 </div>
 
@@ -195,6 +195,94 @@
         });
 
         initCanvasVisualizer();
+        initA11yFallback();
+    }
+
+    // Shared fallback: skip-link focus repair + accessibility toolbar for pages
+    // that load harry-widget.js without apple-style.js (intake, rfq, capabilities).
+    // Guarded via window.__a11yToolbarInit so it never double-inits.
+    function initA11yFallback() {
+        document.querySelectorAll('#main-content, #main-rfq-form, main').forEach(function (t) {
+            if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1');
+        });
+        if (window.__a11yToolbarInit) return;
+        window.__a11yToolbarInit = true;
+
+        var KEY = 'a11y-prefs-v1';
+        var prefs = { text: '100', contrast: false, underline: false, motion: false };
+        try { prefs = Object.assign(prefs, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) {}
+
+        var root = document.documentElement;
+        function apply() {
+            root.classList.toggle('a11y-text-112', prefs.text === '112');
+            root.classList.toggle('a11y-text-125', prefs.text === '125');
+            root.classList.toggle('a11y-high-contrast', !!prefs.contrast);
+            root.classList.toggle('a11y-underline-links', !!prefs.underline);
+            root.classList.toggle('a11y-reduce-motion', !!prefs.motion);
+            try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch (e) {}
+            panel.querySelectorAll('[data-text]').forEach(function (b) {
+                b.setAttribute('aria-pressed', b.getAttribute('data-text') === prefs.text ? 'true' : 'false');
+            });
+            panel.querySelectorAll('[data-toggle]').forEach(function (b) {
+                b.setAttribute('aria-pressed', prefs[b.getAttribute('data-toggle')] ? 'true' : 'false');
+            });
+        }
+
+        var launcher = document.createElement('button');
+        launcher.type = 'button';
+        launcher.className = 'a11y-toolbar-launcher';
+        launcher.setAttribute('aria-expanded', 'false');
+        launcher.setAttribute('aria-controls', 'a11y-toolbar-panel');
+        launcher.innerHTML = '<span aria-hidden="true">♿</span> Accessibility';
+
+        var panel = document.createElement('div');
+        panel.className = 'a11y-toolbar-panel';
+        panel.id = 'a11y-toolbar-panel';
+        panel.setAttribute('role', 'dialog');
+        panel.setAttribute('aria-label', 'Accessibility options');
+        panel.hidden = true;
+        panel.innerHTML =
+            '<h2>Accessibility options</h2>' +
+            '<p>Text, contrast, and motion. Saved on this device.</p>' +
+            '<div class="a11y-toolbar-row" role="group" aria-label="Text size">' +
+            '<button type="button" class="a11y-toolbar-btn" data-text="100">A</button>' +
+            '<button type="button" class="a11y-toolbar-btn" data-text="112">A+</button>' +
+            '<button type="button" class="a11y-toolbar-btn" data-text="125">A++</button></div>' +
+            '<div class="a11y-toolbar-row">' +
+            '<button type="button" class="a11y-toolbar-btn" data-toggle="contrast" aria-pressed="false">High contrast</button>' +
+            '<button type="button" class="a11y-toolbar-btn" data-toggle="underline" aria-pressed="false">Underline links</button></div>' +
+            '<div class="a11y-toolbar-row">' +
+            '<button type="button" class="a11y-toolbar-btn" data-toggle="motion" aria-pressed="false">Reduce motion</button>' +
+            '<button type="button" class="a11y-toolbar-btn" data-reset="true">Reset</button></div>' +
+            '<button type="button" class="a11y-toolbar-close">Close</button>';
+
+        function setOpen(open) {
+            panel.hidden = !open;
+            launcher.setAttribute('aria-expanded', open ? 'true' : 'false');
+            (open ? panel.querySelector('.a11y-toolbar-btn') : launcher).focus();
+        }
+        launcher.addEventListener('click', function () { setOpen(panel.hidden); });
+        panel.querySelector('.a11y-toolbar-close').addEventListener('click', function () { setOpen(false); });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && !panel.hidden) setOpen(false);
+        });
+        panel.addEventListener('click', function (e) {
+            var btn = e.target.closest('button');
+            if (!btn) return;
+            if (btn.hasAttribute('data-text')) prefs.text = btn.getAttribute('data-text');
+            else if (btn.hasAttribute('data-toggle')) { var k = btn.getAttribute('data-toggle'); prefs[k] = !prefs[k]; }
+            else if (btn.hasAttribute('data-reset')) prefs = { text: '100', contrast: false, underline: false, motion: false };
+            else return;
+            apply();
+        });
+
+        try {
+            if (!localStorage.getItem(KEY) && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) prefs.motion = true;
+        } catch (e) {}
+
+        document.body.appendChild(launcher);
+        document.body.appendChild(panel);
+        apply();
     }
 
     function toggleModal() {
@@ -222,7 +310,11 @@
 
     function toggleLeadDrawer() {
         const drawer = document.getElementById('harry-lead-drawer');
+        const btn = document.getElementById('harry-lead-btn');
         drawer.classList.toggle('active');
+        const open = drawer.classList.contains('active');
+        if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
     }
 
     function switchMode(mode) {
@@ -240,6 +332,8 @@
         if (mode === 'text') {
             tabText.classList.add('active');
             tabVoice.classList.remove('active');
+            tabText.setAttribute('aria-selected', 'true');
+            tabVoice.setAttribute('aria-selected', 'false');
             vizSection.style.display = 'none';
             inputBar.style.display = 'flex';
             startBtn.style.display = 'none';
@@ -256,6 +350,8 @@
         } else {
             tabVoice.classList.add('active');
             tabText.classList.remove('active');
+            tabVoice.setAttribute('aria-selected', 'true');
+            tabText.setAttribute('aria-selected', 'false');
             vizSection.style.display = 'flex';
             inputBar.style.display = 'none';
             startBtn.style.display = 'flex';
