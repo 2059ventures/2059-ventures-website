@@ -60,6 +60,7 @@
 - **NAICS Codes**: 423430 (Computer & Peripheral Wholesalers - Primary Resale), 541519 (Other Computer Related Services / ITVAR), 423210 (Office & Technical Furniture Wholesalers), 541512 (Computer Systems Design Services).
 - **PSC Codes**: 7E20, 7D20, 7A20, DE10, 7110, 7195, 6110.
 - **Rapid Procurement**: Government Purchase Card (GPC / P-Card) acceptance with expedited quotes and delivery.
+- **Quality & Cyber Readiness**: Audit-ready QMS aligned to ISO 9001:2015 (document control, supplier review & CAPA tracked in Odoo ERP); NIST SP 800-171 self-assessment on file in SPRS with IA controls enforced toward CMMC Level 2.
 
 
 ---
