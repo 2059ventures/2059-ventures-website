@@ -177,6 +177,21 @@
 
 ---
 
+---
+
+### [SOP-2059-CORP-005] Document Retention, Security & Governance
+* **Retention Schedules:**
+  * **Corporate Governance Records:** Permanent retention (Bylaws, minutes, stock ledgers).
+  * **Tax & Fiscal Records:** 7 Years (Returns, 1099s, bank statements, general ledgers).
+  * **Resident Files & Leases:** 5 Years post-discharge (Intake applications, subleases, proof of address letters).
+  * **Safety & Incident Reports:** 5 Years (Incident forms, strike notices, discharge letters).
+  * **Bi-Weekly Inspections:** 3 Years (Digital mobile walkthrough checklists and photos).
+
+---
+
+# MODULE 02: HOUSING OPERATIONS & RESIDENT LIFECYCLE
+
+
 ### [SOP-2059-CORP-006] Contract Vehicles & Acquisition Pathways
 * **Purpose:** Define the lawful, disclosed routes by which an agency may purchase from 20/59 Ventures Corp, and the internal rules governing how each vehicle may be represented on a quote, order, or proposal.
 * **Governing Rule (Truthful Vehicle Representation):** 20/59 Ventures Corp shall never place on a solicitation, quote, delivery order, or proposal a contract vehicle claim it does not hold. Where a vehicle is held by a distribution partner, the proposal must state the **awardee**, the **contract number**, and 20/59's **role as an authorized reseller/dealer**. Direct-award language shall be used only where 20/59 is the contractor of record.
@@ -207,22 +222,124 @@
   * **Interim framing used on the public site:** the OMNIA NCPA row reads "01-170 (our own reseller agreement)" with no distributor named, which is accurate and avoids the restricted names.
   * **Do not restate D&H's name on any public page without written permission from D&H and/or NCPA.**
 * **RFQ Routing Requirement:** Every RFQ submitted through the public portal must carry a `contract_vehicle` value (or "Not specified — advise me") and, where known, a `vehicle_contract_number`. The contracting desk confirms vehicle validity and expiration **before** issuing a quote.
-* **Public Reference:** https://2059ventures.com/contracts.html — contract numbers, awardees, terms, and 20/59's role on each vehicle. This page must be updated whenever a vehicle term changes.
+* **Public Reference:** https://2059ventures.com/contracts.html — contract numbers and 20/59's role on each vehicle. **The public page publishes no expiry dates by design** (a published expiry makes the site read as stale and the contracting desk confirms terms at quote time instead). Vehicle terms are tracked internally in Appendix A below, and the **Track record** badge on the published portfolio is computed against the current date, not a snapshot.
 * **Benchmark Reference:** `docs/westwind-teardown-and-integration-plan.md` — peer-site benchmark (Westwind Computer Products) and the Track A/B/C integration plan.
 
----
+#### Appendix A — Contract Vehicle Term Register (internal)
 
-### [SOP-2059-CORP-005] Document Retention, Security & Governance
-* **Retention Schedules:**
-  * **Corporate Governance Records:** Permanent retention (Bylaws, minutes, stock ledgers).
-  * **Tax & Fiscal Records:** 7 Years (Returns, 1099s, bank statements, general ledgers).
-  * **Resident Files & Leases:** 5 Years post-discharge (Intake applications, subleases, proof of address letters).
-  * **Safety & Incident Reports:** 5 Years (Incident forms, strike notices, discharge letters).
-  * **Bi-Weekly Inspections:** 3 Years (Digital mobile walkthrough checklists and photos).
+**Authoritative internal record of vehicle terms.** The public site publishes no expiry dates by design (see the DECISION entry above), so this register and the watchlist below are the only place a lapse can be caught. Re-verify against the TD SYNNEX Public Sector Contract Linecard before each contracting cycle.
 
----
+**Register date:** 2026-10-22 · **Source:** TD SYNNEX Public Sector Contract Linecard (2025-2026 edition, 06/16/2026) · **Status computed against 2026-10-22.**
 
-# MODULE 02: HOUSING OPERATIONS & RESIDENT LIFECYCLE
+##### A.1 — Renewal watchlist: completed or lapsed vehicles
+
+These vehicles cannot be ordered against. Confirm renewal status with TD SYNNEX (`contracts@tdsynnex.com`) before quoting any of them.
+
+| Vehicle / Program | Contract # | Expiration | Action |
+|---|---|---|---|
+| TX DIR — Software | `TX DIR-TSO-4383` | 11/19/2025 | **Lapsed — confirm renewal** |
+| New York OGS — Blackboard | `PM69700` | 11/29/2025 | **Lapsed — confirm renewal** |
+| State of Ohio Multi-Vendor IDIQ | `534042` | 04/10/2026 | **Lapsed — confirm renewal** |
+| State of California Multiple Award Schedule (CMAS) | `3-16-70-1047B` | 04/11/2026 | **Lapsed — confirm renewal** |
+| CIO-CS | `HHSN316201500012W` | 04/29/2026 | **Lapsed — confirm renewal** |
+| NASA SEWP V | `NNG15SC07B / NNG15SC98B` | 04/30/2026 | **Lapsed — confirm renewal** |
+| DoD — Rancher Government ESI | `NNG15SC98B` | 04/30/2026 | **Lapsed — confirm renewal** |
+| Equalis Group — Cybersecurity | `COG2127B` | 04/30/2026 | **Lapsed — confirm renewal** |
+| City of San Francisco, CA — Autodesk Software IDIQ | `1000015124` | 06/30/2026 | **Lapsed — confirm renewal** |
+| NASPO ValuePoint — Panasonic Connect North America | `MA23019` | 06/30/2026 | **Lapsed — confirm renewal** |
+| State of California Software License Program — Oracle | `SLP-23-0-0068K` | 08/31/2026 | **Lapsed — confirm renewal** |
+| University of Maine — Autodesk IDIQ | `2020-016` | 09/13/2026 | **Lapsed — confirm renewal** |
+| NASPO ValuePoint — Cloud | `AR2480` | 09/15/2026 | **Lapsed — confirm renewal** |
+| NASPO ValuePoint — Oracle | `AR2487` | 09/15/2026 | **Lapsed — confirm renewal** |
+| 2GIT | `47QTCA21A000Y` | 09/30/2026 | **Lapsed — confirm renewal** |
+| NASPO ValuePoint — Ericsson Enterprise Wireless | `AR3189` | 09/30/2026 | **Lapsed — confirm renewal** |
+| NASPO ValuePoint — HPE Datacom | `AR3228` | 09/30/2026 | **Lapsed — confirm renewal** |
+| NASPO ValuePoint — Palo Alto Networks | `AR3229` | 09/30/2026 | **Lapsed — confirm renewal** |
+
+> **Near-term note.** NASPO ValuePoint `AR3189` (Ericsson Enterprise Wireless), `AR3228` (HPE Datacom), and `AR3229` (Palo Alto Networks) all lapsed **09/30/2026** and were removed from the public "Every way to buy from 20 59 Ventures" table on that date. They remain listed in the published portfolio table as **Completed**. Confirm renewal with TD SYNNEX before quoting any NASPO ValuePoint line — three of the five NASPO ValuePoint OEM awards in our book are affected.
+
+##### A.2 — Full register
+
+| Vehicle / Program | Contract # | PoP Start | Expiration | 20 59 Scope |
+|---|---|---|---|---|
+| 2GIT | `47QTCA21A0026` | 03/31/2020 | 09/26/2039 | 20 59 reseller |
+| 2GIT | `47QTCA21A002E` | 03/31/2020 | 09/26/2039 | 20 59 reseller |
+| 2GIT | `47QTCA21A000Y` | 03/31/2021 | 09/30/2026 | portfolio |
+| GSA Multiple Award Schedule (MAS) | `47QTCA19D00MM` | 09/27/2020 | 09/06/2039 | 20 59 reseller |
+| GSA Multiple Award Schedule (MAS) | `GS-35F-0563U` | 09/08/2008 | 09/04/2028 | 20 59 reseller |
+| GSA Multiple Award Schedule (MAS) | `GS-35F-267DA` | 04/11/2016 | 04/10/2036 | portfolio |
+| CIO-CS | `HHSN316201500012W` | 05/01/2015 | 04/29/2026 | portfolio |
+| ITES-SW2 | `W52P1J-20-D-0047` | 08/31/2020 | 08/30/2030 | portfolio |
+| Department of the Navy — Oracle III Enterprise Agreement | `N00189-23-F-R338 / NNG15SC98B` | 05/31/2023 | 05/30/2028 | portfolio |
+| Department of the Navy — Red Hat II Enterprise Agreement | `N00189-22-F-R009 / NNG15SC98B` | 12/27/2021 | 12/26/2026 | portfolio |
+| Federal Deposit Insurance Corporation — Appian BOA | `CORHQ-19-G-0279` | 08/09/2019 | 08/21/2027 | portfolio |
+| NASA SEWP V | `NNG15SC07B / NNG15SC98B` | 05/01/2015 | 04/30/2026 | portfolio |
+| DoD — Appian ESI | `N66001-24-A-0062` | 08/14/2024 | 08/13/2029 | portfolio |
+| DoD — Archibus / Eptura ITAM ESI | `N66001-19-A-0045` | 07/15/2019 | 07/14/2029 | portfolio |
+| DoD — Autodesk ESI | `N66001-19-A-0051` | 04/01/2019 | 03/31/2029 | portfolio |
+| DoD — Axonius Cyber ESI | `N66001-23-A-0050` | 07/14/2023 | 09/04/2032 | portfolio |
+| DoD — Checkmarx ITAM ESI | `N66001-19-A-0045` | 07/15/2019 | 07/14/2029 | portfolio |
+| DoD — CrowdStrike ITAM ESI | `N66001-19-A-0045` | 07/15/2019 | 07/14/2029 | portfolio |
+| DoD — Dynatrace Cyber ESI | `N66001-23-A-0050` | 07/14/2023 | 09/04/2032 | portfolio |
+| DoD — Firemon Cyber ESI | `N66001-22-A-0079` | 09/05/2022 | 09/04/2032 | portfolio |
+| DoD — Flexera ITAM ESI | `N66001-19-A-0045` | 07/15/2019 | 07/14/2029 | portfolio |
+| DoD — LogRhythm Cyber ESI | `N66001-22-A-0079` | 09/05/2022 | 09/04/2032 | portfolio |
+| DoD — MicroStrategy Cyber ESI | `N66001-23-A-0050` | 07/14/2023 | 09/04/2032 | portfolio |
+| DoD — Rancher Government ESI | `NNG15SC98B` | 05/23/2024 | 04/30/2026 | portfolio |
+| DoD — Red Hat ESI | `N66001-24-A-0057` | 08/07/2024 | 08/06/2029 | 20 59 reseller |
+| DoD — Tychon Cyber ESI | `N66001-22-A-0079` | 09/05/2022 | 09/04/2032 | portfolio |
+| City of Los Angeles, CA — Autodesk Software IDIQ | `180000000350` | 06/25/2018 | 04/10/2036 | portfolio |
+| City of San Francisco, CA — Autodesk Software IDIQ | `1000015124` | 07/01/2019 | 06/30/2026 | portfolio |
+| Commonwealth of Kentucky — Multi-Vendor Master Agreement | `070000217538` | 09/05/2007 | 04/11/2036 | portfolio |
+| Fairfax County, VA — Autodesk BPA | `4400007604` | 04/01/2017 | 04/10/2036 | portfolio |
+| Internet2 | `N/A` | 09/30/2014 | 05/11/2027 | portfolio |
+| Inter-University Council of Ohio Purchasing Group | `UN23-231` | 06/01/2024 | 05/31/2031 | 20 59 reseller |
+| King County, WA — Autodesk IDIQ | `6043767` | 10/15/2018 | 04/10/2036 | portfolio |
+| NASPO ValuePoint — Panasonic Connect North America | `MA23019` | 01/30/2024 | 06/30/2026 | portfolio |
+| New York OGS — Blackboard | `PM69700` | 11/18/2022 | 11/29/2025 | portfolio |
+| New York OGS — Oracle | `PM20940` | 06/13/2016 | 11/29/2030 | portfolio |
+| Ohio State Term Schedule (STS) | `STS022111` | 07/02/2025 | 09/26/2039 | 20 59 reseller |
+| Sourcewell — Private Wireless Services | `020624-SYN` | 05/03/2024 | 05/03/2031 | 20 59 reseller |
+| State of California Multiple Award Schedule (CMAS) | `3-16-70-1047B` | 07/19/2016 | 04/11/2026 | portfolio |
+| State of California Oracle CMAS | `3-17-00-0509A` | 06/22/2017 | 04/30/2027 | portfolio |
+| State of California Software License Program — Oracle | `SLP-23-0-0068K` | 09/01/2023 | 08/31/2026 | portfolio |
+| State of Maryland Multi-Vendor COTS IDIQ | `06B02490021` | 10/01/2012 | 09/30/2027 | portfolio |
+| State of North Carolina Endpoint Protection Services | `STC208M` | 01/20/2021 | 01/19/2027 | portfolio |
+| State of Ohio MCSA CrowdStrike | `MCSA0102` | 03/11/2022 | 03/31/2027 | portfolio |
+| State of Ohio Multi-Vendor IDIQ | `534042` | 06/25/2027 | 04/10/2026 | portfolio |
+| State of South Carolina — Palo Alto Contract | `4400031905` | 07/01/2023 | 06/30/2028 | 20 59 reseller |
+| University of Maine — Autodesk IDIQ | `2020-016` | 09/14/2019 | 09/13/2026 | portfolio |
+| University of Mary Washington — AWS IDIQ | `UCPUMW 15-400` | 08/13/2015 | 08/12/2030 | portfolio |
+| TX DIR — Cybersecurity Products and Services | `TX DIR-CPO-4846` | 01/26/2023 | 01/25/2028 | 20 59 reseller |
+| TX DIR — Miscellaneous IT | `TX DIR-CPO-5096` | 12/14/2022 | 12/21/2027 | 20 59 reseller |
+| TX DIR — Software COTS and Related Services | `TX DIR-CPO-5869` | 11/03/2025 | 11/03/2031 | 20 59 reseller |
+| TX DIR — Mobile Digital Video Recording Systems | `TX DIR-CPO-5283` | 08/21/2024 | 08/21/2029 | 20 59 reseller |
+| TX DIR — Software | `TX DIR-TSO-4383` | 08/13/2019 | 11/19/2025 | portfolio |
+| TX DIR — Telecom & Conferencing | `TX DIR-CPO-5077` | 08/04/2022 | 08/04/2027 | 20 59 reseller |
+| Equalis Group — Technology, Software, Equipment & Services | `R10-1173F` | 03/01/2025 | 02/28/2030 | 20 59 reseller |
+| Equalis Group — Cloud Solutions | `COG-2139A` | 01/01/2023 | 12/31/2026 | portfolio |
+| Equalis Group — Cybersecurity | `COG2127B` | 05/01/2022 | 04/30/2026 | portfolio |
+| NASPO ValuePoint — Cloud | `AR2480` | 09/30/2016 | 09/15/2026 | portfolio |
+| NCPA — Advanced Technology Solutions Aggregator | `01-170` | 12/14/2023 | 12/31/2028 | 20 59 reseller |
+| NCPA — Software | `01-164` | 05/01/2023 | 04/30/2028 | portfolio |
+| NCPA — Systems & IM Software | `01-136` | 04/19/2022 | 04/30/2027 | portfolio |
+| OMNIA Partners — Cyber Security Solutions | `R250307` | 10/01/2025 | 09/30/2030 | 20 59 reseller |
+| OMNIA Partners — Oracle Iowa DAS | `180233-001` | 12/12/2018 | 11/30/2028 | portfolio |
+| OMNIA Partners — Oracle Iowa OCIO | `2019BUS0430` | 12/12/2018 | 11/30/2028 | portfolio |
+| OMNIA Partners — Public Sector Oracle IDIQ | `180233-001` | 12/12/2018 | 11/30/2028 | portfolio |
+| PEPPM — Wholesaler Technology Catalog | `CA KCSOS 542242` | 10/01/2024 | 09/30/2027 | 20 59 reseller |
+| PEPPM — Product Line Contracts (numerous OEMs) | `Multiple` | 01/01/2026 | 12/31/2028 | 20 59 reseller |
+| PEPPM — California PA CSIU | `548362` | — | Current term | 20 59 reseller |
+| Sourcewell — Public Safety Software | `030425-SYN` | 09/05/2025 | 07/17/2029 | 20 59 reseller |
+| TIPS Software II IDIQ | `210101` | 06/09/2021 | 05/31/2027 | portfolio |
+| NASPO ValuePoint — Ericsson Enterprise Wireless | `AR3189` | 10/01/2019 | 09/30/2026 | 20 59 reseller |
+| NASPO ValuePoint — HPE Datacom | `AR3228` | 10/01/2019 | 09/30/2026 | 20 59 reseller |
+| NASPO ValuePoint — HPE Server/Storage | `23008` | 09/07/2023 | 06/30/2028 | 20 59 reseller |
+| NASPO ValuePoint — HP, Inc. Computer Equipment & Peripherals | `23011` | 07/01/2023 | 06/30/2028 | 20 59 reseller |
+| NASPO ValuePoint — Palo Alto Networks | `AR3229` | 10/01/2019 | 09/30/2026 | 20 59 reseller |
+| NASPO ValuePoint — Oracle | `AR2487` | 09/30/2016 | 09/15/2026 | portfolio |
+| TX DIR — Panasonic Corporation of North America | `TX DIR-TSO-5225` | 01/03/2024 | 01/03/2029 | 20 59 reseller |
+
 
 ### [SOP-2059-HOUS-001] Referral Intake & Admissions Workflow
 * **The 5-Step Admissions Lifecycle:**

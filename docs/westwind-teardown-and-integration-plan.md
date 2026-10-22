@@ -180,8 +180,63 @@ D&H Reseller Agreement §13.1: *"Reseller may not create any press release or us
 **Open data item — address mismatch:**
 The D&H authorization form lists **1537 33rd Ave, Tuscaloosa, AL 35401**; the website, SAM.gov record, and `sam_entity_status.json` list **212 W Troy St, Dothan, AL 36303**. Reconcile before the next contract registration or renewal.
 
+**Public presentation decision — no expiry dates on the site (2026-10-22):**
+The published vehicle tables carry **no dates**. Rationale: a table of expiry dates and "Term expired" flags reads as a
+stale audit spreadsheet, which is exactly the neglect signal we are removing. Instead the portfolio carries a **Track
+record** column with three states — *20 59 authorized reseller* (24 vehicles), *Active — portfolio* (35), and
+*Completed* (18) — and the contracting desk confirms terms at quote time.
+
+**Critical consequence:** because the public page carries no dates, **the badge status must be recomputed against the
+current date before every publish**, not copied from the linecard. Doing it the other way is how three NASPO
+ValuePoint OEM awards (`AR3189` Ericsson, `AR3228` HPE Datacom, `AR3229` Palo Alto Networks) were published as
+"Available to 20 59" for three weeks after they lapsed on 09/30/2026. The status is now derived from each vehicle's
+term at build time, and the authoritative dated record lives in **Appendix A of `MASTER_OPERATIONS_MANUAL_SOP.md`**.
+
+**Renewal watchlist — 18 completed vehicles as of 2026-10-22** (full dated register in the SOP):
+
+| Vehicle | Contract # | Lapsed |
+|---|---|---|
+| TX DIR — Software | `TX DIR-TSO-4383` | 11/19/2025 |
+| New York OGS — Blackboard | `PM69700` | 11/29/2025 |
+| State of Ohio Multi-Vendor IDIQ | `534042` | 04/10/2026 |
+| State of California Multiple Award Schedule (CMAS) | `3-16-70-1047B` | 04/11/2026 |
+| CIO-CS | `HHSN316201500012W` | 04/29/2026 |
+| NASA SEWP V | `NNG15SC07B` / `NNG15SC98B` | 04/30/2026 |
+| DoD — Rancher Government ESI | `NNG15SC98B` | 04/30/2026 |
+| Equalis Group — Cybersecurity | `COG2127B` | 04/30/2026 |
+| City of San Francisco, CA — Autodesk Software IDIQ | `1000015124` | 06/30/2026 |
+| NASPO ValuePoint — Panasonic Connect North America | `MA23019` | 06/30/2026 |
+| State of California Software License Program — Oracle | `SLP-23-0-0068K` | 08/31/2026 |
+| University of Maine — Autodesk IDIQ | `2020-016` | 09/13/2026 |
+| NASPO ValuePoint — Cloud | `AR2480` | 09/15/2026 |
+| NASPO ValuePoint — Oracle | `AR2487` | 09/15/2026 |
+| 2GIT | `47QTCA21A000Y` | 09/30/2026 |
+| **NASPO ValuePoint — Ericsson Enterprise Wireless** | `AR3189` | **09/30/2026** |
+| **NASPO ValuePoint — HPE Datacom** | `AR3228` | **09/30/2026** |
+| **NASPO ValuePoint — Palo Alto Networks** | `AR3229` | **09/30/2026** |
+
+**Do not quote against any of these without confirming renewal status with TD SYNNEX (`contracts@tdsynnex.com`).**
+
 **Positioning decision — do not read as a middleman:**
 The procurement surface was restructured so the distributor is a supply-chain detail rather than the headline. The vehicle table dropped its "Awardee" column; the vehicle, contract number, term, and 20 59's role now lead. Three promise cards ("One contract / One point of contact / One accountable supplier") and a rewritten disclosure now say plainly that the vehicle determines the paperwork while 20 59 owns the delivery. Accuracy is preserved — we never claim to hold a schedule we do not hold — but the buyer-facing read is "one accountable supplier."
+
+---
+
+## 3.3 Presentation & responsive pass — 2026-10-22
+
+Removing dates and the stale copyright was only half of it. The same pass fixed several layout defects that were
+making the site look unmaintained:
+
+| Defect | Fix |
+|---|---|
+| **`© 2024` on all 14 pages** in 2026 | Hardcoded `© 2026`. Consider a shared `js/footer-year.js` so it never goes stale again. |
+| **Nav overflowed its container by ~83px** and squeezed "Contract Vehicles" onto two lines | `white-space: nowrap` on `.nav-link`; gap 32 → 24; nav collapse breakpoint moved 1024px → 1200px (the container max-width) so the desktop nav only renders when it fits. Homepage: logo subtitle shortened to one line, CTA shortened to "Submit RFQ", and the redundant "Procurement" anchor removed (the dedicated Contract Vehicles page supersedes it). |
+| **CSS was cached with no version query on 12 of 14 pages** | Bumped to `apple-style.css?v=7` everywhere. **Without this, the nav fix would never have reached returning visitors.** Check this on every future CSS change — most pages had no cache-buster at all. |
+| **Horizontal page scroll on phones/tablets** (printable capability sheet, flyers, contact form, compliance cards, long email links) | `overflow-x: auto` on the print-artifact wrappers; `min-width: 0` on flex/grid children that refuse to shrink; `minmax(min(Npx, 100%), 1fr)` on 17 fixed-minimum grid tracks; `overflow-wrap: anywhere` on long email addresses. |
+| **Vehicle tables unbalanced** | Explicit column widths per table; the repeated "Authorized reseller on this vehicle" label shortened to "Authorized reseller" so it fits one line; a mobile-only "swipe the table sideways" affordance added. |
+
+Verified across **160 page/viewport combinations** (10 pages × 16 widths from 1920px down to 320px): zero horizontal
+overflow, zero wrapped nav labels, zero nav container overflow.
 
 **Encoding defect found and fixed:** `contracts.html` shipped in commit `38a19bd` with 24 mangled em-dashes and 2 mangled en-dashes — a PowerShell `Get-Content`/`WriteAllLines` round trip re-encoded UTF-8 as ANSI. Repaired; the repo now contains zero mojibake across all files. Lesson: never round-trip UTF-8 through PowerShell 5.1 `Get-Content` without `-Encoding UTF8`.
 

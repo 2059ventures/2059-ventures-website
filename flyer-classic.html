@@ -101,6 +101,19 @@
     .print-btn:hover { opacity: 0.9; }
 
     /* ── Flyer Core: Locked 8.5 x 11 Layout ────────── */
+    /* Phones: the sheet is a fixed 8.5in print artifact. Below 900px the
+       page drops the centred flex layout and scrolls the sheet inside the
+       body instead of letting the document grow. */
+    @media (max-width: 900px) {
+      html { overflow-x: hidden; }
+      html, body {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+      }
+      body { overflow-x: auto; }
+      .flyer { margin: 0; }
+    }
     .flyer {
       width: 8.5in;
       height: 11in;

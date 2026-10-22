@@ -115,7 +115,7 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 32px;
+    gap: 24px;
     align-items: center;
 }
 
@@ -127,6 +127,7 @@ body {
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     padding: 8px 0;
     position: relative;
+    white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -469,7 +470,7 @@ body {
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 40px;
     margin-top: 60px;
 }
@@ -573,7 +574,7 @@ body {
 
 .about-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 40px;
     margin-top: 60px;
 }
@@ -635,7 +636,7 @@ body {
 
 .tech-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: 40px;
     margin-top: 60px;
 }
@@ -765,7 +766,7 @@ body {
 
 .housing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
     gap: 40px;
     margin-bottom: 60px;
 }
@@ -881,7 +882,7 @@ body {
 
 .eligibility-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
     gap: 24px;
     max-width: 800px;
     margin: 0 auto;
@@ -923,7 +924,7 @@ body {
 
 .community-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 40px;
     margin-top: 60px;
 }
@@ -1011,7 +1012,7 @@ body {
 
 .testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
     gap: 40px;
     margin: 60px 0;
 }
@@ -1071,7 +1072,7 @@ body {
 /* Trust Metrics */
 .trust-metrics {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
     gap: 40px;
     margin: 80px 0 60px;
     padding: 60px 40px;
@@ -1114,7 +1115,7 @@ body {
 
 .cert-badges {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
     gap: 24px;
 }
 
@@ -1157,7 +1158,7 @@ body {
 
 .guarantees-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: 40px;
     margin: 60px 0;
 }
@@ -1239,7 +1240,7 @@ body {
 
 .program-features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
     gap: 32px;
     margin-top: 40px;
 }
@@ -1378,7 +1379,7 @@ body {
 
 .disclosure-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
     gap: 40px;
     margin-top: 60px;
 }
@@ -1452,8 +1453,14 @@ body {
     align-items: start;
 }
 
+.contact-content > * { min-width: 0; }
+
+/* Long email addresses are single unbreakable tokens - let them wrap */
+.contact-details a { overflow-wrap: anywhere; }
+
 .contact-info {
     display: flex;
+    min-width: 0;
     flex-direction: column;
     gap: 32px;
 }
@@ -1462,6 +1469,11 @@ body {
     display: flex;
     align-items: center;
     gap: 20px;
+    min-width: 0;
+}
+
+.contact-details {
+    min-width: 0;
 }
 
 .contact-icon {
@@ -1538,6 +1550,14 @@ body {
 .form-group {
     display: flex;
     flex-direction: column;
+    min-width: 0;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    min-width: 0;
+    max-width: 100%;
 }
 
 .form-group input,
@@ -1613,7 +1633,7 @@ body {
 
 .footer-links {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
     gap: 40px;
 }
 
@@ -2441,7 +2461,7 @@ html.a11y-underline-links a { text-decoration: underline !important; text-underl
 
 /* Navbar CTAs: high-visibility RFQ button + clean secondary link */
 .nav-links {
-    gap: 20px;
+    gap: 24px;
 }
 .nav-link.nav-cta-primary {
     background: linear-gradient(135deg, #1b4730 0%, #256041 100%);
@@ -2798,10 +2818,22 @@ html.a11y-underline-links a { text-decoration: underline !important; text-underl
     }
 }
 
+/* Contact form: stack the two columns before they can overflow.
+   The 768px block below already stacks them; this extends the stack up to
+   991px so the 60px column gap cannot push the page wider than the
+   viewport on tablets. Homepage only. */
+@media (max-width: 991px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
 /* Header hardening: hamburger + off-canvas nav below desktop widths.
-   8 links + 2 CTA pills cannot fit tablet rows, so collapse at 1024px.
+   9 links + 2 CTA pills cannot fit the 1200px container, so collapse at 1200px
+   (the container max-width). At 1201px+ the desktop nav has room to breathe.
    (Base off-canvas/animation rules live in the 768px block; repeated here.) */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     .nav-links {
         position: fixed;
         top: 70px;

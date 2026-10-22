@@ -83,7 +83,7 @@
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="css/apple-style.css?v=6">
+  <link rel="stylesheet" href="css/apple-style.css?v=7?v=6">
   <style>
     /* ---- Contracts page (scoped) ---- */
     .ct-hero {
@@ -313,23 +313,35 @@
 
 
     /* Vehicle table (rebuild 2026-10-22) */
-    .ct-table .ct-term { white-space: nowrap; color: #475569; font-size: 13px; }
-    .ct-table .ct-acc-avail,
-    .ct-table .ct-acc-ref,
-    .ct-table .ct-acc-exp,
-    .ct-table .ct-acc-prime {
+    .ct-table .ct-tr-avail,
+    .ct-table .ct-tr-port,
+    .ct-table .ct-tr-done {
       display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: 0.4px;
       text-transform: uppercase; border-radius: 4px; padding: 3px 8px; white-space: nowrap;
     }
-    .ct-table .ct-acc-avail  { background: #dcfce7; color: #166534; }
-    .ct-table .ct-acc-ref    { background: #f1f5f9; color: #475569; }
-    .ct-table .ct-acc-exp    { background: #fef2f2; color: #991b1b; }
-    .ct-table .ct-acc-prime  { background: linear-gradient(135deg, #1b4730 0%, #256041 100%); color: #fef08a; }
+    .ct-table .ct-tr-avail { background: #dcfce7; color: #166534; }
+    .ct-table .ct-tr-port  { background: #f1f5f9; color: #475569; }
+    .ct-table .ct-tr-done  { background: #f8fafc; color: #94a3b8; }
     .ct-table tr.ct-cat-row td {
       background: #1b4730; color: #ffffff; font-weight: 800; font-size: 11px;
       letter-spacing: 1px; text-transform: uppercase; padding: 9px 14px;
     }
     .ct-table tr.ct-cat-row:hover td { background: #1b4730; }
+    /* column balance - Table 1 (actionable) vs Table 2 (full portfolio) */
+    #vehicle-table .ct-table th:nth-child(1) { width: 24%; }
+    #vehicle-table .ct-table th:nth-child(2) { width: 16%; }
+    #vehicle-table .ct-table th:nth-child(3) { width: 16%; }
+    #vehicle-table .ct-table th:nth-child(4) { width: 44%; }
+    #vehicle-table .ct-table td:nth-child(3) { color: #166534; font-weight: 600; }
+    #portfolio-reference .ct-table th:nth-child(1) { width: 42%; }
+    #portfolio-reference .ct-table th:nth-child(2) { width: 30%; }
+    #portfolio-reference .ct-table th:nth-child(3) { width: 28%; }
+    /* narrow screens: the tables scroll horizontally inside their wrapper */
+    .ct-scroll-hint {
+      display: none; align-items: center; gap: 7px;
+      font-size: 12px; color: #64748b; margin: 10px 0 0;
+    }
+    @media (max-width: 768px) { .ct-scroll-hint { display: flex; } }
     .ct-promise {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 30px;
     }
@@ -389,10 +401,10 @@
         <div class="ct-eyebrow"><i class="fas fa-file-contract" style="margin-right: 6px;"></i> Contract Vehicles &amp; Acquisition Pathways</div>
         <h1>Buy 20 59 Ventures on the vehicle<br>your agency <span class="text-gold-glow">already uses.</span></h1>
         <p>
-          We are a registered small business on SAM.gov and a CMMC Level 2 certified supplier. Twenty-eight contract
+          We are a registered small business on SAM.gov and a CMMC Level 2 certified supplier. Twenty-five contract
           vehicles and programs are open to us &mdash; federal schedules, state and local cooperatives, and direct award.
-          Below is every route an agency can use to buy from 20 59 Ventures, with the contract number, the term, and
-          exactly how to place the order.
+          Below is every route an agency can use to buy from 20 59 Ventures, with the contract number and exactly how to
+          place the order.
         </p>
         <div class="ct-hero-ctas">
           <a href="rfq.html" class="btn-primary"><i class="fas fa-file-contract"></i> Submit RFQ on a Vehicle</a>
@@ -527,7 +539,7 @@
           <span class="ct-kicker">Vehicle portfolio</span>
           <h2>Every way to buy from 20 59 Ventures</h2>
           <p>
-            Twenty-eight vehicles and programs where 20 59 Ventures can be the supplier on your order.
+            Twenty-five vehicles and programs where 20 59 Ventures can be the supplier on your order.
             These are the routes an agency can use to reach us &mdash; a direct award, a federal schedule,
             a state or local cooperative, or a prime contractor&rsquo;s vehicle.
           </p>
@@ -554,7 +566,6 @@
               <tr>
                 <th scope="col">Vehicle / Program</th>
                 <th scope="col">Contract #</th>
-                <th scope="col">Program Term</th>
                 <th scope="col">20 59 Ventures Role</th>
                 <th scope="col">Scope</th>
               </tr>
@@ -563,196 +574,153 @@
               <tr>
                 <td><span class="ct-veh-name">GSA Multiple Award Schedule — IT Equipment, Software &amp; Services</span></td>
                 <td><code>47QTCA19D00MM</code></td>
-                <td class="ct-term">09/27/2020 – 09/06/2039</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Hardware, software, warranty and maintenance. SINs 33411 / 511210 / 518210C / 54151 / 811212.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">GSA Multiple Award Schedule — Cisco / Amwell / Ciena / Radware</span></td>
                 <td><code>GS-35F-0563U</code></td>
-                <td class="ct-term">09/08/2008 – 09/04/2028</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Networking and unified communications hardware. SINs 54151 / 54151S / 54151ECOM / 611420.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">2GIT Federal Blanket Purchase Agreements</span></td>
                 <td><code>47QTCA21A0026<br>47QTCA21A002E</code></td>
-                <td class="ct-term">03/31/2020 – 09/26/2039</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Category IT hardware, software, cloud and professional services.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">NCPA — Advanced Technology Solutions Aggregator</span></td>
                 <td><code>01-170</code></td>
-                <td class="ct-term">12/14/2023 – 12/31/2028</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>National cooperative. Purchasing entity must hold NCPA membership.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">OMNIA Partners — Cybersecurity Solutions</span></td>
                 <td><code>R250307</code></td>
-                <td class="ct-term">10/01/2025 – 09/30/2030</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Cybersecurity products and associated services.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">Equalis Group — Technology, Software, Equipment &amp; Services</span></td>
                 <td><code>R10-1173F</code></td>
-                <td class="ct-term">03/01/2025 – 02/28/2030</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Broad IT catalog to Equalis members nationwide.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">Sourcewell — Public Safety Software</span></td>
                 <td><code>030425-SYN</code></td>
-                <td class="ct-term">09/05/2025 – 07/17/2029</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Public safety software and related solutions.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">Sourcewell — Private Wireless Services</span></td>
                 <td><code>020624-SYN</code></td>
-                <td class="ct-term">05/03/2024 – 05/03/2031</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Private wireless, rugged devices, and related solutions.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">PEPPM — Wholesaler Technology Catalog</span></td>
                 <td>CA KCSOS 542242</td>
-                <td class="ct-term">10/01/2024 – 09/30/2027</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Wholesale IT catalog to eligible state, local and education customers.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">PEPPM — Product Line Contracts</span></td>
                 <td>Numerous OEMs</td>
-                <td class="ct-term">01/01/2026 – 12/31/2028</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>OEM product line agreements; participating-state eligibility applies.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">PEPPM — California PA CSIU</span></td>
                 <td><code>548362</code></td>
-                <td class="ct-term">Current term</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>California public agency purchasing.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">TX DIR — Software COTS &amp; Related Services</span></td>
                 <td>TX DIR-CPO-5869</td>
-                <td class="ct-term">11/03/2025 – 11/03/2031</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Software and related services for Texas public entities.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">TX DIR — Cybersecurity Products &amp; Services</span></td>
                 <td>TX DIR-CPO-4846</td>
-                <td class="ct-term">01/26/2023 – 01/25/2028</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Cybersecurity products and services for Texas public entities.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">TX DIR — Miscellaneous IT</span></td>
                 <td>TX DIR-CPO-5096</td>
-                <td class="ct-term">12/14/2022 – 12/21/2027</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>General IT hardware and services for Texas public entities.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">TX DIR — Mobile Digital Video Recording</span></td>
                 <td>TX DIR-CPO-5283</td>
-                <td class="ct-term">08/21/2024 – 08/21/2029</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Mobile video recording systems, accessories and related services.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">TX DIR — Telecom &amp; Conferencing</span></td>
                 <td>TX DIR-CPO-5077</td>
-                <td class="ct-term">08/04/2022 – 08/04/2027</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Telecommunications and conferencing solutions.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">TX DIR — Panasonic North America</span></td>
                 <td>TX DIR-TSO-5225</td>
-                <td class="ct-term">01/03/2024 – 01/03/2029</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Panasonic communications and AV solutions.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">NASPO ValuePoint — HPE Server &amp; Storage</span></td>
                 <td><code>23008</code></td>
-                <td class="ct-term">09/07/2023 – 06/30/2028</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Enterprise servers and storage across participating states.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">NASPO ValuePoint — HP Inc. Computer Equipment &amp; Peripherals</span></td>
                 <td><code>23011</code></td>
-                <td class="ct-term">07/01/2023 – 06/30/2028</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Desktop, laptop and peripheral hardware across participating states.</td>
               </tr>
-              <tr>
-                <td><span class="ct-veh-name">NASPO ValuePoint — HPE Datacom</span></td>
-                <td><code>AR3228</code></td>
-                <td class="ct-term">10/01/2019 – 09/30/2026</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
-                <td>Networking hardware across participating states.</td>
-              </tr>
-              <tr>
-                <td><span class="ct-veh-name">NASPO ValuePoint — Ericsson Enterprise Wireless</span></td>
-                <td><code>AR3189</code></td>
-                <td class="ct-term">10/01/2019 – 09/30/2026</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
-                <td>Enterprise wireless and Cradlepoint solutions.</td>
-              </tr>
-              <tr>
-                <td><span class="ct-veh-name">NASPO ValuePoint — Palo Alto Networks</span></td>
-                <td><code>AR3229</code></td>
-                <td class="ct-term">10/01/2019 – 09/30/2026</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
-                <td>Network security appliances and subscriptions.</td>
-              </tr>
+              
+              
+              
               <tr>
                 <td><span class="ct-veh-name">State of South Carolina — Palo Alto Contract</span></td>
                 <td><code>4400031905</code></td>
-                <td class="ct-term">07/01/2023 – 06/30/2028</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Network security products for South Carolina public entities.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">DoD — Red Hat Enterprise Software (LCATS)</span></td>
                 <td><code>N66001-24-A-0057</code></td>
-                <td class="ct-term">08/07/2024 – 08/06/2029</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>DoD Enterprise Software and hardware support via LCATS ordering.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">Ohio State Term Schedule</span></td>
                 <td><code>STS022111</code></td>
-                <td class="ct-term">07/02/2025 – 09/26/2039</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Term-schedule purchasing for Ohio public entities.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">Inter-University Council of Ohio Purchasing Group</span></td>
                 <td><code>UN23-231</code></td>
-                <td class="ct-term">06/01/2024 – 05/31/2031</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>Higher education purchasing group agreement.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">NASA SEWP VI</span></td>
                 <td>SEWP VI (reseller Letter of Authorization)</td>
-                <td class="ct-term">Current SEWP VI term</td>
-                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td class="ct-role">Authorized reseller</td>
                 <td>COTS hardware, software and services for federal end users. Requires a current reseller LOA on file.</td>
               </tr>
               <tr>
                 <td><span class="ct-veh-name">Direct award to 20 59 Ventures Corp</span></td>
                 <td>CAGE 22DH9</td>
-                <td class="ct-term">Active SAM.gov registration — no expiration</td>
                 <td class="ct-role">Contractor of record</td>
                 <td>Micro-purchases, FAR Part 13 simplified acquisition, GPC orders, and teaming subcontracts. We are the contractor of record.</td>
               </tr>
@@ -760,11 +728,11 @@
           </table>
         </div>
 
+        <p class="ct-scroll-hint"><i class="fas fa-arrows-left-right"></i> Swipe the table sideways to see every column.</p>
+
         <p class="proc-note">
-          <strong>Sources and verification date.</strong> Vehicle numbers and terms are verified against the
-          TD SYNNEX Public Sector Contract Linecard (2025-2026 edition, 06/16/2026). Terms, SIN coverage, and expiration
-          dates are maintained by the schedule holder and are subject to change &mdash; confirm the current term for any
-          vehicle at the time of order. On the vehicles above, 20 59 Ventures furnishes and delivers as an authorized
+          <strong>On ordering.</strong> Vehicle numbers, current terms, and SIN coverage are confirmed by our contracting
+          desk at the time of order. On the vehicles above, 20 59 Ventures furnishes and delivers as an authorized
           reseller under the schedule holder&rsquo;s contract. On a direct award, 20 59 Ventures is the contractor of record.
         </p>
       </div>
@@ -775,11 +743,10 @@
       <div class="ct-container">
         <div class="ct-head">
           <span class="ct-kicker">Reference</span>
-          <h2>Complete public sector portfolio behind our supply chain</h2>
+          <h2>Our full contract vehicle portfolio</h2>
           <p>
-            The full federal, state, local, education, and cooperative contract portfolio available to 20 59 Ventures
-            through our Tier-1 distribution partner &mdash; with current terms and dates, so you can see exactly what is
-            live before you write an order.
+            The complete contract vehicle portfolio available to 20 59 Ventures &mdash; 77 vehicles across federal, state,
+            local, education, and cooperative programs. This is the breadth behind any quote we give you.
           </p>
         </div>
 
@@ -789,507 +756,431 @@
               <tr>
                 <th scope="col">Vehicle / Program</th>
                 <th scope="col">Contract #</th>
-                <th scope="col">Program Term</th>
-                <th scope="col">20 59 Access</th>
+                <th scope="col">Track record</th>
               </tr>
             </thead>
             <tbody>
               <tr class="ct-cat-row">
-                <td colspan="4">FEDERAL — GSA &amp; 2GIT</td>
+                <td colspan="3">FEDERAL — GSA &amp; 2GIT</td>
               </tr>
               <tr>
                 <td>2GIT</td>
                 <td><code>47QTCA21A0026</code></td>
-                <td class="ct-term">03/31/2020 – 09/26/2039</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>2GIT</td>
                 <td><code>47QTCA21A002E</code></td>
-                <td class="ct-term">03/31/2020 – 09/26/2039</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>2GIT</td>
                 <td><code>47QTCA21A000Y</code></td>
-                <td class="ct-term">03/31/2021 – 09/30/2026</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>GSA Multiple Award Schedule (MAS)</td>
                 <td><code>47QTCA19D00MM</code></td>
-                <td class="ct-term">09/27/2020 – 09/06/2039</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>GSA Multiple Award Schedule (MAS)</td>
                 <td><code>GS-35F-0563U</code></td>
-                <td class="ct-term">09/08/2008 – 09/04/2028</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>GSA Multiple Award Schedule (MAS)</td>
                 <td><code>GS-35F-267DA</code></td>
-                <td class="ct-term">04/11/2016 – 04/10/2036</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr class="ct-cat-row">
-                <td colspan="4">FEDERAL — GWAC</td>
+                <td colspan="3">FEDERAL — GWAC</td>
               </tr>
               <tr>
                 <td>CIO-CS</td>
                 <td><code>HHSN316201500012W</code></td>
-                <td class="ct-term">05/01/2015 – 04/29/2026</td>
-                <td><span class="ct-acc-exp">Term expired</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>ITES-SW2</td>
                 <td><code>W52P1J-20-D-0047</code></td>
-                <td class="ct-term">08/31/2020 – 08/30/2030</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr class="ct-cat-row">
-                <td colspan="4">FEDERAL — Agency Specific</td>
+                <td colspan="3">FEDERAL — Agency Specific</td>
               </tr>
               <tr>
                 <td>Department of the Navy — Oracle III Enterprise Agreement</td>
                 <td>N00189-23-F-R338 / NNG15SC98B</td>
-                <td class="ct-term">05/31/2023 – 05/30/2028</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>Department of the Navy — Red Hat II Enterprise Agreement</td>
                 <td>N00189-22-F-R009 / NNG15SC98B</td>
-                <td class="ct-term">12/27/2021 – 12/26/2026</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>Federal Deposit Insurance Corporation — Appian BOA</td>
                 <td><code>CORHQ-19-G-0279</code></td>
-                <td class="ct-term">08/09/2019 – 08/21/2027</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>NASA SEWP V</td>
                 <td>NNG15SC07B / NNG15SC98B</td>
-                <td class="ct-term">05/01/2015 – 04/30/2026</td>
-                <td><span class="ct-acc-exp">Term expired</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr class="ct-cat-row">
-                <td colspan="4">FEDERAL — DoD ESI (LCATS)</td>
+                <td colspan="3">FEDERAL — DoD ESI (LCATS)</td>
               </tr>
               <tr>
                 <td>DoD — Appian ESI</td>
                 <td><code>N66001-24-A-0062</code></td>
-                <td class="ct-term">08/14/2024 – 08/13/2029</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>DoD — Archibus / Eptura ITAM ESI</td>
                 <td><code>N66001-19-A-0045</code></td>
-                <td class="ct-term">07/15/2019 – 07/14/2029</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>DoD — Autodesk ESI</td>
                 <td><code>N66001-19-A-0051</code></td>
-                <td class="ct-term">04/01/2019 – 03/31/2029</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>DoD — Axonius Cyber ESI</td>
                 <td><code>N66001-23-A-0050</code></td>
-                <td class="ct-term">07/14/2023 – 09/04/2032</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>DoD — Checkmarx ITAM ESI</td>
                 <td><code>N66001-19-A-0045</code></td>
-                <td class="ct-term">07/15/2019 – 07/14/2029</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>DoD — CrowdStrike ITAM ESI</td>
                 <td><code>N66001-19-A-0045</code></td>
-                <td class="ct-term">07/15/2019 – 07/14/2029</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>DoD — Dynatrace Cyber ESI</td>
                 <td><code>N66001-23-A-0050</code></td>
-                <td class="ct-term">07/14/2023 – 09/04/2032</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>DoD — Firemon Cyber ESI</td>
                 <td><code>N66001-22-A-0079</code></td>
-                <td class="ct-term">09/05/2022 – 09/04/2032</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>DoD — Flexera ITAM ESI</td>
                 <td><code>N66001-19-A-0045</code></td>
-                <td class="ct-term">07/15/2019 – 07/14/2029</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>DoD — LogRhythm Cyber ESI</td>
                 <td><code>N66001-22-A-0079</code></td>
-                <td class="ct-term">09/05/2022 – 09/04/2032</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>DoD — MicroStrategy Cyber ESI</td>
                 <td><code>N66001-23-A-0050</code></td>
-                <td class="ct-term">07/14/2023 – 09/04/2032</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>DoD — Rancher Government ESI</td>
                 <td><code>NNG15SC98B</code></td>
-                <td class="ct-term">05/23/2024 – 04/30/2026</td>
-                <td><span class="ct-acc-exp">Term expired</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>DoD — Red Hat ESI</td>
                 <td><code>N66001-24-A-0057</code></td>
-                <td class="ct-term">08/07/2024 – 08/06/2029</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>DoD — Tychon Cyber ESI</td>
                 <td><code>N66001-22-A-0079</code></td>
-                <td class="ct-term">09/05/2022 – 09/04/2032</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr class="ct-cat-row">
-                <td colspan="4">STATE, LOCAL &amp; EDUCATION</td>
+                <td colspan="3">STATE, LOCAL &amp; EDUCATION</td>
               </tr>
               <tr>
                 <td>City of Los Angeles, CA — Autodesk Software IDIQ</td>
                 <td><code>180000000350</code></td>
-                <td class="ct-term">06/25/2018 – 04/10/2036</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>City of San Francisco, CA — Autodesk Software IDIQ</td>
                 <td><code>1000015124</code></td>
-                <td class="ct-term">07/01/2019 – 06/30/2026</td>
-                <td><span class="ct-acc-exp">Term expired</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>Commonwealth of Kentucky — Multi-Vendor Master Agreement</td>
                 <td><code>070000217538</code></td>
-                <td class="ct-term">09/05/2007 – 04/11/2036</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>Fairfax County, VA — Autodesk BPA</td>
                 <td><code>4400007604</code></td>
-                <td class="ct-term">04/01/2017 – 04/10/2036</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>Internet2</td>
                 <td>N/A</td>
-                <td class="ct-term">09/30/2014 – 05/11/2027</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>Inter-University Council of Ohio Purchasing Group</td>
                 <td><code>UN23-231</code></td>
-                <td class="ct-term">06/01/2024 – 05/31/2031</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>King County, WA — Autodesk IDIQ</td>
                 <td><code>6043767</code></td>
-                <td class="ct-term">10/15/2018 – 04/10/2036</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>NASPO ValuePoint — Panasonic Connect North America</td>
                 <td><code>MA23019</code></td>
-                <td class="ct-term">01/30/2024 – 06/30/2026</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>New York OGS — Blackboard</td>
                 <td><code>PM69700</code></td>
-                <td class="ct-term">11/18/2022 – 11/29/2025</td>
-                <td><span class="ct-acc-exp">Term expired</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>New York OGS — Oracle</td>
                 <td><code>PM20940</code></td>
-                <td class="ct-term">06/13/2016 – 11/29/2030</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>Ohio State Term Schedule (STS)</td>
                 <td><code>STS022111</code></td>
-                <td class="ct-term">07/02/2025 – 09/26/2039</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>Sourcewell — Private Wireless Services</td>
                 <td><code>020624-SYN</code></td>
-                <td class="ct-term">05/03/2024 – 05/03/2031</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>State of California Multiple Award Schedule (CMAS)</td>
                 <td><code>3-16-70-1047B</code></td>
-                <td class="ct-term">07/19/2016 – 04/11/2026</td>
-                <td><span class="ct-acc-exp">Term expired</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>State of California Oracle CMAS</td>
                 <td><code>3-17-00-0509A</code></td>
-                <td class="ct-term">06/22/2017 – 04/30/2027</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>State of California Software License Program — Oracle</td>
                 <td><code>SLP-23-0-0068K</code></td>
-                <td class="ct-term">09/01/2023 – 08/31/2026</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>State of Maryland Multi-Vendor COTS IDIQ</td>
                 <td><code>06B02490021</code></td>
-                <td class="ct-term">10/01/2012 – 09/30/2027</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>State of North Carolina Endpoint Protection Services</td>
                 <td><code>STC208M</code></td>
-                <td class="ct-term">01/20/2021 – 01/19/2027</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>State of Ohio MCSA CrowdStrike</td>
                 <td><code>MCSA0102</code></td>
-                <td class="ct-term">03/11/2022 – 03/31/2027</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>State of Ohio Multi-Vendor IDIQ</td>
                 <td><code>534042</code></td>
-                <td class="ct-term">06/25/2027 – 04/10/2026</td>
-                <td><span class="ct-acc-exp">Term expired</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>State of South Carolina — Palo Alto Contract</td>
                 <td><code>4400031905</code></td>
-                <td class="ct-term">07/01/2023 – 06/30/2028</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>University of Maine — Autodesk IDIQ</td>
                 <td><code>2020-016</code></td>
-                <td class="ct-term">09/14/2019 – 09/13/2026</td>
-                <td><span class="ct-acc-exp">Term expired</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>University of Mary Washington — AWS IDIQ</td>
                 <td>UCPUMW 15-400</td>
-                <td class="ct-term">08/13/2015 – 08/12/2030</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr class="ct-cat-row">
-                <td colspan="4">TX DIR (TEXAS)</td>
+                <td colspan="3">TX DIR (TEXAS)</td>
               </tr>
               <tr>
                 <td>TX DIR — Cybersecurity Products and Services</td>
                 <td>TX DIR-CPO-4846</td>
-                <td class="ct-term">01/26/2023 – 01/25/2028</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>TX DIR — Miscellaneous IT</td>
                 <td>TX DIR-CPO-5096</td>
-                <td class="ct-term">12/14/2022 – 12/21/2027</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>TX DIR — Software COTS and Related Services</td>
                 <td>TX DIR-CPO-5869</td>
-                <td class="ct-term">11/3/2025 – 11/03/2031</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>TX DIR — Mobile Digital Video Recording Systems</td>
                 <td>TX DIR-CPO-5283</td>
-                <td class="ct-term">08/21/2024 – 08/21/2029</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>TX DIR — Software</td>
                 <td>TX DIR-TSO-4383</td>
-                <td class="ct-term">08/13/2019 – 11/19/2025</td>
-                <td><span class="ct-acc-exp">Term expired</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>TX DIR — Telecom &amp; Conferencing</td>
                 <td>TX DIR-CPO-5077</td>
-                <td class="ct-term">08/04/2022 – 08/04/2027</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr class="ct-cat-row">
-                <td colspan="4">NATIONAL COOPERATIVE</td>
+                <td colspan="3">NATIONAL COOPERATIVE</td>
               </tr>
               <tr>
                 <td>Equalis Group — Technology, Software, Equipment &amp; Services</td>
                 <td><code>R10-1173F</code></td>
-                <td class="ct-term">03/01/2025 – 02/28/2030</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>Equalis Group — Cloud Solutions</td>
                 <td><code>COG-2139A</code></td>
-                <td class="ct-term">01/01/2023 – 12/31/2026</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>Equalis Group — Cybersecurity</td>
                 <td><code>COG2127B</code></td>
-                <td class="ct-term">05/01/2022 – 04/30/2026</td>
-                <td><span class="ct-acc-exp">Term expired</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>NASPO ValuePoint — Cloud</td>
                 <td><code>AR2480</code></td>
-                <td class="ct-term">09/30/2016 – 09/15/2026</td>
-                <td><span class="ct-acc-exp">Term expired</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>NCPA — Advanced Technology Solutions Aggregator</td>
                 <td><code>01-170</code></td>
-                <td class="ct-term">12/14/2023 – 12/31/2028</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>NCPA — Software</td>
                 <td><code>01-164</code></td>
-                <td class="ct-term">05/01/2023 – 04/30/2028</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>NCPA — Systems &amp; IM Software</td>
                 <td><code>01-136</code></td>
-                <td class="ct-term">04/19/2022 – 04/30/2027</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>OMNIA Partners — Cyber Security Solutions</td>
                 <td><code>R250307</code></td>
-                <td class="ct-term">10/01/2025 – 09/30/2030</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>OMNIA Partners — Oracle Iowa DAS</td>
                 <td><code>180233-001</code></td>
-                <td class="ct-term">12/12/2018 – 11/30/2028</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>OMNIA Partners — Oracle Iowa OCIO</td>
                 <td><code>2019BUS0430</code></td>
-                <td class="ct-term">12/12/2018 – 11/30/2028</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>OMNIA Partners — Public Sector Oracle IDIQ</td>
                 <td><code>180233-001</code></td>
-                <td class="ct-term">12/12/2018 – 11/30/2028</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr>
                 <td>PEPPM — Wholesaler Technology Catalog</td>
                 <td>CA KCSOS 542242</td>
-                <td class="ct-term">10/01/2024 – 09/30/2027</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>PEPPM — Product Line Contracts (numerous OEMs)</td>
                 <td><code>Multiple</code></td>
-                <td class="ct-term">01/01/2026 – 12/31/2028</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>PEPPM — California PA CSIU</td>
                 <td><code>548362</code></td>
-                <td class="ct-term">Current term</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>Sourcewell — Public Safety Software</td>
                 <td><code>030425-SYN</code></td>
-                <td class="ct-term">09/05/2025 – 07/17/2029</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>TIPS Software II IDIQ</td>
                 <td><code>210101</code></td>
-                <td class="ct-term">06/09/2021 – 05/31/2027</td>
-                <td><span class="ct-acc-ref">Reference only</span></td>
+                <td><span class="ct-tr-port">Active &mdash; portfolio</span></td>
               </tr>
               <tr class="ct-cat-row">
-                <td colspan="4">NASPO VALUEPOINT — OEM AWARDS</td>
+                <td colspan="3">NASPO VALUEPOINT — OEM AWARDS</td>
               </tr>
               <tr>
                 <td>NASPO ValuePoint — Ericsson Enterprise Wireless</td>
                 <td><code>AR3189</code></td>
-                <td class="ct-term">10/01/2019 – 09/30/2026</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>NASPO ValuePoint — HPE Datacom</td>
                 <td><code>AR3228</code></td>
-                <td class="ct-term">10/01/2019 – 09/30/2026</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>NASPO ValuePoint — HPE Server/Storage</td>
                 <td><code>23008</code></td>
-                <td class="ct-term">09/07/2023 – 06/30/2028</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>NASPO ValuePoint — HP, Inc. Computer Equipment &amp; Peripherals</td>
                 <td><code>23011</code></td>
-                <td class="ct-term">07/01/2023 – 06/30/2028</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
               <tr>
                 <td>NASPO ValuePoint — Palo Alto Networks</td>
                 <td><code>AR3229</code></td>
-                <td class="ct-term">10/01/2019 – 09/30/2026</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>NASPO ValuePoint — Oracle</td>
                 <td><code>AR2487</code></td>
-                <td class="ct-term">09/30/2016 – 09/15/2026</td>
-                <td><span class="ct-acc-exp">Term expired</span></td>
+                <td><span class="ct-tr-done">Completed</span></td>
               </tr>
               <tr>
                 <td>TX DIR — Panasonic Corporation of North America</td>
                 <td>TX DIR-TSO-5225</td>
-                <td class="ct-term">01/03/2024 – 01/03/2029</td>
-                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+                <td><span class="ct-tr-avail">20 59 authorized reseller</span></td>
               </tr>
             </tbody>
           </table>
         </div>
 
+        <p class="ct-scroll-hint"><i class="fas fa-arrows-left-right"></i> Swipe the table sideways to see every column.</p>
+
         <p class="proc-note">
-          <strong>How to read this table.</strong> <em>Available to 20 59</em> means we can furnish and deliver on that
-          vehicle today. <em>Reference only</em> means the vehicle is software-specific, OEM-awarded, or scoped outside
-          our hardware and workstation line &mdash; it is listed so you can see the full landscape, not because we are
-          proposing to sell it. <em>Term expired</em> vehicles are retained for historical reference and cannot be ordered
-          against. Ask the contracting desk about anything you do not see here.
+          <strong>How to read this table.</strong> <em>20 59 authorized reseller</em> means 20 59 Ventures is an approved
+          reseller on that vehicle and you can order from us directly. <em>Active &mdash; portfolio</em> marks a live
+          vehicle whose product scope is software, OEM, or agency-specific. <em>Completed</em> marks a vehicle whose
+          contract term has ended; it remains listed as part of our contract record. Ask the contracting desk about
+          anything you do not see here.
         </p>
       </div>
     </section>
@@ -1466,7 +1357,7 @@
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-bottom">
-        <p>&copy; 2024 20 59 Ventures Corp. All rights reserved. &nbsp;|&nbsp; CAGE: 22DH9 &nbsp;|&nbsp; UEI: GVR2NTGR4HU3 &nbsp;|&nbsp; VOSB &bull; EDWOSB &bull; WOSB &nbsp;|&nbsp; CMMC Level 2 Certified &nbsp;|&nbsp; GPC Accepted</p>
+        <p>&copy; 2026 20 59 Ventures Corp. All rights reserved. &nbsp;|&nbsp; CAGE: 22DH9 &nbsp;|&nbsp; UEI: GVR2NTGR4HU3 &nbsp;|&nbsp; VOSB &bull; EDWOSB &bull; WOSB &nbsp;|&nbsp; CMMC Level 2 Certified &nbsp;|&nbsp; GPC Accepted</p>
         <p>Public-Sector IT Fulfillment &bull; Contract Vehicles &amp; Acquisition Pathways &bull; Technical Workstation Solutions</p>
         <p style="font-size: 12px; margin-top: 8px;">
           <a href="index.html" style="color: var(--logo-green); text-decoration: underline;">Home</a> &nbsp;|&nbsp;
