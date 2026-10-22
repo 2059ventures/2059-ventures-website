@@ -271,23 +271,26 @@ overflow, zero wrapped nav labels, zero nav container overflow.
 
 | Claim | Before | After |
 |---|---|---|
-| CMMC | `index.html` said *"CMMC Level 2 … Compliant"*; four other surfaces said *"working toward CMMC L2"* | **CMMC Level 2 readiness** on all surfaces — backed by a NIST SP 800-171 self-assessment in SPRS; certification is not claimed without a C3PAO attestation ID |
+| CMMC | `index.html` said *"CMMC Level 2 … Compliant"*; four other surfaces said *"working toward CMMC L2"* | **CMMC Level 2 readiness** on all surfaces — backed by a CMMC L2 Final Self-Assessment in SPRS; certification is not claimed because no C3PAO assessment is on file |
 | Inventory | *"granting direct access to multi-million dollar IT inventory"* (`it-capabilities.html:1077`) | Rewritten — we resell through Tier-1 distributors, we do not own inventory |
 | Partner set | `llms.txt`, `llms-full.txt`, and every transactional email in `functions/api/rfq.js` omitted D&H and Jabra | All surfaces now list the same partner set |
 | Vehicles | Zero named anywhere | Named with awardee + contract number + participation model |
 
-**SPRS self-assessment artifact (corrected 2026-10-22).** The record is now published instead of asserted, and the
-surfaces were softened from "certified" to **"CMMC Level 2 readiness"**. A new **"NIST SP 800-171 Assessment (SPRS)"**
-card on `compliance.html` publishes: DoD Unique Identifier **SB00164625** · included CAGE **22DH9** · assessment scope
-**Enterprise** · assessment date **10/02/2026** · assessment score **110** (maximum possible score) · SSP assessed
-**SOP-2059-CA-003 System Security Plan rev 1.18** · Plans of Action and Milestones **none open**. The same identifiers
-are echoed in the homepage procurement block, the IT capabilities sidebar, the RFQ fast-facts sidebar, `llms.txt`, and
-`llms-full.txt`. Contracting officers are told they can request the full self-assessment package — assessed SSP and
-evidence index — through the RFQ portal.
+**SPRS CMMC record verified (2026-10-22).** The public card is now sourced from the SPRS Cyber Reports Detail
+screen rather than asserted. `compliance.html` publishes the **CMMC Level 2 Self-Assessment (SPRS)** record: CMMC
+Unique Identifier **S200081625** · assessment type **CMMC L2 Final Self-Assessment** · assessed **10/22/2026** ·
+affirmation expiration **10/22/2027** · CMMC status expiration **10/22/2029** · scope **Enterprise** · included CAGE
+**22DH9** · NIST SP 800-171 score **110** (maximum possible) · SSP assessed **SOP-2059-CA-003 System Security Plan
+rev 1.18** · Plans of Action and Milestones **none open**. The SPRS account shows **CMMC Level 2 (Self) = 1** and
+**CMMC Level 2 (C3PAO) = 0**. The same identifiers and expiry dates are echoed in the homepage procurement block, the
+IT capabilities sidebar, the RFQ fast-facts sidebar, `llms.txt`, and `llms-full.txt`.
 
-**Note on wording:** a DoD UID, assessment date, assessed SSP revision and score describe an SPRS **self-assessment**.
-They do not constitute a CMMC Level 2 certification, which requires a C3PAO assessment and a citable C3PAO/attestation
-ID. Until that ID is on file, the site claims readiness only and does not use "certified".
+**Correction:** the previous pass cited DoD UID `SB00164625` and an assessment date of `10/02/2026`. Those values did
+not match the SPRS CMMC record and were replaced with `S200081625` / `10/22/2026`. Any NIST SP 800-171 record can be
+cited separately only if captured from the NIST tab.
+
+**Note on wording:** a CMMC self-assessment, even at "Final" status, is not a CMMC Level 2 certification. Certification
+requires a C3PAO assessment; because the C3PAO tab shows 0, the site claims readiness only and does not use "certified".
 
 ---
 
