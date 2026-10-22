@@ -90,20 +90,33 @@ TD SYNNEX makes this reachable for us at near-zero cost. From TD SYNNEX Public S
 
 That second quote is the mechanism that gives a firm our size GSA access without a GSA application cycle.
 
-**TD SYNNEX Public Sector vehicles usable by reseller partners (verified 2026-10-22):**
+**TD SYNNEX Public Sector vehicles usable by reseller partners — VERIFIED 2026-10-22 against the TD SYNNEX Public Sector Contract Linecard (2025-2026 edition, 06/16/2026), held locally at `TDSPS_Contracts-Linecard_06_16_26 (1).pdf`:**
 
-| Vehicle | Contract # | Awardee | Notes |
+| Vehicle | Contract # | Awardee | PoP / Expiration |
 |---|---|---|---|
-| GSA MAS — IT Equipment, Software & Services | `47QTCA19D00MM` | TD SYNNEX Corporation | SINs 33411, 511210, 518210C, 54151, 811212, OLM. Max order $500,000 ($250,000 OLM). PoP through 09/2029, ultimate 09/2039. |
-| GSA MAS — Cisco / Amwell / Ciena / Radware | `GS-35F-0563U` | TD SYNNEX Corporation | SINs 33411, 511210, 54151, 54151ECOM, 54151S, 611420, 811212, OLM. Expires 09/04/2028. |
-| 2GIT Blanket Purchase Agreements | `47QTCA21A0026`, `47QTCA21A002E` | TD SYNNEX Corporation | Federal. PoP through 09/2039. |
-| NASA SEWP VI | SEWP VI LOA | TD SYNNEX Corporation | Authorized-reseller LOA required; TD SYNNEX publishes LOA guidance for resellers. |
-| NASPO ValuePoint (formerly WSCA) | — | TD SYNNEX Corporation | Contact `naspo@tdsynnex.com`. |
-| TX DIR — Software COTS & Related Services | `TX DIR-CPO-5869` | TD SYNNEX Corporation | 11/03/2025 – 11/03/2031. |
-| Equalis Group | `EQ-013120-01E` | Region 10 ESC lead agency | TD SYNNEX awardee; renewable through 04/30/2027. Sold through authorized dealers/resellers. |
-| PEPPM | GSA PMO program | TD SYNNEX Corporation | TD SYNNEX PEPPM Participating Dealer Agreement; approved-state SLED customers only. |
-| CMAS (California) | — | TD SYNNEX Corporation | Managed contract. |
-| Sourcewell | `030425-SYN` | TD SYNNEX Corporation | Public safety software. 09/2025 – 07/2029. |
+| GSA MAS — IT Equipment, Software & Services | `47QTCA19D00MM` | TD SYNNEX Corporation | 09/27/2020 – 09/06/2039 |
+| GSA MAS — Cisco / Amwell / Ciena / Radware | `GS-35F-0563U` | TD SYNNEX Corporation | 09/08/2008 – 09/04/2028 |
+| 2GIT Federal BPAs | `47QTCA21A0026`, `47QTCA21A002E` | TD SYNNEX Corporation | 03/31/2020 – 09/26/2039 |
+| OMNIA Partners — Cybersecurity Solutions | `R250307` | TD SYNNEX Corporation | 10/01/2025 – 09/30/2030 |
+| NCPA — Advanced Technology Solutions Aggregator | `01-170` | TD SYNNEX Corporation | 12/14/2023 – 12/31/2028 |
+| Equalis Group — Tech, Software, Equipment & Services | `R10-1173F` | TD SYNNEX Corporation | 03/01/2025 – 02/28/2030 |
+| Sourcewell — Public Safety Software | `030425-SYN` | TD SYNNEX Corporation | 09/05/2025 – 07/17/2029 |
+| PEPPM — Wholesaler Technology Catalog | `CA KCSOS 542242` | TD SYNNEX Corporation | 10/01/2024 – 09/30/2027 |
+| PEPPM — Product Line Contracts | (numerous OEMs) | TD SYNNEX Corporation | 01/01/2026 – 12/31/2028 |
+| CA KCSOS — PA CSIU | `548362` | TD SYNNEX Corporation | — |
+| TX DIR — Software COTS & Related Services | `TX DIR-CPO-5869` | TD SYNNEX Corporation | 11/03/2025 – 11/03/2031 |
+| TX DIR — Cybersecurity Products & Services | `TX DIR-CPO-4846` | TD SYNNEX Corporation | 01/26/2023 – 01/25/2028 |
+| TX DIR — Miscellaneous IT | `TX DIR-CPO-5096` | TD SYNNEX Corporation | 12/14/2022 – 12/21/2027 |
+| TX DIR — Mobile Digital Video Recording | `TX DIR-CPO-5283` | TD SYNNEX Corporation | 08/21/2024 – 08/21/2029 |
+| TX DIR — Telecom & Conferencing | `TX DIR-CPO-5077` | TD SYNNEX Corporation | 08/04/2022 – 08/04/2027 |
+| NASPO ValuePoint — HPE Server/Storage | `23008` | HPE via TD SYNNEX | 09/07/2023 – 06/30/2028 |
+| NASPO ValuePoint — HP Computer Equipment | `23011` | HP Inc. via TD SYNNEX | 07/01/2023 – 06/30/2028 |
+| NASPO ValuePoint — Ericsson Wireless | `AR3189` | Ericsson via TD SYNNEX | 10/01/2019 – 09/30/2026 |
+| NASPO ValuePoint — HPE Datacom | `AR3228` | HPE via TD SYNNEX | 10/01/2019 – 09/30/2026 |
+| NASPO ValuePoint — Palo Alto Networks | `AR3229` | Palo Alto via TD SYNNEX | 10/01/2019 – 09/30/2026 |
+| TX DIR — Panasonic North America | `TX DIR-TSO-5225` | Panasonic via TD SYNNEX | 01/03/2024 – 01/03/2029 |
+
+**Also on the linecard but awarded to DLT Solutions** (TD SYNNEX's public-sector subsidiary, not to us): CIO-CS `HHSN316201500012W` (expired 04/29/2026), NASA SEWP V `NNG15SC07B`/`NNG15SC98B` (expired 04/30/2026), ITES-SW2 `W52P1J-20-D-0047`, DoD ESI LCATS, TIPS `210101`, NASPO ValuePoint Oracle `AR2487` (expired 09/15/2026). **We do not list these on the public page** — they are DLT's awards and the federal terms shown have lapsed. SEWP remains available to us only through TD SYNNEX's separate **SEWP VI reseller LOA** program.
 
 **Also available:** TD SYNNEX's **Small Business Alliance** ("focused support for small business"), and a Public Sector Business Development Team Map with regionally dedicated reps. Contact for reseller public-sector vehicles: `contracts@tdsynnex.com`.
 
@@ -126,8 +139,8 @@ Three surfaces TD SYNNEX exposes to partners:
 
 | # | Item | Status | Notes |
 |---|---|---|---|
-| A1 | `contracts.html` — vehicle portfolio hub | **Done** | New page. Six acquisition pathways, per-vehicle cards with contract numbers, awardee, expiry, and how we participate. |
-| A2 | Ride TD SYNNEX's vehicles instead of applying ourselves | **Open — action required** | Requires: join TD SYNNEX Public Sector, get on the Business Development Team Map, obtain reseller agreement + SEWP VI LOA if needed, enroll in the relevant programs (PEPPM dealer agreement, Equalis dealer agreement). Owner: contracting desk. |
+| A1 | `contracts.html` — vehicle portfolio hub | **Done** | New page. Six acquisition pathways, 13-row vehicle table with contract numbers, awardee, term, and how we participate. |
+| A2 | Ride TD SYNNEX's vehicles instead of applying ourselves | **Partially closed 2026-10-22** | Verified against the TD SYNNEX Public Sector Contract Linecard (06/16/2026). 20 59's **own executed D&H OMNIA NCPA Reseller Agreement** confirmed (Acct 332729, effective 10/06/2026, 3-yr initial term). **Still open:** TD SYNNEX reseller agreement + SEWP VI LOA + PEPPM dealer enrollment + written marketing permission (see §3.2). Owner: contracting desk. |
 | A3 | Publish real vehicle identifiers across the site | **Done** | `contracts.html`, `index.html` procurement section, `it-capabilities.html` sidebar, `rfq.html` fast-facts + new sidebar widget. |
 | A4 | Vehicle-aware RFQ routing | **Done** | New `contract_vehicle` field on the RFQ form, wired through `functions/api/rfq.js` into the alert email, auto-reply, and Odoo lead. |
 | A5 | State & local co-op tier | **Done** | `contracts.html` includes NASPO ValuePoint, TX DIR, Equalis, CMAS, PEPPM, Sourcewell. |
@@ -141,6 +154,29 @@ Three surfaces TD SYNNEX exposes to partners:
 2. Commercially stronger — a contracting officer who sees *"we are the awardee"* and later discovers otherwise disqualifies us. A buyer who sees *"here is the vehicle, here is the contract number, here is exactly how we sit under it, and here is the phone number"* treats us as a partner.
 
 **Never claim a vehicle we do not hold.** If we later obtain our own GSA MAS, add it as a separate direct-award row.
+
+### 3.2 Vehicle verification results — 2026-10-22
+
+Sources read: `D&H Authorization Omnia Auth.pdf`, `TDSPS_Contracts-Linecard_06_16_26 (1).pdf`, `Equalis-R10-1173F-Subcontractors-September2026-no-contact-info.xlsx` (all in the OneDrive business-documents folder).
+
+**Confirmed and promoted on the site:**
+- **OMNIA Partners NCPA `01-170`** — 20 59 holds its own **D&H Distributing OMNIA NCPA Reseller Agreement**, D&H account **332729**, authorization effective **10/06/2026**, three-year initial term with annual renewals, lead agency Region 14 ESC / Advanced Technology Solutions Aggregator. Customers must hold NCPA membership.
+- **OMNIA Partners Cybersecurity `R250307`**, **Equalis `R10-1173F`**, **Sourcewell `030425-SYN`**, **PEPPM `CA KCSOS 542242` / `548362` / Product Line Contracts**, **six TX DIR contracts**, **NASPO ValuePoint OEM awards** — all via TD SYNNEX.
+- **SEWP** is *not* a TD SYNNEX linecard vehicle for us: SEWP V is a DLT award that expired 04/30/2026. SEWP is available to us only under a **SEWP VI reseller LOA**, which we do not yet hold.
+
+**Corrected from the earlier web-research draft:**
+- Equalis contract number is **`R10-1173F`**, not `EQ-013120-01E` (that was an earlier Equalis award).
+- **NASPO ValuePoint is OEM-awarded** (HP Inc., HPE, Ericsson, Palo Alto Networks, Panasonic) via TD SYNNEX — it is not a single TD SYNNEX award.
+- 20 59 does **not** appear in the Equalis `R10-1173F` reseller roster (341 resellers checked, 0 matches) — Equalis is framed as a TD SYNNEX-awarded vehicle we sell under, not as an Equalis-listed reseller.
+- CMAS is **not** on the 2025-2026 linecard; retained with a "confirm with the desk" caveat.
+
+**Open legal action — D&H marketing restriction:**
+D&H Reseller Agreement §13.1: *"Reseller may not create any press release or use D&H or NCPA's names in any external marketing without the prior permission granted by D&H and/or NCPA, respectively."* Naming D&H and NCPA on public pages therefore requires **written permission**. D&H naming already existed site-wide before this work; this pass adds explicit NCPA/OMNIA naming. Either obtain written permission from D&H and/or NCPA, or replace those names with a generic "Tier-1 authorized distribution" description on public-facing surfaces.
+
+**Open data item — address mismatch:**
+The D&H authorization form lists **1537 33rd Ave, Tuscaloosa, AL 35401**; the website, SAM.gov record, and `sam_entity_status.json` list **212 W Troy St, Dothan, AL 36303**. Reconcile before the next contract registration or renewal.
+
+**Encoding defect found and fixed:** `contracts.html` shipped in commit `38a19bd` with 24 mangled em-dashes and 2 mangled en-dashes — a PowerShell `Get-Content`/`WriteAllLines` round trip re-encoded UTF-8 as ANSI. Repaired; the repo now contains zero mojibake across all files. Lesson: never round-trip UTF-8 through PowerShell 5.1 `Get-Content` without `-Encoding UTF8`.
 
 ---
 

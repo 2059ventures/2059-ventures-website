@@ -184,14 +184,22 @@
   * Contractor of record: 20/59 Ventures Corp, CAGE 22DH9, UEI GVR2NTGR4HU3 (Active SAM.gov).
   * Thresholds: FAR Part 13 micro-purchases (<$10,000), FAR Part 13 simplified acquisition (<$250,000), Government Purchase Card / P-Card, and teaming subcontracts.
 * **Route B — Federal Vehicles (Distributor-Held):**
-  * GSA MAS `47QTCA19D00MM` — awardee TD SYNNEX Corporation (through 09/26/2029; ultimate 09/2039). SINs 33411 / 511210 / 518210C / 54151 / 811212.
-  * GSA MAS `GS-35F-0563U` — awardee TD SYNNEX Corporation (through 09/04/2028). SINs 33411 / 511210 / 54151 / 54151S / 54151ECOM / 611420 / 811212.
-  * 2GIT Federal BPAs `47QTCA21A0026` / `47QTCA21A002E` — awardee TD SYNNEX Corporation. Confirm current BPA term before quoting.
+  * GSA MAS `47QTCA19D00MM` — awardee TD SYNNEX Corporation (PoP 09/27/2020 – 09/06/2039). SINs 33411 / 511210 / 518210C / 54151 / 811212.
+  * GSA MAS `GS-35F-0563U` — awardee TD SYNNEX Corporation (PoP 09/08/2008 – 09/04/2028). SINs 33411 / 511210 / 54151 / 54151S / 54151ECOM / 611420 / 811212.
+  * 2GIT Federal BPAs `47QTCA21A0026` / `47QTCA21A002E` — awardee TD SYNNEX Corporation (PoP 03/31/2020 – 09/26/2039).
   * NASA SEWP VI — 20/59 must hold a current TD SYNNEX SEWP VI Letter of Authorization before quoting against SEWP.
-* **Route C — State, Local & Education Cooperative Vehicles:**
-  * NASPO ValuePoint (formerly WSCA), TX DIR (`TX DIR-CPO-5869`, 11/03/2025 – 11/03/2031), PEPPM (participating-state SLED customers only), Equalis Group (`EQ-013120-01E`, renewable through 04/30/2027), CMAS (California), Sourcewell (`030425-SYN`, 09/05/2025 – 07/17/2029).
-  * D&H Distributing public-sector schedules — obtain current schedule numbers and SIN coverage from the contracting desk before quoting.
+* **Route C — Cooperative Vehicles:**
+  * **OMNIA Partners NCPA `01-170`** — sold through 20/59's own executed D&H Distributing OMNIA NCPA Reseller Agreement (D&H account 332729; authorization effective 10/06/2026; three-year initial term with annual renewals). Lead agency: Region 14 ESC / Advanced Technology Solutions Aggregator. **Purchasing entity must hold NCPA membership.**
+  * OMNIA Partners Cybersecurity `R250307` — awardee TD SYNNEX Corporation (PoP 10/01/2025 – 09/30/2030).
+  * Equalis Group `R10-1173F` — awardee TD SYNNEX Corporation (PoP 03/01/2025 – 02/28/2030).
+  * Sourcewell `030425-SYN` — awardee TD SYNNEX Corporation (PoP 09/05/2025 – 07/17/2029).
+  * PEPPM — `CA KCSOS 542242` (PoP 10/01/2024 – 09/30/2027), `548362` PA CSIU, and PEPPM Product Line Contracts (PoP 01/01/2026 – 12/31/2028). Participating-state SLED eligibility applies.
+  * TX DIR — `TX DIR-CPO-5869` (11/03/2025 – 11/03/2031), `TX DIR-CPO-4846` (01/26/2023 – 01/25/2028), `TX DIR-CPO-5096` (12/14/2022 – 12/21/2027), `TX DIR-CPO-5283` (08/21/2024 – 08/21/2029), `TX DIR-CPO-5077` (08/04/2022 – 08/04/2027).
+  * NASPO ValuePoint — OEM-awarded (HP Inc. / HPE / Ericsson / Palo Alto Networks / Panasonic) via TD SYNNEX: `23008`, `23011`, `AR3189`, `AR3228`, `AR3229`, `TX DIR-TSO-5225`. Terms vary by contract (2023 – 2029).
+  * CMAS (California) — awardee TD SYNNEX Corporation. Not listed on the 2025-2026 TD SYNNEX linecard; confirm before quoting.
 * **Route D — Prime Contractor Teaming Subcontract:** 20/59 contracts as a subcontractor under primes carrying FAR 52.219-9 small-business subcontracting plans.
+* **Verification Sources:** TD SYNNEX Public Sector Contract Linecard (2025-2026 edition, 06/16/2026) and 20/59's executed D&H Distributing OMNIA NCPA Reseller Agreement. Re-verify terms at each quote.
+* **Marketing Constraint (D&H Reseller Agreement §13.1):** *"Reseller may not create any press release or use D&H or NCPA's names in any external marketing without the prior permission granted by D&H and/or NCPA, respectively."* **Action required:** obtain written permission from D&H and/or NCPA before naming them in published marketing, or replace those names on public-facing pages with a generic "Tier-1 authorized distribution" description. Applies to `contracts.html`, `index.html`, `it-capabilities.html`, `rfq.html`, `compliance.html`, `llms.txt`, `llms-full.txt`, and transactional emails.
 * **RFQ Routing Requirement:** Every RFQ submitted through the public portal must carry a `contract_vehicle` value (or "Not specified — advise me") and, where known, a `vehicle_contract_number`. The contracting desk confirms vehicle validity and expiration **before** issuing a quote.
 * **Public Reference:** https://2059ventures.com/contracts.html — contract numbers, awardees, terms, and 20/59's role on each vehicle. This page must be updated whenever a vehicle term changes.
 * **Benchmark Reference:** `docs/westwind-teardown-and-integration-plan.md` — peer-site benchmark (Westwind Computer Products) and the Track A/B/C integration plan.
