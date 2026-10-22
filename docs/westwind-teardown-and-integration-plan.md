@@ -170,11 +170,16 @@ Sources read: `D&H Authorization Omnia Auth.pdf`, `TDSPS_Contracts-Linecard_06_1
 - 20 59 does **not** appear in the Equalis `R10-1173F` reseller roster (341 resellers checked, 0 matches) — Equalis is framed as a TD SYNNEX-awarded vehicle we sell under, not as an Equalis-listed reseller.
 - CMAS is **not** on the 2025-2026 linecard; retained with a "confirm with the desk" caveat.
 
-**Open legal action — D&H marketing restriction:**
-D&H Reseller Agreement §13.1: *"Reseller may not create any press release or use D&H or NCPA's names in any external marketing without the prior permission granted by D&H and/or NCPA, respectively."* Naming D&H and NCPA on public pages therefore requires **written permission**. D&H naming already existed site-wide before this work; this pass adds explicit NCPA/OMNIA naming. Either obtain written permission from D&H and/or NCPA, or replace those names with a generic "Tier-1 authorized distribution" description on public-facing surfaces.
+**Open legal action — D&H marketing restriction (RESOLVED 2026-10-22 by removal, not by permission):**
+D&H Reseller Agreement §13.1: *"Reseller may not create any press release or use D&H or NCPA's names in any external marketing without the prior permission granted by D&H and/or NCPA, respectively."* **Decision taken: D&H was removed from every public-facing surface** (`contracts.html`, `index.html`, `it-capabilities.html`, `rfq.html`, `compliance.html`, `llms.txt`, `llms-full.txt`, and the transactional RFQ emails) and **Ingram Micro** was named as the distribution partner in its place. The executed D&H agreement itself remains in force — it is an internal record, not marketing. Two follow-ups for the contracting desk:
+1. **No Ingram Micro agreement was found** in the corporate records (only `D&H Authorization Omnia Auth.pdf` and `Apple-Non-Authorized-Rider-6.pdf`). The published "Authorized Wholesale Distribution via Ingram Micro" claim is currently **unverified** and needs confirming.
+2. **The NCPA name is also restricted by §13.1.** The public pages still publish "NCPA 01-170". Either obtain NCPA's written permission or replace "NCPA" with "OMNIA Partners" publicly — the contract number itself is accurate and safe to publish.
 
 **Open data item — address mismatch:**
 The D&H authorization form lists **1537 33rd Ave, Tuscaloosa, AL 35401**; the website, SAM.gov record, and `sam_entity_status.json` list **212 W Troy St, Dothan, AL 36303**. Reconcile before the next contract registration or renewal.
+
+**Positioning decision — do not read as a middleman:**
+The procurement surface was restructured so the distributor is a supply-chain detail rather than the headline. The vehicle table dropped its "Awardee" column; the vehicle, contract number, term, and 20 59's role now lead. Three promise cards ("One contract / One point of contact / One accountable supplier") and a rewritten disclosure now say plainly that the vehicle determines the paperwork while 20 59 owns the delivery. Accuracy is preserved — we never claim to hold a schedule we do not hold — but the buyer-facing read is "one accountable supplier."
 
 **Encoding defect found and fixed:** `contracts.html` shipped in commit `38a19bd` with 24 mangled em-dashes and 2 mangled en-dashes — a PowerShell `Get-Content`/`WriteAllLines` round trip re-encoded UTF-8 as ANSI. Repaired; the repo now contains zero mojibake across all files. Lesson: never round-trip UTF-8 through PowerShell 5.1 `Get-Content` without `-Encoding UTF8`.
 

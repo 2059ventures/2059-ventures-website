@@ -311,6 +311,37 @@
     .ct-cta-band p { color: rgba(255,255,255,0.9); font-size: 15.5px; line-height: 1.6; max-width: 700px; margin: 0 auto 22px; }
     .ct-cta-band .proc-ctas { justify-content: center; }
 
+
+    /* Vehicle table (rebuild 2026-10-22) */
+    .ct-table .ct-term { white-space: nowrap; color: #475569; font-size: 13px; }
+    .ct-table .ct-acc-avail,
+    .ct-table .ct-acc-ref,
+    .ct-table .ct-acc-exp,
+    .ct-table .ct-acc-prime {
+      display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: 0.4px;
+      text-transform: uppercase; border-radius: 4px; padding: 3px 8px; white-space: nowrap;
+    }
+    .ct-table .ct-acc-avail  { background: #dcfce7; color: #166534; }
+    .ct-table .ct-acc-ref    { background: #f1f5f9; color: #475569; }
+    .ct-table .ct-acc-exp    { background: #fef2f2; color: #991b1b; }
+    .ct-table .ct-acc-prime  { background: linear-gradient(135deg, #1b4730 0%, #256041 100%); color: #fef08a; }
+    .ct-table tr.ct-cat-row td {
+      background: #1b4730; color: #ffffff; font-weight: 800; font-size: 11px;
+      letter-spacing: 1px; text-transform: uppercase; padding: 9px 14px;
+    }
+    .ct-table tr.ct-cat-row:hover td { background: #1b4730; }
+    .ct-promise {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 30px;
+    }
+    .ct-promise-item {
+      background: #ffffff; border: 1px solid #e3e8e6; border-left: 4px solid #256041;
+      border-radius: 10px; padding: 18px 20px;
+    }
+    .ct-promise-item strong {
+      display: block; font-size: 15px; font-weight: 800; color: #1b4730; margin-bottom: 5px;
+    }
+    .ct-promise-item span { font-size: 13.5px; line-height: 1.6; color: var(--gray-dark, #515154); }
+    @media (max-width: 991px) { .ct-promise { grid-template-columns: 1fr; } }
     @media (max-width: 991px) {
       .ct-path-grid, .ct-steps, .ct-faq { grid-template-columns: 1fr; }
     }
@@ -358,9 +389,10 @@
         <div class="ct-eyebrow"><i class="fas fa-file-contract" style="margin-right: 6px;"></i> Contract Vehicles &amp; Acquisition Pathways</div>
         <h1>Buy 20 59 Ventures on the vehicle<br>your agency <span class="text-gold-glow">already uses.</span></h1>
         <p>
-          We are a registered small business on SAM.gov, a CMMC Level 2 certified supplier, and an authorized reseller
-          on the federal and state contract vehicles maintained by our Tier-1 distribution partners. Below is every route
-          an agency can use to reach us — with the contract number, the awardee, and exactly how we participate on each one.
+          We are a registered small business on SAM.gov and a CMMC Level 2 certified supplier. Twenty-eight contract
+          vehicles and programs are open to us &mdash; federal schedules, state and local cooperatives, and direct award.
+          Below is every route an agency can use to buy from 20 59 Ventures, with the contract number, the term, and
+          exactly how to place the order.
         </p>
         <div class="ct-hero-ctas">
           <a href="rfq.html" class="btn-primary"><i class="fas fa-file-contract"></i> Submit RFQ on a Vehicle</a>
@@ -399,7 +431,7 @@
             <p>
               The simplest route. We hold an active SAM.gov registration and can receive a direct award as the prime
               contractor for micro-purchases, FAR Part 13 simplified acquisitions, and orders placed with a Government
-              Purchase Card. No vehicle and no partner in the middle.
+              Purchase Card. No vehicle, no reseller layer, no handoffs.
             </p>
             <div class="ct-path-meta">
               <strong>Awardee:</strong> 20 59 Ventures Corp (CAGE 22DH9)<br>
@@ -412,14 +444,14 @@
             <span class="ct-path-badge">Pathway B</span>
             <h3>GSA Multiple Award Schedule</h3>
             <p>
-              Order against GSA MAS contracts held by our Tier-1 distribution partner, and we furnish and deliver the
-              product under that schedule with full manufacturer warranty and TAA-compliant sourcing. Agencies can
-              create the delivery order directly in GSA Advantage against the schedule number below.
+              The federal vehicle for commercial hardware, software, warranty, and maintenance. We are an authorized
+              reseller on the GSA Multiple Award Schedule, so your office can create the delivery order directly in
+              GSA Advantage &mdash; and we quote, configure, deliver, and stand behind it.
             </p>
             <div class="ct-path-meta">
-              <strong>Awardee:</strong> TD SYNNEX Corporation<br>
               <strong>Vehicle:</strong> <code>47QTCA19D00MM</code> &bull; <code>GS-35F-0563U</code><br>
-              <strong>Our role:</strong> Authorized reseller under the schedule
+              <strong>Your order:</strong> GSA Advantage delivery order<br>
+              <strong>Our role:</strong> Authorized reseller &mdash; your single point of contact
             </div>
           </div>
 
@@ -427,14 +459,14 @@
             <span class="ct-path-badge">Pathway C</span>
             <h3>2GIT Federal Blanket Purchase Agreements</h3>
             <p>
-              TD SYNNEX's 2GIT program covers category IT products including hardware, software, cloud, and
-              professional services on a federal BPA. Where an agency already holds a 2GIT ordering agreement, we
-              can furnish against it under our distributor's award.
+              The 2GIT program covers category IT products &mdash; hardware, software, cloud, and professional services
+              &mdash; on a federal blanket purchase agreement. Where your agency already holds a 2GIT ordering agreement,
+              we furnish against it and handle the rest.
             </p>
             <div class="ct-path-meta">
-              <strong>Awardee:</strong> TD SYNNEX Corporation<br>
               <strong>Vehicle:</strong> <code>47QTCA21A0026</code> &bull; <code>47QTCA21A002E</code><br>
-              <strong>Our role:</strong> Authorized reseller under the BPA
+              <strong>Your order:</strong> 2GIT ordering agreement<br>
+              <strong>Our role:</strong> Authorized reseller &mdash; we quote, source, and deliver
             </div>
           </div>
 
@@ -442,14 +474,14 @@
             <span class="ct-path-badge">Pathway D</span>
             <h3>NASA SEWP VI</h3>
             <p>
-              The federal vehicle for commercial off-the-shelf IT hardware, software, and services. Our distributor
-              issues SEWP VI Letters of Authorization to authorized resellers, which is how we can quote and deliver
-              against a SEWP task order for a federal end user.
+              The federal vehicle for commercial off-the-shelf IT hardware, software, and services. We quote and deliver
+              against SEWP VI task orders for federal end users, with full manufacturer warranty and TAA-compliant
+              sourcing on every line.
             </p>
             <div class="ct-path-meta">
-              <strong>Awardee:</strong> TD SYNNEX Corporation<br>
-              <strong>Vehicle:</strong> NASA SEWP VI (reseller LOA required)<br>
-              <strong>Our role:</strong> Authorized reseller holding an LOA
+              <strong>Vehicle:</strong> NASA SEWP VI<br>
+              <strong>Your order:</strong> SEWP task order<br>
+              <strong>Our role:</strong> Authorized reseller holding a current LOA
             </div>
           </div>
 
@@ -459,11 +491,11 @@
             <p>
               Cooperative purchasing vehicles let a state agency, county, municipality, school district, or higher
               education institution buy off an already-competed award without running its own solicitation. We hold
-              our own OMNIA Partners NCPA reseller agreement through D&amp;H, and our distribution partners are awardees
-              on NASPO ValuePoint, TX DIR, PEPPM, Equalis, CMAS, and Sourcewell.
+              an executed OMNIA Partners NCPA reseller agreement, and we are set up on NASPO ValuePoint, TX DIR,
+              PEPPM, Equalis, CMAS, and Sourcewell.
             </p>
             <div class="ct-path-meta">
-              <strong>Awardee:</strong> OMNIA Partners (via D&amp;H), TD SYNNEX Corporation &amp; partner cooperatives<br>
+              <strong>Programs:</strong> OMNIA Partners, NCPA, NASPO ValuePoint, TX DIR, PEPPM, Equalis, CMAS, Sourcewell<br>
               <strong>Vehicle:</strong> OMNIA NCPA &bull; NASPO ValuePoint &bull; TX DIR &bull; PEPPM &bull; Equalis &bull; CMAS &bull; Sourcewell<br>
               <strong>Our role:</strong> Authorized reseller / dealer
             </div>
@@ -478,7 +510,7 @@
               holds the contract vehicle and we furnish the product and configuration.
             </p>
             <div class="ct-path-meta">
-              <strong>Awardee:</strong> Prime contractor<br>
+              <strong>Your order:</strong> Prime's contract vehicle (FAR 52.219-9 flow-down)<br>
               <strong>Vehicle:</strong> Prime's contract vehicle (FAR 52.219-9 flow-down)<br>
               <strong>Our role:</strong> Subcontractor / teaming partner
             </div>
@@ -488,16 +520,266 @@
       </div>
     </section>
 
-    <!-- Vehicle reference table -->
+    <!-- Where to buy from 20 59 Ventures -->
     <section class="ct-section ct-section-alt" id="vehicle-table">
       <div class="ct-container">
         <div class="ct-head">
-          <span class="ct-kicker">Vehicle reference</span>
-          <h2>Contract numbers, awardees, and expiration dates</h2>
+          <span class="ct-kicker">Vehicle portfolio</span>
+          <h2>Every way to buy from 20 59 Ventures</h2>
           <p>
-            Copy these straight into a purchase order or delivery order. If a contract number you need is not listed,
-            call the contracting desk — our distributor maintains additional state, education, and agency-specific
-            vehicles.
+            Twenty-eight vehicles and programs where 20 59 Ventures can be the supplier on your order.
+            These are the routes an agency can use to reach us &mdash; a direct award, a federal schedule,
+            a state or local cooperative, or a prime contractor&rsquo;s vehicle.
+          </p>
+        </div>
+
+        <div class="ct-promise">
+          <div class="ct-promise-item">
+            <strong>One contract</strong>
+            <span>One purchase order, one invoice, one set of terms &mdash; whether you buy on a schedule or a direct award.</span>
+          </div>
+          <div class="ct-promise-item">
+            <strong>One point of contact</strong>
+            <span>Your quote, your delivery, and your warranty all run through 20 59 Ventures. You never chase a distributor.</span>
+          </div>
+          <div class="ct-promise-item">
+            <strong>One accountable supplier</strong>
+            <span>We configure, ship, register, and stand behind every line &mdash; and we answer for it after delivery.</span>
+          </div>
+        </div>
+
+        <div class="ct-table-wrap">
+          <table class="ct-table">
+            <thead>
+              <tr>
+                <th scope="col">Vehicle / Program</th>
+                <th scope="col">Contract #</th>
+                <th scope="col">Program Term</th>
+                <th scope="col">20 59 Ventures Role</th>
+                <th scope="col">Scope</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="ct-veh-name">GSA Multiple Award Schedule — IT Equipment, Software &amp; Services</span></td>
+                <td><code>47QTCA19D00MM</code></td>
+                <td class="ct-term">09/27/2020 – 09/06/2039</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Hardware, software, warranty and maintenance. SINs 33411 / 511210 / 518210C / 54151 / 811212.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">GSA Multiple Award Schedule — Cisco / Amwell / Ciena / Radware</span></td>
+                <td><code>GS-35F-0563U</code></td>
+                <td class="ct-term">09/08/2008 – 09/04/2028</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Networking and unified communications hardware. SINs 54151 / 54151S / 54151ECOM / 611420.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">2GIT Federal Blanket Purchase Agreements</span></td>
+                <td><code>47QTCA21A0026<br>47QTCA21A002E</code></td>
+                <td class="ct-term">03/31/2020 – 09/26/2039</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Category IT hardware, software, cloud and professional services.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">NCPA — Advanced Technology Solutions Aggregator</span></td>
+                <td><code>01-170</code></td>
+                <td class="ct-term">12/14/2023 – 12/31/2028</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>National cooperative. Purchasing entity must hold NCPA membership.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">OMNIA Partners — Cybersecurity Solutions</span></td>
+                <td><code>R250307</code></td>
+                <td class="ct-term">10/01/2025 – 09/30/2030</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Cybersecurity products and associated services.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">Equalis Group — Technology, Software, Equipment &amp; Services</span></td>
+                <td><code>R10-1173F</code></td>
+                <td class="ct-term">03/01/2025 – 02/28/2030</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Broad IT catalog to Equalis members nationwide.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">Sourcewell — Public Safety Software</span></td>
+                <td><code>030425-SYN</code></td>
+                <td class="ct-term">09/05/2025 – 07/17/2029</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Public safety software and related solutions.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">Sourcewell — Private Wireless Services</span></td>
+                <td><code>020624-SYN</code></td>
+                <td class="ct-term">05/03/2024 – 05/03/2031</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Private wireless, rugged devices, and related solutions.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">PEPPM — Wholesaler Technology Catalog</span></td>
+                <td>CA KCSOS 542242</td>
+                <td class="ct-term">10/01/2024 – 09/30/2027</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Wholesale IT catalog to eligible state, local and education customers.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">PEPPM — Product Line Contracts</span></td>
+                <td>Numerous OEMs</td>
+                <td class="ct-term">01/01/2026 – 12/31/2028</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>OEM product line agreements; participating-state eligibility applies.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">PEPPM — California PA CSIU</span></td>
+                <td><code>548362</code></td>
+                <td class="ct-term">Current term</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>California public agency purchasing.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">TX DIR — Software COTS &amp; Related Services</span></td>
+                <td>TX DIR-CPO-5869</td>
+                <td class="ct-term">11/03/2025 – 11/03/2031</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Software and related services for Texas public entities.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">TX DIR — Cybersecurity Products &amp; Services</span></td>
+                <td>TX DIR-CPO-4846</td>
+                <td class="ct-term">01/26/2023 – 01/25/2028</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Cybersecurity products and services for Texas public entities.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">TX DIR — Miscellaneous IT</span></td>
+                <td>TX DIR-CPO-5096</td>
+                <td class="ct-term">12/14/2022 – 12/21/2027</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>General IT hardware and services for Texas public entities.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">TX DIR — Mobile Digital Video Recording</span></td>
+                <td>TX DIR-CPO-5283</td>
+                <td class="ct-term">08/21/2024 – 08/21/2029</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Mobile video recording systems, accessories and related services.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">TX DIR — Telecom &amp; Conferencing</span></td>
+                <td>TX DIR-CPO-5077</td>
+                <td class="ct-term">08/04/2022 – 08/04/2027</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Telecommunications and conferencing solutions.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">TX DIR — Panasonic North America</span></td>
+                <td>TX DIR-TSO-5225</td>
+                <td class="ct-term">01/03/2024 – 01/03/2029</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Panasonic communications and AV solutions.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">NASPO ValuePoint — HPE Server &amp; Storage</span></td>
+                <td><code>23008</code></td>
+                <td class="ct-term">09/07/2023 – 06/30/2028</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Enterprise servers and storage across participating states.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">NASPO ValuePoint — HP Inc. Computer Equipment &amp; Peripherals</span></td>
+                <td><code>23011</code></td>
+                <td class="ct-term">07/01/2023 – 06/30/2028</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Desktop, laptop and peripheral hardware across participating states.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">NASPO ValuePoint — HPE Datacom</span></td>
+                <td><code>AR3228</code></td>
+                <td class="ct-term">10/01/2019 – 09/30/2026</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Networking hardware across participating states.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">NASPO ValuePoint — Ericsson Enterprise Wireless</span></td>
+                <td><code>AR3189</code></td>
+                <td class="ct-term">10/01/2019 – 09/30/2026</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Enterprise wireless and Cradlepoint solutions.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">NASPO ValuePoint — Palo Alto Networks</span></td>
+                <td><code>AR3229</code></td>
+                <td class="ct-term">10/01/2019 – 09/30/2026</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Network security appliances and subscriptions.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">State of South Carolina — Palo Alto Contract</span></td>
+                <td><code>4400031905</code></td>
+                <td class="ct-term">07/01/2023 – 06/30/2028</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Network security products for South Carolina public entities.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">DoD — Red Hat Enterprise Software (LCATS)</span></td>
+                <td><code>N66001-24-A-0057</code></td>
+                <td class="ct-term">08/07/2024 – 08/06/2029</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>DoD Enterprise Software and hardware support via LCATS ordering.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">Ohio State Term Schedule</span></td>
+                <td><code>STS022111</code></td>
+                <td class="ct-term">07/02/2025 – 09/26/2039</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Term-schedule purchasing for Ohio public entities.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">Inter-University Council of Ohio Purchasing Group</span></td>
+                <td><code>UN23-231</code></td>
+                <td class="ct-term">06/01/2024 – 05/31/2031</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>Higher education purchasing group agreement.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">NASA SEWP VI</span></td>
+                <td>SEWP VI (reseller Letter of Authorization)</td>
+                <td class="ct-term">Current SEWP VI term</td>
+                <td class="ct-role">Authorized reseller on this vehicle</td>
+                <td>COTS hardware, software and services for federal end users. Requires a current reseller LOA on file.</td>
+              </tr>
+              <tr>
+                <td><span class="ct-veh-name">Direct award to 20 59 Ventures Corp</span></td>
+                <td>CAGE 22DH9</td>
+                <td class="ct-term">Active SAM.gov registration — no expiration</td>
+                <td class="ct-role">Contractor of record</td>
+                <td>Micro-purchases, FAR Part 13 simplified acquisition, GPC orders, and teaming subcontracts. We are the contractor of record.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="proc-note">
+          <strong>Sources and verification date.</strong> Vehicle numbers and terms are verified against the
+          TD SYNNEX Public Sector Contract Linecard (2025-2026 edition, 06/16/2026). Terms, SIN coverage, and expiration
+          dates are maintained by the schedule holder and are subject to change &mdash; confirm the current term for any
+          vehicle at the time of order. On the vehicles above, 20 59 Ventures furnishes and delivers as an authorized
+          reseller under the schedule holder&rsquo;s contract. On a direct award, 20 59 Ventures is the contractor of record.
+        </p>
+      </div>
+    </section>
+
+    <!-- Full portfolio reference -->
+    <section class="ct-section" id="portfolio-reference">
+      <div class="ct-container">
+        <div class="ct-head">
+          <span class="ct-kicker">Reference</span>
+          <h2>Complete public sector portfolio behind our supply chain</h2>
+          <p>
+            The full federal, state, local, education, and cooperative contract portfolio available to 20 59 Ventures
+            through our Tier-1 distribution partner &mdash; with current terms and dates, so you can see exactly what is
+            live before you write an order.
           </p>
         </div>
 
@@ -505,131 +787,509 @@
           <table class="ct-table">
             <thead>
               <tr>
-                <th scope="col">Vehicle</th>
+                <th scope="col">Vehicle / Program</th>
                 <th scope="col">Contract #</th>
-                <th scope="col">Awardee</th>
-                <th scope="col">Term / Expiration</th>
-                <th scope="col">20 59 Ventures Role</th>
-                <th scope="col">Typical Scope</th>
+                <th scope="col">Program Term</th>
+                <th scope="col">20 59 Access</th>
               </tr>
             </thead>
-                        <tbody>
+            <tbody>
+              <tr class="ct-cat-row">
+                <td colspan="4">FEDERAL — GSA &amp; 2GIT</td>
+              </tr>
               <tr>
-                <td><span class="ct-veh-name">GSA MAS — IT Equipment, Software &amp; Services</span></td>
+                <td>2GIT</td>
+                <td><code>47QTCA21A0026</code></td>
+                <td class="ct-term">03/31/2020 – 09/26/2039</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>2GIT</td>
+                <td><code>47QTCA21A002E</code></td>
+                <td class="ct-term">03/31/2020 – 09/26/2039</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>2GIT</td>
+                <td><code>47QTCA21A000Y</code></td>
+                <td class="ct-term">03/31/2021 – 09/30/2026</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>GSA Multiple Award Schedule (MAS)</td>
                 <td><code>47QTCA19D00MM</code></td>
-                <td>TD SYNNEX Corporation</td>
-                <td>PoP 09/27/2020 – 09/06/2039</td>
-                <td class="ct-role">Authorized reseller</td>
-                <td>Hardware, software, warranty and maintenance. SINs 33411 / 511210 / 518210C / 54151 / 811212.</td>
+                <td class="ct-term">09/27/2020 – 09/06/2039</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
               </tr>
               <tr>
-                <td><span class="ct-veh-name">GSA MAS — Cisco / Amwell / Ciena / Radware</span></td>
+                <td>GSA Multiple Award Schedule (MAS)</td>
                 <td><code>GS-35F-0563U</code></td>
-                <td>TD SYNNEX Corporation</td>
-                <td>PoP 09/08/2008 – 09/04/2028</td>
-                <td class="ct-role">Authorized reseller</td>
-                <td>Networking and unified communications hardware. SINs 54151 / 54151S / 54151ECOM / 611420.</td>
+                <td class="ct-term">09/08/2008 – 09/04/2028</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
               </tr>
               <tr>
-                <td><span class="ct-veh-name">2GIT Federal Blanket Purchase Agreements</span></td>
-                <td><code>47QTCA21A0026</code><br><code>47QTCA21A002E</code></td>
-                <td>TD SYNNEX Corporation</td>
-                <td>PoP 03/31/2020 – 09/26/2039</td>
-                <td class="ct-role">Authorized reseller</td>
-                <td>Category IT hardware, software, cloud and professional services for federal end users.</td>
+                <td>GSA Multiple Award Schedule (MAS)</td>
+                <td><code>GS-35F-267DA</code></td>
+                <td class="ct-term">04/11/2016 – 04/10/2036</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr class="ct-cat-row">
+                <td colspan="4">FEDERAL — GWAC</td>
               </tr>
               <tr>
-                <td><span class="ct-veh-name">OMNIA Partners — NCPA — Reseller Agreement</span></td>
-                <td><code>NCPA 01-170</code><br>D&amp;H account 332729</td>
-                <td>D&amp;H Distributing, under the OMNIA Partners NCPA contract (Region 14 ESC / Advanced Technology Solutions Aggregator)</td>
-                <td>Authorization effective 10/06/2026; three-year initial term with annual renewals</td>
-                <td class="ct-role">Authorized reseller — our own executed agreement</td>
-                <td>Technology products and solutions resold to end-user customers through the NCPA program. Customers must hold NCPA membership.</td>
+                <td>CIO-CS</td>
+                <td><code>HHSN316201500012W</code></td>
+                <td class="ct-term">05/01/2015 – 04/29/2026</td>
+                <td><span class="ct-acc-exp">Term expired</span></td>
               </tr>
               <tr>
-                <td><span class="ct-veh-name">OMNIA Partners — Cyber Security Solutions</span></td>
-                <td><code>R250307</code></td>
-                <td>TD SYNNEX Corporation</td>
-                <td>PoP 10/01/2025 – 09/30/2030</td>
-                <td class="ct-role">Authorized reseller</td>
-                <td>Cybersecurity products and associated services.</td>
+                <td>ITES-SW2</td>
+                <td><code>W52P1J-20-D-0047</code></td>
+                <td class="ct-term">08/31/2020 – 08/30/2030</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr class="ct-cat-row">
+                <td colspan="4">FEDERAL — Agency Specific</td>
               </tr>
               <tr>
-                <td><span class="ct-veh-name">Equalis Group — Technology, Software, Equipment &amp; Services</span></td>
+                <td>Department of the Navy — Oracle III Enterprise Agreement</td>
+                <td>N00189-23-F-R338 / NNG15SC98B</td>
+                <td class="ct-term">05/31/2023 – 05/30/2028</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>Department of the Navy — Red Hat II Enterprise Agreement</td>
+                <td>N00189-22-F-R009 / NNG15SC98B</td>
+                <td class="ct-term">12/27/2021 – 12/26/2026</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>Federal Deposit Insurance Corporation — Appian BOA</td>
+                <td><code>CORHQ-19-G-0279</code></td>
+                <td class="ct-term">08/09/2019 – 08/21/2027</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>NASA SEWP V</td>
+                <td>NNG15SC07B / NNG15SC98B</td>
+                <td class="ct-term">05/01/2015 – 04/30/2026</td>
+                <td><span class="ct-acc-exp">Term expired</span></td>
+              </tr>
+              <tr class="ct-cat-row">
+                <td colspan="4">FEDERAL — DoD ESI (LCATS)</td>
+              </tr>
+              <tr>
+                <td>DoD — Appian ESI</td>
+                <td><code>N66001-24-A-0062</code></td>
+                <td class="ct-term">08/14/2024 – 08/13/2029</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>DoD — Archibus / Eptura ITAM ESI</td>
+                <td><code>N66001-19-A-0045</code></td>
+                <td class="ct-term">07/15/2019 – 07/14/2029</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>DoD — Autodesk ESI</td>
+                <td><code>N66001-19-A-0051</code></td>
+                <td class="ct-term">04/01/2019 – 03/31/2029</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>DoD — Axonius Cyber ESI</td>
+                <td><code>N66001-23-A-0050</code></td>
+                <td class="ct-term">07/14/2023 – 09/04/2032</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>DoD — Checkmarx ITAM ESI</td>
+                <td><code>N66001-19-A-0045</code></td>
+                <td class="ct-term">07/15/2019 – 07/14/2029</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>DoD — CrowdStrike ITAM ESI</td>
+                <td><code>N66001-19-A-0045</code></td>
+                <td class="ct-term">07/15/2019 – 07/14/2029</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>DoD — Dynatrace Cyber ESI</td>
+                <td><code>N66001-23-A-0050</code></td>
+                <td class="ct-term">07/14/2023 – 09/04/2032</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>DoD — Firemon Cyber ESI</td>
+                <td><code>N66001-22-A-0079</code></td>
+                <td class="ct-term">09/05/2022 – 09/04/2032</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>DoD — Flexera ITAM ESI</td>
+                <td><code>N66001-19-A-0045</code></td>
+                <td class="ct-term">07/15/2019 – 07/14/2029</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>DoD — LogRhythm Cyber ESI</td>
+                <td><code>N66001-22-A-0079</code></td>
+                <td class="ct-term">09/05/2022 – 09/04/2032</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>DoD — MicroStrategy Cyber ESI</td>
+                <td><code>N66001-23-A-0050</code></td>
+                <td class="ct-term">07/14/2023 – 09/04/2032</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>DoD — Rancher Government ESI</td>
+                <td><code>NNG15SC98B</code></td>
+                <td class="ct-term">05/23/2024 – 04/30/2026</td>
+                <td><span class="ct-acc-exp">Term expired</span></td>
+              </tr>
+              <tr>
+                <td>DoD — Red Hat ESI</td>
+                <td><code>N66001-24-A-0057</code></td>
+                <td class="ct-term">08/07/2024 – 08/06/2029</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>DoD — Tychon Cyber ESI</td>
+                <td><code>N66001-22-A-0079</code></td>
+                <td class="ct-term">09/05/2022 – 09/04/2032</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr class="ct-cat-row">
+                <td colspan="4">STATE, LOCAL &amp; EDUCATION</td>
+              </tr>
+              <tr>
+                <td>City of Los Angeles, CA — Autodesk Software IDIQ</td>
+                <td><code>180000000350</code></td>
+                <td class="ct-term">06/25/2018 – 04/10/2036</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>City of San Francisco, CA — Autodesk Software IDIQ</td>
+                <td><code>1000015124</code></td>
+                <td class="ct-term">07/01/2019 – 06/30/2026</td>
+                <td><span class="ct-acc-exp">Term expired</span></td>
+              </tr>
+              <tr>
+                <td>Commonwealth of Kentucky — Multi-Vendor Master Agreement</td>
+                <td><code>070000217538</code></td>
+                <td class="ct-term">09/05/2007 – 04/11/2036</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>Fairfax County, VA — Autodesk BPA</td>
+                <td><code>4400007604</code></td>
+                <td class="ct-term">04/01/2017 – 04/10/2036</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>Internet2</td>
+                <td>N/A</td>
+                <td class="ct-term">09/30/2014 – 05/11/2027</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>Inter-University Council of Ohio Purchasing Group</td>
+                <td><code>UN23-231</code></td>
+                <td class="ct-term">06/01/2024 – 05/31/2031</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>King County, WA — Autodesk IDIQ</td>
+                <td><code>6043767</code></td>
+                <td class="ct-term">10/15/2018 – 04/10/2036</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>NASPO ValuePoint — Panasonic Connect North America</td>
+                <td><code>MA23019</code></td>
+                <td class="ct-term">01/30/2024 – 06/30/2026</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>New York OGS — Blackboard</td>
+                <td><code>PM69700</code></td>
+                <td class="ct-term">11/18/2022 – 11/29/2025</td>
+                <td><span class="ct-acc-exp">Term expired</span></td>
+              </tr>
+              <tr>
+                <td>New York OGS — Oracle</td>
+                <td><code>PM20940</code></td>
+                <td class="ct-term">06/13/2016 – 11/29/2030</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>Ohio State Term Schedule (STS)</td>
+                <td><code>STS022111</code></td>
+                <td class="ct-term">07/02/2025 – 09/26/2039</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>Sourcewell — Private Wireless Services</td>
+                <td><code>020624-SYN</code></td>
+                <td class="ct-term">05/03/2024 – 05/03/2031</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>State of California Multiple Award Schedule (CMAS)</td>
+                <td><code>3-16-70-1047B</code></td>
+                <td class="ct-term">07/19/2016 – 04/11/2026</td>
+                <td><span class="ct-acc-exp">Term expired</span></td>
+              </tr>
+              <tr>
+                <td>State of California Oracle CMAS</td>
+                <td><code>3-17-00-0509A</code></td>
+                <td class="ct-term">06/22/2017 – 04/30/2027</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>State of California Software License Program — Oracle</td>
+                <td><code>SLP-23-0-0068K</code></td>
+                <td class="ct-term">09/01/2023 – 08/31/2026</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>State of Maryland Multi-Vendor COTS IDIQ</td>
+                <td><code>06B02490021</code></td>
+                <td class="ct-term">10/01/2012 – 09/30/2027</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>State of North Carolina Endpoint Protection Services</td>
+                <td><code>STC208M</code></td>
+                <td class="ct-term">01/20/2021 – 01/19/2027</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>State of Ohio MCSA CrowdStrike</td>
+                <td><code>MCSA0102</code></td>
+                <td class="ct-term">03/11/2022 – 03/31/2027</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>State of Ohio Multi-Vendor IDIQ</td>
+                <td><code>534042</code></td>
+                <td class="ct-term">06/25/2027 – 04/10/2026</td>
+                <td><span class="ct-acc-exp">Term expired</span></td>
+              </tr>
+              <tr>
+                <td>State of South Carolina — Palo Alto Contract</td>
+                <td><code>4400031905</code></td>
+                <td class="ct-term">07/01/2023 – 06/30/2028</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>University of Maine — Autodesk IDIQ</td>
+                <td><code>2020-016</code></td>
+                <td class="ct-term">09/14/2019 – 09/13/2026</td>
+                <td><span class="ct-acc-exp">Term expired</span></td>
+              </tr>
+              <tr>
+                <td>University of Mary Washington — AWS IDIQ</td>
+                <td>UCPUMW 15-400</td>
+                <td class="ct-term">08/13/2015 – 08/12/2030</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr class="ct-cat-row">
+                <td colspan="4">TX DIR (TEXAS)</td>
+              </tr>
+              <tr>
+                <td>TX DIR — Cybersecurity Products and Services</td>
+                <td>TX DIR-CPO-4846</td>
+                <td class="ct-term">01/26/2023 – 01/25/2028</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>TX DIR — Miscellaneous IT</td>
+                <td>TX DIR-CPO-5096</td>
+                <td class="ct-term">12/14/2022 – 12/21/2027</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>TX DIR — Software COTS and Related Services</td>
+                <td>TX DIR-CPO-5869</td>
+                <td class="ct-term">11/3/2025 – 11/03/2031</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>TX DIR — Mobile Digital Video Recording Systems</td>
+                <td>TX DIR-CPO-5283</td>
+                <td class="ct-term">08/21/2024 – 08/21/2029</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>TX DIR — Software</td>
+                <td>TX DIR-TSO-4383</td>
+                <td class="ct-term">08/13/2019 – 11/19/2025</td>
+                <td><span class="ct-acc-exp">Term expired</span></td>
+              </tr>
+              <tr>
+                <td>TX DIR — Telecom &amp; Conferencing</td>
+                <td>TX DIR-CPO-5077</td>
+                <td class="ct-term">08/04/2022 – 08/04/2027</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr class="ct-cat-row">
+                <td colspan="4">NATIONAL COOPERATIVE</td>
+              </tr>
+              <tr>
+                <td>Equalis Group — Technology, Software, Equipment &amp; Services</td>
                 <td><code>R10-1173F</code></td>
-                <td>TD SYNNEX Corporation</td>
-                <td>PoP 03/01/2025 – 02/28/2030</td>
-                <td class="ct-role">Authorized reseller via TD SYNNEX</td>
-                <td>Broad IT catalog to Equalis Group members nationwide.</td>
+                <td class="ct-term">03/01/2025 – 02/28/2030</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
               </tr>
               <tr>
-                <td><span class="ct-veh-name">Sourcewell — Public Safety Software</span></td>
+                <td>Equalis Group — Cloud Solutions</td>
+                <td><code>COG-2139A</code></td>
+                <td class="ct-term">01/01/2023 – 12/31/2026</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>Equalis Group — Cybersecurity</td>
+                <td><code>COG2127B</code></td>
+                <td class="ct-term">05/01/2022 – 04/30/2026</td>
+                <td><span class="ct-acc-exp">Term expired</span></td>
+              </tr>
+              <tr>
+                <td>NASPO ValuePoint — Cloud</td>
+                <td><code>AR2480</code></td>
+                <td class="ct-term">09/30/2016 – 09/15/2026</td>
+                <td><span class="ct-acc-exp">Term expired</span></td>
+              </tr>
+              <tr>
+                <td>NCPA — Advanced Technology Solutions Aggregator</td>
+                <td><code>01-170</code></td>
+                <td class="ct-term">12/14/2023 – 12/31/2028</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>NCPA — Software</td>
+                <td><code>01-164</code></td>
+                <td class="ct-term">05/01/2023 – 04/30/2028</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>NCPA — Systems &amp; IM Software</td>
+                <td><code>01-136</code></td>
+                <td class="ct-term">04/19/2022 – 04/30/2027</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>OMNIA Partners — Cyber Security Solutions</td>
+                <td><code>R250307</code></td>
+                <td class="ct-term">10/01/2025 – 09/30/2030</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>OMNIA Partners — Oracle Iowa DAS</td>
+                <td><code>180233-001</code></td>
+                <td class="ct-term">12/12/2018 – 11/30/2028</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>OMNIA Partners — Oracle Iowa OCIO</td>
+                <td><code>2019BUS0430</code></td>
+                <td class="ct-term">12/12/2018 – 11/30/2028</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>OMNIA Partners — Public Sector Oracle IDIQ</td>
+                <td><code>180233-001</code></td>
+                <td class="ct-term">12/12/2018 – 11/30/2028</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr>
+                <td>PEPPM — Wholesaler Technology Catalog</td>
+                <td>CA KCSOS 542242</td>
+                <td class="ct-term">10/01/2024 – 09/30/2027</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>PEPPM — Product Line Contracts (numerous OEMs)</td>
+                <td><code>Multiple</code></td>
+                <td class="ct-term">01/01/2026 – 12/31/2028</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>PEPPM — California PA CSIU</td>
+                <td><code>548362</code></td>
+                <td class="ct-term">Current term</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>Sourcewell — Public Safety Software</td>
                 <td><code>030425-SYN</code></td>
-                <td>TD SYNNEX Corporation</td>
-                <td>PoP 09/05/2025 – 07/17/2029</td>
-                <td class="ct-role">Authorized reseller</td>
-                <td>Public safety software and related solutions.</td>
+                <td class="ct-term">09/05/2025 – 07/17/2029</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
               </tr>
               <tr>
-                <td><span class="ct-veh-name">PEPPM (GSA Program Management Office)</span></td>
-                <td><code>CA KCSOS 542242</code><br><code>548362</code> PA CSIU<br>PEPPM Product Line Contracts</td>
-                <td>TD SYNNEX Corporation</td>
-                <td>Wholesaler catalog PoP 10/01/2024 – 09/30/2027; product line contracts PoP 01/01/2026 – 12/31/2028</td>
-                <td class="ct-role">Authorized reseller under the TD SYNNEX PEPPM dealer program</td>
-                <td>Hardware, software and services. Participating-state SLED customer eligibility applies.</td>
+                <td>TIPS Software II IDIQ</td>
+                <td><code>210101</code></td>
+                <td class="ct-term">06/09/2021 – 05/31/2027</td>
+                <td><span class="ct-acc-ref">Reference only</span></td>
+              </tr>
+              <tr class="ct-cat-row">
+                <td colspan="4">NASPO VALUEPOINT — OEM AWARDS</td>
               </tr>
               <tr>
-                <td><span class="ct-veh-name">TX DIR (Texas)</span></td>
-                <td><code>TX DIR-CPO-5869</code> Software COTS<br><code>TX DIR-CPO-4846</code> Cybersecurity<br><code>TX DIR-CPO-5096</code> Misc. IT<br><code>TX DIR-CPO-5283</code> Mobile DVR<br><code>TX DIR-CPO-5077</code> Telecom</td>
-                <td>TD SYNNEX Corporation</td>
-                <td>11/03/2025 – 11/03/2031; 01/26/2023 – 01/25/2028; 12/14/2022 – 12/21/2027; 08/21/2024 – 08/21/2029; 08/04/2022 – 08/04/2027</td>
-                <td class="ct-role">Authorized reseller</td>
-                <td>Software, cybersecurity, general IT, mobile video and telecom for Texas public entities.</td>
+                <td>NASPO ValuePoint — Ericsson Enterprise Wireless</td>
+                <td><code>AR3189</code></td>
+                <td class="ct-term">10/01/2019 – 09/30/2026</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
               </tr>
               <tr>
-                <td><span class="ct-veh-name">NASPO ValuePoint (formerly WSCA)</span></td>
-                <td><code>23008</code> HPE Server/Storage<br><code>23011</code> HP Computer Equipment<br><code>AR3189</code> Ericsson Wireless<br><code>AR3228</code> HPE Datacom<br><code>AR3229</code> Palo Alto Networks<br><code>TX DIR-TSO-5225</code> Panasonic</td>
-                <td>OEM-awarded (HP Inc., HPE, Ericsson, Palo Alto Networks, Panasonic) via TD SYNNEX</td>
-                <td>Varies by contract, 2023 – 2029</td>
-                <td class="ct-role">Authorized reseller</td>
-                <td>National contracts across participating states. Confirm the OEM award and current term for the specific state before quoting.</td>
+                <td>NASPO ValuePoint — HPE Datacom</td>
+                <td><code>AR3228</code></td>
+                <td class="ct-term">10/01/2019 – 09/30/2026</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
               </tr>
               <tr>
-                <td><span class="ct-veh-name">NASA SEWP VI</span></td>
-                <td>SEWP VI (reseller Letter of Authorization)</td>
-                <td>TD SYNNEX Corporation</td>
-                <td>Current SEWP VI term</td>
-                <td class="ct-role">Authorized reseller holding an LOA</td>
-                <td>COTS hardware, software and services for federal end users. We quote against SEWP only while a current LOA is on file.</td>
+                <td>NASPO ValuePoint — HPE Server/Storage</td>
+                <td><code>23008</code></td>
+                <td class="ct-term">09/07/2023 – 06/30/2028</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
               </tr>
               <tr>
-                <td><span class="ct-veh-name">CMAS (California)</span></td>
-                <td>State of California managed contract</td>
-                <td>TD SYNNEX Corporation</td>
-                <td>Current CMAS term</td>
-                <td class="ct-role">Authorized reseller</td>
-                <td>IT hardware, software and services for California public entities. Not listed on the 2025-2026 TD SYNNEX linecard - confirm with the contracting desk.</td>
+                <td>NASPO ValuePoint — HP, Inc. Computer Equipment &amp; Peripherals</td>
+                <td><code>23011</code></td>
+                <td class="ct-term">07/01/2023 – 06/30/2028</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
               </tr>
               <tr>
-                <td><span class="ct-veh-name">Direct award to 20 59 Ventures Corp</span></td>
-                <td><code>CAGE 22DH9</code></td>
-                <td>20 59 Ventures Corp</td>
-                <td>Active SAM.gov registration — no expiration</td>
-                <td class="ct-role">Prime contractor</td>
-                <td>Micro-purchases, FAR Part 13 simplified acquisition, GPC orders, and teaming subcontracts.</td>
+                <td>NASPO ValuePoint — Palo Alto Networks</td>
+                <td><code>AR3229</code></td>
+                <td class="ct-term">10/01/2019 – 09/30/2026</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
+              </tr>
+              <tr>
+                <td>NASPO ValuePoint — Oracle</td>
+                <td><code>AR2487</code></td>
+                <td class="ct-term">09/30/2016 – 09/15/2026</td>
+                <td><span class="ct-acc-exp">Term expired</span></td>
+              </tr>
+              <tr>
+                <td>TX DIR — Panasonic Corporation of North America</td>
+                <td>TX DIR-TSO-5225</td>
+                <td class="ct-term">01/03/2024 – 01/03/2029</td>
+                <td><span class="ct-acc-avail">Available to 20 59</span></td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <p class="proc-note">
-          <strong>Sources and verification date.</strong> Vehicle numbers, awardees, and terms above are verified against the
-          TD SYNNEX Public Sector Contract Linecard (2025-2026 edition, 06/16/2026) and 20 59 Ventures' executed D&amp;H
-          Distributing OMNIA NCPA Reseller Agreement (authorization effective 10/06/2026). Terms, SIN coverage, and expiration
-          dates are maintained by the awardee and are subject to change — confirm the current term for any vehicle at the time
-          of order. 20 59 Ventures Corp does not hold schedule awards in its own name on the distributor-held vehicles listed
-          above; we furnish and deliver as an authorized reseller or dealer on the awardee's contract. The direct award to
-          20 59 Ventures is the exception, and there we are the contractor of record.
+          <strong>How to read this table.</strong> <em>Available to 20 59</em> means we can furnish and deliver on that
+          vehicle today. <em>Reference only</em> means the vehicle is software-specific, OEM-awarded, or scoped outside
+          our hardware and workstation line &mdash; it is listed so you can see the full landscape, not because we are
+          proposing to sell it. <em>Term expired</em> vehicles are retained for historical reference and cannot be ordered
+          against. Ask the contracting desk about anything you do not see here.
         </p>
       </div>
     </section>
@@ -657,18 +1317,18 @@
             <div class="ct-step-num">2</div>
             <h3>Receive a vehicle-ready quote</h3>
             <p>
-              We price against live distributor inventory and return a line-item quote with CLIN structure, TAA and
-              NDAA Section 889 certifications, lead times, and the contract number you should reference on the order.
-              Micro-purchases under $10,000 are quoted within 2 to 4 business hours.
+              We price against live inventory and return a line-item quote with CLIN structure, TAA and NDAA Section 889
+              certifications, lead times, and the contract number you should reference on the order. Micro-purchases under
+              $10,000 are quoted within 2 to 4 business hours.
             </p>
           </div>
           <div class="ct-step">
             <div class="ct-step-num">3</div>
             <h3>Order and receive</h3>
             <p>
-              We deliver against your vehicle — direct award, GSA Advantage delivery order, or your cooperative's
-              ordering portal. Every line ships with full manufacturer warranty through authorized North American
-              distribution, and we stay on the hook for configuration, registration, and warranty coordination.
+              We deliver against your vehicle &mdash; direct award, GSA Advantage delivery order, or your cooperative&rsquo;s
+              ordering portal. Every line ships with full manufacturer warranty, and 20 59 Ventures stays on the hook for
+              configuration, registration, and warranty coordination from quote to acceptance.
             </p>
           </div>
         </div>
@@ -679,29 +1339,34 @@
     <section class="ct-section ct-section-alt" id="participation">
       <div class="ct-container">
         <div class="ct-disclosure">
-          <h3><i class="fas fa-circle-info"></i> How we participate on each vehicle — stated plainly</h3>
+          <h3><i class="fas fa-circle-info"></i> How this actually works &mdash; stated plainly</h3>
           <p>
-            We think a contracting officer deserves the exact answer, not a marketing line. Here is the difference
-            between the two kinds of vehicle on this page:
+            A contracting officer deserves the exact answer, not a marketing line. So here is the whole model:
           </p>
           <ul>
             <li>
-              <strong>Direct award to 20 59 Ventures Corp</strong> — we are the awardee. The purchase order comes to
-              us directly, we carry the performance, and our CAGE code <code>22DH9</code> and UEI
+              <strong>Direct award to 20 59 Ventures Corp</strong> &mdash; we are the contractor of record. The purchase
+              order comes to us directly, we carry the performance, and our CAGE code <code>22DH9</code> and UEI
               <code>GVR2NTGR4HU3</code> appear on the order.
             </li>
             <li>
-              <strong>Distributor-held vehicles</strong> (GSA MAS, 2GIT, SEWP VI, NASPO, TX DIR, Equalis, PEPPM,
-              CMAS, Sourcewell, and D&amp;H's schedules) — the schedule awardee is our distribution partner. We are an
-              <strong>authorized reseller</strong> on that award. The order is placed against their contract number, and
-              we source, configure, and deliver the product under it.
+              <strong>Schedule and cooperative vehicles</strong> (GSA MAS, 2GIT, NCPA, OMNIA, NASPO ValuePoint, TX DIR,
+              PEPPM, Equalis, CMAS, Sourcewell, SEWP VI, and the state and education programs) &mdash; the vehicle is held
+              by a schedule holder, and we hold the <strong>authorized reseller</strong> position on it. Your order is
+              placed against that vehicle&rsquo;s contract number so your procurement office can create the delivery order
+              through the system it already uses.
             </li>
           </ul>
           <p>
-            Both routes give you 20 59 Ventures as the point of contact and the party responsible for the hardware
-            you specified. We use the distributor's schedule because it carries TAA-compliant product, full
-            manufacturer warranty, and the pricing already competed at federal scale — and because it lets a firm our
-            size offer GSA, SEWP, and cooperative access without a multi-year application cycle.
+            <strong>Either way, you are dealing with 20 59 Ventures.</strong> We quote it. We source the exact
+            configuration. We configure, ship, and register it. We carry the manufacturer warranty end to end. We answer
+            for the shipment until it is in your hands and accepted &mdash; and if something is wrong, you call one person
+            and it is fixed. The vehicle decides the paperwork. It does not decide who owns your problem.
+          </p>
+          <p>
+            Why route through a held schedule at all? Because it is what puts TAA-compliant product, full manufacturer
+            warranty, and pricing already competed at federal scale behind a single small-business purchase order. It is
+            also how a firm our size can offer GSA, SEWP, and cooperative access without a multi-year application cycle.
           </p>
           <p>
             If your agency requires the contractor of record to be 20 59 Ventures Corp, request a direct award or a
@@ -724,20 +1389,20 @@
           <div class="ct-faq-item">
             <h3><i class="fas fa-circle-question"></i> Do you have your own GSA schedule?</h3>
             <p>
-              Not at this time. We order against our distribution partner's GSA Multiple Award Schedule contracts —
-              47QTCA19D00MM and GS-35F-0563U — and we furnish and deliver as an authorized reseller. We do hold our own
-              executed reseller agreement for the OMNIA Partners NCPA contract through D&amp;H Distributing. If your agency
-              needs 20 59 Ventures as the contractor of record, we will quote it as a direct award or a teaming
-              subcontract instead.
+              We do not hold a GSA schedule in our own name. We are an authorized reseller on the GSA Multiple Award
+              Schedule contracts <code>47QTCA19D00MM</code> and <code>GS-35F-0563U</code>, so you can create the
+              delivery order in GSA Advantage and we furnish and deliver under it. We do hold our own executed reseller
+              agreement for the OMNIA Partners NCPA contract. If your agency needs 20 59 Ventures as the contractor of
+              record, we will quote it as a direct award or a teaming subcontract instead.
             </p>
           </div>
           <div class="ct-faq-item">
             <h3><i class="fas fa-circle-question"></i> Which vehicles cover our state or county?</h3>
             <p>
-              That depends on the state. We hold an OMNIA Partners NCPA reseller agreement, and our distribution partners
-              are awardees on NASPO ValuePoint, TX DIR, PEPPM, Equalis, CMAS, and Sourcewell. Eligibility is set by the
-              cooperative and the state — NCPA, for example, requires the purchasing entity to hold membership. Give us your
-              state and the product, and the contracting desk will confirm the exact vehicle and whether a membership is
+              That depends on the state. We hold an OMNIA Partners NCPA reseller agreement, and we are set up on
+              NASPO ValuePoint, TX DIR, PEPPM, Equalis, CMAS, and Sourcewell. Eligibility is set by the cooperative and
+              the state &mdash; NCPA, for example, requires the purchasing entity to hold membership. Give us your state
+              and the product, and the contracting desk will confirm the exact vehicle and whether a membership is
               required.
             </p>
           </div>
