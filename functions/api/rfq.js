@@ -339,7 +339,7 @@ async function sendPriorityEmailAlert(env, data) {
               ⚡ Action Required: Expedited Quote Preparation
             </div>
             <div style="font-size: 13px; color: #047857; line-height: 1.4;">
-              Submitter requested response by: <strong>${data.due_date}</strong>. Fast-track with TD SYNNEX, Ingram Micro, StarTech.com, Ergotron, and Jabra distributor pricing. Vehicle: <strong>${data.contract_vehicle}</strong>${data.vehicle_contract_number && data.vehicle_contract_number !== 'Not specified' ? ' (Contract #' + data.vehicle_contract_number + ')' : ''}.
+              Submitter requested response by: <strong>${data.due_date}</strong>. Fast-track with TD SYNNEX, StarTech.com, Ergotron, and Jabra distributor pricing. Vehicle: <strong>${data.contract_vehicle}</strong>${data.vehicle_contract_number && data.vehicle_contract_number !== 'Not specified' ? ' (Contract #' + data.vehicle_contract_number + ')' : ''}.
             </div>
             <div style="margin-top: 10px;">
               <a href="mailto:${data.email}?subject=RE:%20${encodeURIComponent(data.rfqRefNumber)}%20-%20Quote%20from%2020%2059%20Ventures%20Corp%20(CAGE:%2022DH9)" style="display: inline-block; background: #256041; color: #ffffff; text-decoration: none; padding: 8px 16px; border-radius: 5px; font-weight: 600; font-size: 13px;">
@@ -630,7 +630,7 @@ SUBMITTER CREDENTIALS:
 - Delivery Location: ${data.delivery_location}
 
 REQUIREMENTS & HARDWARE:
-- Target Manufacturers: ${(data.target_brands || []).join(', ') || 'TD SYNNEX, Ingram Micro, StarTech.com, Ergotron, Jabra'}
+- Target Manufacturers: ${(data.target_brands || []).join(', ') || 'TD SYNNEX, StarTech.com, Ergotron, Jabra'}
 - Product Categories: ${(data.categories || []).join(', ')}
 - Socioeconomic Set-Aside: ${(data.set_aside_preference || []).join(', ')}
 - Compliance Needs: ${(data.compliance_needs || []).join(', ')}
@@ -692,7 +692,7 @@ AUDIT METADATA:
                         <li><strong>Submitter:</strong> ${data.contact_name} &bull; ${data.contact_title} (${data.email})</li>
                         <li><strong>Type &amp; Due Date:</strong> ${data.procurement_type} &bull; Due: ${data.due_date}</li>
                         <li><strong>Contract Vehicle:</strong> ${data.contract_vehicle}${data.vehicle_contract_number && data.vehicle_contract_number !== 'Not specified' ? ' — #' + data.vehicle_contract_number : ''}</li>
-                        <li><strong>Target Brands:</strong> ${(data.target_brands || []).join(', ') || 'TD SYNNEX, Ingram Micro, StarTech.com, Ergotron, Jabra'}</li>
+                        <li><strong>Target Brands:</strong> ${(data.target_brands || []).join(', ') || 'TD SYNNEX, StarTech.com, Ergotron, Jabra'}</li>
                         <li><strong>Set-Aside Preference:</strong> ${(data.set_aside_preference || []).join(', ')}</li>
                     </ul>
                     <p><strong>Itemized Requirements:</strong></p>
@@ -783,7 +783,7 @@ AUDIT METADATA:
                                     res_model: 'crm.lead',
                                     res_id: leadId,
                                     summary: `Prepare Quote: ${data.agency} (${data.due_date})`,
-                                    note: `Urgent RFQ from ${data.contact_name} (${data.contact_title}). Vehicle: ${data.contract_vehicle}${data.vehicle_contract_number && data.vehicle_contract_number !== 'Not specified' ? ' (#' + data.vehicle_contract_number + ')' : ''}. Verify pricing with TD SYNNEX / Ingram Micro / StarTech / Ergotron / Jabra and reply to ${data.email}.`,
+                                    note: `Urgent RFQ from ${data.contact_name} (${data.contact_title}). Vehicle: ${data.contract_vehicle}${data.vehicle_contract_number && data.vehicle_contract_number !== 'Not specified' ? ' (#' + data.vehicle_contract_number + ')' : ''}. Verify pricing with TD SYNNEX / StarTech / Ergotron / Jabra and reply to ${data.email}.`,
                                     date_deadline: deadlineDate
                                 }]
                             ]
@@ -818,7 +818,7 @@ async function sendSubmitterAutoReply(env, data) {
 
     const brandList = Array.isArray(data.target_brands) && data.target_brands.length > 0
         ? data.target_brands.join(', ')
-        : 'TD SYNNEX, Ingram Micro, StarTech.com, Ergotron, Jabra & Tier-1 OEMs';
+        : 'TD SYNNEX, StarTech.com, Ergotron, Jabra & Tier-1 OEMs';
 
     const subject = `RFQ Receipt & Acknowledgment: ${data.solicitation_number !== 'Unassigned' && data.solicitation_number !== 'Micro-Purchase / Direct Quote' ? data.solicitation_number : 'Procurement Inquiry'} [Ref: ${data.rfqRefNumber}] — 20 59 Ventures Corp`;
 
@@ -864,7 +864,7 @@ async function sendSubmitterAutoReply(env, data) {
             <ul style="margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.5; color: #334155;">
               <li><strong>Micro-Purchases (&lt;$10,000 / GPC):</strong> Itemized pricing and payment links dispatched within <strong>2 to 4 business hours</strong>.</li>
               <li><strong>Simplified Acquisitions (FAR Part 13):</strong> Full formal proposals with TAA compliance certifications and socioeconomic representation packages delivered prior to your requested deadline of <strong>${data.due_date}</strong>.</li>
-              <li><strong>Supply Chain Guarantee:</strong> Sourced through authorized North American wholesale distribution — including <strong>TD SYNNEX</strong> and <strong>Ingram Micro</strong> — and certified OEM channels including <strong>StarTech.com</strong>, <strong>Ergotron</strong>, and <strong>Jabra</strong>, with full commercial manufacturer warranties.</li>
+              <li><strong>Supply Chain Guarantee:</strong> Sourced through authorized North American wholesale distribution — including <strong>TD SYNNEX</strong> — and certified OEM channels including <strong>StarTech.com</strong>, <strong>Ergotron</strong>, and <strong>Jabra</strong>, with full commercial manufacturer warranties.</li>
               <li><strong>Vehicle Access:</strong> We can quote against a direct award to 20 59 Ventures, GSA Multiple Award Schedule, 2GIT, NASA SEWP VI, state and local cooperatives, or a prime teaming subcontract. See <a href="https://2059ventures.com/contracts.html" style="color: #256041; text-decoration: underline;">our contract vehicle reference</a> for contract numbers and awardees.</li>
             </ul>
           </div>
