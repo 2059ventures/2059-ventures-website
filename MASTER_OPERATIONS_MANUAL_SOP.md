@@ -149,7 +149,7 @@
   * **Accreditation:** Better Business Bureau (BBB) Accredited (Rating: A+)
   * **Payment Acceptance:** Government Purchase Cards (GPC / Credit Card) Accepted
   * **Authorized Supply Chain:** Wholesale distribution via TD SYNNEX & D&H; authorized resale & integration: StarTech.com, Ergotron, Microsoft, Samsung, Logitech, Jabra
-  * **Cyber Certification:** CMMC Level 2 Certified (in addition to NIST SP 800-171 self-assessment on file in SPRS)
+  * **Cyber Certification:** CMMC Level 2 readiness. Supported by an enterprise-level NIST SP 800-171 **self-assessment** on file in SPRS — **DoD UID `SB00164625`**, included CAGE 22DH9, assessment scope **Enterprise**, assessment date **10/02/2026**, assessment score **110** (maximum possible score), System Security Plan assessed **SOP-2059-CA-003 System Security Plan rev 1.18**, Plan of Action completion date **N/A (no open POA&Ms)**. CMMC Level 2 certification requires a C3PAO assessment and is not claimed until that attestation is on file. The full SPRS self-assessment package is released to contracting officers and primes on request via the RFQ / Teaming Inquiry portal.
   * **Contract Vehicles:** See [SOP-2059-CORP-006] Contract Vehicles & Acquisition Pathways below
 * **Registered NAICS Codes:**
   * **624220 (Primary):** Community Housing Services (Temporary, emergency, and supportive housing)

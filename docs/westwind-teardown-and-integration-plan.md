@@ -271,12 +271,23 @@ overflow, zero wrapped nav labels, zero nav container overflow.
 
 | Claim | Before | After |
 |---|---|---|
-| CMMC | `index.html` said *"CMMC Level 2 … Compliant"*; four other surfaces said *"working toward CMMC L2"* | **CMMC Level 2 Certified** on all surfaces — 20 59 Ventures is certified |
+| CMMC | `index.html` said *"CMMC Level 2 … Compliant"*; four other surfaces said *"working toward CMMC L2"* | **CMMC Level 2 readiness** on all surfaces — backed by a NIST SP 800-171 self-assessment in SPRS; certification is not claimed without a C3PAO attestation ID |
 | Inventory | *"granting direct access to multi-million dollar IT inventory"* (`it-capabilities.html:1077`) | Rewritten — we resell through Tier-1 distributors, we do not own inventory |
 | Partner set | `llms.txt`, `llms-full.txt`, and every transactional email in `functions/api/rfq.js` omitted D&H and Jabra | All surfaces now list the same partner set |
 | Vehicles | Zero named anywhere | Named with awardee + contract number + participation model |
 
-**Outstanding, needs a human:** the CMMC Level 2 certification is now claimed site-wide. Before publish, insert the **C3PAO attestation ID, assessment date, and score** into `compliance.html` — a certification claim without a citable artifact is the same problem as the claims we just removed. Placeholder is marked in the source.
+**SPRS self-assessment artifact (corrected 2026-10-22).** The record is now published instead of asserted, and the
+surfaces were softened from "certified" to **"CMMC Level 2 readiness"**. A new **"NIST SP 800-171 Assessment (SPRS)"**
+card on `compliance.html` publishes: DoD Unique Identifier **SB00164625** · included CAGE **22DH9** · assessment scope
+**Enterprise** · assessment date **10/02/2026** · assessment score **110** (maximum possible score) · SSP assessed
+**SOP-2059-CA-003 System Security Plan rev 1.18** · Plans of Action and Milestones **none open**. The same identifiers
+are echoed in the homepage procurement block, the IT capabilities sidebar, the RFQ fast-facts sidebar, `llms.txt`, and
+`llms-full.txt`. Contracting officers are told they can request the full self-assessment package — assessed SSP and
+evidence index — through the RFQ portal.
+
+**Note on wording:** a DoD UID, assessment date, assessed SSP revision and score describe an SPRS **self-assessment**.
+They do not constitute a CMMC Level 2 certification, which requires a C3PAO assessment and a citable C3PAO/attestation
+ID. Until that ID is on file, the site claims readiness only and does not use "certified".
 
 ---
 

@@ -838,7 +838,7 @@ async function sendSubmitterAutoReply(env, data) {
             20 59 VENTURES CORP
           </h1>
           <div style="margin-top: 8px; font-size: 12.5px; opacity: 0.95; line-height: 1.4;">
-            CAGE: <strong>22DH9</strong> &bull; UEI: <strong>GVR2NTGR4HU3</strong> &bull; VOSB &bull; EDWOSB &bull; WOSB &bull; CMMC Level 2 Certified &bull; JCP Certified &bull; GPC Accepted
+            CAGE: <strong>22DH9</strong> &bull; UEI: <strong>GVR2NTGR4HU3</strong> &bull; VOSB &bull; EDWOSB &bull; WOSB &bull; CMMC Level 2 Ready &bull; JCP Certified &bull; GPC Accepted
           </div>
         </div>
 
