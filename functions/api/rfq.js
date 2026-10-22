@@ -123,6 +123,8 @@ export async function onRequestPost(context) {
             agency = 'Public-Sector Agency',
             solicitation_number = 'Unassigned',
             procurement_type = 'Micro-Purchase / GPC',
+            contract_vehicle = 'Not specified — advise me',
+            vehicle_contract_number = 'Not specified',
             due_date = 'Standard',
             budget_range = 'Under $10,000 (Micro-Purchase)',
             contact_name = 'Contracting Officer',
@@ -161,6 +163,8 @@ export async function onRequestPost(context) {
             agency,
             solicitation_number,
             procurement_type,
+            contract_vehicle,
+            vehicle_contract_number,
             due_date,
             budget_range,
             contact_name,
@@ -188,6 +192,8 @@ export async function onRequestPost(context) {
             agency,
             solicitation_number,
             procurement_type,
+            contract_vehicle,
+            vehicle_contract_number,
             due_date,
             budget_range,
             contact_name,
@@ -210,7 +216,7 @@ export async function onRequestPost(context) {
         }
 
         // 3. Dispatch Instant Mobile SMS Notification via Telnyx SMS API
-        const smsText = `🚨 URGENT GOV RFQ: ${agency} ${solicitation_number !== 'Unassigned' ? '#' + solicitation_number : ''} from ${contact_name} (${contact_title}). Type: ${procurement_type}. Due: ${due_date}. Check Odoo CRM & Email immediately!`;
+        const smsText = `🚨 URGENT GOV RFQ: ${agency} ${solicitation_number !== 'Unassigned' ? '#' + solicitation_number : ''} from ${contact_name} (${contact_title}). Type: ${procurement_type}. Vehicle: ${contract_vehicle}. Due: ${due_date}. Check Odoo CRM & Email immediately!`;
         
         const smsPromise = sendUrgentSmsAlert(env, smsText);
         if (typeof waitUntil === 'function') {
@@ -225,6 +231,8 @@ export async function onRequestPost(context) {
             agency,
             solicitation_number,
             procurement_type,
+            contract_vehicle,
+            vehicle_contract_number,
             due_date,
             budget_range,
             contact_name,
@@ -331,7 +339,7 @@ async function sendPriorityEmailAlert(env, data) {
               ⚡ Action Required: Expedited Quote Preparation
             </div>
             <div style="font-size: 13px; color: #047857; line-height: 1.4;">
-              Submitter requested response by: <strong>${data.due_date}</strong>. Fast-track with TD SYNNEX, StarTech.com, or Ergotron distributor pricing.
+              Submitter requested response by: <strong>${data.due_date}</strong>. Fast-track with TD SYNNEX, D&amp;H, StarTech.com, Ergotron, and Jabra distributor pricing. Vehicle: <strong>${data.contract_vehicle}</strong>${data.vehicle_contract_number && data.vehicle_contract_number !== 'Not specified' ? ' (Contract #' + data.vehicle_contract_number + ')' : ''}.
             </div>
             <div style="margin-top: 10px;">
               <a href="mailto:${data.email}?subject=RE:%20${encodeURIComponent(data.rfqRefNumber)}%20-%20Quote%20from%2020%2059%20Ventures%20Corp%20(CAGE:%2022DH9)" style="display: inline-block; background: #256041; color: #ffffff; text-decoration: none; padding: 8px 16px; border-radius: 5px; font-weight: 600; font-size: 13px;">
@@ -356,6 +364,14 @@ async function sendPriorityEmailAlert(env, data) {
             <tr>
               <td style="padding: 6px 0; color: #6b7280;">Procurement Type:</td>
               <td style="padding: 6px 0; font-weight: 600; color: #d97706;">${data.procurement_type}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #6b7280;">Contract Vehicle / Pathway:</td>
+              <td style="padding: 6px 0; font-weight: 700; color: #1e4d35;">${data.contract_vehicle}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #6b7280;">Vehicle Contract #:</td>
+              <td style="padding: 6px 0; font-weight: 700; color: #111827;">${data.vehicle_contract_number}</td>
             </tr>
             <tr>
               <td style="padding: 6px 0; color: #6b7280;">Estimated Budget Tier:</td>
@@ -601,6 +617,8 @@ Reference: ${data.rfqRefNumber}
 Agency / Facility: ${data.agency}
 Solicitation #: ${data.solicitation_number}
 Procurement Type: ${data.procurement_type}
+Contract Vehicle / Pathway: ${data.contract_vehicle}
+Vehicle Contract #: ${data.vehicle_contract_number}
 Response Due Date: ${data.due_date}
 Budget Tier: ${data.budget_range}
 
@@ -612,7 +630,7 @@ SUBMITTER CREDENTIALS:
 - Delivery Location: ${data.delivery_location}
 
 REQUIREMENTS & HARDWARE:
-- Target Manufacturers: ${(data.target_brands || []).join(', ') || 'TD SYNNEX, StarTech.com, Ergotron'}
+- Target Manufacturers: ${(data.target_brands || []).join(', ') || 'TD SYNNEX, D&H, StarTech.com, Ergotron, Jabra'}
 - Product Categories: ${(data.categories || []).join(', ')}
 - Socioeconomic Set-Aside: ${(data.set_aside_preference || []).join(', ')}
 - Compliance Needs: ${(data.compliance_needs || []).join(', ')}
@@ -673,7 +691,8 @@ AUDIT METADATA:
                         <li><strong>Agency:</strong> ${data.agency} (${data.solicitation_number})</li>
                         <li><strong>Submitter:</strong> ${data.contact_name} &bull; ${data.contact_title} (${data.email})</li>
                         <li><strong>Type &amp; Due Date:</strong> ${data.procurement_type} &bull; Due: ${data.due_date}</li>
-                        <li><strong>Target Brands:</strong> ${(data.target_brands || []).join(', ') || 'TD SYNNEX, StarTech.com, Ergotron'}</li>
+                        <li><strong>Contract Vehicle:</strong> ${data.contract_vehicle}${data.vehicle_contract_number && data.vehicle_contract_number !== 'Not specified' ? ' — #' + data.vehicle_contract_number : ''}</li>
+                        <li><strong>Target Brands:</strong> ${(data.target_brands || []).join(', ') || 'TD SYNNEX, D&H, StarTech.com, Ergotron, Jabra'}</li>
                         <li><strong>Set-Aside Preference:</strong> ${(data.set_aside_preference || []).join(', ')}</li>
                     </ul>
                     <p><strong>Itemized Requirements:</strong></p>
@@ -764,7 +783,7 @@ AUDIT METADATA:
                                     res_model: 'crm.lead',
                                     res_id: leadId,
                                     summary: `Prepare Quote: ${data.agency} (${data.due_date})`,
-                                    note: `Urgent RFQ from ${data.contact_name} (${data.contact_title}). Verify pricing with TD SYNNEX / StarTech / Ergotron and reply to ${data.email}.`,
+                                    note: `Urgent RFQ from ${data.contact_name} (${data.contact_title}). Vehicle: ${data.contract_vehicle}${data.vehicle_contract_number && data.vehicle_contract_number !== 'Not specified' ? ' (#' + data.vehicle_contract_number + ')' : ''}. Verify pricing with TD SYNNEX / D&H / StarTech / Ergotron / Jabra and reply to ${data.email}.`,
                                     date_deadline: deadlineDate
                                 }]
                             ]
@@ -799,7 +818,7 @@ async function sendSubmitterAutoReply(env, data) {
 
     const brandList = Array.isArray(data.target_brands) && data.target_brands.length > 0
         ? data.target_brands.join(', ')
-        : 'TD SYNNEX, StarTech.com, Ergotron & Tier-1 OEMs';
+        : 'TD SYNNEX, D&H, StarTech.com, Ergotron, Jabra & Tier-1 OEMs';
 
     const subject = `RFQ Receipt & Acknowledgment: ${data.solicitation_number !== 'Unassigned' && data.solicitation_number !== 'Micro-Purchase / Direct Quote' ? data.solicitation_number : 'Procurement Inquiry'} [Ref: ${data.rfqRefNumber}] — 20 59 Ventures Corp`;
 
@@ -819,7 +838,7 @@ async function sendSubmitterAutoReply(env, data) {
             20 59 VENTURES CORP
           </h1>
           <div style="margin-top: 8px; font-size: 12.5px; opacity: 0.95; line-height: 1.4;">
-            CAGE: <strong>22DH9</strong> &bull; UEI: <strong>GVR2NTGR4HU3</strong> &bull; VOSB &bull; EDWOSB &bull; WOSB &bull; GPC Accepted
+            CAGE: <strong>22DH9</strong> &bull; UEI: <strong>GVR2NTGR4HU3</strong> &bull; VOSB &bull; EDWOSB &bull; WOSB &bull; CMMC Level 2 Certified &bull; JCP Certified &bull; GPC Accepted
           </div>
         </div>
 
@@ -845,7 +864,8 @@ async function sendSubmitterAutoReply(env, data) {
             <ul style="margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.5; color: #334155;">
               <li><strong>Micro-Purchases (&lt;$10,000 / GPC):</strong> Itemized pricing and payment links dispatched within <strong>2 to 4 business hours</strong>.</li>
               <li><strong>Simplified Acquisitions (FAR Part 13):</strong> Full formal proposals with TAA compliance certifications and socioeconomic representation packages delivered prior to your requested deadline of <strong>${data.due_date}</strong>.</li>
-              <li><strong>Supply Chain Guarantee:</strong> Sourced exclusively through authorized North American wholesale distribution (including <strong>TD SYNNEX</strong>, <strong>StarTech.com</strong>, and <strong>Ergotron</strong>) with full commercial manufacturer warranties.</li>
+              <li><strong>Supply Chain Guarantee:</strong> Sourced through authorized North American wholesale distribution — including <strong>TD SYNNEX</strong> and <strong>D&amp;H</strong> — and certified OEM channels including <strong>StarTech.com</strong>, <strong>Ergotron</strong>, and <strong>Jabra</strong>, with full commercial manufacturer warranties.</li>
+              <li><strong>Vehicle Access:</strong> We can quote against a direct award to 20 59 Ventures, GSA Multiple Award Schedule, 2GIT, NASA SEWP VI, state and local cooperatives, or a prime teaming subcontract. See <a href="https://2059ventures.com/contracts.html" style="color: #256041; text-decoration: underline;">our contract vehicle reference</a> for contract numbers and awardees.</li>
             </ul>
           </div>
 
@@ -865,6 +885,14 @@ async function sendSubmitterAutoReply(env, data) {
             <tr>
               <td style="padding: 5px 0; color: #64748b;">Procurement Type:</td>
               <td style="padding: 5px 0; font-weight: 600; color: #d97706;">${data.procurement_type}</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0; color: #64748b;">Contract Vehicle / Pathway:</td>
+              <td style="padding: 5px 0; font-weight: 700; color: #0f172a;">${data.contract_vehicle}</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0; color: #64748b;">Vehicle Contract #:</td>
+              <td style="padding: 5px 0; font-weight: 700; color: #0f172a;">${data.vehicle_contract_number}</td>
             </tr>
             <tr>
               <td style="padding: 5px 0; color: #64748b;">Response Needed By:</td>
@@ -895,6 +923,9 @@ async function sendSubmitterAutoReply(env, data) {
           <div style="text-align: center; margin-bottom: 10px;">
             <a href="https://2059ventures.com/it-capabilities.html" style="display: inline-block; background: #256041; color: #ffffff; text-decoration: none; padding: 9px 20px; border-radius: 6px; font-weight: 700; font-size: 13px;">
               View Official Capabilities Statement (PDF)
+            </a>
+            <a href="https://2059ventures.com/contracts.html" style="display: inline-block; background: #ffffff; color: #256041; border: 1.5px solid #256041; text-decoration: none; padding: 8px 20px; border-radius: 6px; font-weight: 700; font-size: 13px; margin-left: 8px;">
+              Contract Vehicle Reference
             </a>
           </div>
 

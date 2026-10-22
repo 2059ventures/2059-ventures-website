@@ -448,6 +448,7 @@
       <div class="nav-links">
         <a href="index.html#home" class="nav-link">Home</a>
         <a href="it-capabilities.html" class="nav-link">IT Capabilities</a>
+        <a href="contracts.html" class="nav-link">Contract Vehicles</a>
         <a href="capabilities.html" class="nav-link">Housing Capabilities</a>
         <a href="compliance.html" class="nav-link">Compliance</a>
         <a href="index.html#contact" class="nav-link">Contact</a>
@@ -477,8 +478,10 @@
           <span class="rfq-cred-pill"><i class="fas fa-shield-alt" style="color: #fef08a; margin-right: 5px;"></i> CAGE: <strong>22DH9</strong></span>
           <span class="rfq-cred-pill">UEI: <strong>GVR2NTGR4HU3</strong></span>
           <span class="rfq-cred-pill"><i class="fas fa-certificate" style="color: #fef08a; margin-right: 5px;"></i> VOSB &bull; EDWOSB &bull; WOSB</span>
+          <span class="rfq-cred-pill"><i class="fas fa-shield-halved" style="color: #fef08a; margin-right: 5px;"></i> CMMC Level 2 Certified</span>
           <span class="rfq-cred-pill"><i class="fas fa-credit-card" style="color: #fef08a; margin-right: 5px;"></i> GPC / P-Card Accepted</span>
           <span class="rfq-cred-pill"><i class="fas fa-cubes" style="color: #fef08a; margin-right: 5px;"></i> TD SYNNEX &bull; D&amp;H &bull; StarTech &bull; Ergotron &bull; Jabra</span>
+          <a href="contracts.html" class="rfq-cred-pill" style="text-decoration: none; color: #fef08a;"><i class="fas fa-file-contract" style="color: #fef08a; margin-right: 5px;"></i> GSA MAS &bull; 2GIT &bull; SEWP VI &bull; Co-ops</a>
         </div>
       </div>
     </section>
@@ -528,6 +531,32 @@
             <div class="form-group">
               <label for="due_date">Quote Response Deadline / Delivery Need <span class="req">*</span></label>
               <input type="text" id="due_date" name="due_date" class="form-control" placeholder="e.g. Today / ASAP, MM/DD/YYYY, or 48 Hours" required>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="contract_vehicle">Contract Vehicle / Acquisition Pathway</label>
+              <select id="contract_vehicle" name="contract_vehicle" class="form-control">
+                <option value="Not specified — advise me" selected>Not specified — advise me on the best route</option>
+                <option value="Direct award to 20 59 Ventures (CAGE 22DH9)">Direct award to 20 59 Ventures (CAGE 22DH9)</option>
+                <option value="GSA MAS — 47QTCA19D00MM (via TD SYNNEX)">GSA MAS — 47QTCA19D00MM (via TD SYNNEX)</option>
+                <option value="GSA MAS — GS-35F-0563U (via TD SYNNEX)">GSA MAS — GS-35F-0563U (via TD SYNNEX)</option>
+                <option value="2GIT Federal BPA — 47QTCA21A0026 / 47QTCA21A002E (via TD SYNNEX)">2GIT Federal BPA — 47QTCA21A0026 / 47QTCA21A002E (via TD SYNNEX)</option>
+                <option value="NASA SEWP VI (via TD SYNNEX)">NASA SEWP VI (via TD SYNNEX)</option>
+                <option value="NASPO ValuePoint / WSCA">NASPO ValuePoint / WSCA</option>
+                <option value="TX DIR">TX DIR</option>
+                <option value="PEPPM (participating states only)">PEPPM (participating states only)</option>
+                <option value="Equalis Group — EQ-013120-01E">Equalis Group — EQ-013120-01E</option>
+                <option value="CMAS (California)">CMAS (California)</option>
+                <option value="Sourcewell">Sourcewell</option>
+                <option value="D&amp;H Distributing public-sector vehicle">D&amp;H Distributing public-sector vehicle</option>
+                <option value="Prime contractor teaming subcontract">Prime contractor teaming subcontract</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="vehicle_contract_number">Vehicle Contract # (If Known)</label>
+              <input type="text" id="vehicle_contract_number" name="vehicle_contract_number" class="form-control" placeholder="e.g. 47QTCA19D00MM, GS-35F-0563U, or your delivery order number">
             </div>
           </div>
 
@@ -751,9 +780,15 @@
             <li><span>Furniture NAICS:</span> <strong>423210</strong></li>
             <li><span>Primary PSCs:</span> <strong>7E20 &bull; 7D20 &bull; 7195</strong></li>
             <li><span>Payment:</span> <strong>GPC / P-Card Accepted</strong></li>
+            <li><span>Direct Award:</span> <strong>CAGE 22DH9 &mdash; Active SAM.gov</strong></li>
+            <li><span>GSA Schedule:</span> <strong>47QTCA19D00MM &bull; GS-35F-0563U</strong></li>
+            <li><span>Cyber:</span> <strong>CMMC Level 2 Certified &bull; JCP Certified</strong></li>
           </ul>
 
-          <div style="margin-top: 18px; border-top: 1px solid #e2e8f0; padding-top: 14px;">
+          <div style="margin-top: 18px; border-top: 1px solid #e2e8f0; padding-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+            <a href="contracts.html" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 6px; padding: 10px; font-size: 13px; font-weight: 700; color: #1e4d35; text-decoration: none; transition: background 0.15s;">
+              <i class="fas fa-file-contract" style="color: #256041;"></i> View All Contract Vehicles
+            </a>
             <a href="it-capabilities.html" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 6px; padding: 10px; font-size: 13px; font-weight: 700; color: #1e4d35; text-decoration: none; transition: background 0.15s;">
               <i class="fas fa-file-pdf" style="color: #dc2626;"></i> View 1-Page IT Statement
             </a>
@@ -967,6 +1002,8 @@
           agency,
           solicitation_number: document.getElementById('solicitation_number').value.trim() || 'Micro-Purchase / Direct Quote',
           procurement_type: document.getElementById('procurement_type').value,
+          contract_vehicle: document.getElementById('contract_vehicle').value,
+          vehicle_contract_number: document.getElementById('vehicle_contract_number').value.trim(),
           due_date: dueDate,
           budget_range: document.getElementById('budget_range').value,
           delivery_location: document.getElementById('delivery_location').value.trim() || 'Not specified',

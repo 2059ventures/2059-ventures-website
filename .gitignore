@@ -48,6 +48,11 @@ Gemini_Generated_Image_pze67ppze67ppze6.png
 scratch/
 sam_entity_status_private.json
 
+# Browser automation artifacts (Playwright MCP snapshots / screenshots)
+2059-ventures-website/
+.playwright-mcp/
+
+
 # wrangler files
 .wrangler
 .dev.vars*

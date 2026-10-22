@@ -149,6 +149,8 @@
   * **Accreditation:** Better Business Bureau (BBB) Accredited (Rating: A+)
   * **Payment Acceptance:** Government Purchase Cards (GPC / Credit Card) Accepted
   * **Authorized Supply Chain:** Wholesale distribution via TD SYNNEX & D&H; authorized resale & integration: StarTech.com, Ergotron, Microsoft, Samsung, Logitech, Jabra
+  * **Cyber Certification:** CMMC Level 2 Certified (in addition to NIST SP 800-171 self-assessment on file in SPRS)
+  * **Contract Vehicles:** See [SOP-2059-CORP-006] Contract Vehicles & Acquisition Pathways below
 * **Registered NAICS Codes:**
   * **624220 (Primary):** Community Housing Services (Temporary, emergency, and supportive housing)
   * **485991:** Special Needs Transportation & Non-Emergency Medical Transit (NEMT)
@@ -170,8 +172,29 @@
    * Operating under programmatic supportive housing agreements and covenants.
 4. **Federal Contracting, JCP & Export Control Compliance (IT Division):**
    * **JCP Handling:** Export-controlled / military critical technical data is released only to authorized U.S. persons with documented need-to-know under the Data Custodian's control; any change of fact or intention requires prior written approval.
-   * **Supply Chain Integrity:** Federal IT fulfillment sourced exclusively through authorized distribution (TD SYNNEX, D&H) and certified OEM channels (StarTech.com, Ergotron, Jabra, Microsoft, Samsung, Logitech) with full manufacturer warranties and TAA-compliant sourcing where required.
+   * **Supply Chain Integrity:** Federal IT fulfillment sourced through authorized distribution (TD SYNNEX, D&H) and certified OEM channels (StarTech.com, Ergotron, Jabra, Microsoft, Samsung, Logitech) with full manufacturer warranties and TAA-compliant sourcing where required.
    * **NDAA Section 889:** No covered telecommunications / video surveillance equipment from prohibited entities is procured, used, or incorporated (FAR 52.204-24/25).
+
+---
+
+### [SOP-2059-CORP-006] Contract Vehicles & Acquisition Pathways
+* **Purpose:** Define the lawful, disclosed routes by which an agency may purchase from 20/59 Ventures Corp, and the internal rules governing how each vehicle may be represented on a quote, order, or proposal.
+* **Governing Rule (Truthful Vehicle Representation):** 20/59 Ventures Corp shall never place on a solicitation, quote, delivery order, or proposal a contract vehicle claim it does not hold. Where a vehicle is held by a distribution partner, the proposal must state the **awardee**, the **contract number**, and 20/59's **role as an authorized reseller/dealer**. Direct-award language shall be used only where 20/59 is the contractor of record.
+* **Route A — Direct Award to 20/59 Ventures Corp:**
+  * Contractor of record: 20/59 Ventures Corp, CAGE 22DH9, UEI GVR2NTGR4HU3 (Active SAM.gov).
+  * Thresholds: FAR Part 13 micro-purchases (<$10,000), FAR Part 13 simplified acquisition (<$250,000), Government Purchase Card / P-Card, and teaming subcontracts.
+* **Route B — Federal Vehicles (Distributor-Held):**
+  * GSA MAS `47QTCA19D00MM` — awardee TD SYNNEX Corporation (through 09/26/2029; ultimate 09/2039). SINs 33411 / 511210 / 518210C / 54151 / 811212.
+  * GSA MAS `GS-35F-0563U` — awardee TD SYNNEX Corporation (through 09/04/2028). SINs 33411 / 511210 / 54151 / 54151S / 54151ECOM / 611420 / 811212.
+  * 2GIT Federal BPAs `47QTCA21A0026` / `47QTCA21A002E` — awardee TD SYNNEX Corporation. Confirm current BPA term before quoting.
+  * NASA SEWP VI — 20/59 must hold a current TD SYNNEX SEWP VI Letter of Authorization before quoting against SEWP.
+* **Route C — State, Local & Education Cooperative Vehicles:**
+  * NASPO ValuePoint (formerly WSCA), TX DIR (`TX DIR-CPO-5869`, 11/03/2025 – 11/03/2031), PEPPM (participating-state SLED customers only), Equalis Group (`EQ-013120-01E`, renewable through 04/30/2027), CMAS (California), Sourcewell (`030425-SYN`, 09/05/2025 – 07/17/2029).
+  * D&H Distributing public-sector schedules — obtain current schedule numbers and SIN coverage from the contracting desk before quoting.
+* **Route D — Prime Contractor Teaming Subcontract:** 20/59 contracts as a subcontractor under primes carrying FAR 52.219-9 small-business subcontracting plans.
+* **RFQ Routing Requirement:** Every RFQ submitted through the public portal must carry a `contract_vehicle` value (or "Not specified — advise me") and, where known, a `vehicle_contract_number`. The contracting desk confirms vehicle validity and expiration **before** issuing a quote.
+* **Public Reference:** https://2059ventures.com/contracts.html — contract numbers, awardees, terms, and 20/59's role on each vehicle. This page must be updated whenever a vehicle term changes.
+* **Benchmark Reference:** `docs/westwind-teardown-and-integration-plan.md` — peer-site benchmark (Westwind Computer Products) and the Track A/B/C integration plan.
 
 ---
 
@@ -434,7 +457,7 @@
 ### [SOP-2059-APP-002] Preferred Vendor & Service Provider Directory Template
 * **Pre-qualification Requirements:** IRS Form W-9, $1,000,000 General Liability Certificate of Insurance naming 20 59 Ventures Corp., verified trade licensure.
 * **Service Categories:** Licensed HVAC, Master Plumbing, Licensed Electrician, Locksmith/Keypads, Turnover Cleaners, Lawn Maintenance, Pest Control, Emergency Board-Up.
-* **Federal IT Supply Chain:** TD SYNNEX & D&H (authorized wholesale distribution); StarTech.com, Ergotron, Jabra, Microsoft, Samsung, Logitech (authorized resale & integration).
+* **Federal IT Supply Chain:** TD SYNNEX & D&H (authorized wholesale distribution); StarTech.com, Ergotron, Jabra, Microsoft, Samsung, Logitech (authorized resale & integration). Contract vehicles available through those distribution partners are enumerated in [SOP-2059-CORP-006].
 * **Annual Verification (with Q3 VOSB/WOSB check):** Confirm active JCP certification and review Export Control Compliance statement / Data Custodian designation.
 * **Utility Providers Directory:** Complete utility provider contact numbers for Tuscaloosa, Dothan, and Montgomery hubs.
 
