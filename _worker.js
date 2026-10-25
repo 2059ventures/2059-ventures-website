@@ -1940,8 +1940,7 @@ Total Value: $${total.toFixed(2)}`;
             ? `[Received] 20/59 Ventures Procurement Inquiry — MPN: ${items[0]?.mpn || 'Federal Hardware'}`
             : `[Order Received] 20/59 Ventures Procurement Request — Ref: ${saleOrderName}`;
 
-        const itemBulletText = items.map(i => `• ${i.qty || 1}x ${i.name} (MPN: ${i.mpn}) — $${((i.price || 0) * (i.qty || 1)).toFixed(2)}`).join('
-');
+        const itemBulletText = items.map(i => `• ${i.qty || 1}x ${i.name} (MPN: ${i.mpn}) — $${((i.price || 0) * (i.qty || 1)).toFixed(2)}`).join('\n');
 
         const clientTextBody = `Hello ${contactName},
 
