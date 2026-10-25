@@ -150,6 +150,10 @@ export default {
             if (request.method === 'OPTIONS') {
                 return handleRfqOptions();
             }
+            if (request.method === 'POST') {
+                return handleRfqPost({ request, env, waitUntil: (p) => ctx.waitUntil(p) });
+            }
+        }
 
         // ── Handle Government Storefront & GPC Click-to-Buy Orders (Odoo CRM Team 8 & Draft Sale Order) ──
         if (url.pathname === '/api/order') {
@@ -158,10 +162,6 @@ export default {
             }
             if (request.method === 'POST') {
                 return handleStoreOrderPost({ request, env, waitUntil: (p) => ctx.waitUntil(p) });
-            }
-        }
-            if (request.method === 'POST') {
-                return handleRfqPost({ request, env, waitUntil: (p) => ctx.waitUntil(p) });
             }
         }
 
