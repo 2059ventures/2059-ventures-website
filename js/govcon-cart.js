@@ -11,6 +11,7 @@ const GOVCON_PRODUCTS = [
     category: "networking",
     categoryLabel: "Enterprise Networking & Security",
     distro: "TD SYNNEX",
+    image: "img/products/cisco-c9300.jpg",
     price: 4850.00,
     taa: true,
     sec889: true,
@@ -24,6 +25,7 @@ const GOVCON_PRODUCTS = [
     category: "networking",
     categoryLabel: "Enterprise Networking & Security",
     distro: "TD SYNNEX",
+    image: "img/products/cisco-c9200l.jpg",
     price: 2190.00,
     taa: true,
     sec889: true,
@@ -37,6 +39,7 @@ const GOVCON_PRODUCTS = [
     category: "networking",
     categoryLabel: "Enterprise Networking & Security",
     distro: "TD SYNNEX",
+    image: "img/products/cisco-meraki-mx68.jpg",
     price: 895.00,
     taa: false,
     sec889: true,
@@ -50,6 +53,7 @@ const GOVCON_PRODUCTS = [
     category: "mounts",
     categoryLabel: "Ergonomic Mounts & Mobile Carts",
     distro: "TD SYNNEX",
+    image: "img/products/ergotron-lx-arm.jpg",
     price: 219.00,
     taa: true,
     sec889: true,
@@ -63,6 +67,7 @@ const GOVCON_PRODUCTS = [
     category: "mounts",
     categoryLabel: "Ergonomic Mounts & Mobile Carts",
     distro: "TD SYNNEX",
+    image: "img/products/ergotron-carefit.jpg",
     price: 3250.00,
     taa: true,
     sec889: true,
@@ -76,6 +81,7 @@ const GOVCON_PRODUCTS = [
     category: "mounts",
     categoryLabel: "Ergonomic Mounts & Mobile Carts",
     distro: "TD SYNNEX",
+    image: "img/products/ergotron-workfit-t.jpg",
     price: 485.00,
     taa: true,
     sec889: true,
@@ -89,6 +95,7 @@ const GOVCON_PRODUCTS = [
     category: "docks",
     categoryLabel: "Secure Connectivity & Docks",
     distro: "TD SYNNEX",
+    image: "img/products/startech-quad-dock.jpg",
     price: 349.00,
     taa: true,
     sec889: true,
@@ -102,6 +109,7 @@ const GOVCON_PRODUCTS = [
     category: "docks",
     categoryLabel: "Secure Connectivity & Docks",
     distro: "TD SYNNEX",
+    image: "img/products/startech-kvm-switch.jpg",
     price: 625.00,
     taa: true,
     sec889: true,
@@ -115,6 +123,7 @@ const GOVCON_PRODUCTS = [
     category: "audio",
     categoryLabel: "Secure Audio & Communications",
     distro: "Ingram Micro",
+    image: "img/products/jabra-engage-50-ii.jpg",
     price: 239.00,
     taa: true,
     sec889: true,
@@ -128,6 +137,7 @@ const GOVCON_PRODUCTS = [
     category: "audio",
     categoryLabel: "Secure Audio & Communications",
     distro: "Ingram Micro",
+    image: "img/products/jabra-evolve2-65-flex.jpg",
     price: 319.00,
     taa: true,
     sec889: true,
@@ -141,6 +151,7 @@ const GOVCON_PRODUCTS = [
     category: "audio",
     categoryLabel: "Secure Audio & Communications",
     distro: "Ingram Micro",
+    image: "img/products/jabra-speak2-75.jpg",
     price: 389.00,
     taa: true,
     sec889: true,
@@ -154,6 +165,7 @@ const GOVCON_PRODUCTS = [
     category: "docks",
     categoryLabel: "Secure Connectivity & Docks",
     distro: "Ingram Micro",
+    image: "img/products/iogear-cac-reader.jpg",
     price: 29.99,
     taa: true,
     sec889: true,
@@ -167,6 +179,7 @@ const GOVCON_PRODUCTS = [
     category: "power",
     categoryLabel: "Power & Infrastructure",
     distro: "Ingram Micro",
+    image: "img/products/apc-smart-ups-1500.jpg",
     price: 899.00,
     taa: true,
     sec889: true,
@@ -180,6 +193,7 @@ const GOVCON_PRODUCTS = [
     category: "power",
     categoryLabel: "Power & Infrastructure",
     distro: "Ingram Micro",
+    image: "img/products/apc-netshelter-42u.jpg",
     price: 1650.00,
     taa: true,
     sec889: true,
@@ -353,6 +367,9 @@ class GovConCartManager {
             ${p.sec889 ? '<span class="comp-badge comp-889"><i class="fas fa-shield-alt"></i> Sec 889</span>' : ''}
           </div>
         </div>
+        <div class="card-img-wrap">
+          <img src="${p.image}" alt="${p.name}" class="product-thumb-img" loading="lazy">
+        </div>
         <div class="card-body">
           <div class="card-category-label">${p.categoryLabel}</div>
           <h3 class="card-title">${p.name}</h3>
@@ -397,6 +414,7 @@ class GovConCartManager {
         mpn: product.mpn,
         price: product.price,
         distro: product.distro,
+        image: product.image,
         qty: qty
       });
     }
@@ -465,6 +483,7 @@ class GovConCartManager {
       } else {
         listEl.innerHTML = this.cart.map(item => `
           <div class="cart-item-row">
+            ${item.image ? `<img src="${item.image}" alt="${item.mpn}" class="cart-thumb-img">` : ''}
             <div class="cart-item-details">
               <div class="cart-item-title">${item.name}</div>
               <div class="cart-item-mpn">MPN: ${item.mpn} &bull; ${item.distro}</div>
@@ -539,8 +558,11 @@ class GovConCartManager {
 
     if (box) {
       box.innerHTML = this.cart.map(item => `
-        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0;">
-          <span><strong>${item.qty}x</strong> ${item.mpn} (${item.distro})</span>
+        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed #e2e8f0;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            ${item.image ? `<img src="${item.image}" alt="${item.mpn}" style="width: 32px; height: 32px; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1;">` : ''}
+            <span><strong>${item.qty}x</strong> ${item.mpn} (${item.distro})</span>
+          </div>
           <span>$${(item.price * item.qty).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
         </div>
       `).join('');
