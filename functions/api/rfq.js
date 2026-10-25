@@ -650,7 +650,7 @@ AUDIT METADATA:
             partner_id: partnerId || false,
             contact_name: data.contact_name,
             partner_name: data.agency,
-            title: data.contact_title,
+            function: data.contact_title,
             email_from: data.email,
             phone: data.phone || false,
             company_id: companyId,
