@@ -150,6 +150,16 @@ export default {
             if (request.method === 'OPTIONS') {
                 return handleRfqOptions();
             }
+
+        // ── Handle Government Storefront & GPC Click-to-Buy Orders (Odoo CRM Team 8 & Draft Sale Order) ──
+        if (url.pathname === '/api/order') {
+            if (request.method === 'OPTIONS') {
+                return handleRfqOptions();
+            }
+            if (request.method === 'POST') {
+                return handleStoreOrderPost({ request, env, waitUntil: (p) => ctx.waitUntil(p) });
+            }
+        }
             if (request.method === 'POST') {
                 return handleRfqPost({ request, env, waitUntil: (p) => ctx.waitUntil(p) });
             }
@@ -1724,5 +1734,164 @@ async function handleLinkedInLeadWebhook(request, env) {
     } catch (err) {
         console.error('[LinkedIn Webhook] Error:', err);
         return jsonResponse({ error: err.message }, 500);
+    }
+}
+
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Government Storefront & GPC Click-to-Buy Order Handler (/api/order)
+// Integrates with Odoo 18 (Team 8 GovCon Division, res.partner Company 4, draft sale.order, and instant Telnyx SMS alert)
+// ─────────────────────────────────────────────────────────────────────────────
+async function handleStoreOrderPost({ request, env, waitUntil }) {
+    try {
+        const data = await request.json();
+
+        // 1. Anti-Bot Honeypot Validation
+        if (data.rfq_token_hp && String(data.rfq_token_hp).trim().length > 0) {
+            console.warn('[Store Order Honeypot] Bot blocked');
+            return new Response(JSON.stringify({ success: false, error: 'Spam detected' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+            });
+        }
+
+        const agency = (data.agency || '').trim();
+        const contactName = (data.contact_name || '').trim();
+        const email = (data.email || '').trim().toLowerCase();
+        const phone = (data.phone || '').trim();
+        const paymentMethod = data.payment_method || 'gpc';
+        const gpcRef = (data.gpc_ref || '').trim();
+        const deliveryAddress = (data.delivery_address || '').trim();
+        const deliveryReqs = (data.delivery_requirements || '').trim();
+        const items = Array.isArray(data.items) ? data.items : [];
+        const total = parseFloat(data.total) || items.reduce((sum, i) => sum + (i.price * i.qty), 0);
+
+        if (!agency || !contactName || !email || items.length === 0) {
+            return new Response(JSON.stringify({ success: false, error: 'Missing required order fields or items' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+            });
+        }
+
+        // 2. Connect to Odoo 18
+        const { uid, odooDb, odooPass } = await getOdooAuth(env);
+
+        // 3. Find or Create Partner under Company 4
+        const partnerId = await findOrCreateOdooPartner(env, {
+            name: contactName,
+            email: email,
+            phone: phone,
+            companyName: agency
+        });
+
+        // 4. Create CRM Lead in Team 8 (GovCon Division)
+        const leadVals = {
+            name: `[GPC ORDER] ${agency} - $${total.toFixed(2)}`,
+            partner_id: partnerId,
+            contact_name: contactName,
+            partner_name: agency,
+            email_from: email,
+            phone: phone,
+            expected_revenue: total,
+            team_id: 8,
+            company_id: 4,
+            stage_id: 10, // Sourced / Inquiry
+            description: `Government Storefront Click-to-Buy Order\nAgency: ${agency}\nCardholder: ${contactName} (${email})\nPhone: ${phone}\nPayment: ${paymentMethod} (Ref: ${gpcRef})\nDelivery: ${deliveryAddress}\nSpecial Reqs: ${deliveryReqs}\nTotal: $${total.toFixed(2)}`
+        };
+
+        const leadId = await callOdooRpc(env, 'object', 'execute_kw', [
+            odooDb, uid, odooPass, 'crm.lead', 'create', [leadVals]
+        ]);
+
+        // 5. Create Draft sale.order under Company 4
+        const orderLines = items.map(item => [0, 0, {
+            product_id: item.id,
+            name: `${item.name} [MPN: ${item.mpn || ''}]`,
+            product_uom_qty: parseFloat(item.qty) || 1.0,
+            price_unit: parseFloat(item.price) || 0.0,
+            company_id: 4
+        }]);
+
+        const saleOrderVals = {
+            partner_id: partnerId,
+            company_id: 4,
+            team_id: 8,
+            origin: 'SDP Click-to-Buy Storefront',
+            client_order_ref: gpcRef || `GPC Web Order ${Date.now()}`,
+            opportunity_id: leadId,
+            order_line: orderLines
+        };
+
+        const saleOrderId = await callOdooRpc(env, 'object', 'execute_kw', [
+            odooDb, uid, odooPass, 'sale.order', 'create', [saleOrderVals]
+        ]);
+
+        // Read back the SO name (e.g. S00003)
+        let saleOrderName = `SO #${saleOrderId}`;
+        try {
+            const soData = await callOdooRpc(env, 'object', 'execute_kw', [
+                odooDb, uid, odooPass, 'sale.order', 'read', [[saleOrderId], ['name']]
+            ]);
+            if (soData && soData[0] && soData[0].name) {
+                saleOrderName = soData[0].name;
+            }
+        } catch (e) {
+            console.warn('[Odoo SO Name Read]', e.message);
+        }
+
+        // 6. Post Rich Chatter Notes
+        const itemsHtml = items.map(i => `<li><strong>${i.qty}x</strong> ${i.name} (MPN: <code>${i.mpn}</code> &bull; ${i.distro}) &mdash; $${(i.price * i.qty).toFixed(2)}</li>`).join('');
+        const chatterHtml = `
+<div style="font-family: Arial, sans-serif; padding: 6px;">
+  <h3 style="color: #1b4730; margin: 0 0 8px 0;">🛒 GovCon Storefront Click-to-Buy Order Dispatched</h3>
+  <p style="font-size: 13px; margin: 0 0 8px 0;"><strong>Agency:</strong> ${agency} &bull; <strong>Cardholder:</strong> ${contactName} (${email})</p>
+  <p style="font-size: 13px; margin: 0 0 8px 0;"><strong>Payment Method:</strong> ${paymentMethod.toUpperCase()} &bull; <strong>Ref:</strong> ${gpcRef || 'None Provided'}</p>
+  <p style="font-size: 13px; margin: 0 0 8px 0;"><strong>Delivery Destination:</strong> ${deliveryAddress}</p>
+  <p style="font-size: 13px; margin: 0 0 8px 0;"><strong>Special Requirements:</strong> ${deliveryReqs || 'None'}</p>
+  <h4 style="font-size: 13px; color: #0f172a; margin: 10px 0 4px 0;">Procurement Line Items:</h4>
+  <ul style="font-size: 13px; line-height: 1.5; margin: 0 0 10px 20px;">${itemsHtml}</ul>
+  <p style="font-size: 14px; font-weight: bold; color: #166534; margin: 0;">Total Order Value: $${total.toFixed(2)} (${total <= 10000 ? 'FAR 13.201 Micro-Purchase' : 'FAR Part 13 Simplified Acquisition'})</p>
+</div>`;
+
+        await postToOdooChatter(env, {
+            model: 'crm.lead',
+            resId: leadId,
+            body: chatterHtml,
+            subject: `New Storefront Order ${saleOrderName}`
+        });
+
+        await postToOdooChatter(env, {
+            model: 'sale.order',
+            resId: saleOrderId,
+            body: chatterHtml,
+            subject: `Storefront Intake: ${agency}`
+        });
+
+        // 7. Dispatch Instant Telnyx SMS to Quincy Ruffin
+        const smsText = `🚨 NEW GOV GPC ORDER: $${total.toFixed(2)} from ${agency} (${contactName}). Lead #${leadId}, SO ${saleOrderName} created in Team 8. Immediate review & approval required.`;
+        waitUntil(sendTelnyxSms(env, {
+            to: '+12053937396',
+            text: smsText,
+            partnerId: partnerId,
+            leadId: leadId
+        }));
+
+        return new Response(JSON.stringify({
+            success: true,
+            lead_id: leadId,
+            order_id: saleOrderId,
+            order_name: saleOrderName
+        }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+        });
+
+    } catch (err) {
+        console.error('[Store Order Error]', err);
+        return new Response(JSON.stringify({ success: false, error: err.message }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+        });
     }
 }
