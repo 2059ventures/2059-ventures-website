@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════════════════════
 // 20/59 VENTURES CORP. — DEFENSE & FEDERAL IT STOREFRONT & CART ENGINE
-// Persistent Session Cart, Micro-Purchase Tracker (<$10k), and Odoo Bridge
+// Persistent Session Cart, Micro-Purchase Tracker (<$10k), Quick-Spec Modals
 // ═══════════════════════════════════════════════════════════════════════════
 
 const GOVCON_PRODUCTS = [
@@ -16,7 +16,22 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "US Warehouse Stock — Ships 24-48h",
-    desc: "Cisco Catalyst 9300 48-Port PoE+ Layer 3 Switch with Network Advantage. TAA Compliant. Micro-Purchase / Simplified Acquisition Ready."
+    desc: "Cisco Catalyst 9300 48-Port PoE+ Layer 3 Switch with Network Advantage. TAA Compliant. Micro-Purchase / Simplified Acquisition Ready.",
+    specs: {
+      "Form Factor": "1U Rackmount (Standard 19-inch EIA)",
+      "Port Density": "48x 10/100/1000 Ethernet PoE+ Ports",
+      "PoE Power Budget": "715W AC Default (Expandable to 1440W with dual power)",
+      "Stacking Bandwidth": "480 Gbps with Cisco StackWise-480",
+      "Switching Capacity": "256 Gbps (with uplinks)",
+      "Operating System": "Cisco IOS XE with Network Advantage License",
+      "Security Protocols": "MACsec-256 Encryption, Encrypted Traffic Analytics (ETA)"
+    },
+    compliance: {
+      "Trade Agreements Act (TAA)": "Certified Compliant (Manufactured USA/Mexico)",
+      "Section 889 NDAA": "Certified 100% Prohibition Compliant (No Covered Telecom)",
+      "Information Assurance": "FIPS 140-2 Level 2 & Common Criteria EAL4+ Validated",
+      "Target Commands": "USAF AFLCMC, US Navy NAVSEA, Army CECOM, DISA Infrastructure"
+    }
   },
   {
     id: 20,
@@ -30,7 +45,21 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "US Warehouse Stock — Ships 24-48h",
-    desc: "Cisco Catalyst 9200L 24-Port Gigabit PoE+ with 4x 1G SFP uplinks, Network Advantage. TAA Compliant for federal field & tactical deployments."
+    desc: "Cisco Catalyst 9200L 24-Port Gigabit PoE+ with 4x 1G SFP uplinks, Network Advantage. TAA Compliant for federal field & tactical deployments.",
+    specs: {
+      "Form Factor": "1U Rackmount Compact",
+      "Port Density": "24x 10/100/1000 Gigabit Ethernet PoE+ Ports",
+      "Uplinks": "4x 1G SFP Fixed Optical Ports",
+      "PoE Power Budget": "370W Dedicated PoE Power",
+      "Stacking Bandwidth": "80 Gbps Stacking with StackWise-80",
+      "Forwarding Rate": "41.66 Mpps",
+      "Management": "Cisco DNA Center, Command Line Interface (CLI), WebUI"
+    },
+    compliance: {
+      "Trade Agreements Act (TAA)": "Certified Compliant",
+      "Section 889 NDAA": "Compliant (FAR 52.204-24/25/26 Certified)",
+      "Target Commands": "Federal Field Installations, Deployable Tactical Flyaway Kits"
+    }
   },
   {
     id: 21,
@@ -44,7 +73,19 @@ const GOVCON_PRODUCTS = [
     taa: false,
     sec889: true,
     shipping: "US Warehouse Stock — Ships 24h",
-    desc: "Cisco Meraki MX68 Cloud Managed Security & SD-WAN Appliance with 10x GbE, 2x PoE+. Section 889 Compliant firewall."
+    desc: "Cisco Meraki MX68 Cloud Managed Security & SD-WAN Appliance with 10x GbE, 2x PoE+. Section 889 Compliant firewall.",
+    specs: {
+      "Form Factor": "Compact Desktop / Wall-Mount",
+      "Stateful Firewall Throughput": "450 Mbps",
+      "Maximum Recommended Clients": "Up to 50 Concurrent Users",
+      "Interface Density": "10x 1GbE RJ45 (including 2x PoE+ ports, 2x Dedicated WAN ports)",
+      "VPN Throughput": "200 Mbps Site-to-Site Auto VPN",
+      "Security Capabilities": "Snort-based Next-Gen IPS/IDS, Cisco AMP, Dual WAN Failover"
+    },
+    compliance: {
+      "Section 889 NDAA": "Fully Compliant (Federal Cloud FedRAMP Moderate Dashboard)",
+      "Target Commands": "VA Community Clinics, Remote Border Outposts, DoD Satellite Offices"
+    }
   },
   {
     id: 22,
@@ -58,7 +99,20 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "US Warehouse Stock — Ships 24-48h",
-    desc: "Ergotron LX Desk Mount LCD Arm, Polished Aluminum finish. Supports up to 34in displays (25 lbs). Constant Force technology."
+    desc: "Ergotron LX Desk Mount LCD Arm, Polished Aluminum finish. Supports up to 34in displays (25 lbs). Constant Force technology.",
+    specs: {
+      "Weight Capacity": "7 to 25 lbs (3.2 to 11.3 kg)",
+      "Display Size Support": "Up to 34-inch Diagonal Monitors",
+      "Height Adjustment Lift": "13.0 inches (33.0 cm)",
+      "Tilt & Pan": "75-degree Tilt, 360-degree Pan & Rotation (Portrait/Landscape)",
+      "Mounting Standard": "VESA MIS-D (100x100mm & 75x75mm hole patterns)",
+      "Mounting Base": "Includes Heavy-Duty Desk Clamp & Grommet Mount Options"
+    },
+    compliance: {
+      "Trade Agreements Act (TAA)": "Certified Compliant",
+      "Ergonomics Standards": "BIFMA Compliant, Tested to 10,000-cycle Motion Standard",
+      "Target Commands": "DoD Joint Operations Centers (JOC), SCIF Workstations, FAA Centers"
+    }
   },
   {
     id: 23,
@@ -72,7 +126,19 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "Freight Delivery — Ships 3-5 Days",
-    desc: "Ergotron CareFit Pro Medical & Field Mobile Cart with electric lift and integrated LiFe battery system for hospital & deployable medical units."
+    desc: "Ergotron CareFit Pro Medical & Field Mobile Cart with electric lift and integrated LiFe battery system for hospital & deployable medical units.",
+    specs: {
+      "Power System": "Integrated Lithium Iron Phosphate (LiFePO4) Battery with Smart Display",
+      "Lift Mechanism": "Push-Button Motorized Electric Height Lift (24.5 to 49.5 inches)",
+      "Mobility": "4x Ultra-Smooth Hospital-Grade Locking Casters with Directional Lock",
+      "Infection Control": "Non-porous Antimicrobial Surfaces for Cleanroom & Field Triage",
+      "Work Surface": "Backlit Keyboard Tray with Left/Right Mouse Trays & Scanner Holder"
+    },
+    compliance: {
+      "Trade Agreements Act (TAA)": "Certified Compliant",
+      "Safety Certifications": "UL/IEC 60601-1 Medical Electrical Equipment Certified",
+      "Target Commands": "Veterans Health Administration (VHA), Military Treatment Facilities (MTF)"
+    }
   },
   {
     id: 24,
@@ -86,7 +152,18 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "US Warehouse Stock — Ships 24-48h",
-    desc: "Ergotron WorkFit-T Standing Desk Desktop Workstation. TAA Compliant for federal civilian and DoD offices."
+    desc: "Ergotron WorkFit-T Standing Desk Desktop Workstation. TAA Compliant for federal civilian and DoD offices.",
+    specs: {
+      "Work Surface Width": "35.0 inches (89.0 cm)",
+      "Height Adjustment Lift": "15.0 inches (38.1 cm) Vertical Travel",
+      "Weight Capacity": "10 to 35 lbs (4.5 to 15.9 kg)",
+      "Lift Mechanism": "Counterbalancing Constant Force Scissor Lift",
+      "Configuration": "Fits Dual 24-inch Monitors or Single Ultra-Wide Screen"
+    },
+    compliance: {
+      "Trade Agreements Act (TAA)": "Certified Compliant",
+      "Target Commands": "Federal Headquarters, General Services Administration (GSA) Leases"
+    }
   },
   {
     id: 25,
@@ -100,7 +177,19 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "US Warehouse Stock — Ships 24h",
-    desc: "StarTech.com TAA Compliant USB-C Dock with Quad 4K 60Hz DisplayPort/HDMI, 100W Power Delivery, GbE, 4x USB-A/C ports."
+    desc: "StarTech.com TAA Compliant USB-C Dock with Quad 4K 60Hz DisplayPort/HDMI, 100W Power Delivery, GbE, 4x USB-A/C ports.",
+    specs: {
+      "Video Output": "Quad 4K @ 60Hz (Choice of 4x DisplayPort or 4x HDMI 2.0)",
+      "Host Connection": "USB-C or Thunderbolt 3/4 with 100W Power Delivery (PD 3.0)",
+      "Networking": "1x RJ45 Gigabit Ethernet (10/100/1000 Mbps with PXE Boot support)",
+      "USB Expansion": "4x USB 3.2 Gen 2 (10Gbps) Ports (1x USB-C, 3x USB-A with Fast-Charge)",
+      "Audio": "3.5mm 4-Position TRRS Headset Audio Jack"
+    },
+    compliance: {
+      "Trade Agreements Act (TAA)": "Certified Compliant (Taiwan Origin)",
+      "Section 889 NDAA": "Compliant (Realtek / DisplayLink Validated Silicon)",
+      "Target Commands": "DoD Intelligence Analyst Desktops, Engineering Multi-Monitor Workstations"
+    }
   },
   {
     id: 26,
@@ -114,7 +203,19 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "US Warehouse Stock — Ships 24-48h",
-    desc: "StarTech.com TAA Compliant 2-Port Dual-Monitor DisplayPort KVM Switch with 4K 60Hz and Audio isolation. NIAP PP4.0 ready."
+    desc: "StarTech.com TAA Compliant 2-Port Dual-Monitor DisplayPort KVM Switch with 4K 60Hz and Audio isolation. NIAP PP4.0 ready.",
+    specs: {
+      "Host Channels": "2 Isolated Systems (Dual DisplayPort 1.2 Video per Host)",
+      "Resolution": "Dual 4K @ 60Hz (3840x2160)",
+      "Data Isolation": "Unidirectional Optical Data Diodes Prevent Data Leakage",
+      "Tamper Protection": "Active Hardware Tamper Evident Seals & Chassis Intrusion Detection",
+      "Memory Security": "Automatic Keyboard/Mouse Buffer Purging on Channel Switch"
+    },
+    compliance: {
+      "NIAP Protection Profile": "Certified NIAP PP 4.0 for Peripheral Sharing Devices (PSD)",
+      "Trade Agreements Act (TAA)": "Certified Compliant",
+      "Target Commands": "NSA, DIA, Defense Intelligence Commands, Classified Air-Gapped Networks"
+    }
   },
   {
     id: 27,
@@ -128,7 +229,19 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "US Warehouse Stock — Ships 24h",
-    desc: "Jabra Engage 50 II Stereo USB-C Headset with Real-Time Call Insights, 3-Mic Noise Cancellation, Hearing Protection. FIPS compliant."
+    desc: "Jabra Engage 50 II Stereo USB-C Headset with Real-Time Call Insights, 3-Mic Noise Cancellation, Hearing Protection. FIPS compliant.",
+    specs: {
+      "Microphone System": "3-Microphone Array with Beamforming Noise Suppression",
+      "Acoustic Protection": "Jabra SafeTone 2.0 & PeakStop (Prevents Acoustic Shock >105 dB)",
+      "Connectivity": "USB-C Direct with In-line Call Control Unit (Answer/End/Mute/Vol)",
+      "Busylight": "Integrated Multi-Color Status Rings on Both Earcups",
+      "Software Analytics": "Real-Time Speech Clarity & Background Noise Quality Monitoring"
+    },
+    compliance: {
+      "Trade Agreements Act (TAA)": "Certified Compliant",
+      "Information Security": "FIPS 140-2 Compatible for Federal Telework & Dispatch",
+      "Target Commands": "VA Telehealth Contact Centers, Federal Emergency Dispatch Operations"
+    }
   },
   {
     id: 28,
@@ -142,7 +255,19 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "US Warehouse Stock — Ships 24-48h",
-    desc: "Jabra Evolve2 65 Flex Fold-and-Go Wireless Active Noise Cancelling Headset with secure USB-C adapter."
+    desc: "Jabra Evolve2 65 Flex Fold-and-Go Wireless Active Noise Cancelling Headset with secure USB-C adapter.",
+    specs: {
+      "Noise Cancellation": "Hybrid Active Noise Cancellation (ANC) with 6 Microphones",
+      "Form Factor": "Ultra-Compact Fold-and-Go Travel Design with Pouch",
+      "Wireless Range": "Up to 100 feet (30m) with Encrypted Jabra Link 380 USB-C Dongle",
+      "Battery Life": "Up to 32 Hours Listening / 20 Hours Talk Time (Fast Charge 15m=4h)",
+      "Microphone Boom": "Hide-Away Boom Arm with Auto-Mute on Lift"
+    },
+    compliance: {
+      "Trade Agreements Act (TAA)": "Certified Compliant",
+      "Section 889 NDAA": "Compliant",
+      "Target Commands": "Executive Federal Leadership, Mobile Field Officers, DoD Briefing Teams"
+    }
   },
   {
     id: 29,
@@ -156,7 +281,19 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "US Warehouse Stock — Ships 24h",
-    desc: "Jabra Speak2 75 Professional Speakerphone with Super-wideband Audio, 4 Beamforming Microphones, Microphone Quality Indicator."
+    desc: "Jabra Speak2 75 Professional Speakerphone with Super-wideband Audio, 4 Beamforming Microphones, Microphone Quality Indicator.",
+    specs: {
+      "Audio Quality": "Super-Wideband Audio with 65mm Full-Range Speaker",
+      "Microphone Pickup": "4 Beamforming Microphones with 360-Degree Voice Level Normalization",
+      "Microphone Quality Ring": "Illuminated Custom LED Ring Shows Voice Clarity Score",
+      "Connectivity": "USB-C, USB-A and Secure Bluetooth 5.2 (Up to 32 Hours Battery)",
+      "Durability": "IP64 Rated Dust & Water Resistant Aluminum Chassis"
+    },
+    compliance: {
+      "Trade Agreements Act (TAA)": "Certified Compliant",
+      "UC Platform Certifications": "Microsoft Teams Rooms & Zoom Government Certified",
+      "Target Commands": "Tactical Operations Centers (TOC), Command Briefing Rooms"
+    }
   },
   {
     id: 30,
@@ -170,7 +307,20 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "US Warehouse Stock — Ships 24h",
-    desc: "IOGEAR TAA Compliant USB Common Access Card (CAC) / Smart Card Reader. FIPS 201 Compliant for military and federal personnel."
+    desc: "IOGEAR TAA Compliant USB Common Access Card (CAC) / Smart Card Reader. FIPS 201 Compliant for military and federal personnel.",
+    specs: {
+      "Card Protocol Support": "ISO7816 Class A, B, and C (5V, 3V, 1.8V) Smart Cards",
+      "Standards": "EMV Level 1, PC/SC 2.0, Microsoft WHQL Certified",
+      "Interface": "USB 2.0 Type-A (High-speed 12 Mbps)",
+      "Indicator": "Dual LED Power & Card Activity Status",
+      "OS Compatibility": "Windows 11/10, Red Hat Enterprise Linux, macOS, DoD CAC Enclave"
+    },
+    compliance: {
+      "FIPS Standard": "FIPS 201 Approved (Federal Identity Credentialing)",
+      "Trade Agreements Act (TAA)": "Certified Compliant (Taiwan Origin)",
+      "GSA Approved": "Listed on GSA Approved Products List (APL)",
+      "Target Commands": "All DoD Military Branches, Dept of Homeland Security, Federal Judiciary"
+    }
   },
   {
     id: 31,
@@ -184,7 +334,20 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "Heavy Freight — Ships 24-48h",
-    desc: "APC Smart-UPS 1500VA 1000W Pure Sine Wave Battery Backup with SmartConnect Cloud Monitoring for mission-critical IT racks."
+    desc: "APC Smart-UPS 1500VA 1000W Pure Sine Wave Battery Backup with SmartConnect Cloud Monitoring for mission-critical IT racks.",
+    specs: {
+      "Output Power Capacity": "1440 VA / 1000 Watts Pure Sine Wave",
+      "Input / Output Voltage": "120V Nominal (NEMA 5-15P Input Plug)",
+      "Receptacles": "8x NEMA 5-15R Battery Backup Outlets",
+      "Battery Chemistry": "Maintenance-free Sealed Lead-Acid (Hot-Swappable Module)",
+      "Surge Protection": "Surge Energy Rating 680 Joules with Noise Filtering",
+      "Interface": "SmartSlot Expansion Port + SmartConnect Cloud Monitoring"
+    },
+    compliance: {
+      "Trade Agreements Act (TAA)": "Certified Compliant",
+      "Safety Certifications": "UL 1778, CSA Certified, Energy Star V2.0",
+      "Target Commands": "Field Deployable Server Racks, VA Medical Records Servers, DoD SCIFs"
+    }
   },
   {
     id: 32,
@@ -198,7 +361,19 @@ const GOVCON_PRODUCTS = [
     taa: true,
     sec889: true,
     shipping: "Freight LTL — Ships 3-5 Days",
-    desc: "APC NetShelter SX 42U Server Rack Enclosure Cabinet with integrated cable management and locking doors."
+    desc: "APC NetShelter SX 42U Server Rack Enclosure Cabinet with integrated cable management and locking doors.",
+    specs: {
+      "Rack Height": "42U (Internal Dimensions: 78.39in H x 23.62in W x 42.13in D)",
+      "Weight Capacity": "3,000 lbs (1,360 kg) Static Load / 2,250 lbs Dynamic Load",
+      "Doors": "High-Flow Perforated Mesh Curved Front & Split Rear Doors with Keyed Locks",
+      "Roof Architecture": "Overhead Cable Access Openings with Toolless Brush Strips",
+      "Mounting Standards": "EIA-310-E 19-inch Server Rack Mounting Standard"
+    },
+    compliance: {
+      "Trade Agreements Act (TAA)": "Certified Compliant",
+      "Physical Security": "Lockable Side Panels & Front/Rear Doors (Tamper Resistant)",
+      "Target Commands": "Defense Data Centers, VA Regional Hospital Server Rooms, Tactical Shelters"
+    }
   }
 ];
 
@@ -296,6 +471,18 @@ class GovConCartManager {
       });
     }
 
+    // Quick-Spec Modal Overlay Toggle
+    const specOverlay = document.getElementById('spec-modal-overlay');
+    const closeSpecBtn = document.getElementById('btn-close-spec');
+    if (closeSpecBtn) {
+      closeSpecBtn.addEventListener('click', () => this.closeSpecModal());
+    }
+    if (specOverlay) {
+      specOverlay.addEventListener('click', (e) => {
+        if (e.target === specOverlay) this.closeSpecModal();
+      });
+    }
+
     // Checkout Form Submission
     const form = document.getElementById('gpc-checkout-form');
     if (form) {
@@ -320,6 +507,83 @@ class GovConCartManager {
 
   closeCheckout() {
     document.getElementById('checkout-modal-overlay')?.classList.remove('open');
+  }
+
+  openSpecModal(productId) {
+    const product = GOVCON_PRODUCTS.find(p => p.id === productId);
+    if (!product) return;
+
+    const modalBody = document.getElementById('spec-modal-body');
+    if (!modalBody) return;
+
+    // Build Specs Table Rows
+    const specsRows = product.specs ? Object.entries(product.specs).map(([k, v]) => `
+      <tr>
+        <th>${k}</th>
+        <td>${v}</td>
+      </tr>
+    `).join('') : '<tr><td colspan="2">Standard manufacturer specifications apply.</td></tr>';
+
+    // Build Compliance Cards
+    const compCards = product.compliance ? Object.entries(product.compliance).map(([k, v]) => `
+      <div class="comp-spec-card">
+        <strong><i class="fas fa-check-shield" style="color: #166534;"></i> ${k}</strong>
+        <span>${v}</span>
+      </div>
+    `).join('') : '';
+
+    modalBody.innerHTML = `
+      <div class="spec-grid-layout">
+        <div class="spec-img-box">
+          <img src="${product.image}" alt="${product.name}">
+        </div>
+        <div class="spec-info-col">
+          <div style="font-size: 12px; font-weight: 700; color: var(--gov-accent); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">
+            ${product.categoryLabel} &bull; Sourced via ${product.distro}
+          </div>
+          <h2>${product.name}</h2>
+          <div class="spec-mpn-badge">
+            <i class="fas fa-barcode"></i> MPN: <strong>${product.mpn}</strong>
+          </div>
+          <p class="spec-desc-text">${product.desc}</p>
+          <div class="spec-price-action-row">
+            <div>
+              <div style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 700;">GPC Government Price</div>
+              <div style="font-size: 24px; font-weight: 800; color: #0f172a;">$${product.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+            </div>
+            <button class="btn-add-cart" onclick="govconCart.addToCart(${product.id}); govconCart.closeSpecModal();" style="padding: 11px 20px;">
+              <i class="fas fa-cart-plus"></i> Add to GPC Order
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-section-title">
+        <i class="fas fa-microchip" style="color: var(--gov-primary);"></i> Technical Hardware Specifications
+      </div>
+      <table class="spec-table">
+        <tbody>
+          ${specsRows}
+        </tbody>
+      </table>
+
+      <div class="spec-section-title">
+        <i class="fas fa-shield-alt" style="color: var(--gov-primary);"></i> Regulatory &amp; Public-Sector Compliance
+      </div>
+      <div class="compliance-spec-grid">
+        <div class="comp-spec-card">
+          <strong><i class="fas fa-certificate" style="color: #d97706;"></i> Prime Contractor</strong>
+          <span>20/59 Ventures Corp. &bull; CAGE: 22DH9 &bull; UEI: GVR2NTGR4HU3 &bull; SAM Active</span>
+        </div>
+        ${compCards}
+      </div>
+    `;
+
+    document.getElementById('spec-modal-overlay')?.classList.add('open');
+  }
+
+  closeSpecModal() {
+    document.getElementById('spec-modal-overlay')?.classList.remove('open');
   }
 
   renderProducts() {
@@ -367,12 +631,12 @@ class GovConCartManager {
             ${p.sec889 ? '<span class="comp-badge comp-889"><i class="fas fa-shield-alt"></i> Sec 889</span>' : ''}
           </div>
         </div>
-        <div class="card-img-wrap">
+        <div class="card-img-wrap" onclick="govconCart.openSpecModal(${p.id})" style="cursor: pointer;" title="Click to view detailed specs">
           <img src="${p.image}" alt="${p.name}" class="product-thumb-img" loading="lazy">
         </div>
         <div class="card-body">
           <div class="card-category-label">${p.categoryLabel}</div>
-          <h3 class="card-title">${p.name}</h3>
+          <h3 class="card-title" onclick="govconCart.openSpecModal(${p.id})" style="cursor: pointer;">${p.name}</h3>
           <div class="card-mpn-box">
             <i class="fas fa-barcode"></i> MPN: <strong>${p.mpn}</strong>
           </div>
@@ -387,7 +651,9 @@ class GovConCartManager {
             <span class="card-price-value">$${p.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
           </div>
           <div class="card-action-wrap">
-            <input type="number" min="1" max="99" value="1" class="qty-input-store" id="qty-${p.id}" aria-label="Quantity for ${p.mpn}">
+            <button class="btn-card-spec" onclick="govconCart.openSpecModal(${p.id})" title="View Technical Specs">
+              <i class="fas fa-list-ul"></i> Specs
+            </button>
             <button class="btn-add-cart" onclick="govconCart.addToCart(${p.id})">
               <i class="fas fa-cart-plus"></i> Add
             </button>
@@ -401,8 +667,7 @@ class GovConCartManager {
     const product = GOVCON_PRODUCTS.find(p => p.id === productId);
     if (!product) return;
 
-    const qtyInput = document.getElementById(`qty-${productId}`);
-    const qty = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
+    const qty = 1;
 
     const existingIndex = this.cart.findIndex(item => item.id === productId);
     if (existingIndex > -1) {

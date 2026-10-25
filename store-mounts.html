@@ -80,6 +80,28 @@
       </div>
     </div>
 
+    
+    <!-- Category Capability Statement Banner -->
+    <div class="category-capability-card">
+      <div class="capability-inner">
+        <div class="capability-content">
+          <h2><i class="fas fa-award" style="color: var(--gov-gold);"></i> Federal Ergonomics & Medical Workstation Mobility Brief</h2>
+          <p>Authorized government distributor for Ergotron ergonomic display mounting and CareFit medical field carts. Purpose-built for Veterans Health Administration (VHA) hospitals, military treatment facilities (MTF), and 24/7 command center operator desks.</p>
+          <div class="capability-tags-strip">
+            <span class="cap-tag">NAICS 339113</span><span class="cap-tag">UL 60601-1 Medical</span><span class="cap-tag">VHA Hospitals</span><span class="cap-tag">DoD JOC Centers</span><span class="cap-tag">TAA Compliant</span>
+          </div>
+        </div>
+        <div class="capability-actions">
+          <a href="rfq.html" class="btn-cap-pdf">
+            <i class="fas fa-file-invoice"></i> Request Category SOW
+          </a>
+          <a href="javascript:void(0)" onclick="govconCart.openDrawer()" class="btn-custom-bom">
+            <i class="fas fa-boxes"></i> Assemble Multi-Item Kit
+          </a>
+        </div>
+      </div>
+    </div>
+    
     <!-- Product Controls -->
     <section class="catalog-controls">
       <div class="controls-inner">
@@ -259,6 +281,20 @@
     </div>
   </footer>
 
+
+  
+  <!-- Quick-Spec Modal Overlay -->
+  <div class="spec-modal-overlay" id="spec-modal-overlay">
+    <div class="spec-modal" role="dialog" aria-modal="true" aria-labelledby="spec-modal-title">
+      <div class="spec-modal-header">
+        <h3 id="spec-modal-title"><i class="fas fa-file-contract" style="color: #fef08a;"></i> Hardware Technical Specifications &amp; Compliance</h3>
+        <button class="btn-close-drawer" id="btn-close-spec" aria-label="Close Specs">&times;</button>
+      </div>
+      <div class="spec-modal-body" id="spec-modal-body">
+        <!-- Dynamically injected by govconCart.openSpecModal -->
+      </div>
+    </div>
+  </div>
 
   <script src="js/govcon-cart.js"></script>
 </body>
