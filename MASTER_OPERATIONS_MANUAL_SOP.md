@@ -1,6 +1,6 @@
 # 20/59 VENTURES CORP.
 ## MASTER OPERATIONS MANUAL — STANDARD OPERATING PROCEDURES (SOP)
-**Version 1.0 — Effective September 2026**
+**Version 1.7 — Effective October 2026 | Revised: October 24, 2026**
 
 ---
 
@@ -47,6 +47,12 @@
 | **President Approval** | Over $1,000 | Written approval required before expenditure |
 | **Quiet Hours** | 10:00 PM – 7:00 AM | Daily; zero overnight guests permitted |
 
+### Mandatory Workforce Compliance & Certifications (COC Position)
+| Certification | Provider & Cost | Completion Deadline | Annual Renewal | Filing Requirement |
+| :--- | :--- | :--- | :--- | :--- |
+| **HIPAA Compliance Training Program** | [HIPAA Training US](https://hipaatraining.us/) (100% Free) | **Prior to Starting / Pre-Placement** | Required (1 Year) | Digital certificate on file under Odoo Personal Profile (`hr.employee` / `res.partner`) |
+| **OSHA for Healthcare: Bloodborne Pathogens** | [EPICourses](https://epicourses.com/product-category/free-healthcare-compliance-training-courses/) (100% Free) | **Within 30 Days of Hire / Engagement** | Required (1 Year) | Digital certificate on file under Odoo Personal Profile (`hr.employee` / `res.partner`) |
+
 ---
 
 ## TABLE OF CONTENTS
@@ -56,20 +62,30 @@
   * `[SOP-2059-CORP-003]` Corporate Certifications, SAM.gov, NPI & Socioeconomic Standing
   * `[SOP-2059-CORP-004]` Regulatory Compliance, Fair Housing & HIPAA Standards
   * `[SOP-2059-CORP-005]` Document Retention, Security & Information Governance
+  * `[SOP-2059-CORP-006]` Mandatory Workforce Compliance Training, Certification & Chatter Automation Protocol
+  * `[SOP-2059-CORP-007]` Role-Based Security Training for CUI Protection, Access Control & System Security (CMMC 2.0 AT.L2-3.2.1/3.2.2/3.2.3)
 * **MODULE 02: HOUSING OPERATIONS & RESIDENT LIFECYCLE**
   * `[SOP-2059-HOUS-001]` Referral Intake & Admissions Workflow
   * `[SOP-2059-HOUS-002]` Resident Screening & Low-Barrier Acceptance Criteria
   * `[SOP-2059-HOUS-003]` Resident Move-In, Room Assignment & Orientation
   * `[SOP-2059-HOUS-004]` Resident Stay, Case Coordination & Weekly COC Walkthroughs
-  * `[SOP-2059-HOUS-005]` Planned Transition & Involuntary Programmatic Discharge
-  * `[SOP-2059-HOUS-006]` Progressive Disciplinary & 3-Strike System
+  * `[SOP-2059-HOUS-005]` Planned Transition & Involuntary Programmatic Discharge *(Mobile Initiation via TECH-007)*
+  * `[SOP-2059-HOUS-006]` Progressive Disciplinary & 3-Strike System *(Mobile Intake via TECH-007)*
   * `[SOP-2059-HOUS-007]` Master Forms & Operational Documents Index
 * **MODULE 03: TECHNOLOGY, AUTOMATION & OUTREACH**
   * `[SOP-2059-TECH-001]` Housing Facility Automation Platform Operational Run-Rules
   * `[SOP-2059-TECH-002]` Agency Outreach & Caseworker Partnership Pipeline
   * `[SOP-2059-TECH-003]` Harry AI Intake Dispatch & Human Oversight Protocols
   * `[SOP-2059-TECH-004]` Data Protection, Consent & Communications Security
-  * `[SOP-2059-TECH-005]` Digital Intake Architecture & Multi-Layer Anti-Spam / Phishing Standards
+  * `[SOP-2059-TECH-005]` **Mobile COC Walkthrough & Photo Audit Tool — Full SOP** *(v1.1)*
+  * `[SOP-2059-TECH-006]` Digital Platform Expansion Roadmap: CRM Property Profiles & COC Profiles *(v1.1)*
+  * `[SOP-2059-TECH-007]` **Mobile COC Strike Notice & Resident Discharge Reporting Tool — Full SOP** *(v1.2)*
+  * `[SOP-2059-TECH-008]` **Telnyx Wholesale SMS Gateway & Multi-Company Dispatch** *(v1.2)*
+  * `[SOP-2059-TECH-009]` **Unified Email Platform, Odoo Marketing & Carrier Relay Architecture** *(New — v1.3)*
+  * `[SOP-2059-TECH-010]` **TD SYNNEX Distributor Procurement Integration — Read-Only Price Gateway** *(New — v1.5)*
+  * `[SOP-2059-TECH-011]` **Enterprise System Architecture Defense, CMMC/NIST SP 800-171 & JCP Compliance** *(New — v1.6)*
+  * `[SOP-2059-GOV-004]` **GovCon CRM & Defense Procurement Workflow (Tracks A & B, WAWF Engine)** *(New — v1.7)*
+  * `[SOP-2059-GOV-005]` **Simplified Delivery Procurement (SDP) & Federal IT Storefront Operations** *(New — v1.8)*
 * **MODULE 04: FINANCIAL MANAGEMENT, RATES & BILLING**
   * `[SOP-2059-FIN-001]` Room Rate Determination & Calculator Methodology
   * `[SOP-2059-FIN-002]` Voucher Processing, Direct Billing & Copay Collections
@@ -133,6 +149,24 @@
    * **Discharge & Turnover Audit:** $25.00 / exit (Per room turnover audit, key collection & unit prep).
    * **New Property Launch Fee:** $250.00 / new house (Paid when assigned full staging oversight & furniture coordination).
    * **Mileage Reimbursement:** IRS Standard Rate ($0.76/mi) (Reimbursed on all assigned shelter pickups, property routes, and urgent dispatches, tracked via MileIQ or Driversnote).
+4. **Mandatory Workforce Certifications & Compliance Credentials (COC Positions):**
+   To uphold high-standard supportive housing operations, safeguard resident Protected Health Information (PHI) under our National Provider Identifier (NPI `1932035060`), and protect workforce health and safety across shared residential homes, all Community Operations Coordinators (COCs) / Coordinators of Care must complete and maintain two (2) mandatory certifications:
+   * **1. HIPAA Compliance Training Program (Pre-Hire / Day 1 Requirement):**
+     * **Training Portal:** [HIPAA Training US](https://hipaatraining.us/) (100% Free Online Course).
+     * **Timeline:** **Mandatory prior to starting / pre-placement.** Must be completed, certified, and filed before conducting resident intakes, reviewing referral paperwork, accessing tenant PII/PHI, or executing property visits.
+     * **Curriculum:** Introduction to HIPAA, The Privacy Rule, The Security Rule, Breach Notification & Enforcement, and HIPAA Compliance Best Practices.
+     * **Duration & Credential:** 0.5 Credit Hours; formal Certificate of Completion with unique Certificate ID.
+     * **Renewal Cycle:** Annual recertification required (valid for 1 year from date of issue).
+   * **2. OSHA for Healthcare with Bloodborne Pathogens Training (30-Day Requirement):**
+     * **Training Portal:** [EPICourses / EPICompliance](https://epicourses.com/product-category/free-healthcare-compliance-training-courses/) (100% Free Healthcare Compliance Training).
+     * **Timeline:** **Mandatory within thirty (30) days of hire / engagement.**
+     * **Curriculum:** OSHA Healthcare Safety Standards (29 CFR 1910.1030 & 1910.120), Bloodborne Pathogens (HBV, HIV), Universal Precautions, Needle-stick Safety and Prevention Act, Exposure Control Plan, Sharps Injury Log, Biomedical Waste Handling, Disposal Containers, Personal Protective Equipment (PPE), Safety Data Sheets (SDS), and Workplace Hazard Communication.
+     * **Duration & Credential:** 2.0 Contact Hours; formal Certificate of Achievement signed by accredited compliance leadership.
+     * **Renewal Cycle:** Annual recertification required (valid for 1 year from date of issue).
+5. **Personnel Recordkeeping & Odoo Profile Governance:**
+   * **Mandatory File Retention:** Active digital copies of all completed certification certificates must be permanently maintained on file under the worker's official personal profile in Odoo Community ERP (both `hr.employee` and linked `res.partner` records) as verified `ir.attachment` records.
+   * **Resume & Credentials Ledger:** Verified certifications are cataloged under the employee's `Certifications & Compliance` profile tab (`hr.resume.line`) specifying issuance date, expiration date, and accreditation credential ID.
+   * **Compliance Audits & Renewal Alerts:** Program Director reviews the corporate workforce compliance registry quarterly. Automated 30-day pre-expiration notices are dispatched to workers to ensure timely renewal without lapse in credentialing.
 
 ---
 
@@ -141,16 +175,11 @@
   * **Legal Entity:** 20 59 Ventures Corp. (State of Alabama Incorporation)
   * **National Provider Identifier (NPI):** 1932035060 (Taxonomy: `193200000X` Multi-Specialty Group)
   * **SAM.gov Unique Entity ID (UEI):** `GVR2NTGR4HU3` | **CAGE Code:** `22DH9` (Active Entity)
-  * **Socioeconomic Status:** Veteran-Owned Small Business (VOSB), Economically Disadvantaged Women-Owned Small Business (EDWOSB) & Woman-Owned Small Business (WOSB)
+  * **Socioeconomic Status:** Veteran-Owned Small Business (VOSB) & Woman-Owned Small Business (WOSB)
   * **UCP Certification:** Approved Alabama UCP (App ID: 112124)
-  * **Defense Data Access:** JCP Certified (Joint Certification Program) — authorized to receive unclassified military critical technical data and export-controlled technical data
-  * **Export Control Compliance:** Certification Statement of Export Control Compliance signed by appointed Data Custodian on file (ITAR / EAR compliant handling)
   * **Employment Verification:** E-Verify Enrolled Participant (Right to Work Compliant)
   * **Accreditation:** Better Business Bureau (BBB) Accredited (Rating: A+)
   * **Payment Acceptance:** Government Purchase Cards (GPC / Credit Card) Accepted
-  * **Authorized Supply Chain:** Wholesale distribution via TD SYNNEX & D&H; authorized resale & integration: StarTech.com, Ergotron, Microsoft, Samsung, Logitech, Jabra
-  * **Cyber Certification:** CMMC Level 2 readiness. A **CMMC L2 Final Self-Assessment** is on file in SPRS — **CMMC UID `S200081625`**, included CAGE 22DH9, assessment scope **Enterprise**, assessed **10/22/2026**, affirmation expiration **10/22/2027**, CMMC status expiration **10/22/2029**, NIST SP 800-171 score **110** (maximum possible score), System Security Plan assessed **SOP-2059-CA-003 System Security Plan rev 1.18**, Plan of Action completion date **N/A (no open POA&Ms)**. There is **no C3PAO assessment on file**; CMMC Level 2 certification is not claimed. The full self-assessment package is released to contracting officers and primes on request via the RFQ / Teaming Inquiry portal.
-  * **Contract Vehicles:** See [SOP-2059-CORP-006] Contract Vehicles & Acquisition Pathways below
 * **Registered NAICS Codes:**
   * **624220 (Primary):** Community Housing Services (Temporary, emergency, and supportive housing)
   * **485991:** Special Needs Transportation & Non-Emergency Medical Transit (NEMT)
@@ -164,18 +193,13 @@
 1. **Fair Housing Act (Title VIII) Compliance:** 20/59 Ventures Corp. strictly prohibits discrimination based on race, color, religion, sex, national origin, familial status, or disability.
    * **Reasonable Accommodations:** Permitting assistance animals (which are not pets and incur zero deposits) and reasonable physical modifications requested by healthcare providers for disabled participants.
 2. **HIPAA & Health Privacy Safeguards:** With an active NPI (1932035060), staff and contractors must protect client Protected Health Information (PHI):
+   * **Mandatory Pre-Placement Certification:** All workforce members, operations staff, and Community Operations Coordinators (COCs) must successfully complete accredited HIPAA compliance training (via `https://hipaatraining.us/`) prior to interacting with residents, intake documentation, or Protected Health Information (PHI). Active certificates are filed in Odoo personal profiles.
    * Apply the Minimum Necessary Rule to all medical disclosures.
    * Zero transmission of unencrypted clinical diagnosis notes over personal SMS or unencrypted personal email.
    * All case notes and referral memos uploaded directly to secure Odoo CRM records.
 3. **Alabama Residential Landlord-Tenant Act Standards:**
    * Compliance with Alabama habitability standards (operable HVAC, potable hot/cold water, structural integrity, smoke/CO detectors).
    * Operating under programmatic supportive housing agreements and covenants.
-4. **Federal Contracting, JCP & Export Control Compliance (IT Division):**
-   * **JCP Handling:** Export-controlled / military critical technical data is released only to authorized U.S. persons with documented need-to-know under the Data Custodian's control; any change of fact or intention requires prior written approval.
-   * **Supply Chain Integrity:** Federal IT fulfillment sourced through authorized distribution (TD SYNNEX, D&H) and certified OEM channels (StarTech.com, Ergotron, Jabra, Microsoft, Samsung, Logitech) with full manufacturer warranties and TAA-compliant sourcing where required.
-   * **NDAA Section 889:** No covered telecommunications / video surveillance equipment from prohibited entities is procured, used, or incorporated (FAR 52.204-24/25).
-
----
 
 ---
 
@@ -189,157 +213,33 @@
 
 ---
 
+### [SOP-2059-CORP-006] Mandatory Workforce Compliance Training, Certification & Chatter Automation Protocol
+1. **Universal Compliance Mandate:** To protect resident Protected Health Information (PHI) under NPI `1932035060` and maintain high-standard residential biosafety across all shared supportive homes, all workforce members—including new hires, 1099 Community Operations Coordinators (COCs), and existing personnel—must complete and maintain two (2) accredited, 100% free certifications:
+   * **HIPAA Compliance Training (0.5 Credit Hours):** [HIPAA Training US](https://hipaatraining.us/) (Mandatory Pre-Placement / Day 1 prior to resident contact or documentation access).
+   * **OSHA for Healthcare: Bloodborne Pathogens (2.0 Contact Hours):** [EPICourses / EPICompliance](https://epicourses.com/product-category/free-healthcare-compliance-training-courses/) (Mandatory within 30 days of hire/engagement).
+2. **Automated Submission & Intake Channels:**
+   * **Toll-Free Carrier MMS (`+1-888-919-2059`):** Staff text a photo or PDF certificate with keyword `CERT`. The Telnyx relay downloads the media and runs auto-archival.
+   * **Dedicated Email Intake (`compliance@2059ventures.online`):** Staff email or forward certificate attachments.
+   * **Mobile Self-Service Portal (`https://portal.2059ventures.online/cert`):** Smartphone-optimized upload portal with real-time verification status.
+3. **Automated Odoo Archival & Autopilot Recertification:**
+   * Certificates are automatically converted and filed as verified `ir.attachment` records under `hr.employee` and `res.partner`.
+   * Open compliance activities (`mail.activity`) are automatically marked complete with audit feedback.
+   * A rich compliance status card is posted to employee Chatter.
+   * The next annual recertification activity is automatically scheduled **11 months out (335 days)**.
+4. **Dual Leadership "Good News" Alerts:**
+   * Real-time celebration SMS dispatched to **Program Director Quincy Ruffin (`205-534-8492`)** and **Owner & President Andrea Marcus (`205-886-5198`)**.
+   * Executive email summary dispatched to `andrea.marcus@2059ventures.online`, `qruffin@2059ventures.online`, and `compliance@2059ventures.online`.
+5. **Enforcement & Non-Compliance:** Uncertified personnel are subject to immediate dispatch hold from resident intake and field walkthrough duties.
+
+### [SOP-2059-CORP-007] Role-Based Security Training for CUI Protection, Access Control & System Security (CMMC 2.0)
+1. **Scope:** Additionally mandatory for Administrative (CUI-ADMIN), Engineering (CUI-ENG), and Data-Handling (CUI-DATA) roles. Covers CUI/FCI protection, access control protocols (least privilege, MFA, quarterly recertification), system security procedures, and insider-threat recognition/reporting per CMMC 2.0 AT.L2-3.2.1/3.2.2/3.2.3 (NIST 800-171 §3.2).
+2. **Timing:** Pre-access Day 0, retrain within 14 days on system/policy change, annual refresher (335-day autopilot).
+3. **Evidence:** Signed `AT_Security_Policy_Signoff.pdf` per person/year filed as `ir.attachment` on `hr.employee` + `res.partner` (`docs/AT_Security_Policy_Signoff.pdf`), quiz roster, Chatter card, access-review log.
+4. **Full SOP:** See `docs/SOP-2059-CORP-007-Role-Based-Security-Training-CUI.md` (+ PDF twin).
+
+---
+
 # MODULE 02: HOUSING OPERATIONS & RESIDENT LIFECYCLE
-
-
-### [SOP-2059-CORP-006] Contract Vehicles & Acquisition Pathways
-* **Purpose:** Define the lawful, disclosed routes by which an agency may purchase from 20/59 Ventures Corp, and the internal rules governing how each vehicle may be represented on a quote, order, or proposal.
-* **Governing Rule (Truthful Vehicle Representation):** 20/59 Ventures Corp shall never place on a solicitation, quote, delivery order, or proposal a contract vehicle claim it does not hold. Where a vehicle is held by a distribution partner, the proposal must state the **awardee**, the **contract number**, and 20/59's **role as an authorized reseller/dealer**. Direct-award language shall be used only where 20/59 is the contractor of record.
-* **Route A — Direct Award to 20/59 Ventures Corp:**
-  * Contractor of record: 20/59 Ventures Corp, CAGE 22DH9, UEI GVR2NTGR4HU3 (Active SAM.gov).
-  * Thresholds: FAR Part 13 micro-purchases (<$10,000), FAR Part 13 simplified acquisition (<$250,000), Government Purchase Card / P-Card, and teaming subcontracts.
-* **Route B — Federal Vehicles (Distributor-Held):**
-  * GSA MAS `47QTCA19D00MM` — awardee TD SYNNEX Corporation (PoP 09/27/2020 – 09/06/2039). SINs 33411 / 511210 / 518210C / 54151 / 811212.
-  * GSA MAS `GS-35F-0563U` — awardee TD SYNNEX Corporation (PoP 09/08/2008 – 09/04/2028). SINs 33411 / 511210 / 54151 / 54151S / 54151ECOM / 611420 / 811212.
-  * 2GIT Federal BPAs `47QTCA21A0026` / `47QTCA21A002E` — awardee TD SYNNEX Corporation (PoP 03/31/2020 – 09/26/2039).
-  * NASA SEWP VI — 20/59 must hold a current TD SYNNEX SEWP VI Letter of Authorization before quoting against SEWP.
-* **Route C — Cooperative Vehicles:**
-  * **OMNIA Partners NCPA `01-170`** — sold through 20/59's own executed D&H Distributing OMNIA NCPA Reseller Agreement (D&H account 332729; authorization effective 10/06/2026; three-year initial term with annual renewals). Lead agency: Region 14 ESC / Advanced Technology Solutions Aggregator. **Purchasing entity must hold NCPA membership.**
-  * OMNIA Partners Cybersecurity `R250307` — awardee TD SYNNEX Corporation (PoP 10/01/2025 – 09/30/2030).
-  * Equalis Group `R10-1173F` — awardee TD SYNNEX Corporation (PoP 03/01/2025 – 02/28/2030).
-  * Sourcewell `030425-SYN` — awardee TD SYNNEX Corporation (PoP 09/05/2025 – 07/17/2029).
-  * PEPPM — `CA KCSOS 542242` (PoP 10/01/2024 – 09/30/2027), `548362` PA CSIU, and PEPPM Product Line Contracts (PoP 01/01/2026 – 12/31/2028). Participating-state SLED eligibility applies.
-  * TX DIR — `TX DIR-CPO-5869` (11/03/2025 – 11/03/2031), `TX DIR-CPO-4846` (01/26/2023 – 01/25/2028), `TX DIR-CPO-5096` (12/14/2022 – 12/21/2027), `TX DIR-CPO-5283` (08/21/2024 – 08/21/2029), `TX DIR-CPO-5077` (08/04/2022 – 08/04/2027).
-  * NASPO ValuePoint — OEM-awarded (HP Inc. / HPE / Ericsson / Palo Alto Networks / Panasonic) via TD SYNNEX: `23008`, `23011`, `AR3189`, `AR3228`, `AR3229`, `TX DIR-TSO-5225`. Terms vary by contract (2023 – 2029).
-  * CMAS (California) — awardee TD SYNNEX Corporation. Not listed on the 2025-2026 TD SYNNEX linecard; confirm before quoting.
-* **Route D — Prime Contractor Teaming Subcontract:** 20/59 contracts as a subcontractor under primes carrying FAR 52.219-9 small-business subcontracting plans.
-* **Verification Sources:** TD SYNNEX Public Sector Contract Linecard (2025-2026 edition, 06/16/2026) and 20/59's executed D&H Distributing OMNIA NCPA Reseller Agreement. Re-verify terms at each quote.
-* **Marketing Constraint (D&H Reseller Agreement §13.1):** *"Reseller may not create any press release or use D&H or NCPA's names in any external marketing without the prior permission granted by D&H and/or NCPA, respectively."*
-* **DECISION 2026-10-22 — D&H removed from all public-facing surfaces.** The executed D&H Distributing OMNIA NCPA Reseller Agreement (D&H account 332729, authorization effective 10/06/2026, three-year initial term) **remains in force and is not terminated by this decision** — the agreement is an internal record and this document is not external marketing. What changed is that D&H's name no longer appears on any public page, and **no unverified distributor was substituted in its place**.
-  * **Public distributor naming rule:** `contracts.html`, `index.html`, `it-capabilities.html`, `rfq.html`, `compliance.html`, `llms.txt`, `llms-full.txt`, and the transactional RFQ emails name **only TD SYNNEX** as the wholesale distribution partner (a verified relationship), alongside the OEM authorizations. Where the vehicle table needs the schedule holder for ordering, it says "our Tier-1 distribution partner" rather than naming a company.
-  * **Ingram Micro — considered and NOT published.** No Ingram Micro reseller agreement was found in the 20 59 Ventures corporate records (only `D&H Authorization Omnia Auth.pdf` and `Reseller agreements\Apple-Non-Authorized-Rider-6.pdf`). A claim of "Authorized Wholesale Distribution via Ingram Micro" cannot be substantiated, so it was not published anywhere. **Revisit only if an executed Ingram Micro agreement is on file**, and then update every public surface in the same pass.
-  * **Action required — NCPA naming:** §13.1 also restricts the NCPA name. The public pages currently name "NCPA 01-170" as a vehicle. Either obtain NCPA's written permission, or replace "NCPA" with "OMNIA Partners" on public pages. The vehicle number itself is accurate and may be published.
-  * **Interim framing used on the public site:** the OMNIA NCPA row reads "01-170 (our own reseller agreement)" with no distributor named, which is accurate and avoids the restricted names.
-  * **Do not restate D&H's name on any public page without written permission from D&H and/or NCPA.**
-* **RFQ Routing Requirement:** Every RFQ submitted through the public portal must carry a `contract_vehicle` value (or "Not specified — advise me") and, where known, a `vehicle_contract_number`. The contracting desk confirms vehicle validity and expiration **before** issuing a quote.
-* **Public Reference:** https://2059ventures.com/contracts.html — contract numbers and 20/59's role on each vehicle. **The public page publishes no expiry dates by design** (a published expiry makes the site read as stale and the contracting desk confirms terms at quote time instead). Vehicle terms are tracked internally in Appendix A below, and the **Track record** badge on the published portfolio is computed against the current date, not a snapshot.
-* **Benchmark Reference:** `docs/westwind-teardown-and-integration-plan.md` — peer-site benchmark (Westwind Computer Products) and the Track A/B/C integration plan.
-
-#### Appendix A — Contract Vehicle Term Register (internal)
-
-**Authoritative internal record of vehicle terms.** The public site publishes no expiry dates by design (see the DECISION entry above), so this register and the watchlist below are the only place a lapse can be caught. Re-verify against the TD SYNNEX Public Sector Contract Linecard before each contracting cycle.
-
-**Register date:** 2026-10-22 · **Source:** TD SYNNEX Public Sector Contract Linecard (2025-2026 edition, 06/16/2026) · **Status computed against 2026-10-22.**
-
-##### A.1 — Renewal watchlist: completed or lapsed vehicles
-
-These vehicles cannot be ordered against. Confirm renewal status with TD SYNNEX (`contracts@tdsynnex.com`) before quoting any of them.
-
-| Vehicle / Program | Contract # | Expiration | Action |
-|---|---|---|---|
-| TX DIR — Software | `TX DIR-TSO-4383` | 11/19/2025 | **Lapsed — confirm renewal** |
-| New York OGS — Blackboard | `PM69700` | 11/29/2025 | **Lapsed — confirm renewal** |
-| State of Ohio Multi-Vendor IDIQ | `534042` | 04/10/2026 | **Lapsed — confirm renewal** |
-| State of California Multiple Award Schedule (CMAS) | `3-16-70-1047B` | 04/11/2026 | **Lapsed — confirm renewal** |
-| CIO-CS | `HHSN316201500012W` | 04/29/2026 | **Lapsed — confirm renewal** |
-| NASA SEWP V | `NNG15SC07B / NNG15SC98B` | 04/30/2026 | **Lapsed — confirm renewal** |
-| DoD — Rancher Government ESI | `NNG15SC98B` | 04/30/2026 | **Lapsed — confirm renewal** |
-| Equalis Group — Cybersecurity | `COG2127B` | 04/30/2026 | **Lapsed — confirm renewal** |
-| City of San Francisco, CA — Autodesk Software IDIQ | `1000015124` | 06/30/2026 | **Lapsed — confirm renewal** |
-| NASPO ValuePoint — Panasonic Connect North America | `MA23019` | 06/30/2026 | **Lapsed — confirm renewal** |
-| State of California Software License Program — Oracle | `SLP-23-0-0068K` | 08/31/2026 | **Lapsed — confirm renewal** |
-| University of Maine — Autodesk IDIQ | `2020-016` | 09/13/2026 | **Lapsed — confirm renewal** |
-| NASPO ValuePoint — Cloud | `AR2480` | 09/15/2026 | **Lapsed — confirm renewal** |
-| NASPO ValuePoint — Oracle | `AR2487` | 09/15/2026 | **Lapsed — confirm renewal** |
-| 2GIT | `47QTCA21A000Y` | 09/30/2026 | **Lapsed — confirm renewal** |
-| NASPO ValuePoint — Ericsson Enterprise Wireless | `AR3189` | 09/30/2026 | **Lapsed — confirm renewal** |
-| NASPO ValuePoint — HPE Datacom | `AR3228` | 09/30/2026 | **Lapsed — confirm renewal** |
-| NASPO ValuePoint — Palo Alto Networks | `AR3229` | 09/30/2026 | **Lapsed — confirm renewal** |
-
-> **Near-term note.** NASPO ValuePoint `AR3189` (Ericsson Enterprise Wireless), `AR3228` (HPE Datacom), and `AR3229` (Palo Alto Networks) all lapsed **09/30/2026** and were removed from the public "Every way to buy from 20 59 Ventures" table on that date. They remain listed in the published portfolio table as **Completed**. Confirm renewal with TD SYNNEX before quoting any NASPO ValuePoint line — three of the five NASPO ValuePoint OEM awards in our book are affected.
-
-##### A.2 — Full register
-
-| Vehicle / Program | Contract # | PoP Start | Expiration | 20 59 Scope |
-|---|---|---|---|---|
-| 2GIT | `47QTCA21A0026` | 03/31/2020 | 09/26/2039 | 20 59 reseller |
-| 2GIT | `47QTCA21A002E` | 03/31/2020 | 09/26/2039 | 20 59 reseller |
-| 2GIT | `47QTCA21A000Y` | 03/31/2021 | 09/30/2026 | portfolio |
-| GSA Multiple Award Schedule (MAS) | `47QTCA19D00MM` | 09/27/2020 | 09/06/2039 | 20 59 reseller |
-| GSA Multiple Award Schedule (MAS) | `GS-35F-0563U` | 09/08/2008 | 09/04/2028 | 20 59 reseller |
-| GSA Multiple Award Schedule (MAS) | `GS-35F-267DA` | 04/11/2016 | 04/10/2036 | portfolio |
-| CIO-CS | `HHSN316201500012W` | 05/01/2015 | 04/29/2026 | portfolio |
-| ITES-SW2 | `W52P1J-20-D-0047` | 08/31/2020 | 08/30/2030 | portfolio |
-| Department of the Navy — Oracle III Enterprise Agreement | `N00189-23-F-R338 / NNG15SC98B` | 05/31/2023 | 05/30/2028 | portfolio |
-| Department of the Navy — Red Hat II Enterprise Agreement | `N00189-22-F-R009 / NNG15SC98B` | 12/27/2021 | 12/26/2026 | portfolio |
-| Federal Deposit Insurance Corporation — Appian BOA | `CORHQ-19-G-0279` | 08/09/2019 | 08/21/2027 | portfolio |
-| NASA SEWP V | `NNG15SC07B / NNG15SC98B` | 05/01/2015 | 04/30/2026 | portfolio |
-| DoD — Appian ESI | `N66001-24-A-0062` | 08/14/2024 | 08/13/2029 | portfolio |
-| DoD — Archibus / Eptura ITAM ESI | `N66001-19-A-0045` | 07/15/2019 | 07/14/2029 | portfolio |
-| DoD — Autodesk ESI | `N66001-19-A-0051` | 04/01/2019 | 03/31/2029 | portfolio |
-| DoD — Axonius Cyber ESI | `N66001-23-A-0050` | 07/14/2023 | 09/04/2032 | portfolio |
-| DoD — Checkmarx ITAM ESI | `N66001-19-A-0045` | 07/15/2019 | 07/14/2029 | portfolio |
-| DoD — CrowdStrike ITAM ESI | `N66001-19-A-0045` | 07/15/2019 | 07/14/2029 | portfolio |
-| DoD — Dynatrace Cyber ESI | `N66001-23-A-0050` | 07/14/2023 | 09/04/2032 | portfolio |
-| DoD — Firemon Cyber ESI | `N66001-22-A-0079` | 09/05/2022 | 09/04/2032 | portfolio |
-| DoD — Flexera ITAM ESI | `N66001-19-A-0045` | 07/15/2019 | 07/14/2029 | portfolio |
-| DoD — LogRhythm Cyber ESI | `N66001-22-A-0079` | 09/05/2022 | 09/04/2032 | portfolio |
-| DoD — MicroStrategy Cyber ESI | `N66001-23-A-0050` | 07/14/2023 | 09/04/2032 | portfolio |
-| DoD — Rancher Government ESI | `NNG15SC98B` | 05/23/2024 | 04/30/2026 | portfolio |
-| DoD — Red Hat ESI | `N66001-24-A-0057` | 08/07/2024 | 08/06/2029 | 20 59 reseller |
-| DoD — Tychon Cyber ESI | `N66001-22-A-0079` | 09/05/2022 | 09/04/2032 | portfolio |
-| City of Los Angeles, CA — Autodesk Software IDIQ | `180000000350` | 06/25/2018 | 04/10/2036 | portfolio |
-| City of San Francisco, CA — Autodesk Software IDIQ | `1000015124` | 07/01/2019 | 06/30/2026 | portfolio |
-| Commonwealth of Kentucky — Multi-Vendor Master Agreement | `070000217538` | 09/05/2007 | 04/11/2036 | portfolio |
-| Fairfax County, VA — Autodesk BPA | `4400007604` | 04/01/2017 | 04/10/2036 | portfolio |
-| Internet2 | `N/A` | 09/30/2014 | 05/11/2027 | portfolio |
-| Inter-University Council of Ohio Purchasing Group | `UN23-231` | 06/01/2024 | 05/31/2031 | 20 59 reseller |
-| King County, WA — Autodesk IDIQ | `6043767` | 10/15/2018 | 04/10/2036 | portfolio |
-| NASPO ValuePoint — Panasonic Connect North America | `MA23019` | 01/30/2024 | 06/30/2026 | portfolio |
-| New York OGS — Blackboard | `PM69700` | 11/18/2022 | 11/29/2025 | portfolio |
-| New York OGS — Oracle | `PM20940` | 06/13/2016 | 11/29/2030 | portfolio |
-| Ohio State Term Schedule (STS) | `STS022111` | 07/02/2025 | 09/26/2039 | 20 59 reseller |
-| Sourcewell — Private Wireless Services | `020624-SYN` | 05/03/2024 | 05/03/2031 | 20 59 reseller |
-| State of California Multiple Award Schedule (CMAS) | `3-16-70-1047B` | 07/19/2016 | 04/11/2026 | portfolio |
-| State of California Oracle CMAS | `3-17-00-0509A` | 06/22/2017 | 04/30/2027 | portfolio |
-| State of California Software License Program — Oracle | `SLP-23-0-0068K` | 09/01/2023 | 08/31/2026 | portfolio |
-| State of Maryland Multi-Vendor COTS IDIQ | `06B02490021` | 10/01/2012 | 09/30/2027 | portfolio |
-| State of North Carolina Endpoint Protection Services | `STC208M` | 01/20/2021 | 01/19/2027 | portfolio |
-| State of Ohio MCSA CrowdStrike | `MCSA0102` | 03/11/2022 | 03/31/2027 | portfolio |
-| State of Ohio Multi-Vendor IDIQ | `534042` | 06/25/2027 | 04/10/2026 | portfolio |
-| State of South Carolina — Palo Alto Contract | `4400031905` | 07/01/2023 | 06/30/2028 | 20 59 reseller |
-| University of Maine — Autodesk IDIQ | `2020-016` | 09/14/2019 | 09/13/2026 | portfolio |
-| University of Mary Washington — AWS IDIQ | `UCPUMW 15-400` | 08/13/2015 | 08/12/2030 | portfolio |
-| TX DIR — Cybersecurity Products and Services | `TX DIR-CPO-4846` | 01/26/2023 | 01/25/2028 | 20 59 reseller |
-| TX DIR — Miscellaneous IT | `TX DIR-CPO-5096` | 12/14/2022 | 12/21/2027 | 20 59 reseller |
-| TX DIR — Software COTS and Related Services | `TX DIR-CPO-5869` | 11/03/2025 | 11/03/2031 | 20 59 reseller |
-| TX DIR — Mobile Digital Video Recording Systems | `TX DIR-CPO-5283` | 08/21/2024 | 08/21/2029 | 20 59 reseller |
-| TX DIR — Software | `TX DIR-TSO-4383` | 08/13/2019 | 11/19/2025 | portfolio |
-| TX DIR — Telecom & Conferencing | `TX DIR-CPO-5077` | 08/04/2022 | 08/04/2027 | 20 59 reseller |
-| Equalis Group — Technology, Software, Equipment & Services | `R10-1173F` | 03/01/2025 | 02/28/2030 | 20 59 reseller |
-| Equalis Group — Cloud Solutions | `COG-2139A` | 01/01/2023 | 12/31/2026 | portfolio |
-| Equalis Group — Cybersecurity | `COG2127B` | 05/01/2022 | 04/30/2026 | portfolio |
-| NASPO ValuePoint — Cloud | `AR2480` | 09/30/2016 | 09/15/2026 | portfolio |
-| NCPA — Advanced Technology Solutions Aggregator | `01-170` | 12/14/2023 | 12/31/2028 | 20 59 reseller |
-| NCPA — Software | `01-164` | 05/01/2023 | 04/30/2028 | portfolio |
-| NCPA — Systems & IM Software | `01-136` | 04/19/2022 | 04/30/2027 | portfolio |
-| OMNIA Partners — Cyber Security Solutions | `R250307` | 10/01/2025 | 09/30/2030 | 20 59 reseller |
-| OMNIA Partners — Oracle Iowa DAS | `180233-001` | 12/12/2018 | 11/30/2028 | portfolio |
-| OMNIA Partners — Oracle Iowa OCIO | `2019BUS0430` | 12/12/2018 | 11/30/2028 | portfolio |
-| OMNIA Partners — Public Sector Oracle IDIQ | `180233-001` | 12/12/2018 | 11/30/2028 | portfolio |
-| PEPPM — Wholesaler Technology Catalog | `CA KCSOS 542242` | 10/01/2024 | 09/30/2027 | 20 59 reseller |
-| PEPPM — Product Line Contracts (numerous OEMs) | `Multiple` | 01/01/2026 | 12/31/2028 | 20 59 reseller |
-| PEPPM — California PA CSIU | `548362` | — | Current term | 20 59 reseller |
-| Sourcewell — Public Safety Software | `030425-SYN` | 09/05/2025 | 07/17/2029 | 20 59 reseller |
-| TIPS Software II IDIQ | `210101` | 06/09/2021 | 05/31/2027 | portfolio |
-| NASPO ValuePoint — Ericsson Enterprise Wireless | `AR3189` | 10/01/2019 | 09/30/2026 | 20 59 reseller |
-| NASPO ValuePoint — HPE Datacom | `AR3228` | 10/01/2019 | 09/30/2026 | 20 59 reseller |
-| NASPO ValuePoint — HPE Server/Storage | `23008` | 09/07/2023 | 06/30/2028 | 20 59 reseller |
-| NASPO ValuePoint — HP, Inc. Computer Equipment & Peripherals | `23011` | 07/01/2023 | 06/30/2028 | 20 59 reseller |
-| NASPO ValuePoint — Palo Alto Networks | `AR3229` | 10/01/2019 | 09/30/2026 | 20 59 reseller |
-| NASPO ValuePoint — Oracle | `AR2487` | 09/30/2016 | 09/15/2026 | portfolio |
-| TX DIR — Panasonic Corporation of North America | `TX DIR-TSO-5225` | 01/03/2024 | 01/03/2029 | 20 59 reseller |
-
 
 ### [SOP-2059-HOUS-001] Referral Intake & Admissions Workflow
 * **The 5-Step Admissions Lifecycle:**
@@ -375,7 +275,8 @@ These vehicles cannot be ordered against. Confirm renewal status with TD SYNNEX 
   * **Physical Walkthrough:** Inspect kitchen, living room, hallways, bathrooms, and exterior.
   * **Supplies Restock:** Replenish toilet tissue, paper towels, dish soap, hand soap, and trash bags.
   * **Safety Audit:** Confirm smoke and CO detectors have green operational lights; verify locks.
-  * **Mobile Photo Log:** Submit time-stamped inspection checklist and photos to Odoo.
+  * **Mobile Photo Log:** COC opens the mobile audit tool via link (`https://sms.iamalgo.com/audit`), completes all Pass/Fail toggles, selects restocked supplies, uploads 8 required time-stamped photos from phone camera, enters defect priority if applicable, and submits. Audit is automatically ingested into Odoo `Field Walkthrough Audits` (Module 05 category) with photos attached as `ir.attachment` records. *See `[SOP-2059-TECH-005]` for full operational procedure.*
+  * **Trigger via SMS:** Any COC may text **`AUDIT`** to **`+1-888-919-2059`** to receive a direct link to the walkthrough tool at any time.
   * **Quiet Hours:** 10:00 PM – 7:00 AM daily.
   * **Visitors:** Daytime visiting hours 9:00 AM – 8:00 PM in common areas only; zero overnight guests.
   * **Substance Prohibition:** 100% smoke-free / vape-free indoors; zero illegal drugs on property.
@@ -384,17 +285,24 @@ These vehicles cannot be ordered against. Confirm renewal status with TD SYNNEX 
 
 ### [SOP-2059-HOUS-005] Planned Transition & Involuntary Programmatic Discharge
 * **Planned Transition (Graduation):** Resident achieves independence and transitions to permanent housing. Requires 14-day notice, exit inspection, and positive landlord reference.
-* **Involuntary Discharge:** Accumulation of 3 strikes or immediate safety violations (weapons, active violence). Executed via Notice of Programmatic Discharge (`NOTICE_OF_PROGRAMMATIC_DISCHARGE.pdf` / `SOP-2059-FORM-006`) with mandatory caseworker coordination.
-* **Turnover Audit ($25 COC Milestone):** Move-out inspection, key collection, digital code removal, and scheduling turnover cleaning & ozone sanitization.
+* **Involuntary Discharge Procedure:**
+  * **Grounds:** Accumulation of 3 progressive strikes or immediate zero-tolerance violations (firearms, physical violence, drug distribution).
+  * **Digital Incident Reporting:** COC initiates report via Mobile Strike Tool (`https://sms.iamalgo.com/strike` or text `DISCHARGE` to `+1-888-919-2059`) with photo evidence and narrative per `[SOP-2059-TECH-007]`.
+  * **Strict Zero-Confrontation Rule:** COC does NOT confront resident. COC reports; Program Director executes.
+  * **Automatic Escalation Alert:** System automatically sends instant high-priority SMS alert to Program Director (`+1-205-534-8492`).
+  * **Formal Notice & Coordination:** Program Director delivers formal Notice of Programmatic Discharge (`SOP-2059-FORM-006`), provides immediate notice to caseworker within 2 hours, and coordinates safe transition.
+* **Turnover Audit ($25 COC Milestone):** Move-out inspection, key collection, digital door code revocation, and scheduling turnover cleaning & ozone sanitization.
 
 ---
 
 ### [SOP-2059-HOUS-006] Progressive Disciplinary & 3-Strike System
-* **Strike 1 (Written Warning):** Executed via `PARTICIPANT_STRIKE_NOTICE.pdf` (`SOP-2059-FORM-004`); copy to caseworker; 30-day corrective action plan.
-* **Strike 2 (Final Written Warning):** Formal notice and mandatory joint conference with caseworker.
-* **Strike 3 (Programmatic Discharge):** Issuance of Notice of Programmatic Discharge (7-day notice).
-* **Severe Violations:** Immediate escalation to Strike 3 / emergency discharge for weapons, physical violence, or illicit drug distribution.
-* **Clean Slate:** 60 consecutive days of compliance expunges one active strike.
+* **Core Philosophy:** Progressive accountability with second chances, documented objectively via the Mobile Strike Tool (`https://sms.iamalgo.com/strike` / text `STRIKE` to `+1-888-919-2059`).
+* **COC Role:** Fact-finder and evidence submitter only. COCs do not adjudicate strikes or issue final penalties.
+* **Strike 1 (Written Warning):** Initiated via mobile tool; formal notice issued via `PARTICIPANT_STRIKE_NOTICE.pdf` (`SOP-2059-FORM-004`); copy sent to caseworker within 48 hours; establishes a 30-day corrective action plan.
+* **Strike 2 (Final Written Warning):** Formal notice and mandatory 3-way conference between resident, Program Director, and caseworker.
+* **Strike 3 (Programmatic Discharge):** Issuance of formal Notice of Programmatic Discharge (`SOP-2059-FORM-006`, 7-day transition notice).
+* **Severe Violations (Immediate Emergency Discharge):** Firearms/deadly weapons, physical assault, or active illicit drug sales immediately escalate to emergency discharge and 911 police dispatch.
+* **Clean Slate Policy:** 60 consecutive days of full compliance expunges one active strike from the resident's Odoo record.
 
 ---
 
@@ -440,38 +348,137 @@ These vehicles cannot be ordered against. Confirm renewal status with TD SYNNEX 
 
 ---
 
-### [SOP-2059-TECH-005] Digital Intake Architecture & Multi-Layer Anti-Spam / Anti-Bot Security Standards
-1. **Purpose & Scope:** Mandates the standardized security engineering requirements for all public web forms, contact endpoints, and automated intake portals across 20/59 Ventures Corp. and any current or future subsidiary divisions (e.g., Housing Intake, NEMT Mobility, Meal Logistics, Foundation Outreach).
-2. **The Threat Landscape (Botnets, Phishing & Lead Flooding):** Public contact and intake forms connected to transactional email pipelines (Telnyx Email REST API) and CRM databases (Odoo Community) are frequent targets for automated crawler botnets and foreign proxies. Attackers inject deceptive cryptocurrency links, sweepstakes, phishing URLs, or automated price-scraping probes (often in foreign languages or from overseas hosting VPS nodes). Left unmitigated, these attacks:
-   * Pollute CRM pipeline opportunities with junk records and fake lead data.
-   * Trigger excessive transactional email API costs and pollute staff inboxes.
-   * Risk corporate domain sender reputation if auto-replies bounce to spoofed or invalid mailboxes.
-   * Risk TCPA and audit compliance metrics by spoofing fake consent records.
-3. **Mandatory 6-Layer Defense-in-Depth Specification for All Corporate Applications:**
-   * **Layer 1: Edge IP & Hosting Subnet Blacklist (Cloudflare Worker)**
-     * The Cloudflare Edge Worker (`_worker.js`) intercepts all inbound traffic at the edge before application execution.
-     * Requests originating from known malicious scraper IPs or non-residential VPS/proxy hosting subnets (e.g., `80.94.95.202` and `80.94.95.0/24`) are immediately terminated with an `HTTP 403 Access Denied`.
-   * **Layer 2: Edge Geo-Fencing & Silent Discard (Cloudflare Worker)**
-     * Since 20/59 Ventures Corp. exclusively serves veterans and seniors across domestic Alabama regional hubs, intake and contact APIs (`/api/contact`, `/api/public/intake`, `/api/intake`, `/api/lead`, `/api/intake-upload`) strictly enforce domestic origin (`US`, `CA`, `PR`, `VI`, `GU`, `MP`, `AS`).
-     * Submissions originating from international country signatures (`cf-ipcountry`) are automatically intercepted at the edge and dropped with a simulated `HTTP 200 { success: true, shielded: true }` response so bots do not retry or rotate IPs.
-   * **Layer 3: North American Numbering Plan (NANP) Phone Sanitization (Backend)**
-     * All lead-generation and intake endpoints must validate incoming phone numbers against the 10-digit North American Numbering Plan (10 digits starting with 2–9, or 11 digits starting with +1).
-     * Foreign or spoofed 11-digit numbers (such as Russian/European mobile prefixes like `89...` or arbitrary digit sequences) are immediately flagged and dropped as spam.
-   * **Layer 4: Zero-Friction Frontend Honeypot Fields**
-     * Every HTML `<form>` across all public pages (`index.html`, `intake.html`, modal forms) must incorporate an invisible honeypot field (`b_website_url` or `company_website`).
-     * The field is hidden off-screen with CSS (`position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;`), `tabindex="-1"`, `autocomplete="off"`, and `aria-hidden="true"`.
-     * Legitimate users and assistive screen readers ignore this field; automated form scrapers automatically populate all detected inputs and trigger instant backend drops.
-   * **Layer 5: Intelligent Probe, Foreign Script & Phishing Content Scanner**
-     * The backend scanner evaluates free-text fields (`message`, `notes`, `name`, `management_needs`) using regex patterns:
-       * Drops raw outbound hyperlinks (`https?://`, `bit.ly`, `tinyurl.com`, `telegra.ph`, `t.me/`, etc.).
-       * Drops common foreign bot scraping probes (e.g., Italian/European pricing solicitations like "ciao", "volevo sapere", "il tuo prezzo").
-       * Drops foreign alphabet injections (Cyrillic `\u0400-\u04FF`, Chinese `\u4E00-\u9FA5`) incompatible with domestic case manager workflows.
-   * **Layer 6: Downstream Service Shielding & Zero Data Pollution**
-     * When any shield condition triggers, the system must **immediately abort** all downstream operations:
-       * **Skip Telnyx Email API:** Zero notification emails dispatched to company inboxes or leadership.
-       * **Skip Client Auto-Confirmations:** Zero automated replies sent to unverified or spoofed addresses.
-       * **Skip Odoo CRM Sync:** Zero opportunity leads or chatter logs created in Odoo CRM.
-       * **Deceptive Response:** Return an HTTP 200 `{ success: true, message: '...', shielded: true }` so threat actors cannot reverse-engineer filter criteria.
+### [SOP-2059-TECH-005] Mobile COC Walkthrough & Photo Audit Tool — Full SOP
+*(Introduced v1.1 — September 11, 2026)*
+
+#### 1. Purpose & Scope
+This SOP governs the mandatory use of the 20/59 Ventures Mobile COC Walkthrough & Photo Audit application (`coc_audit.py`) for all bi-weekly supportive housing property inspections. The tool replaces paper or informal photo documentation with a standardized, mobile-optimized web form that automatically ingests results into Odoo Community Edition (Knowledge Base, Module 05) with time-stamped photographic evidence.
+
+#### 2. System Architecture
+| Component | Technology | Description |
+| :--- | :--- | :--- |
+| **Frontend** | HTML5 / CSS3 / Vanilla JS | Zero-install mobile web app. Opens in any smartphone browser. |
+| **Backend** | FastAPI (Algo Text gateway, port 8000) | Receives JSON submission; routes to Odoo XML-RPC. |
+| **SMS Trigger** | Telnyx toll-free `+1-888-919-2059` | Inbound keyword `AUDIT`, `WALKTHROUGH`, or `CHECKLIST` auto-replies with the link. |
+| **Data Store** | Odoo `document.page` — Module 05 KB | Each audit creates a permanent record under `Field Walkthrough Audits`. |
+| **Photo Storage** | Odoo `ir.attachment` (base64 JPEG) | Up to 8 photos attached to each audit record; client-side compressed before upload. |
+| **Public URL** | `https://sms.iamalgo.com/audit` | Routed via Cloudflare Tunnel `sms-gateway` → `127.0.0.1:8000/audit`. |
+| **Emergency SMS** | Telnyx → `+1-205-534-8492` | Automatic Priority 1 alert SMS to Program Director when flagged. |
+
+#### 3. Step-by-Step COC Operating Procedure
+1. **Receive Link:** Text `AUDIT` to `+1-888-919-2059` from your phone. You will immediately receive a text with the walkthrough link. Alternatively, Program Director may text the link directly before each visit via `send_audit_link.py`.
+2. **Open on Mobile:** Tap the link. The form opens in your default mobile browser — no app download required.
+3. **Select Property:** Choose the property address from the dropdown or enter a custom address. Select your visit type (Routine Visit 1 or 2, Emergency, or Turnover Audit).
+4. **Enter COC Details:** Enter your name and phone number. The confirmation SMS will be sent to your phone number upon successful submission.
+5. **Complete Life-Safety Audit:** Tap **PASS** or **ATTENTION** for each item:
+   - Smoke Detectors (all rooms)
+   - Fire Extinguisher (green zone, charged)
+   - Narcan / First Aid Kit (stocked)
+   - Exterior & Egress (grounds, locks, lighting)
+6. **Log Supplies Restocked:** Tap the chips for each supply item restocked during the visit.
+7. **Upload 8 Required Photos:** Tap each camera slot to capture:
+   1. Front Exterior & Grounds
+   2. Living Room / Entry
+   3. Kitchen Counters & Sink
+   4. Refrigerator Shelves
+   5. Bathroom 1 (primary)
+   6. Bathroom 2 / Hall Bath
+   7. Fire Extinguisher & Narcan (First Aid Kit)
+   8. Utility Closet / HVAC Filter
+8. **Flag Maintenance Defects:** If any maintenance issue is observed, select priority level:
+   - **None** — No issues
+   - **Priority 3** — Routine (< 72 hr)
+   - **Priority 2** — Urgent (< 24 hr)
+   - **Priority 1 — Emergency** — Life-safety hazard (< 4 hr)
+9. **Add Resident Notes:** Enter brief welfare notes or observations.
+10. **Sign & Submit:** Type your name in the certification field. Tap **Submit Walkthrough to Odoo**.
+
+#### 4. Automated System Actions Upon Submission
+* Odoo `document.page` record created under `Field Walkthrough Audits` → `Module 05: Facilities, Safety & Maintenance`.
+* All uploaded photos attached as `ir.attachment` records (named `Audit_[Area]_[Date].jpg`).
+* **If Priority 1 flagged:** Automatic emergency SMS dispatched to Program Director (`+1-205-534-8492`) with property, defect description, and COC contact.
+* **COC Confirmation SMS:** If phone number was entered, a confirmation text is sent acknowledging the audit was logged with photo count.
+
+#### 5. Compliance & Retention
+* Completed audits must be submitted **within 30 minutes of completing each physical walkthrough**.
+* Audit records are retained for **3 years minimum** per `[SOP-2059-CORP-005]`.
+* Photos must be captured **at the property during the visit** — no stock or archival photos permitted.
+* Submission without minimum 4 photos will be flagged as incomplete by Program Director during monthly review.
+
+#### 6. Manual Link Dispatch (Program Director)
+To proactively send the walkthrough link to a COC before a scheduled visit:
+```
+python scripts/tools/send_audit_link.py --phone [COC_10_DIGIT] --name "[COC Name]" --property "[Address]" --url "https://sms.iamalgo.com/audit"
+```
+
+#### 7. Troubleshooting
+| Symptom | Cause | Resolution |
+| :--- | :--- | :--- |
+| No reply after texting AUDIT | Gateway service may be stopped | Program Director restarts Algo Text service on port 8000 |
+| Photos fail to upload | Image too large or network timeout | Use on Wi-Fi; photos are auto-compressed but retry if > 5 MB raw |
+| Submission error on final step | Odoo server unavailable | Notify Program Director; Odoo Docker may need restart (`docker start odoo`) |
+| Link not loading | Cloudflare tunnel offline | Program Director checks tunnel `sms-gateway` via Cloudflare dashboard |
+
+---
+
+### [SOP-2059-TECH-006] Digital Platform Expansion Roadmap: CRM Property Profiles & COC Profiles
+*(Introduced v1.1 — September 11, 2026)*
+
+#### Purpose
+This section documents the planned integration roadmap for expanding the Mobile COC Audit Tool beyond basic walkthrough logging into a full property intelligence and workforce management platform.
+
+#### Planned Phase 2 Capabilities
+
+| Feature | Description | Timeline |
+| :--- | :--- | :--- |
+| **CRM Property Profiles** | Each audit submission auto-populates or updates an Odoo CRM record for the inspected property (address, resident count, last audit date, cumulative defect history, maintenance trends). | Phase 2 |
+| **COC Profiles** | Individual contractor dashboards in Odoo CRM showing audit count, average photo quality score, defect catch rate, response time to Priority 1 events, and monthly earnings summary. | Phase 2 |
+| **Audit Analytics Dashboard** | Aggregated property health dashboard showing: defect frequency by property, supply restock patterns, COC walkthrough compliance rate (% completed vs. required per month). | Phase 2 |
+| **Scheduling Integration** | Auto-generate COC walkthrough calendar from Odoo using property list; dispatch SMS reminders 1 hour before each scheduled visit. | Phase 3 |
+| **Resident Welfare Flag** | Add a resident-initiated SMS keyword (e.g., text `HELP` to `+1-888-919-2059`) to open a welfare request form routed to Program Director. | Phase 3 |
+| **Vendor Dispatch from Audit** | Priority 1 defect automatically opens a maintenance work order in Odoo, pre-fills vendor list, and triggers vendor notification SMS. | Phase 3 |
+| **Move-In & Turnover Audit Forms** | Separate form variants in the same app for new resident move-in condition documentation and exit turnover audits. | Phase 3 |
+
+#### Development Principles
+* All new form types use the same `coc_audit.py` FastAPI + Odoo XML-RPC pattern — zero additional servers required.
+* CRM integration uses Odoo's native `crm.lead` and `res.partner` models with property address as the unique CRM record key.
+* All SMS interactions continue through the existing Telnyx toll-free `+1-888-919-2059` number with additional keyword routing.
+* Privacy: COC profile data is accessible only to Program Director and President — not to other COC contractors.
+
+---
+
+### [SOP-2059-TECH-007] Mobile COC Strike Notice & Resident Discharge Reporting Tool — Full SOP
+*(Introduced v1.2 — September 11, 2026)*
+
+#### 1. Purpose & Core Operational Safeguard
+This SOP governs the digital reporting of resident rule violations, progressive disciplinary strikes, and emergency programmatic discharges across all supportive housing properties using `coc_strike.py`.
+
+> [!CAUTION]
+> **STRICT ZERO-CONFRONTATION MANDATE:**  
+> Community Operations Coordinators (COCs) are independent 1099 contractors responsible for property oversight and factual documentation. **COCs DO NOT have authority to verbally evict, remove, or physically confront a resident.**  
+> - **COC Role:** Document facts, select violation categories, upload photographic evidence, and submit.  
+> - **Director Role:** Program Director (Quincy Ruffin) executes all disciplinary actions, serves formal notices (`SOP-2059-FORM-004` / `FORM-006`), coordinates with sponsoring caseworkers, and manages law enforcement if required.
+
+#### 2. System Architecture & Access
+| Component | Details |
+| :--- | :--- |
+| **Tool URL** | `https://sms.iamalgo.com/strike` (via Cloudflare Tunnel `sms-gateway`) |
+| **SMS Gateway** | Telnyx toll-free `+1-888-919-2059` |
+| **SMS Triggers** | Text keyword `STRIKE`, `DISCHARGE`, or `VIOLATION` to receive the mobile link instantly |
+| **Backend** | FastAPI endpoint `/api/v1/strike/submit` running in `Algo Text` (port 8000) |
+| **Database Target** | Odoo `document.page` records in Module 02 (`Resident Discipline & Discharges`) |
+| **Evidence Photos** | Attached as `ir.attachment` records to the incident report |
+| **Emergency SMS Alert** | Automatic instant text to Program Director (`+1-205-534-8492`) on Emergency or Strike 3 |
+
+#### 3. Step-by-Step Reporting Procedure
+1. **Safety First:** If active violence or weapons are present, retreat to safety and call **911** first.
+2. **Access Form:** Text `STRIKE` to `+1-888-919-2059` or open `https://sms.iamalgo.com/strike`.
+3. **Property & Resident Identification:** Select property address, resident full name, and room/bed number.
+4. **Select Action Level:** Strike 1 (Written Warning), Strike 2 (Final Warning), Strike 3 (Discharge Notice), or Emergency Discharge (Immediate Revocation).
+5. **Violation Tags:** Select all applicable tags (e.g., unauthorized overnight guests, indoor smoking/vaping, noise, food theft, weapons, physical altercations).
+6. **Upload Evidence:** Take or upload clear photos of physical evidence (contraband, property damage, cigarette butts, etc.).
+7. **Factual Narrative:** Detail exactly what occurred (date, time, witness accounts, direct observations).
+8. **Submit:** Upon submission, report is logged into Odoo KB, evidence attached, Director alerted if critical, and confirmation text sent to COC.
 
 ---
 
@@ -588,8 +595,6 @@ These vehicles cannot be ordered against. Confirm renewal status with TD SYNNEX 
 ### [SOP-2059-APP-002] Preferred Vendor & Service Provider Directory Template
 * **Pre-qualification Requirements:** IRS Form W-9, $1,000,000 General Liability Certificate of Insurance naming 20 59 Ventures Corp., verified trade licensure.
 * **Service Categories:** Licensed HVAC, Master Plumbing, Licensed Electrician, Locksmith/Keypads, Turnover Cleaners, Lawn Maintenance, Pest Control, Emergency Board-Up.
-* **Federal IT Supply Chain:** TD SYNNEX & D&H (authorized wholesale distribution); StarTech.com, Ergotron, Jabra, Microsoft, Samsung, Logitech (authorized resale & integration). Contract vehicles available through those distribution partners are enumerated in [SOP-2059-CORP-006].
-* **Annual Verification (with Q3 VOSB/WOSB check):** Confirm active JCP certification and review Export Control Compliance statement / Data Custodian designation.
 * **Utility Providers Directory:** Complete utility provider contact numbers for Tuscaloosa, Dothan, and Montgomery hubs.
 
 ---
@@ -610,8 +615,212 @@ Plain-language resident-facing handbook structure covering:
 
 ---
 
+### [SOP-2059-TECH-008] Telnyx Wholesale SMS Gateway & Multi-Company Dispatch
+Integrated telecommunications gateway directly connecting Odoo 18 to Telnyx v2 Messaging REST API, routing all system SMS alerts, strike warnings, audit links, and mass broadcasts through wholesale US 10DLC and toll-free carrier routes.
+
+---
+
+### [SOP-2059-TECH-009] Unified Email Platform, Odoo Marketing & Carrier Relay Architecture
+*(Introduced v1.3 — September 11, 2026)*
+
+#### 1. Purpose & Scope
+This SOP establishes the unified email communication framework for 20 59 Ventures Corp. across all regional hubs (Tuscaloosa, Dothan, Montgomery). It combines executive/staff human mailboxes (Zoho Mail), community outreach and marketing campaigns (Odoo Email Marketing), and high-volume automated operational dispatches (Telnyx Carrier API Relay) into a cohesive architecture without seat-licensing friction or domain deliverability conflicts.
+
+#### 2. Corporate Mailboxes & Operational Routing
+| Address | Purpose | Environment | Delivery Path |
+| :--- | :--- | :--- | :--- |
+| `info@2059ventures.online` | Public inquiries, admissions, general correspondence | Zoho Mail (Desktop & Mobile) | Primary Zoho MX |
+| `support@2059ventures.online` | Property issues, tenant assistance, tickets | Zoho Mail + Odoo Ticket sync | Primary Zoho MX + Algo Text Webhook |
+| `intake@2059ventures.online` | Housing referral & application submissions | Zoho Alias + Housing Auto-sync | Primary Zoho MX + Algo Text Webhook |
+| `andrea.marcus@2059ventures.online` | Executive leadership (President & CEO) | Zoho Mail (Desktop & Mobile) | Primary Zoho MX |
+| `qruffin@2059ventures.online` | Operational leadership (Program Director & COO) | Zoho Mail (Desktop & Mobile) | Primary Zoho MX |
+
+#### 3. DNS Co-Existence & Deliverability (Cloudflare)
+To ensure flawless deliverability and eliminate spam filtering while protecting human inboxes:
+* **Primary MX Records:** Maintained exclusively by Zoho Mail (`mx.zoho.com`, `mx2.zoho.com`, `mx3.zoho.com`). Personal email is never disrupted.
+* **SPF Authorization:** Multi-provider SPF record authorizing both Zoho and Telnyx:
+  `v=spf1 include:zohomail.com include:spf.telnyx.com ~all`
+* **Cryptographic DKIM:** Dedicated 2048-bit RSA selector `telnyx1._domainkey.2059ventures.online` authenticating automated dispatches.
+* **Domain Ownership:** Verification token `telnyx-domain-verification=bcc40a08-ae0d-4df5-8a83-930831a6fcd8`.
+
+#### 4. Automated Operational Templates & Dispatch Run-Rules
+Automated operational notices trigger directly from the mobile-ready application suite (`https://sms.iamalgo.com/email` or automated Odoo events):
+1. **Application Received Confirmation:** Sent immediately upon intake form submission (`intake@`).
+2. **Move-In & Welcome Package:** Dispatched upon room assignment with handbook attachment (`info@`).
+3. **Corrective Strike Notice:** Formal disciplinary documentation mirroring SMS strike warnings (`support@`).
+4. **COC Walkthrough Schedule:** Audit links and property notices to COCs and landlords.
+5. **Community Announcements & Newsletters:** Built and dispatched via Odoo Email Marketing using shared Contact lists (`Coordinators of Care`, `All Active Residents`, `Monthly Rent & Fee Reminder List`).
+
+#### 5. Employee Standard of Procedure
+1. **Reading & Responding on the Go:** Employees continue using the official Zoho Mail iOS/Android application for direct human conversations.
+2. **Outbound Community Blasts:** Employees utilize Odoo Email Marketing (`/odoo/email-marketing`) to draft and schedule professional mass mailings using predefined mailing lists.
+3. **Resident History:** All sent notices and incoming operational emails are logged against the resident or caseworker record in Odoo Chatter for a complete audit trail.
+
+---
+
+### [SOP-2059-TECH-010] TD SYNNEX Distributor Procurement Integration — Read-Only Price Gateway
+*(Introduced v1.5 — October 4, 2026. Full SOP: `docs/SOP-2059-TECH-010-TD-SYNNEX-Procurement-Integration.md`)*
+
+Live distributor pricing for 20/59 Ventures (Company 4 only) via the TD SYNNEX CIS Partner API (reseller account `822061`, US). `tdsynnex_2059_client.py` manages OAuth2 tokens and `POST GetPriceAvailability` lookups (1–100 SKUs/call, `synnexSKU`/`mfgPN`/`customerPartNo`); Hub API Gateway exposes `GET/POST /api/v1/2059/tdsynnex/price` and `GET /api/v1/2059/tdsynnex/health` behind `HUBS_PRIVATE_API_KEY`. Reads run against Prod (account exists there; UAT has no record of `822061`). Use `priceType PROMOTION` for deal pricing (e.g. Cisco 8851 `$477.72` vs `$608.46` REGULAR). Credentials live in VPS `.env` as `TDSYNNEX_2059_*` (`chmod 600`, never git); rotate per §4 of TECH-010. All future purchases carry `x_distributor_id` + `x_vehicle_id` for the 3-year coop audit trail. No automated ordering in this phase.
+
+---
+
+### [SOP-2059-TECH-011] Enterprise System Architecture Defense, CMMC/NIST SP 800-171 & JCP Safeguards
+*(Introduced v1.6 — October 14, 2026)*
+
+#### 1. Purpose & Core System Defense Framework
+This SOP operationalizes the **Enterprise System Defense Framework** for 20/59 Ventures Corp. (Company ID: 4). In commercial and defense procurement evaluations, enterprise buyers and government contracting officers do not read raw application code—they require leadership to defend the architecture across **five fundamental operational pillars**:
+1. **Data Flows & Boundary Definition** (*Where the data goes*)
+2. **Access Control & Least Privilege** (*Who can reach it*)
+3. **Auditability, Telemetry & Logging** (*What gets logged*)
+4. **Resilience, Degraded Mode & Recovery** (*What happens when it fails*)
+5. **Ownership, Governance & Escalation** (*Who owns it*)
+
+This standard integrates our active federal accreditations—including **SAM.gov** (`UEI: GVR2NTGR4HU3`, `CAGE: 22DH9`), **NPI** (`1932035060`), **CMMC 2.0 Level 2 / NIST SP 800-171 Rev 2** controls, and **Joint Certification Program (JCP / DD Form 2345)** export-controlled technical data protections—directly into daily Odoo Community ERP workflows.
+
+#### 2. The Five System Defense Pillars for 20/59 Ventures
+
+```
++───────────────────────────────────────────────────────────────────────────────────────+
+|               20/59 VENTURES ENTERPRISE SYSTEM ARCHITECTURE DEFENSE                   |
++───────────────────────────────────────────────────────────────────────────────────────+
+| 1. DATA FLOWS         | 2. ACCESS CONTROL       | 3. AUDIT & LOGGING | 4. RESILIENCE  |
+| - MMS/SMS (+1-888-2059)| - RBAC via Company ID 4 | - Central Syslog   | - SQLite Queue |
+| - COC Photo Audits    | - Mandatory TOTP / MFA  | - Immutable Chatter| - Warm Fallback|
+| - TD SYNNEX API       | - Replay-Resistant Keys | - 24-hr Incident Log| - R2 Snapshots |
+| - Encrypted Postgres  | - Session Auto-Lock (15m)| - Audit Watchdog   | - Quarantine Dir|
++───────────────────────────────────────────────────────────────────────────────────────+
+|                                5. OWNERSHIP & GOVERNANCE                              |
+|   Executive Custodians: Andrea Marcus (President/CEO) & Quincy Ruffin (COO/Director)  |
++───────────────────────────────────────────────────────────────────────────────────────+
+```
+
+##### Pillar 1: Where the Data Goes (Data Ingestion, Boundaries & Sinks)
+* **Ingestion Channels**:
+  * **Resident & Workforce Communications**: Toll-Free MMS/SMS (`+1-888-919-2059`) processed via Telnyx Webhook router into Odoo Chatter.
+  * **Property & Facility Field Data**: Mobile COC Walkthrough & Photo Audit Tool (`coc_audit.py`) and Mobile Strike Notice Tool (`coc_strike.py`) ingesting inspection metrics, geolocation, and time-stamped damage photos into Odoo Knowledge Module 05.
+  * **Distributor Procurement Data**: TD SYNNEX CIS Partner API (`tdsynnex_2059_client.py`) ingesting hardware pricing into read-only memory caches; no resident PII or CUI leaves the enclave.
+  * **Compliance Intake**: Mobile `/cert` portal, intake mailboxes (`intake@2059ventures.online`), and carrier relays.
+* **Storage Sinks & Boundary Protection**:
+  * Primary persistent storage: PostgreSQL 15 (`IAM_Main` database), restricted strictly to localhost/internal Docker network.
+  * Digital Attachments: Encrypted `ir.attachment` volume storage for lease agreements, photo audits, and certifications.
+  * CUI/PII Isolation: Resident intake files, HIPAA disclosures, and CUI are tagged with metadata flags and restricted by Odoo record rules.
+
+##### Pillar 2: Who Can Reach It (Access Control & Boundary Isolation)
+* **Corporate Segregation**: Multi-company record rules guarantee that users authenticated under Company 4 cannot access parent IAM proprietary assets or sibling subsidiary ledgers without explicit inter-company permission.
+* **Authentication Controls**:
+  * Mandatory Multi-Factor Authentication (TOTP) for all administrative and operational staff (`SOP-2059-IDA-003`).
+  * Replay-resistant authentication and strict session timeouts (15 minutes idle lock per `SOP-2059-SYS-011`).
+  * Explicit role-based separation: COC Field Staff (read/create inspection tickets), Program Director (operational approval, lease execution), President (financial disbursements, executive certifications).
+
+##### Pillar 3: What Gets Logged (Auditability, Correlation & Telemetry)
+* **Immutable Chatter Logging**: All resident state transitions, lease approvals, disciplinary strikes, and compliance uploads post directly to Odoo Chatter (`mail.message`), recording user ID, timestamp, and payload hash.
+* **System Audit Daemon**: Centralized logging via `core/logger.py` and `scripts/audit_watchdog.py`, monitoring failed authentication attempts, privilege escalation, and file system modifications (`SOP-2059-AUD-001` to `AUD-009`).
+* **Audit Failure Alerting**: Automated notifications dispatch within 60 minutes if audit ingestion ceases (`SOP-2059-AUD-004`).
+
+##### Pillar 4: What Happens When It Fails (Resilience, Degraded Modes & Recovery)
+* **Graceful Degradation**:
+  * If external telecom gateways experience downtime, incoming webhooks queue in local persistence buffers (SQLite) with automatic retry backoff.
+  * If the TD SYNNEX API is unreachable, procurement caching falls back to the static line-card repository (`TDS_LINECARD_2025_2026.csv`) with warning indicators.
+* **Backup & Warm Fallback**:
+  * Nightly automated database snapshots pushed to Cloudflare R2 object storage with 256-bit AES encryption (`backup.bat`).
+  * Documented Warm Fallback restoration procedure on local Docker instances (`LOCAL_RESTORE_PROCEDURE.md`), guaranteeing Recovery Time Objective (RTO) under 2 hours and Recovery Point Objective (RPO) under 24 hours.
+
+##### Pillar 5: Ownership, Accountability & Human Oversight
+* **Designated Service Custodians**:
+  * Primary System Custodian & Program Director: **Quincy Ruffin** (operations, incident response, COC coordination).
+  * Executive Governance & Corporate Certifications: **Andrea Marcus** (SAM.gov, JCP Data Custodian, banking).
+* **Incident Escalation**: Formal incident handling per `SOP-2059-IR-001`: Tier 1 (1 hour acknowledgment) -> Tier 2 (containment under 4 hours) -> Tier 3 (executive/agency reporting within 24 hours).
+
+---
+
+#### 3. CMMC 2.0 Level 2 & NIST SP 800-171 Rev 2 Safeguards Matrix
+20/59 Ventures enforces the 110 NIST SP 800-171 Rev 2 controls across its ERP and cloud footprint:
+
+| NIST SP 800-171 Family | 20/59 Ventures Implementation Mechanism | Active SOP Reference |
+| :--- | :--- | :--- |
+| **Access Control (AC)** | Dual-layered CORS + Private API headers, Odoo multi-company record rules, least-privilege role gating, automatic session lockout after 15m idle. | `SOP-2059-SYS-002`, `SYS-006`, `SYS-011` |
+| **Awareness & Training (AT)** | Mandatory CUI and cyber hygiene onboarding before system access; signed annual acknowledgement. | `SOP-2059-CORP-006`, `CORP-007` |
+| **Audit & Accountability (AU)** | Synchronized NTP authoritative time source, daily log review, automated audit alerting, immutable Chatter thread tracking. | `SOP-2059-AUD-001` through `AUD-009` |
+| **Configuration Mgmt (CM)** | Baseline configuration management in Git, strict change approval protocol, non-essential port and service disabling. | `SOP-2059-CFG-001` through `CFG-009` |
+| **Identification & Auth (IA)** | Mandatory MFA/TOTP on all Odoo web access, salted-hash password storage, obscure login feedback, identifier reuse bans. | `SOP-2059-IDA-001` through `IDA-011` |
+| **Incident Response (IR)** | 1-hr containment timeline, 24-hr mandatory incident reporting, documented tabletop exercises and after-action reports. | `SOP-2059-IR-001`, `IR-002`, `IR-003` |
+| **Maintenance (MA)** | Sanitization of equipment prior to disposal, nonlocal maintenance authorization and monitoring. | `SOP-2059-MA-001` through `MA-006` |
+| **Media Protection (MP)** | Full-disk encryption for backups, zero portable media storage of CUI, controlled media disposal protocols. | `SOP-2059-MP-001` through `MP-009` |
+| **Personnel Security (PS)** | Comprehensive pre-engagement screening for COCs and employees, rapid account offboarding upon transfer or termination. | `SOP-2059-PS-001`, `PS-002` |
+| **Physical Protection (PE)** | Facility monitoring, visitor logs, 48-hr resident entry notice rules, secure physical lockboxes for operational hardware. | `SOP-2059-PE-001` through `PE-006` |
+| **Risk Assessment (RA)** | Periodic vulnerability scans and formal annual operational risk assessments. | `SOP-2059-RA-001`, `RA-002` |
+| **Security Assessment (CA)** | Continuous monitoring plan, System Security Plan (SSP) version control, active Plan of Action and Milestones (POA&M). | `SOP-2059-CA-001` through `CA-004` |
+| **System & Comm Protection (SC)** | TLS 1.3 encryption in transit, strict split-tunneling prohibition, boundary firewalls, isolated microservices network. | `SOP-2059-SC-001` through `SC-016` |
+| **System & Info Integrity (SI)** | Flaw remediation monitoring, automated endpoint protection, rapid malicious code scanning on uploaded attachments. | `SOP-2059-SI-001` through `SI-007` |
+
+---
+
+#### 4. Joint Certification Program (JCP / DD Form 2345) Safeguards
+As a certified entity holding active registration under **CAGE: 22DH9**, 20/59 Ventures maintains rigorous governance over Militarily Critical Technical Data (MCTD) and Export-Controlled defense technical information pursuant to DoDD 5230.25 and Canadian Technical Data Control Regulations (TDCR):
+
+1. **Designated Data Custodians**:
+   * **Andrea Marcus** (President & CEO) — Primary Executive Custodian
+   * **Quincy Ruffin** (Program Director & COO) — Technical & Systems Custodian
+   * *Both custodians maintain active signed certifications on file in Odoo Knowledge Base (`[EXPORT-22DH9-2026]`).*
+2. **Access & Handling Controls**:
+   * **Strict U.S. Person Verification**: Access to defense logistics records, cooperative procurement specifications, or technical data is strictly limited to verified U.S. citizens or lawful permanent residents.
+   * **Air-Gapped Document Tags**: Any defense logistics or technical document ingested into Odoo is classified under the `MCTD / EXPORT-CONTROLLED` tag, preventing automated external sync or public portal exposure.
+   * **Prohibition of Non-U.S. Hosting**: All production instances, Docker containers, and Cloudflare R2 backup buckets reside exclusively within continental United States (CONUS) data centers.
+   * **Media Sanitization & Disposal**: Any storage device or media bearing JCP-regulated data is sanitized pursuant to NIST SP 800-88 Rev 1 before decommissioning (`SOP-2059-MA-003`).
+
+---
+
+### [SOP-2059-GOV-005] Simplified Delivery Procurement (SDP) & Federal IT Storefront Operations
+1. **Purpose & Authority:**
+   Establishes the operational run-rules and ERP intake pipelines for 20/59 Ventures Corp.'s public-sector commercial-off-the-shelf (COTS) IT hardware storefront (`https://2059ventures.com/store.html`) pursuant to **FAR 13.201 (Micro-Purchase threshold < $10,000)**, **FAR Part 13 (Simplified Acquisition Procedures up to $250,000)**, **FAR 52.204-24/25/26 (Section 889 NDAA)**, and the **Trade Agreements Act (19 U.S.C. § 2501)**.
+2. **Storefront Multi-Page Architecture:**
+   * **Master IT Catalog (`store.html`):** Unified line card across all authorized manufacturers with search bar, category filter pills, and persistent session cart.
+   * **Enterprise Networking (`store-networking.html`):** Cisco Catalyst 9300/9200L Layer 3 switches & Meraki cloud security appliances.
+   * **Secure Audio & Headsets (`store-audio.html`):** Jabra Engage 50 II, Evolve2 65 Flex ANC, and Speak2 75 conference units (FIPS-compatible).
+   * **Ergonomic Mounts & Carts (`store-mounts.html`):** Ergotron LX monitor arms, CareFit Pro medical/field carts, and WorkFit-T sit-stand converters.
+   * **Docks, KVM & CAC Readers (`store-docks-cac.html`):** StarTech Quad 4K TAA docks, NIAP PP4.0 secure DisplayPort KVMs, and IOGEAR FIPS 201 CAC readers.
+   * **Power Protection & Racks (`store-power.html`):** APC Smart-UPS 1500VA pure sine wave backups & NetShelter SX 42U server enclosures.
+3. **Persistent Session Cart & Statutory Threshold Monitoring:**
+   * Utilizes client-side persistent storage (`js/govcon-cart.js`) maintaining state across page reloads and category navigation.
+   * Real-time statutory threshold evaluation:
+     * `< $10,000.00`: Displays `✅ FAR 13.201 Micro-Purchase Qualified (Immediate GPC Card Action)`.
+     * `> $10,000.00`: Displays `📋 FAR Part 13 Simplified Acquisition ($10k-$250k Formal RFQ Flow)`.
+4. **Odoo 18 Multi-Company Intake Pipeline (`POST /api/order`):**
+   * Serverless edge routing via Cloudflare Worker (`_worker.js`) with anti-bot honeypot and `.gov`/`.mil` domain validation.
+   * Automated lookup or creation of customer record in `res.partner` under **Company 4** (`20/59 Ventures Corp.`).
+   * Automated generation of `crm.lead` in **Team 8** (`20/59 GovCon & IT Solutions`) with tag `[GPC ORDER]` and expected revenue.
+   * Automated generation of draft quotation (`sale.order`, `state='draft'`) in Company 4 with itemized line items, MPNs, and distributor tags.
+   * Automated rich HTML Chatter logging to both lead and quotation records.
+   * Instant priority Telnyx SMS notification dispatch to Quincy Ruffin (+1-205-393-7396) from +1-888-919-2059.
+5. **Human Executive Oversight Gate (Zero Auto-Dropship):**
+   * Dropship purchase orders (`purchase.order`) are **never automatically placed** with TD SYNNEX (Partner ID 107) or Ingram Micro (Partner ID 137).
+   * Executive leadership (Quincy Ruffin / Andrea Marcus) must review the draft sale order, verify buyer agency authority, confirm distributor stock and lead time, and validate minimum 15% CLIN gross margin before confirming quotation.
+
+---
+
 ## EXECUTIVE SIGN-OFF & ADOPTION
-*This Master Operations Manual is hereby formally adopted by the executive leadership of 20/59 Ventures Corp. on this 11th day of September, 2026.*
+
+### Original Adoption
+*This Master Operations Manual was originally adopted by the executive leadership of 20/59 Ventures Corp. on the 11th day of September, 2026.*
+
+### Version 1.3 Amendment
+*Version 1.3 formally establishes `[SOP-2059-TECH-009]` (Unified Email Platform, Odoo Marketing & Carrier Relay Architecture) and integrates Odoo Email Marketing with Telnyx and Zoho DNS co-existence. Approved: September 11, 2026.*
+
+### Version 1.4 Amendment
+*Version 1.4 formally establishes mandatory workforce compliance certifications for all Community Operations Coordinator (COC) positions—requiring pre-placement HIPAA compliance training and 30-day OSHA for Healthcare Bloodborne Pathogens certification, with digital credentials permanently filed under worker personal profiles in Odoo Community ERP. Approved: September 12, 2026.*
+
+### Version 1.5 Amendment
+*Version 1.5 formally establishes `[SOP-2059-TECH-010]` (TD SYNNEX Distributor Procurement Integration — Read-Only Price Gateway): live price/availability via CIS Partner API for Company 4, gateway routes in `hub_api.py`, `TDSYNNEX_2059_*` credential handling, and rotation run-rules. No automated ordering. Approved: October 4, 2026.*
+
+### Version 1.6 Amendment
+*Version 1.6 formally establishes `[SOP-2059-TECH-011]` (Enterprise System Architecture Defense, CMMC/NIST SP 800-171 & JCP Compliance): codifying the 5-question system defense review framework, full 110-control NIST SP 800-171 alignment, and JCP DD Form 2345 export control data handling protocols under CAGE 22DH9. Approved: October 14, 2026.*
+
+### Version 1.8 Amendment
+*Version 1.8 formally establishes `[SOP-2059-GOV-005]` (Simplified Delivery Procurement & Federal IT Storefront Operations): codifying the multi-page defense IT hardware storefront (Master store.html + 5 dedicated category pages), 14 TAA & Section 889 curated products seeded in Odoo 18 Company 4, persistent cross-page session cart with FAR 13.201 micro-purchase tracker (<$10,000 statutory limit), Cloudflare `/api/order` edge pipeline, automated Team 8 CRM lead and draft quotation (`sale.order`) creation, human executive approval gate, and instant Telnyx SMS dispatch. Approved: October 24, 2026.*
+
+### Version 1.7 Amendment
+*Version 1.7 formally establishes `[SOP-2059-GOV-004]` (GovCon CRM & Defense Procurement Workflow): unifying Team 8 visual pipeline stages with satellite `govcon.rfq` workspaces, automated Sourcing Cascade (TD SYNNEX API adapter & line card benchmark), stage-exit compliance gates, distributor price-lock constraints, FAR 4.703 retention lock, DFARS 252.232-7006 WAWF pre-flight validation, Prompt Payment Act statutory interest computation (31 U.S.C. § 3902), daily compliance watchdog cron, and CUI-sanitized Telnyx SMS alerts to Quincy's cell (+1-205-393-7396). Approved: October 24, 2026.*
 
 **Andrea Marcus**  
 President & Chief Executive Officer  
