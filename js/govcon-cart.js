@@ -451,6 +451,24 @@ class GovConCartManager {
       });
     }
 
+    // Quick-Quote Modal Overlay Toggle
+    const quoteOverlay = document.getElementById('quick-quote-modal-overlay');
+    const closeQuoteBtn = document.getElementById('btn-close-quick-quote');
+    if (closeQuoteBtn) {
+      closeQuoteBtn.addEventListener('click', () => this.closeQuickQuoteModal());
+    }
+    if (quoteOverlay) {
+      quoteOverlay.addEventListener('click', (e) => {
+        if (e.target === quoteOverlay) this.closeQuickQuoteModal();
+      });
+    }
+
+    // Quick-Quote Form Submission
+    const quoteForm = document.getElementById('quick-quote-form');
+    if (quoteForm) {
+      quoteForm.addEventListener('submit', (e) => this.handleQuickQuoteSubmit(e));
+    }
+
     // Checkout Modal Toggle
     const checkoutBtn = document.getElementById('btn-open-checkout');
     const checkoutOverlay = document.getElementById('checkout-modal-overlay');
@@ -502,7 +520,41 @@ class GovConCartManager {
 
   openCheckout() {
     this.renderCheckoutSummary();
+    // Stamp render time for bot velocity check
+    document.querySelectorAll('.form-rendered-timestamp').forEach(el => el.value = Date.now());
     document.getElementById('checkout-modal-overlay')?.classList.add('open');
+  }
+
+  openQuickQuoteModal(productId) {
+    const product = GOVCON_PRODUCTS.find(p => p.id === productId);
+    if (!product) return;
+
+    const summaryBox = document.getElementById('quick-quote-product-summary');
+    const idInput = document.getElementById('quick-quote-product-id');
+    const errBox = document.getElementById('quick-quote-error');
+    if (errBox) errBox.style.display = 'none';
+
+    if (idInput) idInput.value = product.id;
+
+    if (summaryBox) {
+      summaryBox.innerHTML = `
+        ${product.image ? `<img src="${product.image}" alt="${product.name}" style="width: 58px; height: 58px; object-fit: contain; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; padding: 4px;">` : ''}
+        <div style="flex: 1;">
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--gov-accent); letter-spacing: 0.5px;">${product.categoryLabel} &bull; ${product.distro}</div>
+          <div style="font-size: 14px; font-weight: 800; color: #0f172a; line-height: 1.3; margin: 2px 0;">${product.name}</div>
+          <div style="font-size: 12px; color: #475569;">MPN: <strong>${product.mpn}</strong> &bull; GPC List: <strong style="color: #166534;">$${product.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div>
+        </div>
+      `;
+    }
+
+    // Stamp render time for anti-spam check
+    document.querySelectorAll('.form-rendered-timestamp').forEach(el => el.value = Date.now());
+
+    document.getElementById('quick-quote-modal-overlay')?.classList.add('open');
+  }
+
+  closeQuickQuoteModal() {
+    document.getElementById('quick-quote-modal-overlay')?.classList.remove('open');
   }
 
   closeCheckout() {
@@ -551,9 +603,14 @@ class GovConCartManager {
               <div style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 700;">GPC Government Price</div>
               <div style="font-size: 24px; font-weight: 800; color: #0f172a;">$${product.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
             </div>
-            <button class="btn-add-cart" onclick="govconCart.addToCart(${product.id}); govconCart.closeSpecModal();" style="padding: 11px 20px;">
-              <i class="fas fa-cart-plus"></i> Add to GPC Order
-            </button>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn-quick-quote-action" onclick="govconCart.openQuickQuoteModal(${product.id}); govconCart.closeSpecModal();">
+                <i class="fas fa-bolt" style="color: #fef08a;"></i> Fast Quote
+              </button>
+              <button class="btn-add-cart" onclick="govconCart.addToCart(${product.id}); govconCart.closeSpecModal();" style="padding: 11px 18px;">
+                <i class="fas fa-cart-plus"></i> Add to Cart
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -573,7 +630,7 @@ class GovConCartManager {
       <div class="compliance-spec-grid">
         <div class="comp-spec-card">
           <strong><i class="fas fa-certificate" style="color: #d97706;"></i> Prime Contractor</strong>
-          <span>20/59 Ventures Corp. &bull; CAGE: 22DH9 &bull; UEI: GVR2NTGR4HU3 &bull; SAM Active</span>
+          <span>20/59 Ventures Corp. &bull; CAGE: 22DH9 &bull; UEI: GVR2NTGR4HU3 &bull; NPI: 1932035060 &bull; SAM Active</span>
         </div>
         ${compCards}
       </div>
@@ -654,7 +711,10 @@ class GovConCartManager {
             <button class="btn-card-spec" onclick="govconCart.openSpecModal(${p.id})" title="View Technical Specs">
               <i class="fas fa-list-ul"></i> Specs
             </button>
-            <button class="btn-add-cart" onclick="govconCart.addToCart(${p.id})">
+            <button class="btn-card-quote" onclick="govconCart.openQuickQuoteModal(${p.id})" title="Instant Price & Availability Quote">
+              <i class="fas fa-bolt" style="color: #fef08a;"></i> Quote
+            </button>
+            <button class="btn-add-cart" onclick="govconCart.addToCart(${p.id})" title="Add to Cart">
               <i class="fas fa-cart-plus"></i> Add
             </button>
           </div>
@@ -862,11 +922,14 @@ class GovConCartManager {
       title: formData.get('title') || '',
       email: formData.get('email') || '',
       phone: formData.get('phone') || '',
+      order_type: 'cart_order',
       payment_method: formData.get('payment_method') || 'gpc',
       gpc_ref: formData.get('gpc_ref') || '',
       delivery_address: formData.get('delivery_address') || '',
       delivery_requirements: formData.get('delivery_requirements') || '',
-      rfq_token_hp: formData.get('rfq_token_hp') || '', // honeypot
+      rfq_token_hp: formData.get('rfq_token_hp') || '',
+      business_website_hp: formData.get('business_website_hp') || '',
+      form_rendered_at: formData.get('form_rendered_at') || '',
       items: this.cart,
       total: this.calculateTotal()
     };
@@ -900,7 +963,7 @@ class GovConCartManager {
               </div>
               <p style="font-size: 13.5px; color: #64748b; line-height: 1.5; margin-bottom: 24px;">
                 A confirmation has been dispatched to <strong>${payload.email}</strong>.<br>
-                Quincy Ruffin and the GovCon dispatch team have received an instant priority alert for final executive dropship verification.
+                Andrea Marcus and the contracts desk have received your order (Toll-Free Desk: 1-888-919-2059). A formal confirmation has been dispatched to your email.
               </p>
               <button class="btn-checkout-modal" onclick="location.reload()" style="max-width: 260px; margin: 0 auto;">
                 Return to Storefront

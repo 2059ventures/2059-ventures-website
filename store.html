@@ -60,6 +60,7 @@
         <div class="store-cred-strip">
           <span class="store-cred-pill"><i class="fas fa-shield-alt" style="color: #fef08a;"></i> CAGE: <strong>22DH9</strong></span>
           <span class="store-cred-pill">UEI: <strong>GVR2NTGR4HU3</strong></span>
+          <span class="store-cred-pill"><i class="fas fa-stethoscope" style="color: #fef08a;"></i> NPI: <strong>1932035060</strong></span>
           <span class="store-cred-pill"><i class="fas fa-check-circle" style="color: #4ade80;"></i> SAM.gov Active</span>
           <span class="store-cred-pill"><i class="fas fa-certificate" style="color: #fef08a;"></i> VOSB &bull; EDWOSB &bull; WOSB</span>
           <span class="store-cred-pill"><i class="fas fa-flag-usa"></i> TAA &amp; Sec 889 Compliant</span>
@@ -166,47 +167,61 @@
           </div>
         </div>
 
-        <form id="gpc-checkout-form">
-          <!-- Honeypot -->
-          <input type="text" name="rfq_token_hp" style="display:none !important;" tabindex="-1" autocomplete="off">
+                <form id="gpc-checkout-form">
+          <!-- Honeypots & Anti-Bot Protection -->
+          <div style="display:none !important; opacity:0; position:absolute; left:-9999px;">
+            <input type="text" name="rfq_token_hp" tabindex="-1" autocomplete="off">
+            <input type="text" name="business_website_hp" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="form_rendered_at" class="form-rendered-timestamp">
+          </div>
 
           <div class="form-grid-store">
             <div>
               <label class="store-label">Federal Agency / DoD Command *</label>
-              <input type="text" name="agency" required placeholder="e.g. US Navy NAVSEA, VA Medical Center" class="store-input">
+              <input type="text" name="agency" required placeholder="e.g. US Navy NAVSEA, VA CAVHCS" class="store-input">
             </div>
             <div>
               <label class="store-label">Cardholder / Officer Name *</label>
-              <input type="text" name="contact_name" required placeholder="e.g. LCDR Marcus Vance, GS-13" class="store-input">
+              <input type="text" name="contact_name" required placeholder="First &amp; Last Name" class="store-input">
             </div>
             <div>
-              <label class="store-label">Official Work Email (.gov / .mil) *</label>
+              <label class="store-label">Official Work Email (.gov / .mil / corporate) *</label>
               <input type="email" name="email" required placeholder="first.last@agency.gov" class="store-input">
             </div>
             <div>
               <label class="store-label">Direct Phone (Voice/SMS) *</label>
               <input type="tel" name="phone" required placeholder="205-555-0199" class="store-input">
             </div>
-            <div>
-              <label class="store-label">Procurement Payment Method *</label>
-              <select name="payment_method" class="store-select">
-                <option value="gpc">Government Purchase Card (GPC SmartPay Visa/MC)</option>
-                <option value="po">Written Purchase Order (SF-182 / DD-1155 / SF-1449)</option>
-                <option value="quote">Formal Written Quotation / SAT Solicitations</option>
-              </select>
-            </div>
-            <div>
-              <label class="store-label">GPC / PO Reference Number</label>
-              <input type="text" name="gpc_ref" placeholder="e.g. GPC-4421-NAVSEA (Optional)" class="store-input">
-            </div>
-            <div class="form-group-full">
-              <label class="store-label">Destination Facility / Delivery Address / DODAAC *</label>
-              <textarea name="delivery_address" rows="2" required placeholder="Building / Dock #, Installation Name, Street, City, State, ZIP, DODAAC" class="store-textarea"></textarea>
-            </div>
-            <div class="form-group-full">
-              <label class="store-label">Special Delivery / Security Instructions</label>
-              <input type="text" name="delivery_requirements" placeholder="e.g. Liftgate required, SCIF cleared escort, Inside delivery" class="store-input">
-            </div>
+          </div>
+
+          <!-- Optional Delivery / DODAAC Accordion -->
+          <div class="checkout-delivery-accordion" style="margin: 10px 0 16px;">
+            <details style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 14px; font-size: 13px;">
+              <summary style="font-weight: 700; color: #1e293b; cursor: pointer; user-select: none; display: flex; align-items: center; justify-content: space-between;">
+                <span><i class="fas fa-truck" style="color: var(--gov-primary); margin-right: 6px;"></i> Delivery Destination / DODAAC <span style="font-weight: 400; color: #64748b;">(Optional)</span></span>
+                <span style="font-size: 11.5px; color: var(--gov-primary); font-weight: 700;">+ Expand</span>
+              </summary>
+              <div style="margin-top: 12px; display: grid; gap: 10px;">
+                <div>
+                  <label class="store-label" style="font-size: 12px;">Delivery Address / Facility / DODAAC</label>
+                  <input type="text" name="delivery_address" placeholder="Building / Dock #, Base Name, City, State, ZIP, DODAAC" class="store-input">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                  <div>
+                    <label class="store-label" style="font-size: 12px;">Payment Method</label>
+                    <select name="payment_method" class="store-select">
+                      <option value="gpc" selected>GPC SmartPay (Visa/MC)</option>
+                      <option value="po">Written Purchase Order</option>
+                      <option value="quote">Formal Quotation</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="store-label" style="font-size: 12px;">PO / GPC Ref # (Optional)</label>
+                    <input type="text" name="gpc_ref" placeholder="e.g. GPC-4421-NAVSEA" class="store-input">
+                  </div>
+                </div>
+              </div>
+            </details>
           </div>
 
           <div id="order-submit-error" style="display: none; background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 10px 14px; border-radius: 6px; font-size: 13px; margin-bottom: 16px;"></div>
@@ -220,6 +235,63 @@
   </div>
 
   
+  
+  <!-- Quick-Quote Modal Overlay (Single Product Fast Inquiry) -->
+  <div class="quick-quote-modal-overlay" id="quick-quote-modal-overlay">
+    <div class="quick-quote-modal" role="dialog" aria-modal="true" aria-labelledby="quick-quote-title">
+      <div class="modal-header-store" style="background: #0f172a;">
+        <h3 id="quick-quote-title"><i class="fas fa-bolt" style="color: #fef08a;"></i> Instant Price &amp; Stock Availability</h3>
+        <button class="btn-close-drawer" id="btn-close-quick-quote" aria-label="Close Quick Quote">&times;</button>
+      </div>
+      <div class="modal-body-store" id="quick-quote-modal-body">
+        <div id="quick-quote-product-summary" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 14px;">
+          <!-- Dynamically populated by JS -->
+        </div>
+
+        <p style="font-size: 13px; color: #475569; line-height: 1.5; margin-bottom: 16px;">
+          Enter your official work details below. Andrea Marcus and our contracts desk will verify live warehouse inventory (TD SYNNEX / Ingram Micro) and email a formal quotation directly to you.
+        </p>
+
+        <form id="quick-quote-form">
+          <!-- Honeypots -->
+          <div style="display:none !important; opacity:0; position:absolute; left:-9999px;">
+            <input type="text" name="rfq_token_hp" tabindex="-1" autocomplete="off">
+            <input type="text" name="business_website_hp" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="form_rendered_at" class="form-rendered-timestamp">
+            <input type="hidden" name="product_id" id="quick-quote-product-id">
+          </div>
+
+          <div style="display: grid; gap: 12px; margin-bottom: 18px;">
+            <div>
+              <label class="store-label">Official Work Email (.gov / .mil / corporate) *</label>
+              <input type="email" name="email" required placeholder="name@agency.gov or first.last@company.com" class="store-input">
+            </div>
+            <div>
+              <label class="store-label">Agency / Command / Organization *</label>
+              <input type="text" name="agency" required placeholder="e.g. US Air Force AFLCMC, VA, General Dynamics" class="store-input">
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div>
+                <label class="store-label">Your Name <span style="font-weight: 400; color: #64748b;">(Optional)</span></label>
+                <input type="text" name="contact_name" placeholder="First &amp; Last Name" class="store-input">
+              </div>
+              <div>
+                <label class="store-label">Phone <span style="font-weight: 400; color: #64748b;">(Optional)</span></label>
+                <input type="tel" name="phone" placeholder="e.g. 205-555-0199" class="store-input">
+              </div>
+            </div>
+          </div>
+
+          <div id="quick-quote-error" style="display: none; background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 10px 14px; border-radius: 6px; font-size: 13px; margin-bottom: 14px;"></div>
+
+          <button type="submit" class="btn-submit-order" id="btn-submit-quick-quote" style="background: var(--gov-primary);">
+            <i class="fas fa-paper-plane"></i> Send Fast Quote &amp; Stock Report
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer style="background: #0f172a; color: #94a3b8; padding: 60px 20px 30px; margin-top: 80px; font-size: 13.5px;">
     <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid #1e293b;">
@@ -227,7 +299,7 @@
         <div style="color: #ffffff; font-weight: 800; font-size: 16px; margin-bottom: 14px;">20/59 VENTURES CORP.</div>
         <p style="line-height: 1.6; margin-bottom: 14px;">Defense &amp; Public-Sector IT Hardware Procurement. Authorized TD SYNNEX &amp; Ingram Micro Federal Logistics.</p>
         <div style="color: #cbd5e1; font-size: 12.5px;">
-          <strong>CAGE:</strong> 22DH9 &bull; <strong>UEI:</strong> GVR2NTGR4HU3<br>
+          <strong>CAGE:</strong> 22DH9 &bull; <strong>UEI:</strong> GVR2NTGR4HU3 &bull; <strong>NPI:</strong> 1932035060<br>
           <strong>SBA:</strong> VOSB &bull; EDWOSB &bull; WOSB Certified
         </div>
       </div>

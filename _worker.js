@@ -1747,32 +1747,74 @@ async function handleStoreOrderPost({ request, env, waitUntil }) {
     try {
         const data = await request.json();
 
-        // 1. Anti-Bot Honeypot Validation
-        if (data.rfq_token_hp && String(data.rfq_token_hp).trim().length > 0) {
-            console.warn('[Store Order Honeypot] Bot blocked');
-            return new Response(JSON.stringify({ success: false, error: 'Spam detected' }), {
+        // 1. Anti-Bot Honeypot & Timing Velocity Shield
+        const honeypotKeys = ['rfq_token_hp', 'business_website_hp', 'form_honeypot', 'middle_name'];
+        for (const hp of honeypotKeys) {
+            if (data[hp] && String(data[hp]).trim().length > 0) {
+                console.warn(`[Store Intake Honeypot] Trapped bot on field ${hp}`);
+                return new Response(JSON.stringify({ success: true, message: 'Inquiry received' }), {
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+                });
+            }
+        }
+
+        // Velocity timing check: bots submit in <1800ms
+        const renderedAt = Number(data.form_rendered_at);
+        if (renderedAt && (Date.now() - renderedAt < 1800)) {
+            console.warn('[Store Intake Velocity] Submission arrived under 1.8s. Bot dropped.');
+            return new Response(JSON.stringify({ success: true, message: 'Inquiry received' }), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+            });
+        }
+
+        const email = (data.email || '').trim().toLowerCase();
+        const agency = (data.agency || '').trim();
+        let contactName = (data.contact_name || '').trim();
+        const phone = (data.phone || '').trim();
+        const orderType = data.order_type || (data.items && data.items.length > 1 ? 'cart_order' : 'quick_quote');
+        const isQuickQuote = orderType === 'quick_quote';
+
+        // Phishing / spam pattern check
+        const textPayload = [agency, contactName, data.delivery_address, data.delivery_requirements].filter(Boolean).join(' ').toLowerCase();
+        if (/https?:\/\/|t\.me\/|wa\.me\/|crypto|casino|viagra|sweepstakes/i.test(textPayload)) {
+            console.warn('[Store Intake Spam] External URL or spam keyword blocked');
+            return new Response(JSON.stringify({ success: true, message: 'Inquiry received' }), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+            });
+        }
+
+        // Disposable email rejection
+        const disposableDomains = ['tempmail.com', 'mailinator.com', 'guerrillamail.com', 'throwawaymail.com', '10minutemail.com', 'sharklasers.com', 'yopmail.com'];
+        const domain = email.split('@')[1] || '';
+        if (disposableDomains.includes(domain)) {
+            console.warn(`[Store Intake] Disposable domain blocked: ${domain}`);
+            return new Response(JSON.stringify({ success: false, error: 'Please use an official government (.gov/.mil) or corporate organization email.' }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
             });
         }
 
-        const agency = (data.agency || '').trim();
-        const contactName = (data.contact_name || '').trim();
-        const email = (data.email || '').trim().toLowerCase();
-        const phone = (data.phone || '').trim();
+        const items = Array.isArray(data.items) ? data.items : [];
+        const total = parseFloat(data.total) || items.reduce((sum, i) => sum + ((i.price || 0) * (i.qty || 1)), 0);
+
+        if (!email || !agency || items.length === 0) {
+            return new Response(JSON.stringify({ success: false, error: 'Official email, agency name, and product details are required.' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+            });
+        }
+
+        if (!contactName) {
+            contactName = `${agency} Procurement Specialist`;
+        }
+
         const paymentMethod = data.payment_method || 'gpc';
         const gpcRef = (data.gpc_ref || '').trim();
-        const deliveryAddress = (data.delivery_address || '').trim();
+        const deliveryAddress = (data.delivery_address || 'Destination will be confirmed during quote review').trim();
         const deliveryReqs = (data.delivery_requirements || '').trim();
-        const items = Array.isArray(data.items) ? data.items : [];
-        const total = parseFloat(data.total) || items.reduce((sum, i) => sum + (i.price * i.qty), 0);
-
-        if (!agency || !contactName || !email || items.length === 0) {
-            return new Response(JSON.stringify({ success: false, error: 'Missing required order fields or items' }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
-            });
-        }
 
         // 2. Connect to Odoo 18
         const { uid, odooDb, odooPass } = await getOdooAuth(env);
@@ -1786,8 +1828,29 @@ async function handleStoreOrderPost({ request, env, waitUntil }) {
         });
 
         // 4. Create CRM Lead in Team 8 (GovCon Division)
+        const leadTitle = isQuickQuote
+            ? `[FAST QUOTE] ${agency} - ${items[0]?.mpn || 'Inquiry'} ($${total.toFixed(2)})`
+            : `[GPC ORDER] ${agency} - $${total.toFixed(2)}`;
+
+        const leadDesc = isQuickQuote
+            ? `⚡ 1-Click Fast Price & Stock Availability Inquiry
+Agency: ${agency}
+Contact: ${contactName} (${email})
+Phone: ${phone || 'Not provided'}
+Item: ${items[0]?.name} [MPN: ${items[0]?.mpn}]
+Distro: ${items[0]?.distro}
+Unit Price: $${total.toFixed(2)}`
+            : `🛒 Government Storefront Cart Order
+Agency: ${agency}
+Cardholder: ${contactName} (${email})
+Phone: ${phone}
+Payment: ${paymentMethod.toUpperCase()} (Ref: ${gpcRef || 'None'})
+Delivery Destination: ${deliveryAddress}
+Special Requirements: ${deliveryReqs || 'None'}
+Total Value: $${total.toFixed(2)}`;
+
         const leadVals = {
-            name: `[GPC ORDER] ${agency} - $${total.toFixed(2)}`,
+            name: leadTitle,
             partner_id: partnerId,
             contact_name: contactName,
             partner_name: agency,
@@ -1797,82 +1860,192 @@ async function handleStoreOrderPost({ request, env, waitUntil }) {
             team_id: 8,
             company_id: 4,
             stage_id: 10, // Sourced / Inquiry
-            description: `Government Storefront Click-to-Buy Order\nAgency: ${agency}\nCardholder: ${contactName} (${email})\nPhone: ${phone}\nPayment: ${paymentMethod} (Ref: ${gpcRef})\nDelivery: ${deliveryAddress}\nSpecial Reqs: ${deliveryReqs}\nTotal: $${total.toFixed(2)}`
+            description: leadDesc
         };
 
         const leadId = await callOdooRpc(env, 'object', 'execute_kw', [
             odooDb, uid, odooPass, 'crm.lead', 'create', [leadVals]
         ]);
 
-        // 5. Create Draft sale.order under Company 4
-        const orderLines = items.map(item => [0, 0, {
-            product_id: item.id,
-            name: `${item.name} [MPN: ${item.mpn || ''}]`,
-            product_uom_qty: parseFloat(item.qty) || 1.0,
-            price_unit: parseFloat(item.price) || 0.0,
-            company_id: 4
-        }]);
+        // 5. If Cart Order, also create Draft sale.order
+        let saleOrderId = null;
+        let saleOrderName = `Lead #${leadId}`;
+        if (!isQuickQuote) {
+            const orderLines = items.map(item => [0, 0, {
+                product_id: item.id,
+                name: `${item.name} [MPN: ${item.mpn || ''}]`,
+                product_uom_qty: parseFloat(item.qty) || 1.0,
+                price_unit: parseFloat(item.price) || 0.0,
+                company_id: 4
+            }]);
 
-        const saleOrderVals = {
-            partner_id: partnerId,
-            company_id: 4,
-            team_id: 8,
-            origin: 'SDP Click-to-Buy Storefront',
-            client_order_ref: gpcRef || `GPC Web Order ${Date.now()}`,
-            opportunity_id: leadId,
-            order_line: orderLines
-        };
+            const saleOrderVals = {
+                partner_id: partnerId,
+                company_id: 4,
+                team_id: 8,
+                origin: 'SDP Click-to-Buy Storefront',
+                client_order_ref: gpcRef || `GPC Web Order ${Date.now()}`,
+                opportunity_id: leadId,
+                order_line: orderLines
+            };
 
-        const saleOrderId = await callOdooRpc(env, 'object', 'execute_kw', [
-            odooDb, uid, odooPass, 'sale.order', 'create', [saleOrderVals]
-        ]);
-
-        // Read back the SO name (e.g. S00003)
-        let saleOrderName = `SO #${saleOrderId}`;
-        try {
-            const soData = await callOdooRpc(env, 'object', 'execute_kw', [
-                odooDb, uid, odooPass, 'sale.order', 'read', [[saleOrderId], ['name']]
+            saleOrderId = await callOdooRpc(env, 'object', 'execute_kw', [
+                odooDb, uid, odooPass, 'sale.order', 'create', [saleOrderVals]
             ]);
-            if (soData && soData[0] && soData[0].name) {
-                saleOrderName = soData[0].name;
+
+            try {
+                const soData = await callOdooRpc(env, 'object', 'execute_kw', [
+                    odooDb, uid, odooPass, 'sale.order', 'read', [[saleOrderId], ['name']]
+                ]);
+                if (soData && soData[0] && soData[0].name) {
+                    saleOrderName = soData[0].name;
+                }
+            } catch (e) {
+                console.warn('[Odoo SO Name Read]', e.message);
             }
-        } catch (e) {
-            console.warn('[Odoo SO Name Read]', e.message);
         }
 
-        // 6. Post Rich Chatter Notes
-        const itemsHtml = items.map(i => `<li><strong>${i.qty}x</strong> ${i.name} (MPN: <code>${i.mpn}</code> &bull; ${i.distro}) &mdash; $${(i.price * i.qty).toFixed(2)}</li>`).join('');
+        // 6. Post Rich Chatter Notes in Odoo
+        const itemsHtml = items.map(i => `<li><strong>${i.qty || 1}x</strong> ${i.name} (MPN: <code>${i.mpn}</code> &bull; ${i.distro}) &mdash; $${(((i.price || 0) * (i.qty || 1))).toFixed(2)}</li>`).join('');
         const chatterHtml = `
 <div style="font-family: Arial, sans-serif; padding: 6px;">
-  <h3 style="color: #1b4730; margin: 0 0 8px 0;">🛒 GovCon Storefront Click-to-Buy Order Dispatched</h3>
-  <p style="font-size: 13px; margin: 0 0 8px 0;"><strong>Agency:</strong> ${agency} &bull; <strong>Cardholder:</strong> ${contactName} (${email})</p>
-  <p style="font-size: 13px; margin: 0 0 8px 0;"><strong>Payment Method:</strong> ${paymentMethod.toUpperCase()} &bull; <strong>Ref:</strong> ${gpcRef || 'None Provided'}</p>
-  <p style="font-size: 13px; margin: 0 0 8px 0;"><strong>Delivery Destination:</strong> ${deliveryAddress}</p>
-  <p style="font-size: 13px; margin: 0 0 8px 0;"><strong>Special Requirements:</strong> ${deliveryReqs || 'None'}</p>
-  <h4 style="font-size: 13px; color: #0f172a; margin: 10px 0 4px 0;">Procurement Line Items:</h4>
+  <h3 style="color: #1b4730; margin: 0 0 8px 0;">${isQuickQuote ? '⚡ Fast Price &amp; Stock Availability Inquiry' : '🛒 GovCon Storefront Order Dispatched'}</h3>
+  <p style="font-size: 13px; margin: 0 0 8px 0;"><strong>Agency:</strong> ${agency} &bull; <strong>Contact:</strong> ${contactName} (${email})</p>
+  <p style="font-size: 13px; margin: 0 0 8px 0;"><strong>Direct Phone:</strong> ${phone || 'Not provided'}</p>
+  ${!isQuickQuote ? `<p style="font-size: 13px; margin: 0 0 8px 0;"><strong>Delivery:</strong> ${deliveryAddress}</p>` : ''}
+  <h4 style="font-size: 13px; color: #0f172a; margin: 10px 0 4px 0;">Requested Items:</h4>
   <ul style="font-size: 13px; line-height: 1.5; margin: 0 0 10px 20px;">${itemsHtml}</ul>
-  <p style="font-size: 14px; font-weight: bold; color: #166534; margin: 0;">Total Order Value: $${total.toFixed(2)} (${total <= 10000 ? 'FAR 13.201 Micro-Purchase' : 'FAR Part 13 Simplified Acquisition'})</p>
+  <p style="font-size: 14px; font-weight: bold; color: #166534; margin: 0;">Total Value: $${total.toFixed(2)}</p>
+  <p style="font-size: 12px; color: #64748b; margin-top: 6px;">Auto-reply dispatched to buyer from Andrea Marcus (support@2059ventures.com).</p>
 </div>`;
 
         await postToOdooChatter(env, {
             model: 'crm.lead',
             resId: leadId,
             body: chatterHtml,
-            subject: `New Storefront Order ${saleOrderName}`
+            subject: isQuickQuote ? `Fast Quote Inquiry: ${items[0]?.mpn || agency}` : `New Storefront Order ${saleOrderName}`
         });
 
-        await postToOdooChatter(env, {
-            model: 'sale.order',
-            resId: saleOrderId,
-            body: chatterHtml,
-            subject: `Storefront Intake: ${agency}`
-        });
+        if (saleOrderId) {
+            await postToOdooChatter(env, {
+                model: 'sale.order',
+                resId: saleOrderId,
+                body: chatterHtml,
+                subject: `Storefront Intake: ${agency}`
+            });
+        }
 
-        // 7. Dispatch Instant Telnyx SMS to Quincy Ruffin
-        const smsText = `🚨 NEW GOV GPC ORDER: $${total.toFixed(2)} from ${agency} (${contactName}). Lead #${leadId}, SO ${saleOrderName} created in Team 8. Immediate review & approval required.`;
+        // 7. Dispatch Client Auto-Reply Email (from Andrea Marcus | Toll-Free 1-888-919-2059)
+        const clientSubject = isQuickQuote
+            ? `[Received] 20/59 Ventures Procurement Inquiry — MPN: ${items[0]?.mpn || 'Federal Hardware'}`
+            : `[Order Received] 20/59 Ventures Procurement Request — Ref: ${saleOrderName}`;
+
+        const itemBulletText = items.map(i => `• ${i.qty || 1}x ${i.name} (MPN: ${i.mpn}) — $${((i.price || 0) * (i.qty || 1)).toFixed(2)}`).join('
+');
+
+        const clientTextBody = `Hello ${contactName},
+
+Thank you for reaching out to 20/59 Ventures Corp.
+
+We have received your ${isQuickQuote ? 'hardware price and availability inquiry' : 'procurement order request'} for:
+${itemBulletText}
+
+Inquiry Reference: #${leadId}
+
+Our contracts desk is pulling live distributor inventory (TD SYNNEX / Ingram Micro) to confirm available warehouse stock and delivery lead times. A formal quotation will be sent to your inbox shortly.
+
+PROCUREMENT DESK CONTACT:
+--------------------------------------------------------
+• Toll-Free Desk (Voice/SMS): 1-888-919-2059
+• Official Email: support@2059ventures.com
+• Online Hardware Store: https://2059ventures.com/store.html
+
+PRIME CONTRACTOR CREDENTIALS:
+--------------------------------------------------------
+• CAGE Code: 22DH9
+• Unique Entity ID (UEI): GVR2NTGR4HU3
+• National Provider Identifier (NPI): 1932035060
+• Small Business Certifications: WOSB | EDWOSB | VOSB Certified
+• SAM.gov: Active Federal Registration
+
+(Tip: To ensure your formal quote and delivery tracking reach your inbox without delay, please add support@2059ventures.com to your safe sender list.)
+
+Respectfully,
+
+Andrea Marcus
+Director of Contracts & Procurement
+20/59 Ventures Corp. — Federal & Public-Sector IT Solutions
+Tuscaloosa, AL | Washington, D.C.`;
+
+        const itemsHtmlTable = items.map(i => `<tr><td style="padding: 8px 12px; border-bottom: 1px solid #e2e8f0;"><strong>${i.qty || 1}x</strong></td><td style="padding: 8px 12px; border-bottom: 1px solid #e2e8f0;">${i.name}</td><td style="padding: 8px 12px; border-bottom: 1px solid #e2e8f0; font-family: monospace;">${i.mpn}</td><td style="padding: 8px 12px; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 700;">$${((i.price || 0) * (i.qty || 1)).toFixed(2)}</td></tr>`).join('');
+
+        const clientHtmlBody = `
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; color: #1e293b; line-height: 1.6;">
+  <div style="background: #0f172a; color: #ffffff; padding: 22px 26px; border-bottom: 3px solid #1b4730;">
+    <h2 style="margin: 0; font-size: 20px; font-weight: 800; letter-spacing: 0.5px;">20/59 VENTURES CORP.</h2>
+    <p style="margin: 4px 0 0; color: #94a3b8; font-size: 13px;">Defense &amp; Public-Sector IT Hardware Procurement</p>
+  </div>
+  <div style="padding: 24px 26px;">
+    <p style="font-size: 15px; margin: 0 0 14px;">Hello <strong>${contactName}</strong>,</p>
+    <p style="font-size: 14px; color: #334155; margin: 0 0 16px;">
+      Thank you for reaching out to 20/59 Ventures Corp. We have received your ${isQuickQuote ? 'pricing and stock inquiry' : 'procurement order request'} (Ref: <strong>#${leadId}</strong>).
+    </p>
+
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; margin: 18px 0;">
+      <div style="background: #f1f5f9; padding: 8px 12px; font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px;">
+        Requested Hardware Items
+      </div>
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+        <tbody>
+          ${itemsHtmlTable}
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size: 14px; color: #334155; margin: 0 0 16px;">
+      Our contracts desk is pulling live distributor inventory (TD SYNNEX / Ingram Micro) to confirm warehouse stock and delivery lead times. A formal quotation will be sent to your inbox shortly.
+    </p>
+
+    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #166534; border-radius: 6px; padding: 14px 16px; margin: 20px 0; font-size: 13px;">
+      <strong style="color: #166534; display: block; margin-bottom: 6px;">Direct Procurement Desk:</strong>
+      &bull; <strong>Toll-Free (Voice/SMS):</strong> <a href="tel:18889192059" style="color: #166534; font-weight: 700; text-decoration: none;">1-888-919-2059</a><br>
+      &bull; <strong>Official Email:</strong> <a href="mailto:support@2059ventures.com" style="color: #166534; text-decoration: none;">support@2059ventures.com</a><br>
+      &bull; <strong>Storefront:</strong> <a href="https://2059ventures.com/store.html" style="color: #166534; text-decoration: none;">2059ventures.com/store.html</a>
+    </div>
+
+    <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 12px 14px; font-size: 12px; color: #475569; margin: 18px 0;">
+      <strong>Prime Contractor Credentials:</strong> CAGE: <strong>22DH9</strong> &bull; UEI: <strong>GVR2NTGR4HU3</strong> &bull; NPI: <strong>1932035060</strong><br>
+      SBA Certified: <strong>WOSB | EDWOSB | VOSB</strong> &bull; SAM.gov Active
+    </div>
+
+    <p style="font-size: 12px; color: #64748b; font-style: italic; margin: 16px 0 20px;">
+      Tip: To ensure your formal quote and delivery tracking reach your inbox without delay, please add <strong>support@2059ventures.com</strong> to your safe sender list.
+    </p>
+
+    <div style="border-top: 1px solid #e2e8f0; padding-top: 14px; font-size: 13px; color: #1e293b;">
+      <strong>Andrea Marcus</strong><br>
+      <span style="color: #64748b;">Director of Contracts &amp; Procurement</span><br>
+      <strong>20/59 Ventures Corp.</strong> &mdash; Federal &amp; Public-Sector IT Solutions
+    </div>
+  </div>
+</div>`;
+
+        waitUntil(sendTelnyxEmail(env, {
+            to: email,
+            fromName: 'Andrea Marcus | 20/59 Ventures',
+            subject: clientSubject,
+            text: clientTextBody,
+            html: clientHtmlBody
+        }));
+
+        // 8. Internal Alert SMS to Quincy Ruffin (+12053937396)
+        const smsAlertText = isQuickQuote
+            ? `⚡ FAST QUOTE INQUIRY: $${total.toFixed(2)} from ${agency} (${contactName}). Item: ${items[0]?.mpn}. Lead #${leadId} in Team 8. Andrea Marcus auto-reply sent.`
+            : `🚨 NEW GOV GPC ORDER: $${total.toFixed(2)} from ${agency} (${contactName}). Lead #${leadId}, SO ${saleOrderName} in Team 8. Andrea Marcus auto-reply sent.`;
+
         waitUntil(sendTelnyxSms(env, {
             to: '+12053937396',
-            text: smsText,
+            text: smsAlertText,
             partnerId: partnerId,
             leadId: leadId
         }));
