@@ -540,7 +540,7 @@ class GovConCartManager {
       summaryBox.innerHTML = `
         ${product.image ? `<img src="${product.image}" alt="${product.name}" style="width: 58px; height: 58px; object-fit: contain; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; padding: 4px;">` : ''}
         <div style="flex: 1;">
-          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--gov-accent); letter-spacing: 0.5px;">${product.categoryLabel} &bull; ${product.distro}</div>
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--gov-accent); letter-spacing: 0.5px;">${product.categoryLabel} &bull; Authorized US Distro</div>
           <div style="font-size: 14px; font-weight: 800; color: #0f172a; line-height: 1.3; margin: 2px 0;">${product.name}</div>
           <div style="font-size: 12px; color: #475569;">MPN: <strong>${product.mpn}</strong> &bull; GPC List: <strong style="color: #166534;">$${product.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div>
         </div>
@@ -591,7 +591,7 @@ class GovConCartManager {
         </div>
         <div class="spec-info-col">
           <div style="font-size: 12px; font-weight: 700; color: var(--gov-accent); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">
-            ${product.categoryLabel} &bull; Sourced via ${product.distro}
+            ${product.categoryLabel} &bull; Authorized US Distro
           </div>
           <h2>${product.name}</h2>
           <div class="spec-mpn-badge">
@@ -681,7 +681,7 @@ class GovConCartManager {
       <div class="product-card" data-product-id="${p.id}">
         <div class="card-header-banner">
           <div class="card-distro-tag">
-            <i class="fas fa-network-wired" style="color: var(--gov-accent);"></i> ${p.distro}
+            <i class="fas fa-network-wired" style="color: var(--gov-accent);"></i> Authorized US Distro
           </div>
           <div class="card-compliance-badges">
             ${p.taa ? '<span class="comp-badge comp-taa"><i class="fas fa-flag-usa"></i> TAA</span>' : ''}
@@ -811,7 +811,7 @@ class GovConCartManager {
             ${item.image ? `<img src="${item.image}" alt="${item.mpn}" class="cart-thumb-img">` : ''}
             <div class="cart-item-details">
               <div class="cart-item-title">${item.name}</div>
-              <div class="cart-item-mpn">MPN: ${item.mpn} &bull; ${item.distro}</div>
+              <div class="cart-item-mpn">MPN: ${item.mpn} &bull; TAA Compliant</div>
               <div class="cart-item-controls">
                 <div class="qty-stepper">
                   <button class="btn-stepper" onclick="govconCart.updateQuantity(${item.id}, -1)">-</button>
@@ -886,7 +886,7 @@ class GovConCartManager {
         <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed #e2e8f0;">
           <div style="display: flex; align-items: center; gap: 8px;">
             ${item.image ? `<img src="${item.image}" alt="${item.mpn}" style="width: 32px; height: 32px; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1;">` : ''}
-            <span><strong>${item.qty}x</strong> ${item.mpn} (${item.distro})</span>
+            <span><strong>${item.qty}x</strong> ${item.mpn}</span>
           </div>
           <span>$${(item.price * item.qty).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
         </div>
