@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════════════════════
 // 20/59 VENTURES CORP. — DEFENSE & FEDERAL IT STOREFRONT & CART ENGINE
-// Persistent Session Cart, Micro-Purchase Tracker (<$10k), Quick-Spec Modals
+// Persistent Session Cart, Micro-Purchase Tracker (<=$15k), Quick-Spec Modals
 // ═══════════════════════════════════════════════════════════════════════════
 
 const GOVCON_PRODUCTS = [
@@ -832,22 +832,22 @@ class GovConCartManager {
     // Update Drawer Threshold Status & Totals
     const statusBox = document.getElementById('drawer-threshold-status');
     if (statusBox) {
-      if (subtotal <= 10000 && subtotal > 0) {
+      if (subtotal <= 15000 && subtotal > 0) {
         statusBox.innerHTML = `
           <div class="status-badge-wrap qualified">
             <i class="fas fa-check-circle" style="font-size: 18px;"></i>
             <div>
               <strong style="font-size: 13px;">FAR 13.201 Micro-Purchase Qualified</strong>
-              <div style="font-size: 11.5px; opacity: 0.9;">Direct GPC Card checkout permitted under $10,000 statutory limit.</div>
+              <div style="font-size: 11.5px; opacity: 0.9;">Direct GPC Card checkout permitted up to $15,000 statutory limit.</div>
             </div>
           </div>
         `;
-      } else if (subtotal > 10000) {
+      } else if (subtotal > 15000) {
         statusBox.innerHTML = `
           <div class="status-badge-wrap simplified">
             <i class="fas fa-info-circle" style="font-size: 18px;"></i>
             <div>
-              <strong style="font-size: 13px;">FAR Part 13 Simplified Acquisition ($10k - $250k)</strong>
+              <strong style="font-size: 13px;">FAR Part 13 Simplified Acquisition ($15k - $350k)</strong>
               <div style="font-size: 11.5px; opacity: 0.9;">Requires formal written contracting officer quote & GPC/PO sign-off.</div>
             </div>
           </div>
@@ -855,7 +855,7 @@ class GovConCartManager {
       } else {
         statusBox.innerHTML = `
           <div style="font-size: 12px; color: #64748b; text-align: center;">
-            <i class="fas fa-shield-alt"></i> Micro-Purchase Threshold: $10,000.00 (FAR 13.201)
+            <i class="fas fa-shield-alt"></i> Micro-Purchase Threshold: $15,000.00 (FAR 13.201)
           </div>
         `;
       }

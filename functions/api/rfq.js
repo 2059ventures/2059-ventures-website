@@ -126,7 +126,7 @@ export async function onRequestPost(context) {
             contract_vehicle = 'Not specified — advise me',
             vehicle_contract_number = 'Not specified',
             due_date = 'Standard',
-            budget_range = 'Under $10,000 (Micro-Purchase)',
+            budget_range = 'Under $15,000 (Micro-Purchase)',
             contact_name = 'Contracting Officer',
             contact_title = 'Procurement Officer',
             email = '',
@@ -608,6 +608,8 @@ async function syncToOdooCrm(env, data) {
         // 3. Estimate Expected Revenue based on budget tier
         let expectedRev = 5000;
         if (data.budget_range.includes('50,000')) expectedRev = 25000;
+        else if (data.budget_range.includes('350,000+')) expectedRev = 400000;
+        else if (data.budget_range.includes('350,000')) expectedRev = 150000;
         else if (data.budget_range.includes('250,000')) expectedRev = 100000;
         else if (data.budget_range.includes('250k+')) expectedRev = 300000;
 
@@ -862,7 +864,7 @@ async function sendSubmitterAutoReply(env, data) {
               Fulfillment &amp; Turnaround Standards:
             </div>
             <ul style="margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.5; color: #334155;">
-              <li><strong>Micro-Purchases (&lt;$10,000 / GPC):</strong> Itemized pricing and payment links dispatched within <strong>2 to 4 business hours</strong>.</li>
+              <li><strong>Micro-Purchases (&le;$15,000 / GPC):</strong> Itemized pricing and payment links dispatched within <strong>2 to 4 business hours</strong>.</li>
               <li><strong>Simplified Acquisitions (FAR Part 13):</strong> Full formal proposals with TAA compliance certifications and socioeconomic representation packages delivered prior to your requested deadline of <strong>${data.due_date}</strong>.</li>
               <li><strong>Supply Chain Guarantee:</strong> Sourced through authorized North American wholesale distribution — including <strong>TD SYNNEX</strong> — and certified OEM channels including <strong>StarTech.com</strong>, <strong>Ergotron</strong>, and <strong>Jabra</strong>, with full commercial manufacturer warranties.</li>
               <li><strong>Vehicle Access:</strong> We can quote against a direct award to 20 59 Ventures, GSA Multiple Award Schedule, 2GIT, NASA SEWP VI, state and local cooperatives, or a prime teaming subcontract. See <a href="https://2059ventures.com/contracts.html" style="color: #256041; text-decoration: underline;">our contract vehicle reference</a> for contract numbers and awardees.</li>
