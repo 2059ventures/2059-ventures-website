@@ -135,6 +135,7 @@ export async function onRequestPost(context) {
             categories = [],
             target_brands = [],
             line_items = '',
+            structured_items = [],
             special_instructions = '',
             set_aside_preference = [],
             compliance_needs = [],
@@ -151,6 +152,8 @@ export async function onRequestPost(context) {
                 headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
             });
         }
+
+        const parsedItems = extractMpnLineItems(line_items, structured_items);
 
         const isGovVerified = isVerifiedGovDomain(email);
         const timestamp = new Date().toISOString();
@@ -175,6 +178,7 @@ export async function onRequestPost(context) {
             categories,
             target_brands,
             line_items,
+            parsedItems,
             special_instructions,
             set_aside_preference,
             compliance_needs,
@@ -204,6 +208,7 @@ export async function onRequestPost(context) {
             categories,
             target_brands,
             line_items,
+            parsedItems,
             special_instructions,
             set_aside_preference,
             compliance_needs,
@@ -243,6 +248,7 @@ export async function onRequestPost(context) {
             categories,
             target_brands,
             line_items,
+            parsedItems,
             special_instructions,
             set_aside_preference,
             compliance_needs,
@@ -518,7 +524,7 @@ async function syncToOdooCrm(env, data) {
     const companyId = 4; // 20 59 Ventures Corp
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 6000);
+    const timeoutId = setTimeout(() => controller.abort(), 25000);
 
     try {
         // 1. Authenticate with Odoo
@@ -699,6 +705,7 @@ AUDIT METADATA:
                     </ul>
                     <p><strong>Itemized Requirements:</strong></p>
                     <pre style="background: #f8fafc; padding: 10px; border-radius: 4px; border: 1px solid #e2e8f0; font-size: 12px; white-space: pre-wrap;">${data.line_items || 'See attached documents.'}</pre>
+                    ${Array.isArray(data.parsedItems) && data.parsedItems.length > 0 ? `<p style="margin-top: 8px;"><strong>Detected MPNs for Sourcing Cascade:</strong> ${data.parsedItems.map(i => `<code>${i.qty}x ${i.mpn}</code>`).join(', ')}</p>` : ''}
                 </div>
             `;
 
@@ -797,6 +804,24 @@ AUDIT METADATA:
             } catch (actErr) {
                 console.warn('[Odoo Activity Schedule Error]', actErr.message);
             }
+
+            // 7. Trigger Odoo-Side Dual-Sourcing Cascade (TD SYNNEX + Ingram Micro) if configured
+            if (Array.isArray(data.parsedItems) && data.parsedItems.length > 0 && env.ODOO_SOURCING_URL) {
+                await triggerOdooSourcingCascade(env, {
+                    rfq_ref: data.rfqRefNumber,
+                    lead_id: leadId,
+                    partner_id: partnerId || null,
+                    company_id: companyId,
+                    odoo_db: odooDb,
+                    agency: data.agency,
+                    solicitation_number: data.solicitation_number,
+                    procurement_type: data.procurement_type,
+                    contract_vehicle: data.contract_vehicle,
+                    items: data.parsedItems,
+                    min_margin_pct: 15,
+                    auto_dropship: false
+                });
+            }
         }
 
         clearTimeout(timeoutId);
@@ -806,6 +831,85 @@ AUDIT METADATA:
         clearTimeout(timeoutId);
         console.warn('[Odoo RFQ Sync Exception]', odooErr.message);
         return false;
+    }
+}
+
+/**
+ * Extract structured { mpn, qty } pairs from free-text RFQ line items
+ * or explicit structured_items array for the Odoo Dual-Sourcing Cascade.
+ */
+function extractMpnLineItems(lineItemsText, structuredItems) {
+    const byMpn = new Map();
+    const addItem = (mpnRaw, qtyRaw) => {
+        const mpn = String(mpnRaw || '').trim().toUpperCase().replace(/^[,;:|]+|[,;:|]+$/g, '');
+        if (!mpn || mpn.length < 4 || mpn.length > 40) return;
+        if (!/[A-Z]/.test(mpn) || !/\d/.test(mpn)) return; // Must be alphanumeric (skips plain words & bare numbers)
+        const qty = Math.max(1, Math.min(10000, parseInt(qtyRaw, 10) || 1));
+        byMpn.set(mpn, (byMpn.get(mpn) || 0) + qty);
+    };
+
+    if (Array.isArray(structuredItems)) {
+        for (const item of structuredItems) {
+            if (item && item.mpn) addItem(item.mpn, item.qty ?? item.quantity ?? 1);
+        }
+    }
+
+    if (typeof lineItemsText === 'string' && lineItemsText.trim()) {
+        const lines = lineItemsText.split(/\r?\n|;/);
+        for (const rawLine of lines) {
+            const line = rawLine.trim();
+            if (!line) continue;
+
+            // Detect quantity prefixes like "20x ...", "20 x ...", "Qty: 20 ...", or trailing "x 20" / "(20)"
+            let qty = 1;
+            const prefixQty = line.match(/^(?:qty[:\s]*)?(\d{1,4})\s*[x×*]?\s+/i);
+            const suffixQty = line.match(/(?:\bqty[:\s]*|[x×*]\s*)(\d{1,4})\s*\)?$/i);
+            if (prefixQty) qty = parseInt(prefixQty[1], 10);
+            else if (suffixQty) qty = parseInt(suffixQty[1], 10);
+
+            const tokens = line.split(/[\s,]+/);
+            for (const token of tokens) {
+                const cleaned = token.replace(/^[([{"']+|[)\]}"'.,:]+$/g, '');
+                if (/^[A-Za-z0-9][A-Za-z0-9._/-]{2,38}[A-Za-z0-9]$/.test(cleaned)) {
+                    addItem(cleaned, qty);
+                }
+            }
+        }
+    }
+
+    return Array.from(byMpn.entries())
+        .slice(0, 25)
+        .map(([mpn, qty]) => ({ mpn, qty }));
+}
+
+/**
+ * Forward parsed MPNs to the Odoo Dual-Sourcing Cascade gateway (non-blocking).
+ */
+async function triggerOdooSourcingCascade(env, payload) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 25000);
+    try {
+        const headers = {
+            'Content-Type': 'application/json',
+            'User-Agent': '2059-GovCon-RFQ/1.0'
+        };
+        if (env.ODOO_SOURCING_TOKEN) {
+            headers['Authorization'] = `Bearer ${env.ODOO_SOURCING_TOKEN}`;
+            headers['x-api-key'] = env.ODOO_SOURCING_TOKEN;
+        }
+        const res = await fetch(env.ODOO_SOURCING_URL, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(payload),
+            signal: controller.signal
+        });
+        if (!res.ok) {
+            console.warn(`[Odoo Sourcing Cascade HTTP ${res.status}]`);
+        }
+    } catch (err) {
+        console.warn('[Odoo Sourcing Cascade Error]', err.message);
+    } finally {
+        clearTimeout(timeoutId);
     }
 }
 

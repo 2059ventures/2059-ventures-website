@@ -15,6 +15,8 @@ functions/
 scratch/
 archive/
 node_modules/
+package.json
+package-lock.json
 
 # Exclude source documents
 Website setup.odt

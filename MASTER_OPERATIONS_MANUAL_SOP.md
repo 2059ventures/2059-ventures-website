@@ -773,7 +773,7 @@ As a certified entity holding active registration under **CAGE: 22DH9**, 20/59 V
 
 ### [SOP-2059-GOV-005] Simplified Delivery Procurement (SDP) & Federal IT Storefront Operations
 1. **Purpose & Authority:**
-   Establishes the operational run-rules and ERP intake pipelines for 20/59 Ventures Corp.'s public-sector commercial-off-the-shelf (COTS) IT hardware storefront (`https://2059ventures.com/store.html`) pursuant to **FAR 13.201 (Micro-Purchase threshold < $10,000)**, **FAR Part 13 (Simplified Acquisition Procedures up to $250,000)**, **FAR 52.204-24/25/26 (Section 889 NDAA)**, and the **Trade Agreements Act (19 U.S.C. § 2501)**.
+   Establishes the operational run-rules and ERP intake pipelines for 20/59 Ventures Corp.'s public-sector commercial-off-the-shelf (COTS) IT hardware storefront (`https://2059ventures.com/store.html`) pursuant to **FAR 13.201 (Micro-Purchase threshold &le; $15,000)**, **FAR Part 13 (Simplified Acquisition Procedures up to $350,000)**, **FAR 52.204-24/25/26 (Section 889 NDAA)**, and the **Trade Agreements Act (19 U.S.C. § 2501)**.
 2. **Storefront Multi-Page Architecture:**
    * **Master IT Catalog (`store.html`):** Unified line card across all authorized manufacturers with search bar, category filter pills, and persistent session cart.
    * **Enterprise Networking (`store-networking.html`):** Cisco Catalyst 9300/9200L Layer 3 switches & Meraki cloud security appliances.
@@ -784,8 +784,8 @@ As a certified entity holding active registration under **CAGE: 22DH9**, 20/59 V
 3. **Persistent Session Cart & Statutory Threshold Monitoring:**
    * Utilizes client-side persistent storage (`js/govcon-cart.js`) maintaining state across page reloads and category navigation.
    * Real-time statutory threshold evaluation:
-     * `< $10,000.00`: Displays `✅ FAR 13.201 Micro-Purchase Qualified (Immediate GPC Card Action)`.
-     * `> $10,000.00`: Displays `📋 FAR Part 13 Simplified Acquisition ($10k-$250k Formal RFQ Flow)`.
+     * `&le; $15,000.00`: Displays `✅ FAR 13.201 Micro-Purchase Qualified (Immediate GPC Card Action)`.
+     * `> $15,000.00`: Displays `📋 FAR Part 13 Simplified Acquisition ($15k-$350k Formal RFQ Flow)`.
 4. **Odoo 18 Multi-Company Intake Pipeline (`POST /api/order`):**
    * Serverless edge routing via Cloudflare Worker (`_worker.js`) with anti-bot honeypot and `.gov`/`.mil` domain validation.
    * Automated lookup or creation of customer record in `res.partner` under **Company 4** (`20/59 Ventures Corp.`).
@@ -796,6 +796,19 @@ As a certified entity holding active registration under **CAGE: 22DH9**, 20/59 V
 5. **Human Executive Oversight Gate (Zero Auto-Dropship):**
    * Dropship purchase orders (`purchase.order`) are **never automatically placed** with TD SYNNEX (Partner ID 107) or Ingram Micro (Partner ID 137).
    * Executive leadership (Quincy Ruffin / Andrea Marcus) must review the draft sale order, verify buyer agency authority, confirm distributor stock and lead time, and validate minimum 15% CLIN gross margin before confirming quotation.
+
+---
+
+### [SOP-2059-TECH-012] Ingram Micro Distributor Procurement Integration & API Governance
+*(Introduced v1.9 — October 29, 2026. Full SOP: docs/SOP-2059-TECH-012-Ingram-Micro-Procurement-Integration.md)*
+
+Establishes the enterprise REST API integration, credential lifecycle, and Dual-Distributor Sourcing Cascade with **Ingram Micro Inc.** (Partner ID 137, Account 70-214122, clean 214122) under CAGE 22DH9. Connects Odoo 18 (2059_edi_gateway and distributors/ingram.py) to Ingram Micro Xvantage REST APIs (OAuth 2.0 client_credentials, 24-hr token cache). Supports both approved developer applications: Production (70-214122-2059 Ventures GovCon Procurement) and Sandbox (70-214122-SandboxApp).
+
+**Mandatory Safety Run-Rules:**
+1. **Sandbox-First Mandate:** All integration tests, syntax checks, and developer inquiries default strictly to Sandbox (https://api.ingrammicro.com/sandbox/...).
+2. **Read-Only Phase 1:** Price and Availability v6 querying only (/catalog/priceandavailability?includePricing=true&includeAvailability=true).
+3. **Zero Automated Dropship:** Direct automated submission of purchase orders to Ingram Micro is strictly barred. All orders require draft sale.order creation and human executive review (Quincy Ruffin / Andrea Marcus) verifying buyer agency authority and minimum 15% gross profit margin.
+4. **Dual-Sourcing Arbitration:** Cascades price checks across TD SYNNEX (Partner ID 107) and Ingram Micro (Partner ID 137) to determine optimal landed stock, lead times, and TAA compliance.
 
 ---
 
@@ -817,7 +830,10 @@ As a certified entity holding active registration under **CAGE: 22DH9**, 20/59 V
 *Version 1.6 formally establishes `[SOP-2059-TECH-011]` (Enterprise System Architecture Defense, CMMC/NIST SP 800-171 & JCP Compliance): codifying the 5-question system defense review framework, full 110-control NIST SP 800-171 alignment, and JCP DD Form 2345 export control data handling protocols under CAGE 22DH9. Approved: October 14, 2026.*
 
 ### Version 1.8 Amendment
-*Version 1.8 formally establishes `[SOP-2059-GOV-005]` (Simplified Delivery Procurement & Federal IT Storefront Operations): codifying the multi-page defense IT hardware storefront (Master store.html + 5 dedicated category pages), 14 TAA & Section 889 curated products seeded in Odoo 18 Company 4, persistent cross-page session cart with FAR 13.201 micro-purchase tracker (<$10,000 statutory limit), Cloudflare `/api/order` edge pipeline, automated Team 8 CRM lead and draft quotation (`sale.order`) creation, human executive approval gate, and instant Telnyx SMS dispatch. Approved: October 24, 2026.*
+*Version 1.8 formally establishes `[SOP-2059-GOV-005]` (Simplified Delivery Procurement & Federal IT Storefront Operations): codifying the multi-page defense IT hardware storefront (Master store.html + 5 dedicated category pages), 14 TAA & Section 889 curated products seeded in Odoo 18 Company 4, persistent cross-page session cart with FAR 13.201 micro-purchase tracker (&le;$15,000 statutory limit), Cloudflare `/api/order` edge pipeline, automated Team 8 CRM lead and draft quotation (`sale.order`) creation, human executive approval gate, and instant Telnyx SMS dispatch. Approved: October 24, 2026.*
+
+### Version 1.9 Amendment
+*Version 1.9 formally establishes [SOP-2059-TECH-012] (Ingram Micro Distributor Procurement Integration, API Governance & Dual-Sourcing Protocol): codifying approved Ingram Micro production and sandbox API app governance (Customer # 70-214122, Partner ID 137), strict Sandbox-First testing mandates, dual-distributor sourcing cascades with TD SYNNEX, and non-automated executive oversight gates for public-sector fulfillment. Approved: October 29, 2026.*
 
 ### Version 1.7 Amendment
 *Version 1.7 formally establishes `[SOP-2059-GOV-004]` (GovCon CRM & Defense Procurement Workflow): unifying Team 8 visual pipeline stages with satellite `govcon.rfq` workspaces, automated Sourcing Cascade (TD SYNNEX API adapter & line card benchmark), stage-exit compliance gates, distributor price-lock constraints, FAR 4.703 retention lock, DFARS 252.232-7006 WAWF pre-flight validation, Prompt Payment Act statutory interest computation (31 U.S.C. § 3902), daily compliance watchdog cron, and CUI-sanitized Telnyx SMS alerts to Quincy's cell (+1-205-393-7396). Approved: October 24, 2026.*
